@@ -276,77 +276,184 @@ const Index = () => {
         }}
       />
 
-      <div className="w-full px-6 md:px-12 lg:px-20 relative z-10">
-        <h1 
-          className={`text-hero font-pixel transition-all duration-500 flex flex-col text-center md:text-left ${
-            isPluggedIn ? "cfl-tube cfl-glow" : "cfl-off"
-          }`}
-        >
-          {/* First line: anand prince */}
-          <span className="flex flex-wrap justify-center md:justify-start">
-            {["anand", "prince"].map((word, i) => 
-              renderWord(word, i, false)
-            )}
-          </span>
-
-          {/* Second line: purty + cable */}
-          <span className="flex items-start justify-center md:justify-start">
-            <span className="flex items-center">
-              {renderWord("purty", 2, true)}
-              
-              {/* Fixed cable anchor point - attached to end of text */}
-              <span 
-                ref={anchorRef} 
-                className="relative inline-block w-0 h-0"
-                style={{ marginTop: '0.5em' }}
+      {/* 90s CRT Television */}
+      <div className="w-full flex items-center justify-center px-4 md:px-12 lg:px-20 relative z-10">
+        <div className="relative">
+          {/* TV Outer Shell - Beige/cream plastic body */}
+          <div 
+            className="relative bg-gradient-to-b from-[hsl(40_15%_75%)] to-[hsl(35_20%_60%)] rounded-lg p-3 md:p-5 shadow-2xl"
+            style={{
+              boxShadow: 'inset 2px 2px 8px rgba(255,255,255,0.3), inset -2px -2px 8px rgba(0,0,0,0.2), 8px 8px 30px rgba(0,0,0,0.5)',
+            }}
+          >
+            {/* Top vents */}
+            <div className="absolute top-2 left-1/2 -translate-x-1/2 flex gap-1">
+              {[...Array(8)].map((_, i) => (
+                <div key={i} className="w-4 md:w-6 h-1 bg-[hsl(35_15%_50%)] rounded-full opacity-60" />
+              ))}
+            </div>
+            
+            {/* Screen bezel - dark gray frame */}
+            <div className="bg-[hsl(0_0%_12%)] rounded p-2 md:p-3 mt-2">
+              {/* CRT Screen with slight curve effect */}
+              <div 
+                className={`relative overflow-hidden rounded transition-all duration-500 ${
+                  isPluggedIn ? 'bg-[hsl(220_30%_8%)]' : 'bg-[hsl(0_0%_3%)]'
+                }`}
+                style={{
+                  width: 'clamp(280px, 70vw, 600px)',
+                  height: 'clamp(180px, 45vw, 380px)',
+                  boxShadow: isPluggedIn 
+                    ? 'inset 0 0 60px rgba(100,200,255,0.1), inset 0 0 100px rgba(0,0,0,0.8)'
+                    : 'inset 0 0 100px rgba(0,0,0,0.9)',
+                }}
               >
-                {/* SVG Cable - starts from anchor, extends to plug */}
-                <svg 
-                  className="absolute pointer-events-none"
-                  style={{
-                    left: 0,
-                    top: 0,
-                    width: Math.abs(plugPosition.x) + 50,
-                    height: Math.abs(plugPosition.y) + 50,
-                    overflow: 'visible',
-                  }}
-                >
-                  <path
-                    d={getCablePath()}
-                    stroke="hsl(0 0% 22%)"
-                    strokeWidth="5"
-                    strokeLinecap="round"
-                    className={`transition-all ${isDragging ? "duration-0" : "duration-500"} ease-out`}
-                    fill="none"
-                  />
-                </svg>
-
-                {/* Draggable Plug - positioned at end of cable */}
+                {/* Screen glare overlay */}
                 <div 
-                  onMouseDown={handleMouseDown}
-                  className={`absolute cursor-grab active:cursor-grabbing z-10 ${
-                    isDragging ? "" : "transition-all duration-500"
+                  className="absolute inset-0 pointer-events-none opacity-20"
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(255,255,255,0.3) 0%, transparent 40%, transparent 60%, rgba(255,255,255,0.1) 100%)',
+                  }}
+                />
+                
+                {/* Scanlines effect */}
+                <div 
+                  className={`absolute inset-0 pointer-events-none transition-opacity duration-500 ${isPluggedIn ? 'opacity-30' : 'opacity-0'}`}
+                  style={{
+                    backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.3) 2px, rgba(0,0,0,0.3) 4px)',
+                  }}
+                />
+                
+                {/* Static noise when off */}
+                <div 
+                  className={`absolute inset-0 pointer-events-none transition-opacity duration-300 ${!isPluggedIn ? 'opacity-5' : 'opacity-0'}`}
+                  style={{
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E")`,
+                  }}
+                />
+                
+                {/* Text content on screen */}
+                <div className="absolute inset-0 flex items-center justify-center p-4">
+                  <h1 
+                    className={`text-hero font-pixel transition-all duration-500 flex flex-col text-center ${
+                      isPluggedIn ? "cfl-tube cfl-glow" : "cfl-off"
+                    }`}
+                    style={{
+                      fontSize: 'clamp(1.5rem, 6vw, 4rem)',
+                    }}
+                  >
+                    <span className="flex flex-wrap justify-center">
+                      {["anand", "prince"].map((word, i) => 
+                        renderWord(word, i, false)
+                      )}
+                    </span>
+                    <span className="flex justify-center">
+                      {renderWord("purty", 2, true)}
+                    </span>
+                  </h1>
+                </div>
+                
+                {/* Screen glow when on */}
+                <div 
+                  className={`absolute inset-0 pointer-events-none transition-opacity duration-700 ${
+                    isPluggedIn ? 'opacity-100' : 'opacity-0'
                   }`}
                   style={{
-                    left: plugPosition.x,
-                    top: plugPosition.y,
-                    transform: `translate(-8px, -50%) ${!isPluggedIn && !isDragging ? "rotate(90deg)" : "rotate(0deg)"}`,
-                    transformOrigin: 'left center',
+                    boxShadow: 'inset 0 0 80px rgba(100,220,255,0.15)',
                   }}
-                >
-                  <div className="flex items-center">
-                    {/* Plug body */}
-                    <div className="w-5 h-5 md:w-6 md:h-6 bg-[hsl(0_0%_18%)] rounded-sm flex flex-col justify-center items-end pr-0.5 gap-1 shadow-md border border-[hsl(0_0%_25%)]">
-                      {/* Prongs */}
-                      <div className="w-3 h-1 bg-[hsl(45_60%_50%)] rounded-r-sm" />
-                      <div className="w-3 h-1 bg-[hsl(45_60%_50%)] rounded-r-sm" />
-                    </div>
+                />
+              </div>
+            </div>
+            
+            {/* Control panel below screen */}
+            <div className="flex items-center justify-between mt-3 md:mt-4 px-2">
+              {/* Brand name */}
+              <div className="text-[hsl(35_10%_35%)] text-xs md:text-sm font-bold tracking-widest uppercase" style={{ fontFamily: 'Arial, sans-serif' }}>
+                Retrovision
+              </div>
+              
+              {/* Control buttons and knobs */}
+              <div className="flex items-center gap-2 md:gap-3">
+                {/* Channel/Volume knobs */}
+                <div className="flex gap-1 md:gap-2">
+                  <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-gradient-to-b from-[hsl(0_0%_25%)] to-[hsl(0_0%_15%)] border-2 border-[hsl(0_0%_20%)] shadow-inner flex items-center justify-center">
+                    <div className="w-0.5 h-2 md:h-3 bg-[hsl(0_0%_40%)]" />
+                  </div>
+                  <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-gradient-to-b from-[hsl(0_0%_25%)] to-[hsl(0_0%_15%)] border-2 border-[hsl(0_0%_20%)] shadow-inner flex items-center justify-center">
+                    <div className="w-0.5 h-2 md:h-3 bg-[hsl(0_0%_40%)]" />
                   </div>
                 </div>
-              </span>
+                
+                {/* Power LED */}
+                <div 
+                  className={`w-2 h-2 md:w-3 md:h-3 rounded-full transition-all duration-300 ${
+                    isPluggedIn 
+                      ? 'bg-green-500 shadow-[0_0_8px_2px_rgba(34,197,94,0.6)]' 
+                      : 'bg-[hsl(0_0%_20%)]'
+                  }`}
+                />
+              </div>
+            </div>
+            
+            {/* Cable anchor point - bottom right of TV */}
+            <span 
+              ref={anchorRef} 
+              className="absolute -bottom-2 right-8 md:right-12"
+            >
+              {/* Cable exit port */}
+              <div className="w-4 h-3 bg-[hsl(0_0%_20%)] rounded-b" />
+              
+              {/* SVG Cable - starts from TV, extends to plug */}
+              <svg 
+                className="absolute pointer-events-none"
+                style={{
+                  left: 8,
+                  top: 12,
+                  width: Math.abs(plugPosition.x) + 50,
+                  height: Math.abs(plugPosition.y) + 50,
+                  overflow: 'visible',
+                }}
+              >
+                <path
+                  d={getCablePath()}
+                  stroke="hsl(0 0% 22%)"
+                  strokeWidth="5"
+                  strokeLinecap="round"
+                  className={`transition-all ${isDragging ? "duration-0" : "duration-500"} ease-out`}
+                  fill="none"
+                />
+              </svg>
+
+              {/* Draggable Plug - positioned at end of cable */}
+              <div 
+                onMouseDown={handleMouseDown}
+                className={`absolute cursor-grab active:cursor-grabbing z-10 ${
+                  isDragging ? "" : "transition-all duration-500"
+                }`}
+                style={{
+                  left: plugPosition.x + 8,
+                  top: plugPosition.y + 12,
+                  transform: `translate(-8px, -50%) ${!isPluggedIn && !isDragging ? "rotate(90deg)" : "rotate(0deg)"}`,
+                  transformOrigin: 'left center',
+                }}
+              >
+                <div className="flex items-center">
+                  {/* Plug body */}
+                  <div className="w-5 h-5 md:w-6 md:h-6 bg-[hsl(0_0%_18%)] rounded-sm flex flex-col justify-center items-end pr-0.5 gap-1 shadow-md border border-[hsl(0_0%_25%)]">
+                    {/* Prongs */}
+                    <div className="w-3 h-1 bg-[hsl(45_60%_50%)] rounded-r-sm" />
+                    <div className="w-3 h-1 bg-[hsl(45_60%_50%)] rounded-r-sm" />
+                  </div>
+                </div>
+              </div>
             </span>
-          </span>
-        </h1>
+          </div>
+          
+          {/* TV Stand/Base */}
+          <div className="flex justify-center mt-1">
+            <div className="w-32 md:w-48 h-3 md:h-4 bg-gradient-to-b from-[hsl(35_15%_55%)] to-[hsl(30_20%_45%)] rounded-b-lg shadow-lg" />
+          </div>
+        </div>
       </div>
 
       {/* Floor */}
