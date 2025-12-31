@@ -135,6 +135,80 @@ const Index = () => {
 
   return (
     <main className="min-h-screen flex items-center bg-background overflow-hidden relative" ref={containerRef}>
+      {/* Cobweb - Top Left */}
+      <svg 
+        className="fixed top-0 left-0 w-32 h-32 md:w-48 md:h-48 pointer-events-none opacity-30"
+        viewBox="0 0 100 100"
+      >
+        {/* Radial threads */}
+        <path d="M0 0 L100 100" stroke="hsl(0 0% 60%)" strokeWidth="0.3" fill="none" />
+        <path d="M0 0 L70 100" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
+        <path d="M0 0 L40 100" stroke="hsl(0 0% 60%)" strokeWidth="0.3" fill="none" />
+        <path d="M0 0 L100 70" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
+        <path d="M0 0 L100 40" stroke="hsl(0 0% 60%)" strokeWidth="0.3" fill="none" />
+        <path d="M0 0 L100 15" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
+        <path d="M0 0 L15 100" stroke="hsl(0 0% 60%)" strokeWidth="0.3" fill="none" />
+        {/* Spiral threads */}
+        <path d="M8 2 Q12 8 2 10" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
+        <path d="M20 4 Q28 18 4 24" stroke="hsl(0 0% 60%)" strokeWidth="0.3" fill="none" />
+        <path d="M35 6 Q48 28 6 42" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
+        <path d="M55 8 Q72 42 8 62" stroke="hsl(0 0% 60%)" strokeWidth="0.3" fill="none" />
+        <path d="M78 10 Q95 58 10 85" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
+        <path d="M95 15 Q100 75 15 98" stroke="hsl(0 0% 60%)" strokeWidth="0.3" fill="none" />
+      </svg>
+
+      {/* Cobweb - Top Right */}
+      <svg 
+        className="fixed top-0 right-0 w-40 h-40 md:w-56 md:h-56 pointer-events-none opacity-30"
+        viewBox="0 0 100 100"
+        style={{ transform: 'scaleX(-1)' }}
+      >
+        {/* Radial threads */}
+        <path d="M0 0 L100 100" stroke="hsl(0 0% 60%)" strokeWidth="0.3" fill="none" />
+        <path d="M0 0 L65 100" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
+        <path d="M0 0 L35 100" stroke="hsl(0 0% 60%)" strokeWidth="0.3" fill="none" />
+        <path d="M0 0 L100 65" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
+        <path d="M0 0 L100 35" stroke="hsl(0 0% 60%)" strokeWidth="0.3" fill="none" />
+        <path d="M0 0 L100 12" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
+        <path d="M0 0 L12 100" stroke="hsl(0 0% 60%)" strokeWidth="0.3" fill="none" />
+        {/* Spiral threads */}
+        <path d="M10 2 Q14 10 2 12" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
+        <path d="M22 5 Q32 20 5 28" stroke="hsl(0 0% 60%)" strokeWidth="0.3" fill="none" />
+        <path d="M38 7 Q52 32 7 48" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
+        <path d="M58 9 Q78 48 9 68" stroke="hsl(0 0% 60%)" strokeWidth="0.3" fill="none" />
+        <path d="M80 12 Q98 65 12 88" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
+      </svg>
+
+      {/* Spider hanging from right cobweb */}
+      <div className="fixed top-0 right-16 md:right-24 pointer-events-none z-30">
+        {/* Spider thread */}
+        <div 
+          className="w-px bg-[hsl(0_0%_50%)] origin-top animate-spider-swing"
+          style={{ height: '180px' }}
+        >
+          {/* Spider body */}
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 animate-spider-bob">
+            {/* Legs left */}
+            <svg className="absolute -left-3 top-1 w-3 h-4" viewBox="0 0 12 16">
+              <path d="M12 2 Q6 4 0 0" stroke="hsl(0 0% 15%)" strokeWidth="1" fill="none" />
+              <path d="M12 6 Q5 7 0 4" stroke="hsl(0 0% 15%)" strokeWidth="1" fill="none" />
+              <path d="M12 10 Q4 10 0 8" stroke="hsl(0 0% 15%)" strokeWidth="1" fill="none" />
+              <path d="M12 14 Q5 13 0 16" stroke="hsl(0 0% 15%)" strokeWidth="1" fill="none" />
+            </svg>
+            {/* Legs right */}
+            <svg className="absolute -right-3 top-1 w-3 h-4" viewBox="0 0 12 16" style={{ transform: 'scaleX(-1)' }}>
+              <path d="M12 2 Q6 4 0 0" stroke="hsl(0 0% 15%)" strokeWidth="1" fill="none" />
+              <path d="M12 6 Q5 7 0 4" stroke="hsl(0 0% 15%)" strokeWidth="1" fill="none" />
+              <path d="M12 10 Q4 10 0 8" stroke="hsl(0 0% 15%)" strokeWidth="1" fill="none" />
+              <path d="M12 14 Q5 13 0 16" stroke="hsl(0 0% 15%)" strokeWidth="1" fill="none" />
+            </svg>
+            {/* Body */}
+            <div className="w-2 h-3 bg-[hsl(0_0%_10%)] rounded-full" />
+            {/* Head */}
+            <div className="w-1.5 h-1.5 bg-[hsl(0_0%_8%)] rounded-full -mt-0.5 mx-auto" />
+          </div>
+        </div>
+      </div>
       {/* Brick wall - only visible when CFL is on, with radial light mask */}
       <div 
         className={`fixed inset-0 transition-opacity duration-700 pointer-events-none ${

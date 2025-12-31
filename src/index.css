@@ -271,3 +271,35 @@
     d: path("M0 40 C 40 25, 100 20, 150 30 L 200 40");
   }
 }
+
+@keyframes spider-bob {
+  0%, 100% { 
+    transform: translateY(0) translateX(-50%); 
+  }
+  50% { 
+    transform: translateY(40px) translateX(-50%); 
+  }
+}
+
+@keyframes spider-swing {
+  0%, 100% { 
+    transform: rotate(0deg) scaleY(1); 
+  }
+  25% { 
+    transform: rotate(3deg) scaleY(1.1); 
+  }
+  50% { 
+    transform: rotate(0deg) scaleY(1.2); 
+  }
+  75% { 
+    transform: rotate(-3deg) scaleY(1.1); 
+  }
+}
+
+.animate-spider-bob {
+  animation: spider-bob 4s ease-in-out infinite;
+}
+
+.animate-spider-swing {
+  animation: spider-swing 4s ease-in-out infinite;
+}
