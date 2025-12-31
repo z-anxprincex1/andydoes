@@ -156,31 +156,24 @@ const Index = () => {
         <path d="M74 16 Q92 52 48 82 Q22 68 18 48" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
       </svg>
 
-      {/* Cobweb - Top Right (larger, more elaborate) */}
+      {/* Cobweb - Top Right */}
       <svg 
-        className="fixed top-0 right-0 w-44 h-44 md:w-64 md:h-64 pointer-events-none opacity-30"
+        className="fixed top-0 right-0 w-28 h-28 md:w-40 md:h-40 pointer-events-none opacity-25"
         viewBox="0 0 100 100"
         style={{ transform: 'scaleX(-1)' }}
       >
-        {/* Radial threads - curved and irregular */}
-        <path d="M0 0 Q48 52 95 98" stroke="hsl(0 0% 58%)" strokeWidth="0.35" fill="none" />
-        <path d="M0 0 Q28 48 62 100" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
-        <path d="M0 0 Q15 42 32 98" stroke="hsl(0 0% 60%)" strokeWidth="0.35" fill="none" />
-        <path d="M0 0 Q48 28 100 58" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
-        <path d="M0 0 Q45 15 98 32" stroke="hsl(0 0% 58%)" strokeWidth="0.35" fill="none" />
-        <path d="M0 0 Q38 6 88 14" stroke="hsl(0 0% 52%)" strokeWidth="0.3" fill="none" />
-        <path d="M0 0 Q6 35 12 92" stroke="hsl(0 0% 60%)" strokeWidth="0.3" fill="none" />
-        <path d="M0 0 Q52 42 82 78" stroke="hsl(0 0% 55%)" strokeWidth="0.25" fill="none" />
-        {/* Spiral threads - wobbly irregular curves */}
-        <path d="M8 2 Q14 8 5 14 Q2 10 8 2" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
-        <path d="M20 4 Q32 16 14 28 Q5 22 4 14" stroke="hsl(0 0% 58%)" strokeWidth="0.3" fill="none" />
-        <path d="M36 7 Q52 25 28 45 Q12 38 8 25" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
-        <path d="M56 10 Q78 38 42 68 Q18 55 14 38" stroke="hsl(0 0% 60%)" strokeWidth="0.3" fill="none" />
-        <path d="M78 14 Q98 58 58 88 Q28 75 22 52" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
-        <path d="M92 18 Q100 72 68 96 Q35 88 28 62" stroke="hsl(0 0% 58%)" strokeWidth="0.25" fill="none" />
-        {/* Extra broken strand */}
-        <path d="M45 20 Q55 28 48 38" stroke="hsl(0 0% 50%)" strokeWidth="0.25" fill="none" />
-        <path d="M65 35 Q72 45 62 55" stroke="hsl(0 0% 52%)" strokeWidth="0.25" fill="none" />
+        {/* Radial threads - organic curves */}
+        <path d="M0 0 Q42 55 88 92" stroke="hsl(0 0% 55%)" strokeWidth="0.4" fill="none" />
+        <path d="M0 0 Q22 48 55 95" stroke="hsl(0 0% 58%)" strokeWidth="0.35" fill="none" />
+        <path d="M0 0 Q12 40 28 90" stroke="hsl(0 0% 52%)" strokeWidth="0.3" fill="none" />
+        <path d="M0 0 Q50 25 92 52" stroke="hsl(0 0% 55%)" strokeWidth="0.35" fill="none" />
+        <path d="M0 0 Q40 12 85 28" stroke="hsl(0 0% 58%)" strokeWidth="0.3" fill="none" />
+        <path d="M0 0 Q5 32 10 88" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
+        {/* Connecting threads - sagging curves */}
+        <path d="M12 4 Q16 10 6 15" stroke="hsl(0 0% 52%)" strokeWidth="0.3" fill="none" />
+        <path d="M28 8 Q38 22 16 32" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
+        <path d="M48 14 Q62 38 28 55" stroke="hsl(0 0% 58%)" strokeWidth="0.3" fill="none" />
+        <path d="M72 22 Q85 52 45 75" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
       </svg>
 
       {/* Spider hanging from right cobweb */}
