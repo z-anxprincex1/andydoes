@@ -5,10 +5,36 @@ const Index = () => {
   const [isPluggedIn, setIsPluggedIn] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [plugPosition, setPlugPosition] = useState({ x: 30, y: 180 }); // Hanging down longer by default
+  const [spiderDescending, setSpiderDescending] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const socketRef = useRef<HTMLDivElement>(null);
   const anchorRef = useRef<HTMLSpanElement>(null);
   const flickerClasses = ["flicker-1", "flicker-2", "flicker-3", "flicker-4", "flicker-5"];
+
+  // Spider descends randomly to unplug
+  useEffect(() => {
+    if (!isPluggedIn) return;
+    
+    const scheduleSpiderAttack = () => {
+      const delay = Math.random() * 15000 + 10000; // 10-25 seconds
+      return setTimeout(() => {
+        if (isPluggedIn && Math.random() > 0.5) {
+          setSpiderDescending(true);
+          // Spider reaches the cable and unplugs after animation
+          setTimeout(() => {
+            setIsPluggedIn(false);
+            setPlugPosition({ x: 30, y: 180 });
+            setTimeout(() => setSpiderDescending(false), 1500);
+          }, 2000);
+        } else {
+          scheduleSpiderAttack();
+        }
+      }, delay);
+    };
+    
+    const timer = scheduleSpiderAttack();
+    return () => clearTimeout(timer);
+  }, [isPluggedIn]);
 
   const getFlickerClass = (index: number) => {
     return flickerClasses[index % flickerClasses.length];
@@ -178,22 +204,28 @@ const Index = () => {
 
       {/* Spider hanging from right cobweb */}
       <div className="fixed top-0 right-16 md:right-24 pointer-events-none z-30">
-        {/* Spider thread */}
+        {/* Spider thread - extends when descending */}
         <div 
-          className="w-px bg-[hsl(0_0%_50%)] origin-top animate-spider-swing"
-          style={{ height: '200px' }}
+          className={`w-px bg-[hsl(0_0%_50%)] origin-top transition-all duration-2000 ease-in-out ${
+            !spiderDescending ? 'animate-spider-swing' : ''
+          }`}
+          style={{ 
+            height: spiderDescending ? 'calc(100vh - 120px)' : '200px',
+          }}
         >
           {/* Spider body */}
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 animate-spider-bob">
+          <div className={`absolute bottom-0 left-1/2 -translate-x-1/2 ${
+            !spiderDescending ? 'animate-spider-bob' : ''
+          }`}>
             {/* Legs left */}
-            <svg className="absolute -left-5 top-1 w-5 h-6" viewBox="0 0 12 16">
+            <svg className={`absolute -left-5 top-1 w-5 h-6 ${spiderDescending ? 'animate-spider-legs' : ''}`} viewBox="0 0 12 16">
               <path d="M12 2 Q6 4 0 0" stroke="hsl(0 0% 15%)" strokeWidth="1.2" fill="none" />
               <path d="M12 6 Q5 7 0 4" stroke="hsl(0 0% 15%)" strokeWidth="1.2" fill="none" />
               <path d="M12 10 Q4 10 0 8" stroke="hsl(0 0% 15%)" strokeWidth="1.2" fill="none" />
               <path d="M12 14 Q5 13 0 16" stroke="hsl(0 0% 15%)" strokeWidth="1.2" fill="none" />
             </svg>
             {/* Legs right */}
-            <svg className="absolute -right-5 top-1 w-5 h-6" viewBox="0 0 12 16" style={{ transform: 'scaleX(-1)' }}>
+            <svg className={`absolute -right-5 top-1 w-5 h-6 ${spiderDescending ? 'animate-spider-legs' : ''}`} viewBox="0 0 12 16" style={{ transform: 'scaleX(-1)' }}>
               <path d="M12 2 Q6 4 0 0" stroke="hsl(0 0% 15%)" strokeWidth="1.2" fill="none" />
               <path d="M12 6 Q5 7 0 4" stroke="hsl(0 0% 15%)" strokeWidth="1.2" fill="none" />
               <path d="M12 10 Q4 10 0 8" stroke="hsl(0 0% 15%)" strokeWidth="1.2" fill="none" />
