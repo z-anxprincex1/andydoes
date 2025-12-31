@@ -39,58 +39,47 @@ const Index = () => {
 
   return (
     <main className="min-h-screen flex items-center bg-background overflow-x-hidden">
-      <div className="w-full flex flex-col md:flex-row items-center">
-        {/* Text container */}
-        <div className="px-6 md:px-12 lg:px-20 w-full md:w-auto md:shrink-0 flex justify-center md:justify-start">
-          <h1 
-            className={`text-hero font-mono transition-all duration-500 flex flex-col text-center md:text-left ${
-              isPluggedIn ? "cfl-tube cfl-glow" : "cfl-off"
-            }`}
-          >
-            <span className="flex flex-wrap justify-center md:justify-start">
-              {["anand", "prince"].map((word, i) => 
-                renderWord(word, i, false)
-              )}
-            </span>
-            <span className="flex justify-center md:justify-start">
-              {renderWord("purty", 2, true)}
-            </span>
-          </h1>
-        </div>
-
-        {/* Cable + socket (stay visible on smaller screens) */}
-        <div className="w-full md:flex-1 flex items-center justify-center md:justify-end gap-4 px-6 md:px-0 pt-6 md:pt-0">
-          {/* Cable section - connects text to socket */}
-          <div className={`flex-1 max-w-[520px] min-w-[160px] h-20 relative ${isPluggedIn ? "cable-hover" : ""}`}>
-            <svg 
-              className="w-full h-full absolute inset-0 cursor-pointer"
-              viewBox="0 0 200 80"
-              fill="none"
-              preserveAspectRatio="none"
-            >
-              {/* Cable wire */}
-              <path
-                d={isPluggedIn 
-                  ? "M0 40 C 50 40, 100 40, 150 40 L 200 40" 
-                  : "M0 40 C 40 25, 80 55, 120 35 C 160 15, 175 50, 185 55"
-                }
-                stroke="hsl(0 0% 18%)"
-                strokeWidth="6"
-                strokeLinecap="round"
-                className={`transition-all duration-500 ease-in-out ${isPluggedIn ? "cable-jiggly" : ""}`}
+      <div className="w-full px-6 md:px-12 lg:px-20">
+        <h1 
+          className={`text-hero font-mono transition-all duration-500 flex flex-col text-center md:text-left ${
+            isPluggedIn ? "cfl-tube cfl-glow" : "cfl-off"
+          }`}
+        >
+          {/* First line: anand prince + cable + socket */}
+          <span className="flex flex-wrap items-center justify-center md:justify-start">
+            {["anand", "prince"].map((word, i) => 
+              renderWord(word, i, false)
+            )}
+            
+            {/* Cable section */}
+            <span className={`inline-flex items-center h-12 md:h-16 w-24 md:w-40 relative mx-2 ${isPluggedIn ? "cable-hover" : ""}`}>
+              <svg 
+                className="w-full h-full absolute inset-0 cursor-pointer"
+                viewBox="0 0 200 80"
                 fill="none"
-              />
-            </svg>
-          </div>
+                preserveAspectRatio="none"
+              >
+                <path
+                  d={isPluggedIn 
+                    ? "M0 40 C 50 40, 100 40, 150 40 L 200 40" 
+                    : "M0 40 C 40 25, 80 55, 120 35 C 160 15, 175 50, 185 55"
+                  }
+                  stroke="hsl(0 0% 18%)"
+                  strokeWidth="6"
+                  strokeLinecap="round"
+                  className={`transition-all duration-500 ease-in-out ${isPluggedIn ? "cable-jiggly" : ""}`}
+                  fill="none"
+                />
+              </svg>
+            </span>
 
-          {/* Socket with integrated plug */}
-          <div className="shrink-0 flex items-center">
+            {/* Socket with plug */}
             <button
               onClick={() => setIsPluggedIn(!isPluggedIn)}
               className="relative flex items-center cursor-pointer group"
               aria-label={isPluggedIn ? "Unplug cable" : "Plug in cable"}
             >
-              {/* Plug - positioned relative to socket */}
+              {/* Plug */}
               <div 
                 className={`flex items-center transition-all duration-500 ease-in-out ${
                   isPluggedIn 
@@ -98,9 +87,7 @@ const Index = () => {
                     : "-translate-x-4 -rotate-12 translate-y-2"
                 }`}
               >
-                {/* Plug body */}
                 <div className="w-5 h-4 md:w-6 md:h-5 bg-[hsl(0_0%_20%)] rounded-l-sm flex flex-col justify-center items-end pr-0.5 gap-1">
-                  {/* Prongs */}
                   <div className="w-3 h-1 bg-[hsl(45_60%_50%)] rounded-r-sm" />
                   <div className="w-3 h-1 bg-[hsl(45_60%_50%)] rounded-r-sm" />
                 </div>
@@ -108,15 +95,12 @@ const Index = () => {
 
               {/* Socket */}
               <div 
-                className="relative w-12 h-16 md:w-14 md:h-20 bg-[hsl(0_0%_10%)] rounded border-2 border-[hsl(0_0%_18%)] flex flex-col items-center justify-center gap-2 group-hover:border-[hsl(0_0%_30%)] transition-colors shadow-[inset_0_2px_8px_rgba(0,0,0,0.6)]"
+                className="relative w-10 h-14 md:w-14 md:h-20 bg-[hsl(0_0%_10%)] rounded border-2 border-[hsl(0_0%_18%)] flex flex-col items-center justify-center gap-2 group-hover:border-[hsl(0_0%_30%)] transition-colors shadow-[inset_0_2px_8px_rgba(0,0,0,0.6)]"
               >
-                {/* Socket outlet holes */}
                 <div className="flex gap-1.5 md:gap-2">
                   <div className="w-1.5 h-3 md:w-2 md:h-4 bg-[hsl(0_0%_5%)] rounded-sm shadow-[inset_0_1px_3px_rgba(0,0,0,0.9)]" />
                   <div className="w-1.5 h-3 md:w-2 md:h-4 bg-[hsl(0_0%_5%)] rounded-sm shadow-[inset_0_1px_3px_rgba(0,0,0,0.9)]" />
                 </div>
-                
-                {/* Power indicator */}
                 <div 
                   className={`w-1.5 h-1.5 md:w-2 md:h-2 rounded-full transition-all duration-300 ${
                     isPluggedIn 
@@ -126,8 +110,13 @@ const Index = () => {
                 />
               </div>
             </button>
-          </div>
-        </div>
+          </span>
+
+          {/* Second line: purty */}
+          <span className="flex justify-center md:justify-start">
+            {renderWord("purty", 2, false)}
+          </span>
+        </h1>
       </div>
     </main>
   );
