@@ -15,7 +15,7 @@ const Cat = () => {
         // Walk right
         setCatState("walking-right");
         setIsVisible(true);
-        const newPos = Math.min(position + Math.random() * 15 + 5, 75);
+        const newPos = Math.min(position + Math.random() * 8 + 3, 75);
         setPosition(newPos);
         
         setTimeout(() => setCatState("idle"), 4000);
@@ -23,7 +23,7 @@ const Cat = () => {
         // Walk left
         setCatState("walking-left");
         setIsVisible(true);
-        const newPos = Math.max(position - Math.random() * 15 - 5, 10);
+        const newPos = Math.max(position - Math.random() * 8 - 3, 10);
         setPosition(newPos);
         
         setTimeout(() => setCatState("idle"), 4000);
@@ -53,7 +53,7 @@ const Cat = () => {
 
   return (
     <div
-      className={`fixed bottom-8 md:bottom-12 z-15 transition-all duration-[4000ms] ease-in-out ${
+      className={`fixed bottom-8 md:bottom-12 z-15 transition-all duration-[6000ms] ease-linear ${
         !isVisible ? "opacity-0" : "opacity-100"
       }`}
       style={{
