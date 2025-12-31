@@ -100,17 +100,29 @@ const Index = () => {
       return `M 0 0 Q ${endX * 0.5} ${midY + 10} ${endX} ${endY}`;
     }
     
-    // Zig-zag hanging cable
-    const segments = 6;
-    const segmentLength = endY / segments;
-    const zigWidth = 12;
+    // Smooth curvy zig-zag - like cable lying naturally
+    const waveAmplitude = 18;
+    const segments = 4;
+    const segmentHeight = endY / segments;
     
     let path = `M 0 0`;
-    for (let i = 1; i <= segments; i++) {
-      const y = segmentLength * i;
-      const xOffset = (i % 2 === 0 ? -zigWidth : zigWidth) + (endX / segments) * i;
-      path += ` L ${xOffset} ${y}`;
+    
+    for (let i = 0; i < segments; i++) {
+      const startY = segmentHeight * i;
+      const endSegY = segmentHeight * (i + 1);
+      const midY = (startY + endSegY) / 2;
+      
+      const xProgress = (endX / segments) * i;
+      const xProgressNext = (endX / segments) * (i + 1);
+      
+      // Alternate wave direction
+      const waveDir = i % 2 === 0 ? 1 : -1;
+      const controlX = xProgress + (xProgressNext - xProgress) / 2 + (waveAmplitude * waveDir);
+      
+      path += ` Q ${controlX} ${midY} ${xProgressNext} ${endSegY}`;
     }
+    
+    // Final connection to plug
     path += ` L ${endX} ${endY}`;
     
     return path;
