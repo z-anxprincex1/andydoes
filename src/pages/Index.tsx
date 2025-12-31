@@ -207,10 +207,22 @@ const Index = () => {
         </h1>
       </div>
 
-      {/* Socket - fixed at bottom right */}
+      {/* Floor */}
+      <div className="fixed bottom-0 left-0 right-0 h-8 md:h-12 bg-[hsl(0_0%_6%)] border-t border-[hsl(0_0%_15%)] z-10">
+        {/* Floor texture lines */}
+        <div className="absolute inset-0 opacity-30">
+          <div className="h-full w-full" style={{
+            backgroundImage: 'repeating-linear-gradient(90deg, transparent, transparent 40px, hsl(0 0% 12%) 40px, hsl(0 0% 12%) 41px)',
+          }} />
+        </div>
+        {/* Floor highlight */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[hsl(0_0%_20%)] to-transparent" />
+      </div>
+
+      {/* Socket - fixed at bottom right, sitting on floor */}
       <div 
         ref={socketRef}
-        className={`fixed bottom-8 right-8 md:bottom-12 md:right-12 w-12 h-16 md:w-16 md:h-24 bg-[hsl(0_0%_8%)] rounded border-2 transition-all duration-300 shadow-[inset_0_2px_8px_rgba(0,0,0,0.6)] z-20 ${
+        className={`fixed bottom-8 md:bottom-12 right-8 md:right-12 w-12 h-16 md:w-16 md:h-24 bg-[hsl(0_0%_8%)] rounded-t border-2 border-b-0 transition-all duration-300 shadow-[inset_0_2px_8px_rgba(0,0,0,0.6)] z-20 ${
           isDragging 
             ? "border-[hsl(120_40%_30%)] shadow-[inset_0_2px_8px_rgba(0,0,0,0.6),0_0_15px_rgba(74,222,128,0.3)]" 
             : "border-[hsl(0_0%_18%)]"
