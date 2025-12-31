@@ -101,7 +101,7 @@ const Cat = ({ onScratchSocket }: CatProps) => {
 
     let loopTimer = 0;
     const scheduleNext = () => {
-      const delay = 9000 + Math.random() * 7000;
+      const delay = 5000 + Math.random() * 4000;
       loopTimer = window.setTimeout(() => {
         moveCat();
         scheduleNext();
@@ -122,7 +122,7 @@ const Cat = ({ onScratchSocket }: CatProps) => {
   const isScratching = catState === "scratching";
   const facingLeft = catState === "walking-left" || catState === "peeking-right";
 
-  const transitionMs = isPeeking ? 900 : 10000;
+  const transitionMs = isPeeking ? 600 : 4000;
 
   return (
     <div
