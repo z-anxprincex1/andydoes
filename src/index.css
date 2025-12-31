@@ -69,6 +69,19 @@
     letter-spacing: -0.02em;
     font-weight: 400;
   }
+
+  .cfl-glow {
+    text-shadow: 
+      0 0 5px hsl(180 100% 95% / 0.9),
+      0 0 10px hsl(180 100% 90% / 0.7),
+      0 0 20px hsl(180 80% 80% / 0.5),
+      0 0 40px hsl(180 70% 70% / 0.3),
+      0 0 80px hsl(180 60% 60% / 0.2);
+  }
+
+  .cfl-tube {
+    color: hsl(180 30% 95%);
+  }
 }
 
 @layer components {
@@ -79,15 +92,32 @@
   .slide-up {
     animation: slideUp 1s ease-out forwards;
   }
+
+  .flicker-1 {
+    animation: flicker1 0.15s ease-in-out infinite alternate,
+               flicker-slow 4s ease-in-out infinite;
+  }
+  .flicker-2 {
+    animation: flicker2 0.11s ease-in-out infinite alternate,
+               flicker-slow 5s ease-in-out infinite 0.5s;
+  }
+  .flicker-3 {
+    animation: flicker3 0.13s ease-in-out infinite alternate,
+               flicker-slow 3.5s ease-in-out infinite 1s;
+  }
+  .flicker-4 {
+    animation: flicker1 0.17s ease-in-out infinite alternate,
+               flicker-slow 4.5s ease-in-out infinite 1.5s;
+  }
+  .flicker-5 {
+    animation: flicker2 0.12s ease-in-out infinite alternate,
+               flicker-slow 5.5s ease-in-out infinite 0.3s;
+  }
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 @keyframes slideUp {
@@ -98,5 +128,69 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes flicker1 {
+  0%, 100% { opacity: 1; }
+  41% { opacity: 1; }
+  42% { opacity: 0.8; }
+  43% { opacity: 1; }
+  45% { opacity: 0.3; }
+  46% { opacity: 1; }
+}
+
+@keyframes flicker2 {
+  0%, 100% { opacity: 1; }
+  20% { opacity: 0.9; }
+  21% { opacity: 0.4; }
+  22% { opacity: 1; }
+  60% { opacity: 1; }
+  61% { opacity: 0.6; }
+  62% { opacity: 1; }
+}
+
+@keyframes flicker3 {
+  0%, 100% { opacity: 1; }
+  33% { opacity: 0.7; }
+  34% { opacity: 1; }
+  35% { opacity: 0.5; }
+  36% { opacity: 1; }
+  80% { opacity: 0.85; }
+  81% { opacity: 1; }
+}
+
+@keyframes flicker-slow {
+  0%, 100% { 
+    opacity: 1;
+    filter: brightness(1);
+  }
+  10% { 
+    opacity: 0.95;
+    filter: brightness(0.95);
+  }
+  20% { 
+    opacity: 1;
+    filter: brightness(1.05);
+  }
+  50% { 
+    opacity: 0.9;
+    filter: brightness(0.9);
+  }
+  51% { 
+    opacity: 0.4;
+    filter: brightness(0.6);
+  }
+  52% { 
+    opacity: 0.9;
+    filter: brightness(0.95);
+  }
+  53% { 
+    opacity: 1;
+    filter: brightness(1);
+  }
+  70% { 
+    opacity: 0.98;
+    filter: brightness(1.02);
   }
 }
