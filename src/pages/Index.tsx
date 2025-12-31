@@ -155,107 +155,146 @@ const Index = () => {
 
   return (
     <main className="min-h-screen flex items-center bg-background overflow-hidden relative" ref={containerRef}>
-      <div className="w-full px-6 md:px-12 lg:px-20 relative z-10">
-        {/* Text container with brick reveal effect */}
-        <div className="relative">
-          {/* Brick wall layer - clipped to text shape, only visible when on */}
-          <h1 
-            aria-hidden="true"
-            className={`text-hero font-pixel flex flex-col text-center md:text-left select-none transition-opacity duration-500 ${
-              isPluggedIn ? "opacity-100" : "opacity-0"
-            }`}
-            style={{
-              backgroundImage: brickPattern,
-              backgroundSize: '104px 26px',
-              WebkitBackgroundClip: 'text',
-              backgroundClip: 'text',
-              color: 'transparent',
-              position: 'absolute',
-              inset: 0,
-              zIndex: 1,
-            }}
-          >
+      {/* Full screen brick wall - masked by text glow */}
+      <div 
+        className={`fixed inset-0 transition-opacity duration-700 pointer-events-none ${
+          isPluggedIn ? "opacity-100" : "opacity-0"
+        }`}
+        style={{
+          backgroundImage: brickPattern,
+          backgroundSize: '104px 26px',
+        }}
+      />
+      
+      {/* SVG mask definition - text shapes with blur to create light spread */}
+      <svg className="absolute w-0 h-0" aria-hidden="true">
+        <defs>
+          <filter id="glow-blur" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="30" result="blur" />
+          </filter>
+        </defs>
+      </svg>
+
+      {/* Light mask layer - blurred text that masks the brick wall */}
+      <div 
+        className={`fixed inset-0 pointer-events-none transition-opacity duration-700 ${
+          isPluggedIn ? "opacity-100" : "opacity-0"
+        }`}
+        style={{
+          background: 'hsl(0 0% 2%)',
+          mixBlendMode: 'multiply',
+        }}
+      >
+        {/* Cutout glow shape matching text position */}
+        <div 
+          className="absolute inset-0 flex items-center"
+          style={{
+            maskImage: 'radial-gradient(ellipse 100% 100% at 35% 50%, black 0%, transparent 50%)',
+            WebkitMaskImage: 'radial-gradient(ellipse 100% 100% at 35% 50%, black 0%, transparent 50%)',
+            background: 'transparent',
+          }}
+        />
+      </div>
+      
+      {/* Text glow light reveal - creates the lit area shape */}
+      <div 
+        className={`fixed inset-0 pointer-events-none transition-opacity duration-700 ${
+          isPluggedIn ? "opacity-100" : "opacity-0"
+        }`}
+        style={{
+          background: 'hsl(0 0% 2%)',
+        }}
+      >
+        {/* Blurred text acting as light source mask */}
+        <div 
+          className="w-full h-full flex items-center px-6 md:px-12 lg:px-20"
+          style={{
+            mixBlendMode: 'destination-out' as React.CSSProperties['mixBlendMode'],
+            filter: 'blur(40px)',
+          }}
+        >
+          <div className="text-hero font-pixel flex flex-col text-center md:text-left text-white">
             <span className="flex flex-wrap justify-center md:justify-start">
               <span>anand&nbsp;</span>
               <span>prince</span>
             </span>
-            <span className="flex items-start justify-center md:justify-start">
-              <span>purty</span>
-            </span>
-          </h1>
+            <span>purty</span>
+          </div>
+        </div>
+      </div>
 
-          {/* Main glowing text layer */}
-          <h1 
-            className={`text-hero font-pixel transition-all duration-500 flex flex-col text-center md:text-left relative z-0 ${
-              isPluggedIn ? "cfl-tube cfl-glow" : "cfl-off"
-            }`}
-          >
-            {/* First line: anand prince */}
-            <span className="flex flex-wrap justify-center md:justify-start">
-              {["anand", "prince"].map((word, i) => 
-                renderWord(word, i, false)
-              )}
-            </span>
+      <div className="w-full px-6 md:px-12 lg:px-20 relative z-10">
+        {/* Main glowing text layer */}
+        <h1 
+          className={`text-hero font-pixel transition-all duration-500 flex flex-col text-center md:text-left ${
+            isPluggedIn ? "cfl-tube cfl-glow" : "cfl-off"
+          }`}
+        >
+          {/* First line: anand prince */}
+          <span className="flex flex-wrap justify-center md:justify-start">
+            {["anand", "prince"].map((word, i) => 
+              renderWord(word, i, false)
+            )}
+          </span>
 
-            {/* Second line: purty + cable */}
-            <span className="flex items-start justify-center md:justify-start">
-              <span className="flex items-center">
-                {renderWord("purty", 2, true)}
-                
-                {/* Fixed cable anchor point - attached to end of text */}
-                <span 
-                  ref={anchorRef} 
-                  className="relative inline-block w-0 h-0"
-                  style={{ marginTop: '0.5em' }}
+          {/* Second line: purty + cable */}
+          <span className="flex items-start justify-center md:justify-start">
+            <span className="flex items-center">
+              {renderWord("purty", 2, true)}
+              
+              {/* Fixed cable anchor point - attached to end of text */}
+              <span 
+                ref={anchorRef} 
+                className="relative inline-block w-0 h-0"
+                style={{ marginTop: '0.5em' }}
+              >
+                {/* SVG Cable - starts from anchor, extends to plug */}
+                <svg 
+                  className="absolute pointer-events-none"
+                  style={{
+                    left: 0,
+                    top: 0,
+                    width: Math.abs(plugPosition.x) + 50,
+                    height: Math.abs(plugPosition.y) + 50,
+                    overflow: 'visible',
+                  }}
                 >
-                  {/* SVG Cable - starts from anchor, extends to plug */}
-                  <svg 
-                    className="absolute pointer-events-none"
-                    style={{
-                      left: 0,
-                      top: 0,
-                      width: Math.abs(plugPosition.x) + 50,
-                      height: Math.abs(plugPosition.y) + 50,
-                      overflow: 'visible',
-                    }}
-                  >
-                    <path
-                      d={getCablePath()}
-                      stroke="hsl(0 0% 22%)"
-                      strokeWidth="5"
-                      strokeLinecap="round"
-                      className={`transition-all ${isDragging ? "duration-0" : "duration-500"} ease-out`}
-                      fill="none"
-                    />
-                  </svg>
+                  <path
+                    d={getCablePath()}
+                    stroke="hsl(0 0% 22%)"
+                    strokeWidth="5"
+                    strokeLinecap="round"
+                    className={`transition-all ${isDragging ? "duration-0" : "duration-500"} ease-out`}
+                    fill="none"
+                  />
+                </svg>
 
-                  {/* Draggable Plug - positioned at end of cable */}
-                  <div 
-                    onMouseDown={handleMouseDown}
-                    className={`absolute cursor-grab active:cursor-grabbing z-10 ${
-                      isDragging ? "" : "transition-all duration-500"
-                    }`}
-                    style={{
-                      left: plugPosition.x,
-                      top: plugPosition.y,
-                      transform: `translate(-8px, -50%) ${!isPluggedIn && !isDragging ? "rotate(90deg)" : "rotate(0deg)"}`,
-                      transformOrigin: 'left center',
-                    }}
-                  >
-                    <div className="flex items-center">
-                      {/* Plug body */}
-                      <div className="w-5 h-5 md:w-6 md:h-6 bg-[hsl(0_0%_18%)] rounded-sm flex flex-col justify-center items-end pr-0.5 gap-1 shadow-md border border-[hsl(0_0%_25%)]">
-                        {/* Prongs */}
-                        <div className="w-3 h-1 bg-[hsl(45_60%_50%)] rounded-r-sm" />
-                        <div className="w-3 h-1 bg-[hsl(45_60%_50%)] rounded-r-sm" />
-                      </div>
+                {/* Draggable Plug - positioned at end of cable */}
+                <div 
+                  onMouseDown={handleMouseDown}
+                  className={`absolute cursor-grab active:cursor-grabbing z-10 ${
+                    isDragging ? "" : "transition-all duration-500"
+                  }`}
+                  style={{
+                    left: plugPosition.x,
+                    top: plugPosition.y,
+                    transform: `translate(-8px, -50%) ${!isPluggedIn && !isDragging ? "rotate(90deg)" : "rotate(0deg)"}`,
+                    transformOrigin: 'left center',
+                  }}
+                >
+                  <div className="flex items-center">
+                    {/* Plug body */}
+                    <div className="w-5 h-5 md:w-6 md:h-6 bg-[hsl(0_0%_18%)] rounded-sm flex flex-col justify-center items-end pr-0.5 gap-1 shadow-md border border-[hsl(0_0%_25%)]">
+                      {/* Prongs */}
+                      <div className="w-3 h-1 bg-[hsl(45_60%_50%)] rounded-r-sm" />
+                      <div className="w-3 h-1 bg-[hsl(45_60%_50%)] rounded-r-sm" />
                     </div>
                   </div>
-                </span>
+                </div>
               </span>
             </span>
-          </h1>
-        </div>
+          </span>
+        </h1>
       </div>
 
       {/* Floor */}
