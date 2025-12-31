@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import Cat from "@/components/Cat";
+import wantedPhoto from "@/assets/wanted-photo.png";
 
 const Index = () => {
   const [isPluggedIn, setIsPluggedIn] = useState(false);
@@ -275,6 +276,50 @@ const Index = () => {
           background: 'radial-gradient(ellipse 50% 40% at 50% 50%, hsl(60 80% 85% / 0.15) 0%, transparent 60%)',
         }}
       />
+
+      {/* Wanted Poster - reveals when light is on */}
+      <div 
+        className={`fixed top-1/2 left-[55%] -translate-y-1/2 pointer-events-none transition-opacity duration-700 z-5 ${
+          isPluggedIn ? "opacity-90" : "opacity-0"
+        }`}
+      >
+        <div className="relative bg-[hsl(35_30%_75%)] p-2 md:p-3 shadow-lg" style={{
+          boxShadow: '4px 4px 12px rgba(0,0,0,0.5), inset 0 0 20px rgba(0,0,0,0.1)',
+          transform: 'rotate(2deg)',
+        }}>
+          {/* Aged paper texture overlay */}
+          <div className="absolute inset-0 opacity-30" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.4'/%3E%3C/svg%3E")`,
+          }} />
+          
+          {/* Poster content */}
+          <div className="relative text-center">
+            <h3 className="font-serif text-[hsl(0_0%_10%)] text-sm md:text-lg font-bold tracking-widest mb-1 md:mb-2" style={{ fontFamily: 'Georgia, serif' }}>
+              WANTED
+            </h3>
+            
+            {/* Photo frame */}
+            <div className="bg-[hsl(0_0%_20%)] p-1 mx-auto w-16 h-20 md:w-24 md:h-28 mb-1 md:mb-2">
+              <img 
+                src={wantedPhoto} 
+                alt="Wanted person" 
+                className="w-full h-full object-cover grayscale contrast-125"
+                style={{ filter: 'grayscale(100%) contrast(1.2) sepia(20%)' }}
+              />
+            </div>
+            
+            <p className="font-serif text-[hsl(0_0%_15%)] text-[8px] md:text-xs tracking-wide" style={{ fontFamily: 'Georgia, serif' }}>
+              DEAD OR ALIVE
+            </p>
+            <p className="font-serif text-[hsl(0_0%_10%)] text-[10px] md:text-sm font-bold mt-0.5" style={{ fontFamily: 'Georgia, serif' }}>
+              $10,000 REWARD
+            </p>
+          </div>
+          
+          {/* Nail/pin at top */}
+          <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 md:w-3 md:h-3 bg-[hsl(0_0%_25%)] rounded-full shadow-md" />
+        </div>
+      </div>
 
       <div className="w-full px-6 md:px-12 lg:px-20 relative z-10">
         <h1 
