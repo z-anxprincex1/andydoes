@@ -54,9 +54,9 @@ const Index = () => {
         </div>
 
         {/* Cable section - connects text to socket */}
-        <div className="flex-1 flex items-center min-w-[80px] md:min-w-[120px] h-20 relative">
+        <div className={`flex-1 flex items-center min-w-[80px] md:min-w-[120px] h-20 relative ${isPluggedIn ? "cable-hover" : ""}`}>
           <svg 
-            className="w-full h-full absolute inset-0"
+            className="w-full h-full absolute inset-0 cursor-pointer"
             viewBox="0 0 200 80"
             fill="none"
             preserveAspectRatio="none"
@@ -70,7 +70,7 @@ const Index = () => {
               stroke="hsl(0 0% 18%)"
               strokeWidth="6"
               strokeLinecap="round"
-              className="transition-all duration-500 ease-in-out"
+              className={`transition-all duration-500 ease-in-out ${isPluggedIn ? "cable-jiggly" : ""}`}
               fill="none"
             />
           </svg>
