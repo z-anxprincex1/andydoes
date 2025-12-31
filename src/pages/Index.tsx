@@ -244,7 +244,10 @@ const Index = () => {
       </div>
 
       {/* Cat */}
-      <Cat />
+      <Cat onScratchSocket={() => {
+        setIsPluggedIn(false);
+        setPlugPosition({ x: 30, y: 180 });
+      }} />
       </div>
     </main>
   );

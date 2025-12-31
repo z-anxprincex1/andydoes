@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
 
-type CatState = "walking-right" | "walking-left" | "peeking-right" | "peeking-left" | "idle";
+type CatState = "walking-right" | "walking-left" | "peeking-right" | "peeking-left" | "idle" | "scratching";
 
-const Cat = () => {
+interface CatProps {
+  onScratchSocket?: () => void;
+}
+
+const Cat = ({ onScratchSocket }: CatProps) => {
   const [position, setPosition] = useState(20);
   const [catState, setCatState] = useState<CatState>("idle");
   const [isVisible, setIsVisible] = useState(true);
@@ -11,7 +15,7 @@ const Cat = () => {
     const moveCat = () => {
       const action = Math.random();
       
-      if (action < 0.3) {
+      if (action < 0.25) {
         // Walk right
         setCatState("walking-right");
         setIsVisible(true);
@@ -19,7 +23,7 @@ const Cat = () => {
         setPosition(newPos);
         
         setTimeout(() => setCatState("idle"), 4000);
-      } else if (action < 0.6) {
+      } else if (action < 0.5) {
         // Walk left
         setCatState("walking-left");
         setIsVisible(true);
@@ -27,28 +31,56 @@ const Cat = () => {
         setPosition(newPos);
         
         setTimeout(() => setCatState("idle"), 4000);
-      } else if (action < 0.8) {
+      } else if (action < 0.65) {
         // Hide and peek from right
         setCatState("peeking-right");
         setPosition(98);
         setIsVisible(true);
-      } else {
+      } else if (action < 0.8) {
         // Hide and peek from left
         setCatState("peeking-left");
         setPosition(-3);
         setIsVisible(true);
+      } else if (action < 0.88) {
+        // Scratch the socket! (rare action)
+        setCatState("walking-right");
+        setIsVisible(true);
+        setPosition(85); // Move towards socket
+        
+        setTimeout(() => {
+          setCatState("scratching");
+          // Trigger disconnect after scratching animation starts
+          setTimeout(() => {
+            onScratchSocket?.();
+          }, 500);
+          
+          // Return to idle after scratching
+          setTimeout(() => {
+            setCatState("idle");
+            // Walk away after scratching
+            setTimeout(() => {
+              setCatState("walking-left");
+              setPosition(50 + Math.random() * 20);
+              setTimeout(() => setCatState("idle"), 4000);
+            }, 1000);
+          }, 1500);
+        }, 6000);
+      } else {
+        // Just idle
+        setCatState("idle");
       }
     };
 
-    const interval = setInterval(moveCat, 6000 + Math.random() * 4000);
+    const interval = setInterval(moveCat, 8000 + Math.random() * 5000);
     
     // Initial movement
     setTimeout(moveCat, 2000);
     
     return () => clearInterval(interval);
-  }, [position]);
+  }, [position, onScratchSocket]);
 
   const isPeeking = catState === "peeking-right" || catState === "peeking-left";
+  const isScratching = catState === "scratching";
   const facingLeft = catState === "walking-left" || catState === "peeking-right";
 
   return (
@@ -96,7 +128,9 @@ const Cat = () => {
               style={{ transform: "rotate(-20deg)" }}
             />
             {/* Body */}
-            <div className="w-14 h-7 md:w-18 md:h-9 bg-[hsl(30_20%_25%)] rounded-full" />
+            <div className={`w-14 h-7 md:w-18 md:h-9 bg-[hsl(30_20%_25%)] rounded-full ${
+              isScratching ? "animate-[scratchBody_0.15s_ease-in-out_infinite]" : ""
+            }`} />
             {/* Head */}
             <div className="absolute -top-5 right-0 w-9 h-7 md:w-11 md:h-9 bg-[hsl(30_20%_25%)] rounded-full">
               {/* Ears */}
@@ -110,18 +144,20 @@ const Cat = () => {
                 <div className="w-0.5 h-1.5 bg-black rounded-full" />
               </div>
             </div>
-            {/* Legs */}
+            {/* Legs - front legs scratch when scratching */}
             <div className={`absolute bottom-0 left-1.5 w-2 h-4 bg-[hsl(30_20%_22%)] rounded-b ${
-              catState !== "idle" ? "animate-[legMove_0.2s_ease-in-out_infinite]" : ""
+              catState === "walking-right" || catState === "walking-left" ? "animate-[legMove_0.2s_ease-in-out_infinite]" : ""
             }`} />
             <div className={`absolute bottom-0 left-5 w-2 h-4 bg-[hsl(30_20%_22%)] rounded-b ${
-              catState !== "idle" ? "animate-[legMove_0.2s_ease-in-out_infinite_0.1s]" : ""
+              catState === "walking-right" || catState === "walking-left" ? "animate-[legMove_0.2s_ease-in-out_infinite_0.1s]" : ""
             }`} />
-            <div className={`absolute bottom-0 right-3 w-2 h-4 bg-[hsl(30_20%_22%)] rounded-b ${
-              catState !== "idle" ? "animate-[legMove_0.2s_ease-in-out_infinite_0.05s]" : ""
+            <div className={`absolute bottom-0 right-3 w-2 h-4 bg-[hsl(30_20%_22%)] rounded-b origin-top ${
+              isScratching ? "animate-[scratchLeg_0.1s_ease-in-out_infinite]" : 
+              catState === "walking-right" || catState === "walking-left" ? "animate-[legMove_0.2s_ease-in-out_infinite_0.05s]" : ""
             }`} />
-            <div className={`absolute bottom-0 right-0.5 w-2 h-4 bg-[hsl(30_20%_22%)] rounded-b ${
-              catState !== "idle" ? "animate-[legMove_0.2s_ease-in-out_infinite_0.15s]" : ""
+            <div className={`absolute bottom-0 right-0.5 w-2 h-4 bg-[hsl(30_20%_22%)] rounded-b origin-top ${
+              isScratching ? "animate-[scratchLeg_0.1s_ease-in-out_infinite_0.05s]" : 
+              catState === "walking-right" || catState === "walking-left" ? "animate-[legMove_0.2s_ease-in-out_infinite_0.15s]" : ""
             }`} />
           </div>
         )}
