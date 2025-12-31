@@ -39,11 +39,11 @@ const Index = () => {
 
   return (
     <main className="min-h-screen flex items-center bg-background overflow-hidden">
-      <div className="w-full flex items-center">
+      <div className="w-full flex flex-wrap md:flex-nowrap items-center">
         {/* Text container */}
         <div className="px-6 md:px-12 lg:px-20 shrink-0">
           <h1 
-            className={`text-hero font-mono transition-all duration-500 ${
+            className={`text-hero font-mono transition-all duration-500 flex flex-wrap ${
               isPluggedIn ? "cfl-tube cfl-glow" : "cfl-off"
             }`}
           >
