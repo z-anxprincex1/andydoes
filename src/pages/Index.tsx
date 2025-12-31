@@ -3,10 +3,10 @@ import { useState, useRef, useEffect } from "react";
 const Index = () => {
   const [isPluggedIn, setIsPluggedIn] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
-  const [plugPosition, setPlugPosition] = useState({ x: 0, y: 80 }); // Hanging down by default
-  const plugRef = useRef<HTMLDivElement>(null);
+  const [plugPosition, setPlugPosition] = useState({ x: 20, y: 100 }); // Hanging down by default
+  const containerRef = useRef<HTMLDivElement>(null);
   const socketRef = useRef<HTMLDivElement>(null);
-  const cableStartRef = useRef<HTMLSpanElement>(null);
+  const anchorRef = useRef<HTMLSpanElement>(null);
   const flickerClasses = ["flicker-1", "flicker-2", "flicker-3", "flicker-4", "flicker-5"];
 
   const getFlickerClass = (index: number) => {
@@ -22,35 +22,38 @@ const Index = () => {
   };
 
   const handleMouseMove = (e: MouseEvent) => {
-    if (!isDragging || !cableStartRef.current) return;
+    if (!isDragging || !anchorRef.current) return;
     
-    const startRect = cableStartRef.current.getBoundingClientRect();
-    const startX = startRect.right;
-    const startY = startRect.top + startRect.height / 2;
+    const anchorRect = anchorRef.current.getBoundingClientRect();
+    const anchorX = anchorRect.left + anchorRect.width / 2;
+    const anchorY = anchorRect.top + anchorRect.height / 2;
     
-    const offsetX = e.clientX - startX;
-    const offsetY = e.clientY - startY;
-    
-    setPlugPosition({ x: offsetX, y: offsetY });
+    setPlugPosition({
+      x: e.clientX - anchorX,
+      y: e.clientY - anchorY,
+    });
   };
 
   const handleMouseUp = () => {
-    if (!isDragging || !socketRef.current || !cableStartRef.current) return;
+    if (!isDragging || !socketRef.current || !anchorRef.current) return;
     setIsDragging(false);
     
     const socketRect = socketRef.current.getBoundingClientRect();
-    const startRect = cableStartRef.current.getBoundingClientRect();
+    const anchorRect = anchorRef.current.getBoundingClientRect();
     
-    const socketCenterX = socketRect.left + socketRect.width / 2 - startRect.right;
-    const socketCenterY = socketRect.top + socketRect.height / 2 - (startRect.top + startRect.height / 2);
+    const anchorX = anchorRect.left + anchorRect.width / 2;
+    const anchorY = anchorRect.top + anchorRect.height / 2;
+    
+    const socketTargetX = socketRect.left - anchorX;
+    const socketTargetY = socketRect.top + socketRect.height / 2 - anchorY;
     
     // Check if plug is close enough to socket to snap
-    if (Math.abs(plugPosition.x - socketCenterX) < 50 && Math.abs(plugPosition.y - socketCenterY) < 50) {
+    if (Math.abs(plugPosition.x - socketTargetX) < 60 && Math.abs(plugPosition.y - socketTargetY) < 40) {
       setIsPluggedIn(true);
-      setPlugPosition({ x: socketCenterX, y: socketCenterY });
+      setPlugPosition({ x: socketTargetX, y: socketTargetY });
     } else {
-      // Drop and hang
-      setPlugPosition({ x: 0, y: 80 });
+      // Drop and hang down
+      setPlugPosition({ x: 20, y: 100 });
     }
   };
 
@@ -86,8 +89,27 @@ const Index = () => {
     );
   };
 
+  // Cable path from fixed anchor (0,0) to plug position
+  const getCablePath = () => {
+    const endX = plugPosition.x;
+    const endY = plugPosition.y;
+    
+    if (isPluggedIn && !isDragging) {
+      // Slight curve when plugged in
+      const midY = endY * 0.3;
+      return `M 0 0 Q ${endX * 0.5} ${midY + 15} ${endX} ${endY}`;
+    }
+    
+    // Natural hanging cable with gravity sag
+    const sagAmount = Math.max(40, Math.abs(endY) * 0.5);
+    const controlX = endX * 0.4;
+    const controlY = Math.max(endY * 0.5, sagAmount);
+    
+    return `M 0 0 Q ${controlX} ${controlY} ${endX} ${endY}`;
+  };
+
   return (
-    <main className="min-h-screen flex items-center bg-background overflow-hidden">
+    <main className="min-h-screen flex items-center bg-background overflow-hidden" ref={containerRef}>
       <div className="w-full px-6 md:px-12 lg:px-20">
         <h1 
           className={`text-hero font-mono transition-all duration-500 flex flex-col text-center md:text-left ${
@@ -102,78 +124,76 @@ const Index = () => {
           </span>
 
           {/* Second line: purty + cable + socket */}
-          <span className="flex items-center justify-center md:justify-start relative">
-            {renderWord("purty", 2, true)}
-            
-            {/* Cable anchor point */}
-            <span ref={cableStartRef} className="relative">
-              {/* SVG Cable - positioned absolutely to allow unlimited extension */}
-              <svg 
-                className="absolute top-1/2 left-0 -translate-y-1/2 pointer-events-none overflow-visible"
-                style={{
-                  width: Math.max(Math.abs(plugPosition.x) + 100, 150),
-                  height: Math.max(Math.abs(plugPosition.y) * 2 + 100, 200),
-                  left: plugPosition.x < 0 ? plugPosition.x - 20 : 0,
-                  top: `calc(50% - ${Math.max(Math.abs(plugPosition.y) + 50, 100)}px)`,
-                }}
-                viewBox={`${plugPosition.x < 0 ? plugPosition.x - 20 : 0} ${-Math.max(Math.abs(plugPosition.y) + 50, 100)} ${Math.max(Math.abs(plugPosition.x) + 100, 150)} ${Math.max(Math.abs(plugPosition.y) * 2 + 100, 200)}`}
-                fill="none"
+          <span className="flex items-start justify-center md:justify-start">
+            <span className="flex items-center">
+              {renderWord("purty", 2, true)}
+              
+              {/* Fixed cable anchor point - attached to end of text */}
+              <span 
+                ref={anchorRef} 
+                className="relative inline-block w-0 h-0"
+                style={{ marginTop: '0.5em' }}
               >
-                <path
-                  d={(() => {
-                    const endX = plugPosition.x;
-                    const endY = plugPosition.y;
-                    
-                    if (isPluggedIn && !isDragging) {
-                      // Straight-ish line to socket when plugged in
-                      return `M 0 0 Q ${endX * 0.5} ${endY * 0.3} ${endX - 15} ${endY}`;
-                    }
-                    
-                    // Natural hanging cable with gravity curve
-                    const sagAmount = Math.max(30, Math.abs(endX) * 0.3 + 20);
-                    const controlY = Math.max(endY, sagAmount);
-                    
-                    return `M 0 0 Q ${endX * 0.3} ${controlY} ${endX - 15} ${endY}`;
-                  })()}
-                  stroke="hsl(0 0% 18%)"
-                  strokeWidth="6"
-                  strokeLinecap="round"
-                  className={`transition-all ${isDragging ? "duration-0" : "duration-500"} ease-out`}
-                  fill="none"
-                />
-              </svg>
+                {/* SVG Cable - starts from anchor, extends to plug */}
+                <svg 
+                  className="absolute pointer-events-none"
+                  style={{
+                    left: 0,
+                    top: 0,
+                    width: Math.abs(plugPosition.x) + 50,
+                    height: Math.abs(plugPosition.y) + 50,
+                    overflow: 'visible',
+                  }}
+                >
+                  <path
+                    d={getCablePath()}
+                    stroke="hsl(0 0% 22%)"
+                    strokeWidth="5"
+                    strokeLinecap="round"
+                    className={`transition-all ${isDragging ? "duration-0" : "duration-500"} ease-out`}
+                    fill="none"
+                  />
+                </svg>
 
-              {/* Draggable Plug */}
-              <div 
-                ref={plugRef}
-                onMouseDown={handleMouseDown}
-                className={`absolute top-1/2 left-0 -translate-y-1/2 flex items-center cursor-grab active:cursor-grabbing z-10 ${
-                  isDragging ? "" : "transition-all duration-500"
-                }`}
-                style={{
-                  transform: `translate(${plugPosition.x - 20}px, calc(-50% + ${plugPosition.y}px)) ${!isPluggedIn && !isDragging ? "rotate(90deg)" : ""}`,
-                }}
-              >
-                <div className="w-5 h-4 md:w-6 md:h-5 bg-[hsl(0_0%_20%)] rounded-l-sm flex flex-col justify-center items-end pr-0.5 gap-1 shadow-md">
-                  <div className="w-3 h-1 bg-[hsl(45_60%_50%)] rounded-r-sm" />
-                  <div className="w-3 h-1 bg-[hsl(45_60%_50%)] rounded-r-sm" />
+                {/* Draggable Plug - positioned at end of cable */}
+                <div 
+                  onMouseDown={handleMouseDown}
+                  className={`absolute cursor-grab active:cursor-grabbing z-10 ${
+                    isDragging ? "" : "transition-all duration-500"
+                  }`}
+                  style={{
+                    left: plugPosition.x,
+                    top: plugPosition.y,
+                    transform: `translate(-100%, -50%) ${!isPluggedIn && !isDragging ? "rotate(90deg)" : "rotate(0deg)"}`,
+                  }}
+                >
+                  <div className="flex items-center">
+                    {/* Cable end connector */}
+                    <div className="w-2 h-3 bg-[hsl(0_0%_22%)] rounded-l-sm" />
+                    {/* Plug body */}
+                    <div className="w-5 h-5 md:w-6 md:h-6 bg-[hsl(0_0%_18%)] rounded-sm flex flex-col justify-center items-end pr-0.5 gap-1 shadow-md border border-[hsl(0_0%_25%)]">
+                      {/* Prongs */}
+                      <div className="w-3 h-1 bg-[hsl(45_60%_50%)] rounded-r-sm" />
+                      <div className="w-3 h-1 bg-[hsl(45_60%_50%)] rounded-r-sm" />
+                    </div>
+                  </div>
                 </div>
-              </div>
+              </span>
             </span>
 
             {/* Socket - positioned with gap */}
             <div 
               ref={socketRef}
-              className={`ml-24 md:ml-40 relative w-10 h-14 md:w-14 md:h-20 bg-[hsl(0_0%_10%)] rounded border-2 transition-colors shadow-[inset_0_2px_8px_rgba(0,0,0,0.6)] ${
+              className={`ml-28 md:ml-44 mt-2 relative w-10 h-14 md:w-14 md:h-20 bg-[hsl(0_0%_8%)] rounded border-2 transition-all duration-300 shadow-[inset_0_2px_8px_rgba(0,0,0,0.6)] shrink-0 ${
                 isDragging 
-                  ? "border-[hsl(0_0%_40%)]" 
+                  ? "border-[hsl(120_40%_30%)] shadow-[inset_0_2px_8px_rgba(0,0,0,0.6),0_0_15px_rgba(74,222,128,0.3)]" 
                   : "border-[hsl(0_0%_18%)]"
               }`}
             >
               <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
                 <div className="flex gap-1.5 md:gap-2">
-                  <div className="w-1.5 h-3 md:w-2 md:h-4 bg-[hsl(0_0%_5%)] rounded-sm shadow-[inset_0_1px_3px_rgba(0,0,0,0.9)]" />
-                  <div className="w-1.5 h-3 md:w-2 md:h-4 bg-[hsl(0_0%_5%)] rounded-sm shadow-[inset_0_1px_3px_rgba(0,0,0,0.9)]" />
+                  <div className="w-1.5 h-3 md:w-2 md:h-4 bg-[hsl(0_0%_3%)] rounded-sm shadow-[inset_0_1px_3px_rgba(0,0,0,0.9)]" />
+                  <div className="w-1.5 h-3 md:w-2 md:h-4 bg-[hsl(0_0%_3%)] rounded-sm shadow-[inset_0_1px_3px_rgba(0,0,0,0.9)]" />
                 </div>
                 <div 
                   className={`w-1.5 h-1.5 md:w-2 md:h-2 rounded-full transition-all duration-300 ${
