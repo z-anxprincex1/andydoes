@@ -54,7 +54,7 @@ const Index = () => {
 
           {/* Second line: purty + cable + socket */}
           <span className="flex items-center justify-center md:justify-start">
-            {renderWord("purty", 2, false)}
+            {renderWord("purty", 2, true)}
             
             {/* Cable section - no gap, directly attached */}
             <span className={`inline-flex items-center h-12 md:h-16 w-20 md:w-32 relative ${isPluggedIn ? "cable-hover" : ""}`}>
