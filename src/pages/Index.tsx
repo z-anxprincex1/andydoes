@@ -133,98 +133,51 @@ const Index = () => {
     return path;
   };
 
-  // Brick wall pattern as CSS background
-  const brickPattern = `
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 24px,
-      hsl(0 0% 5%) 24px,
-      hsl(0 0% 5%) 26px
-    ),
-    repeating-linear-gradient(
-      90deg,
-      hsl(8 35% 18%),
-      hsl(12 40% 22%) 45px,
-      hsl(8 30% 16%) 50px,
-      hsl(0 0% 5%) 50px,
-      hsl(0 0% 5%) 52px,
-      hsl(10 38% 20%) 52px
-    )
-  `;
-
   return (
     <main className="min-h-screen flex items-center bg-background overflow-hidden relative" ref={containerRef}>
-      {/* Full screen brick wall - masked by text glow */}
+      {/* Brick wall - only visible when CFL is on, with radial light mask */}
       <div 
         className={`fixed inset-0 transition-opacity duration-700 pointer-events-none ${
           isPluggedIn ? "opacity-100" : "opacity-0"
         }`}
         style={{
-          backgroundImage: brickPattern,
-          backgroundSize: '104px 26px',
+          backgroundImage: `
+            repeating-linear-gradient(
+              0deg,
+              transparent,
+              transparent 30px,
+              hsl(0 0% 8%) 30px,
+              hsl(0 0% 8%) 32px
+            ),
+            repeating-linear-gradient(
+              90deg,
+              hsl(15 40% 22%),
+              hsl(15 40% 22%) 60px,
+              hsl(0 0% 8%) 60px,
+              hsl(0 0% 8%) 62px
+            )
+          `,
+          backgroundSize: '124px 32px',
+          maskImage: isPluggedIn 
+            ? 'radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 30%, rgba(0,0,0,0) 70%)'
+            : 'none',
+          WebkitMaskImage: isPluggedIn 
+            ? 'radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 30%, rgba(0,0,0,0) 70%)'
+            : 'none',
         }}
       />
       
-      {/* SVG mask definition - text shapes with blur to create light spread */}
-      <svg className="absolute w-0 h-0" aria-hidden="true">
-        <defs>
-          <filter id="glow-blur" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="30" result="blur" />
-          </filter>
-        </defs>
-      </svg>
-
-      {/* Light mask layer - blurred text that masks the brick wall */}
+      {/* Ambient light glow behind text when on */}
       <div 
-        className={`fixed inset-0 pointer-events-none transition-opacity duration-700 ${
-          isPluggedIn ? "opacity-100" : "opacity-0"
+        className={`fixed inset-0 transition-opacity duration-700 pointer-events-none ${
+          isPluggedIn ? "opacity-40" : "opacity-0"
         }`}
         style={{
-          background: 'hsl(0 0% 2%)',
-          mixBlendMode: 'multiply',
+          background: 'radial-gradient(ellipse 50% 40% at 50% 50%, hsl(60 80% 85% / 0.15) 0%, transparent 60%)',
         }}
-      >
-        {/* Cutout glow shape matching text position */}
-        <div 
-          className="absolute inset-0 flex items-center"
-          style={{
-            maskImage: 'radial-gradient(ellipse 100% 100% at 35% 50%, black 0%, transparent 50%)',
-            WebkitMaskImage: 'radial-gradient(ellipse 100% 100% at 35% 50%, black 0%, transparent 50%)',
-            background: 'transparent',
-          }}
-        />
-      </div>
-      
-      {/* Text glow light reveal - creates the lit area shape */}
-      <div 
-        className={`fixed inset-0 pointer-events-none transition-opacity duration-700 ${
-          isPluggedIn ? "opacity-100" : "opacity-0"
-        }`}
-        style={{
-          background: 'hsl(0 0% 2%)',
-        }}
-      >
-        {/* Blurred text acting as light source mask */}
-        <div 
-          className="w-full h-full flex items-center px-6 md:px-12 lg:px-20"
-          style={{
-            mixBlendMode: 'destination-out' as React.CSSProperties['mixBlendMode'],
-            filter: 'blur(40px)',
-          }}
-        >
-          <div className="text-hero font-pixel flex flex-col text-center md:text-left text-white">
-            <span className="flex flex-wrap justify-center md:justify-start">
-              <span>anand&nbsp;</span>
-              <span>prince</span>
-            </span>
-            <span>purty</span>
-          </div>
-        </div>
-      </div>
+      />
 
       <div className="w-full px-6 md:px-12 lg:px-20 relative z-10">
-        {/* Main glowing text layer */}
         <h1 
           className={`text-hero font-pixel transition-all duration-500 flex flex-col text-center md:text-left ${
             isPluggedIn ? "cfl-tube cfl-glow" : "cfl-off"
