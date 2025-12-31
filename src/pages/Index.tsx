@@ -135,7 +135,49 @@ const Index = () => {
 
   return (
     <main className="min-h-screen flex items-center bg-background overflow-hidden relative" ref={containerRef}>
-      <div className="w-full px-6 md:px-12 lg:px-20">
+      {/* Brick wall - only visible when CFL is on, with radial light mask */}
+      <div 
+        className={`fixed inset-0 transition-opacity duration-700 pointer-events-none ${
+          isPluggedIn ? "opacity-100" : "opacity-0"
+        }`}
+        style={{
+          backgroundImage: `
+            repeating-linear-gradient(
+              0deg,
+              transparent,
+              transparent 30px,
+              hsl(0 0% 8%) 30px,
+              hsl(0 0% 8%) 32px
+            ),
+            repeating-linear-gradient(
+              90deg,
+              hsl(15 40% 22%),
+              hsl(15 40% 22%) 60px,
+              hsl(0 0% 8%) 60px,
+              hsl(0 0% 8%) 62px
+            )
+          `,
+          backgroundSize: '124px 32px',
+          maskImage: isPluggedIn 
+            ? 'radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 30%, rgba(0,0,0,0) 70%)'
+            : 'none',
+          WebkitMaskImage: isPluggedIn 
+            ? 'radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 30%, rgba(0,0,0,0) 70%)'
+            : 'none',
+        }}
+      />
+      
+      {/* Ambient light glow behind text when on */}
+      <div 
+        className={`fixed inset-0 transition-opacity duration-700 pointer-events-none ${
+          isPluggedIn ? "opacity-40" : "opacity-0"
+        }`}
+        style={{
+          background: 'radial-gradient(ellipse 50% 40% at 50% 50%, hsl(60 80% 85% / 0.15) 0%, transparent 60%)',
+        }}
+      />
+
+      <div className="w-full px-6 md:px-12 lg:px-20 relative z-10">
         <h1 
           className={`text-hero font-pixel transition-all duration-500 flex flex-col text-center md:text-left ${
             isPluggedIn ? "cfl-tube cfl-glow" : "cfl-off"
