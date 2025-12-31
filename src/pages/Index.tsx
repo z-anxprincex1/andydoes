@@ -141,23 +141,10 @@ const Index = () => {
           isPluggedIn ? "opacity-100" : "opacity-0"
         }`}
         style={{
-          backgroundImage: `
-            repeating-linear-gradient(
-              0deg,
-              transparent,
-              transparent 30px,
-              hsl(0 0% 8%) 30px,
-              hsl(0 0% 8%) 32px
-            ),
-            repeating-linear-gradient(
-              90deg,
-              hsl(15 40% 22%),
-              hsl(15 40% 22%) 60px,
-              hsl(0 0% 8%) 60px,
-              hsl(0 0% 8%) 62px
-            )
+          background: `
+            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='100' viewBox='0 0 200 100'%3E%3Crect fill='hsl(12, 35%25, 18%25)' width='200' height='100'/%3E%3Crect fill='hsl(15, 40%25, 24%25)' x='2' y='2' width='58' height='22' rx='1'/%3E%3Crect fill='hsl(14, 38%25, 21%25)' x='64' y='2' width='72' height='22' rx='1'/%3E%3Crect fill='hsl(16, 42%25, 26%25)' x='140' y='2' width='56' height='22' rx='1'/%3E%3Crect fill='hsl(13, 36%25, 22%25)' x='2' y='28' width='45' height='20' rx='1'/%3E%3Crect fill='hsl(17, 44%25, 25%25)' x='51' y='28' width='68' height='20' rx='1'/%3E%3Crect fill='hsl(11, 34%25, 20%25)' x='123' y='28' width='42' height='20' rx='1'/%3E%3Crect fill='hsl(15, 39%25, 23%25)' x='169' y='28' width='29' height='20' rx='1'/%3E%3Crect fill='hsl(18, 45%25, 27%25)' x='2' y='52' width='52' height='21' rx='1'/%3E%3Crect fill='hsl(12, 33%25, 19%25)' x='58' y='52' width='78' height='21' rx='1'/%3E%3Crect fill='hsl(14, 41%25, 24%25)' x='140' y='52' width='58' height='21' rx='1'/%3E%3Crect fill='hsl(16, 37%25, 22%25)' x='2' y='77' width='66' height='21' rx='1'/%3E%3Crect fill='hsl(13, 43%25, 26%25)' x='72' y='77' width='55' height='21' rx='1'/%3E%3Crect fill='hsl(19, 38%25, 21%25)' x='131' y='77' width='67' height='21' rx='1'/%3E%3C/svg%3E")
           `,
-          backgroundSize: '124px 32px',
+          backgroundSize: '200px 100px',
           maskImage: isPluggedIn 
             ? 'radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 30%, rgba(0,0,0,0) 70%)'
             : 'none',
