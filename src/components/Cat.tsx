@@ -19,7 +19,7 @@ const Cat = ({ onScratchSocket }: CatProps) => {
         // Walk right
         setCatState("walking-right");
         setIsVisible(true);
-        const newPos = Math.min(position + Math.random() * 8 + 3, 75);
+        const newPos = Math.min(position + Math.random() * 5 + 2, 75);
         setPosition(newPos);
         
         setTimeout(() => setCatState("idle"), 4000);
@@ -27,7 +27,7 @@ const Cat = ({ onScratchSocket }: CatProps) => {
         // Walk left
         setCatState("walking-left");
         setIsVisible(true);
-        const newPos = Math.max(position - Math.random() * 8 - 3, 10);
+        const newPos = Math.max(position - Math.random() * 5 - 2, 10);
         setPosition(newPos);
         
         setTimeout(() => setCatState("idle"), 4000);
@@ -85,7 +85,7 @@ const Cat = ({ onScratchSocket }: CatProps) => {
 
   return (
     <div
-      className={`fixed bottom-8 md:bottom-12 z-15 transition-all duration-[6000ms] ease-linear ${
+      className={`fixed bottom-8 md:bottom-12 z-15 transition-all duration-[10000ms] ease-linear ${
         !isVisible ? "opacity-0" : "opacity-100"
       }`}
       style={{
