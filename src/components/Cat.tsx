@@ -15,18 +15,18 @@ const Cat = () => {
         // Walk right
         setCatState("walking-right");
         setIsVisible(true);
-        const newPos = Math.min(position + Math.random() * 30 + 10, 75);
+        const newPos = Math.min(position + Math.random() * 15 + 5, 75);
         setPosition(newPos);
         
-        setTimeout(() => setCatState("idle"), 2000);
+        setTimeout(() => setCatState("idle"), 4000);
       } else if (action < 0.6) {
         // Walk left
         setCatState("walking-left");
         setIsVisible(true);
-        const newPos = Math.max(position - Math.random() * 30 - 10, 10);
+        const newPos = Math.max(position - Math.random() * 15 - 5, 10);
         setPosition(newPos);
         
-        setTimeout(() => setCatState("idle"), 2000);
+        setTimeout(() => setCatState("idle"), 4000);
       } else if (action < 0.8) {
         // Hide and peek from right
         setCatState("peeking-right");
@@ -40,10 +40,10 @@ const Cat = () => {
       }
     };
 
-    const interval = setInterval(moveCat, 3000 + Math.random() * 2000);
+    const interval = setInterval(moveCat, 6000 + Math.random() * 4000);
     
     // Initial movement
-    setTimeout(moveCat, 1000);
+    setTimeout(moveCat, 2000);
     
     return () => clearInterval(interval);
   }, [position]);
@@ -53,7 +53,7 @@ const Cat = () => {
 
   return (
     <div
-      className={`fixed bottom-8 md:bottom-12 z-15 transition-all duration-[2000ms] ease-in-out ${
+      className={`fixed bottom-8 md:bottom-12 z-15 transition-all duration-[4000ms] ease-in-out ${
         !isVisible ? "opacity-0" : "opacity-100"
       }`}
       style={{
