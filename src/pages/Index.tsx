@@ -45,14 +45,19 @@ const Index = () => {
             isPluggedIn ? "cfl-tube cfl-glow" : "cfl-off"
           }`}
         >
-          {/* First line: anand prince + cable + socket */}
-          <span className="flex flex-wrap items-center justify-center md:justify-start">
+          {/* First line: anand prince */}
+          <span className="flex flex-wrap justify-center md:justify-start">
             {["anand", "prince"].map((word, i) => 
               renderWord(word, i, false)
             )}
+          </span>
+
+          {/* Second line: purty + cable + socket */}
+          <span className="flex items-center justify-center md:justify-start">
+            {renderWord("purty", 2, false)}
             
-            {/* Cable section */}
-            <span className={`inline-flex items-center h-12 md:h-16 w-24 md:w-40 relative mx-2 ${isPluggedIn ? "cable-hover" : ""}`}>
+            {/* Cable section - no gap, directly attached */}
+            <span className={`inline-flex items-center h-12 md:h-16 w-20 md:w-32 relative ${isPluggedIn ? "cable-hover" : ""}`}>
               <svg 
                 className="w-full h-full absolute inset-0 cursor-pointer"
                 viewBox="0 0 200 80"
@@ -110,11 +115,6 @@ const Index = () => {
                 />
               </div>
             </button>
-          </span>
-
-          {/* Second line: purty */}
-          <span className="flex justify-center md:justify-start">
-            {renderWord("purty", 2, false)}
           </span>
         </h1>
       </div>
