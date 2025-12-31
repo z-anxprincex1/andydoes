@@ -15,6 +15,7 @@ export default {
     extend: {
       fontFamily: {
         mono: ['Atkinson Hyperlegible Mono', 'monospace'],
+        pixel: ['"Press Start 2P"', 'cursive'],
       },
       colors: {
         border: "hsl(var(--border))",
