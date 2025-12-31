@@ -67,22 +67,22 @@ const Cat = () => {
           // Peeking cat - only head visible
           <div className="relative">
             {/* Head */}
-            <div className="w-6 h-5 md:w-8 md:h-6 bg-[hsl(30_20%_25%)] rounded-t-full relative">
+            <div className="w-10 h-8 md:w-14 md:h-10 bg-[hsl(30_20%_25%)] rounded-t-full relative">
               {/* Ears */}
-              <div className="absolute -top-2 left-0.5 w-0 h-0 border-l-[5px] border-l-transparent border-r-[5px] border-r-transparent border-b-[8px] border-b-[hsl(30_20%_25%)]" />
-              <div className="absolute -top-2 right-0.5 w-0 h-0 border-l-[5px] border-l-transparent border-r-[5px] border-r-transparent border-b-[8px] border-b-[hsl(30_20%_25%)]" />
+              <div className="absolute -top-3 left-1 w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-b-[12px] border-b-[hsl(30_20%_25%)]" />
+              <div className="absolute -top-3 right-1 w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-b-[12px] border-b-[hsl(30_20%_25%)]" />
               {/* Inner ears */}
-              <div className="absolute -top-1 left-1 w-0 h-0 border-l-[3px] border-l-transparent border-r-[3px] border-r-transparent border-b-[5px] border-b-[hsl(350_30%_40%)]" />
-              <div className="absolute -top-1 right-1 w-0 h-0 border-l-[3px] border-l-transparent border-r-[3px] border-r-transparent border-b-[5px] border-b-[hsl(350_30%_40%)]" />
+              <div className="absolute -top-1.5 left-2 w-0 h-0 border-l-[5px] border-l-transparent border-r-[5px] border-r-transparent border-b-[8px] border-b-[hsl(350_30%_40%)]" />
+              <div className="absolute -top-1.5 right-2 w-0 h-0 border-l-[5px] border-l-transparent border-r-[5px] border-r-transparent border-b-[8px] border-b-[hsl(350_30%_40%)]" />
               {/* Eyes */}
-              <div className="absolute top-1.5 left-1 w-1.5 h-2 md:w-2 md:h-2.5 bg-[hsl(60_80%_60%)] rounded-full flex items-center justify-center">
-                <div className="w-0.5 h-1.5 bg-black rounded-full" />
+              <div className="absolute top-2 left-1.5 w-2.5 h-3 md:w-3 md:h-4 bg-[hsl(60_80%_60%)] rounded-full flex items-center justify-center">
+                <div className="w-1 h-2 bg-black rounded-full" />
               </div>
-              <div className="absolute top-1.5 right-1 w-1.5 h-2 md:w-2 md:h-2.5 bg-[hsl(60_80%_60%)] rounded-full flex items-center justify-center">
-                <div className="w-0.5 h-1.5 bg-black rounded-full" />
+              <div className="absolute top-2 right-1.5 w-2.5 h-3 md:w-3 md:h-4 bg-[hsl(60_80%_60%)] rounded-full flex items-center justify-center">
+                <div className="w-1 h-2 bg-black rounded-full" />
               </div>
               {/* Nose */}
-              <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-0.5 bg-[hsl(350_30%_45%)] rounded-full" />
+              <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-2 h-1 bg-[hsl(350_30%_45%)] rounded-full" />
             </div>
           </div>
         ) : (
@@ -90,37 +90,37 @@ const Cat = () => {
           <div className="relative">
             {/* Tail */}
             <div 
-              className={`absolute -left-4 bottom-2 w-5 h-1.5 bg-[hsl(30_20%_25%)] rounded-full origin-right ${
+              className={`absolute -left-6 bottom-3 w-8 h-2.5 bg-[hsl(30_20%_25%)] rounded-full origin-right ${
                 catState !== "idle" ? "animate-[tailWag_0.3s_ease-in-out_infinite]" : ""
               }`}
               style={{ transform: "rotate(-20deg)" }}
             />
             {/* Body */}
-            <div className="w-8 h-4 md:w-10 md:h-5 bg-[hsl(30_20%_25%)] rounded-full" />
+            <div className="w-14 h-7 md:w-18 md:h-9 bg-[hsl(30_20%_25%)] rounded-full" />
             {/* Head */}
-            <div className="absolute -top-3 right-0 w-5 h-4 md:w-6 md:h-5 bg-[hsl(30_20%_25%)] rounded-full">
+            <div className="absolute -top-5 right-0 w-9 h-7 md:w-11 md:h-9 bg-[hsl(30_20%_25%)] rounded-full">
               {/* Ears */}
-              <div className="absolute -top-1.5 left-0 w-0 h-0 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent border-b-[6px] border-b-[hsl(30_20%_25%)]" />
-              <div className="absolute -top-1.5 right-0 w-0 h-0 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent border-b-[6px] border-b-[hsl(30_20%_25%)]" />
+              <div className="absolute -top-2.5 left-0.5 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[10px] border-b-[hsl(30_20%_25%)]" />
+              <div className="absolute -top-2.5 right-0.5 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[10px] border-b-[hsl(30_20%_25%)]" />
               {/* Eyes */}
-              <div className="absolute top-1 left-0.5 w-1 h-1.5 bg-[hsl(60_80%_60%)] rounded-full flex items-center justify-center">
-                <div className="w-0.5 h-1 bg-black rounded-full" />
+              <div className="absolute top-1.5 left-1 w-2 h-2.5 bg-[hsl(60_80%_60%)] rounded-full flex items-center justify-center">
+                <div className="w-0.5 h-1.5 bg-black rounded-full" />
               </div>
-              <div className="absolute top-1 right-0.5 w-1 h-1.5 bg-[hsl(60_80%_60%)] rounded-full flex items-center justify-center">
-                <div className="w-0.5 h-1 bg-black rounded-full" />
+              <div className="absolute top-1.5 right-1 w-2 h-2.5 bg-[hsl(60_80%_60%)] rounded-full flex items-center justify-center">
+                <div className="w-0.5 h-1.5 bg-black rounded-full" />
               </div>
             </div>
             {/* Legs */}
-            <div className={`absolute bottom-0 left-1 w-1 h-2 bg-[hsl(30_20%_22%)] rounded-b ${
+            <div className={`absolute bottom-0 left-1.5 w-2 h-4 bg-[hsl(30_20%_22%)] rounded-b ${
               catState !== "idle" ? "animate-[legMove_0.2s_ease-in-out_infinite]" : ""
             }`} />
-            <div className={`absolute bottom-0 left-3 w-1 h-2 bg-[hsl(30_20%_22%)] rounded-b ${
+            <div className={`absolute bottom-0 left-5 w-2 h-4 bg-[hsl(30_20%_22%)] rounded-b ${
               catState !== "idle" ? "animate-[legMove_0.2s_ease-in-out_infinite_0.1s]" : ""
             }`} />
-            <div className={`absolute bottom-0 right-2 w-1 h-2 bg-[hsl(30_20%_22%)] rounded-b ${
+            <div className={`absolute bottom-0 right-3 w-2 h-4 bg-[hsl(30_20%_22%)] rounded-b ${
               catState !== "idle" ? "animate-[legMove_0.2s_ease-in-out_infinite_0.05s]" : ""
             }`} />
-            <div className={`absolute bottom-0 right-0.5 w-1 h-2 bg-[hsl(30_20%_22%)] rounded-b ${
+            <div className={`absolute bottom-0 right-0.5 w-2 h-4 bg-[hsl(30_20%_22%)] rounded-b ${
               catState !== "idle" ? "animate-[legMove_0.2s_ease-in-out_infinite_0.15s]" : ""
             }`} />
           </div>
