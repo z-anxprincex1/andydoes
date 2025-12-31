@@ -118,6 +118,14 @@
     animation: flicker2 0.12s ease-in-out infinite alternate,
                flicker-slow 5.5s ease-in-out infinite 0.3s;
   }
+
+  .cable-jiggly {
+    animation: cableJiggle 2s ease-in-out infinite;
+  }
+
+  .cable-hover:hover path {
+    animation: cableLift 0.4s ease-out forwards;
+  }
 }
 
 @keyframes fadeIn {
@@ -197,5 +205,29 @@
   70% { 
     opacity: 0.98;
     filter: brightness(1.02);
+  }
+}
+
+@keyframes cableJiggle {
+  0%, 100% {
+    d: path("M0 40 C 50 40, 100 40, 150 40 L 200 40");
+  }
+  25% {
+    d: path("M0 40 C 50 38, 100 43, 150 39 L 200 40");
+  }
+  50% {
+    d: path("M0 40 C 50 42, 100 37, 150 41 L 200 40");
+  }
+  75% {
+    d: path("M0 40 C 50 39, 100 42, 150 38 L 200 40");
+  }
+}
+
+@keyframes cableLift {
+  0% {
+    d: path("M0 40 C 50 40, 100 40, 150 40 L 200 40");
+  }
+  100% {
+    d: path("M0 40 C 40 25, 100 20, 150 30 L 200 40");
   }
 }
