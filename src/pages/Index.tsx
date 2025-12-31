@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import Cat from "@/components/Cat";
 
 const Index = () => {
   const [isPluggedIn, setIsPluggedIn] = useState(false);
@@ -240,7 +241,10 @@ const Index = () => {
                 : "bg-[hsl(0_0%_20%)]"
             }`} 
           />
-        </div>
+      </div>
+
+      {/* Cat */}
+      <Cat />
       </div>
     </main>
   );
