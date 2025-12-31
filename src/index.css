@@ -82,6 +82,11 @@
   .cfl-tube {
     color: hsl(180 30% 95%);
   }
+
+  .cfl-off {
+    color: hsl(0 0% 25%);
+    text-shadow: none;
+  }
 }
 
 @layer components {
