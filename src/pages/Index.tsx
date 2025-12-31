@@ -200,12 +200,17 @@ const Index = () => {
               <path d="M12 14 Q5 13 0 16" stroke="hsl(0 0% 15%)" strokeWidth="1.2" fill="none" />
             </svg>
             {/* Body */}
-            <div className="w-3 h-5 bg-[hsl(0_0%_10%)] rounded-full" />
-            {/* Head with eyes */}
-            <div className="w-2.5 h-2.5 bg-[hsl(0_0%_8%)] rounded-full -mt-1 mx-auto relative">
-              {/* Eyes */}
-              <div className="absolute top-0.5 left-0.5 w-1 h-1 bg-[hsl(0_0%_90%)] rounded-full animate-spider-blink" />
-              <div className="absolute top-0.5 right-0.5 w-1 h-1 bg-[hsl(0_0%_90%)] rounded-full animate-spider-blink" />
+            <div className="w-4 h-6 bg-[hsl(0_0%_12%)] rounded-full" />
+            {/* Head with cute eyes */}
+            <div className="w-4 h-4 bg-[hsl(0_0%_10%)] rounded-full -mt-1.5 mx-auto relative flex items-center justify-center gap-1">
+              {/* Left eye */}
+              <div className="w-1.5 h-1.5 bg-[hsl(0_0%_95%)] rounded-full relative animate-spider-blink">
+                <div className="absolute top-0.5 left-0.5 w-0.5 h-0.5 bg-[hsl(0_0%_5%)] rounded-full" />
+              </div>
+              {/* Right eye */}
+              <div className="w-1.5 h-1.5 bg-[hsl(0_0%_95%)] rounded-full relative animate-spider-blink">
+                <div className="absolute top-0.5 left-0.5 w-0.5 h-0.5 bg-[hsl(0_0%_5%)] rounded-full" />
+              </div>
             </div>
           </div>
         </div>
