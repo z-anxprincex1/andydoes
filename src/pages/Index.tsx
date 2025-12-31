@@ -91,19 +91,20 @@ const Index = () => {
 
   // Cable path from fixed anchor (0,0) to plug position
   const getCablePath = () => {
-    const endX = plugPosition.x;
+    const endX = plugPosition.x - 8; // End exactly at plug connector
     const endY = plugPosition.y;
     
     if (isPluggedIn && !isDragging) {
       // Slight curve when plugged in
       const midY = endY * 0.3;
-      return `M 0 0 Q ${endX * 0.5} ${midY + 15} ${endX} ${endY}`;
+      return `M 0 0 Q ${endX * 0.5} ${midY + 10} ${endX} ${endY}`;
     }
     
     // Natural hanging cable with gravity sag
-    const sagAmount = Math.max(40, Math.abs(endY) * 0.5);
-    const controlX = endX * 0.4;
-    const controlY = Math.max(endY * 0.5, sagAmount);
+    const distance = Math.sqrt(endX * endX + endY * endY);
+    const sagAmount = Math.min(80, distance * 0.3);
+    const controlX = endX * 0.3;
+    const controlY = Math.max(endY, sagAmount);
     
     return `M 0 0 Q ${controlX} ${controlY} ${endX} ${endY}`;
   };
@@ -164,12 +165,11 @@ const Index = () => {
                   style={{
                     left: plugPosition.x,
                     top: plugPosition.y,
-                    transform: `translate(-100%, -50%) ${!isPluggedIn && !isDragging ? "rotate(90deg)" : "rotate(0deg)"}`,
+                    transform: `translate(-8px, -50%) ${!isPluggedIn && !isDragging ? "rotate(90deg)" : "rotate(0deg)"}`,
+                    transformOrigin: 'left center',
                   }}
                 >
                   <div className="flex items-center">
-                    {/* Cable end connector */}
-                    <div className="w-2 h-3 bg-[hsl(0_0%_22%)] rounded-l-sm" />
                     {/* Plug body */}
                     <div className="w-5 h-5 md:w-6 md:h-6 bg-[hsl(0_0%_18%)] rounded-sm flex flex-col justify-center items-end pr-0.5 gap-1 shadow-md border border-[hsl(0_0%_25%)]">
                       {/* Prongs */}
