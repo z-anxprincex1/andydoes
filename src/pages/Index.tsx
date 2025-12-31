@@ -2,132 +2,124 @@ import { useState } from "react";
 
 const Index = () => {
   const [isPluggedIn, setIsPluggedIn] = useState(true);
-  const words = ["anand", "prince", "purty"];
   const flickerClasses = ["flicker-1", "flicker-2", "flicker-3", "flicker-4", "flicker-5"];
 
   const getFlickerClass = (index: number) => {
     return flickerClasses[index % flickerClasses.length];
   };
 
+  const renderWord = (word: string, wordIndex: number, isLast: boolean) => {
+    return (
+      <span key={wordIndex} className="inline-flex items-center">
+        {word.split("").map((letter, letterIndex) => {
+          const isLastLetter = isLast && letterIndex === word.length - 1;
+          return (
+            <span
+              key={letterIndex}
+              className={`inline-block relative ${isPluggedIn ? getFlickerClass(wordIndex * 5 + letterIndex) : ""}`}
+              style={{
+                animationDelay: isPluggedIn ? `${(wordIndex * 5 + letterIndex) * 0.1}s` : undefined,
+              }}
+            >
+              {letter}
+              {/* Cable connector attached to last letter */}
+              {isLastLetter && (
+                <span className="absolute left-full top-1/2 -translate-y-1/2 flex items-center">
+                  {/* Small connector box on letter */}
+                  <span className="w-3 h-4 md:w-4 md:h-5 bg-[hsl(0_0%_15%)] border border-[hsl(0_0%_25%)] rounded-sm" />
+                </span>
+              )}
+            </span>
+          );
+        })}
+        {!isLast && <span className="inline-block">&nbsp;</span>}
+      </span>
+    );
+  };
+
   return (
-    <main className="min-h-screen flex items-center bg-background overflow-hidden relative">
-      <div className="container px-6 md:px-12 lg:px-20 relative">
-        <div className="relative inline-block">
+    <main className="min-h-screen flex items-center bg-background overflow-hidden">
+      <div className="w-full flex items-center">
+        {/* Text container */}
+        <div className="px-6 md:px-12 lg:px-20 shrink-0">
           <h1 
             className={`text-hero font-mono transition-all duration-500 ${
               isPluggedIn ? "cfl-tube cfl-glow" : "cfl-off"
             }`}
           >
-            {words.map((word, wordIndex) => (
-              <span key={wordIndex} className="inline-block">
-                {word.split("").map((letter, letterIndex) => (
-                  <span
-                    key={letterIndex}
-                    className={`inline-block ${isPluggedIn ? getFlickerClass(wordIndex * 5 + letterIndex) : ""}`}
-                    style={{
-                      animationDelay: isPluggedIn ? `${(wordIndex * 5 + letterIndex) * 0.1}s` : undefined,
-                    }}
-                  >
-                    {letter}
-                  </span>
-                ))}
-                {wordIndex < words.length - 1 && (
-                  <span className="inline-block">&nbsp;</span>
-                )}
-              </span>
-            ))}
+            {["anand", "prince", "purty"].map((word, i, arr) => 
+              renderWord(word, i, i === arr.length - 1)
+            )}
           </h1>
+        </div>
 
-          {/* Cable attached to the letter - starts from end of text */}
+        {/* Cable section - connects text to socket */}
+        <div className="flex-1 flex items-center min-w-[80px] md:min-w-[120px] h-20 relative">
           <svg 
-            className="absolute top-1/2 -translate-y-1/2 -right-4 md:-right-6 h-40 pointer-events-none"
-            style={{ width: 'calc(100vw - 100%)' }}
-            viewBox="0 0 400 120"
+            className="w-full h-full absolute inset-0"
+            viewBox="0 0 200 80"
             fill="none"
-            preserveAspectRatio="xMinYMid meet"
+            preserveAspectRatio="none"
           >
-            {/* Cable connector at letter */}
-            <circle
-              cx="8"
-              cy="60"
-              r="6"
-              fill="hsl(0 0% 15%)"
-              stroke="hsl(0 0% 25%)"
-              strokeWidth="2"
-            />
-            
             {/* Cable wire */}
             <path
               d={isPluggedIn 
-                ? "M14 60 C 80 60, 150 55, 220 55 C 290 55, 340 58, 370 60" 
-                : "M14 60 C 80 45, 150 80, 220 50 C 290 30, 320 70, 335 75"
+                ? "M0 40 C 50 40, 100 40, 150 40 L 200 40" 
+                : "M0 40 C 40 25, 80 55, 120 35 C 160 15, 175 50, 185 55"
               }
-              stroke="hsl(0 0% 20%)"
-              strokeWidth="5"
+              stroke="hsl(0 0% 18%)"
+              strokeWidth="6"
               strokeLinecap="round"
               className="transition-all duration-500 ease-in-out"
               fill="none"
             />
-            
-            {/* Cable sheath near connector */}
-            <rect
-              x="10"
-              y="55"
-              width="12"
-              height="10"
-              rx="2"
-              fill="hsl(0 0% 18%)"
-            />
           </svg>
         </div>
-      </div>
 
-      {/* Socket on the right edge */}
-      <div className="fixed right-4 md:right-8 top-1/2 -translate-y-1/2 flex items-center">
-        {/* Plug */}
-        <div 
-          className={`absolute transition-all duration-500 ease-in-out ${
-            isPluggedIn 
-              ? "right-[52px] md:right-[68px]" 
-              : "right-[80px] md:right-[100px] rotate-12"
-          }`}
-        >
-          {/* Plug body */}
-          <div className="w-6 h-5 bg-[hsl(0_0%_22%)] rounded-sm relative">
-            {/* Prongs */}
-            <div className="absolute -right-2 top-1 w-2 h-1 bg-[hsl(45_70%_55%)] rounded-r-sm" />
-            <div className="absolute -right-2 bottom-1 w-2 h-1 bg-[hsl(45_70%_55%)] rounded-r-sm" />
-          </div>
+        {/* Socket with integrated plug */}
+        <div className="shrink-0 pr-4 md:pr-8 flex items-center">
+          <button
+            onClick={() => setIsPluggedIn(!isPluggedIn)}
+            className="relative flex items-center cursor-pointer group"
+            aria-label={isPluggedIn ? "Unplug cable" : "Plug in cable"}
+          >
+            {/* Plug - positioned relative to socket */}
+            <div 
+              className={`flex items-center transition-all duration-500 ease-in-out ${
+                isPluggedIn 
+                  ? "translate-x-0" 
+                  : "-translate-x-4 -rotate-12 translate-y-2"
+              }`}
+            >
+              {/* Plug body */}
+              <div className="w-5 h-4 md:w-6 md:h-5 bg-[hsl(0_0%_20%)] rounded-l-sm flex flex-col justify-center items-end pr-0.5 gap-1">
+                {/* Prongs */}
+                <div className="w-3 h-1 bg-[hsl(45_60%_50%)] rounded-r-sm" />
+                <div className="w-3 h-1 bg-[hsl(45_60%_50%)] rounded-r-sm" />
+              </div>
+            </div>
+
+            {/* Socket */}
+            <div 
+              className="relative w-12 h-16 md:w-14 md:h-20 bg-[hsl(0_0%_10%)] rounded border-2 border-[hsl(0_0%_18%)] flex flex-col items-center justify-center gap-2 group-hover:border-[hsl(0_0%_30%)] transition-colors shadow-[inset_0_2px_8px_rgba(0,0,0,0.6)]"
+            >
+              {/* Socket outlet holes */}
+              <div className="flex gap-1.5 md:gap-2">
+                <div className="w-1.5 h-3 md:w-2 md:h-4 bg-[hsl(0_0%_5%)] rounded-sm shadow-[inset_0_1px_3px_rgba(0,0,0,0.9)]" />
+                <div className="w-1.5 h-3 md:w-2 md:h-4 bg-[hsl(0_0%_5%)] rounded-sm shadow-[inset_0_1px_3px_rgba(0,0,0,0.9)]" />
+              </div>
+              
+              {/* Power indicator */}
+              <div 
+                className={`w-1.5 h-1.5 md:w-2 md:h-2 rounded-full transition-all duration-300 ${
+                  isPluggedIn 
+                    ? "bg-green-400 shadow-[0_0_6px_2px_rgba(74,222,128,0.6)]" 
+                    : "bg-[hsl(0_0%_20%)]"
+                }`} 
+              />
+            </div>
+          </button>
         </div>
-
-        {/* Socket */}
-        <button
-          onClick={() => setIsPluggedIn(!isPluggedIn)}
-          className="relative w-14 h-20 md:w-16 md:h-24 bg-[hsl(0_0%_12%)] rounded-md border-2 border-[hsl(0_0%_20%)] flex flex-col items-center justify-center gap-2 hover:border-muted-foreground transition-colors cursor-pointer shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)]"
-          aria-label={isPluggedIn ? "Unplug cable" : "Plug in cable"}
-        >
-          {/* Socket plate texture */}
-          <div className="absolute inset-1 rounded bg-[hsl(0_0%_10%)] opacity-50" />
-          
-          {/* Socket holes */}
-          <div className="relative flex gap-2">
-            <div className={`w-1.5 h-3 md:w-2 md:h-4 rounded-sm transition-colors duration-300 ${
-              isPluggedIn ? "bg-[hsl(0_0%_8%)]" : "bg-[hsl(0_0%_5%)] shadow-[inset_0_1px_2px_rgba(0,0,0,0.8)]"
-            }`} />
-            <div className={`w-1.5 h-3 md:w-2 md:h-4 rounded-sm transition-colors duration-300 ${
-              isPluggedIn ? "bg-[hsl(0_0%_8%)]" : "bg-[hsl(0_0%_5%)] shadow-[inset_0_1px_2px_rgba(0,0,0,0.8)]"
-            }`} />
-          </div>
-          
-          {/* Socket indicator light */}
-          <div 
-            className={`relative w-1.5 h-1.5 md:w-2 md:h-2 rounded-full transition-all duration-300 ${
-              isPluggedIn 
-                ? "bg-green-400 shadow-[0_0_8px_3px_rgba(74,222,128,0.5)]" 
-                : "bg-[hsl(0_0%_20%)]"
-            }`} 
-          />
-        </button>
       </div>
     </main>
   );
