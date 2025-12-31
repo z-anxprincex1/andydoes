@@ -133,121 +133,129 @@ const Index = () => {
     return path;
   };
 
+  // Brick wall pattern as CSS background
+  const brickPattern = `
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 24px,
+      hsl(0 0% 5%) 24px,
+      hsl(0 0% 5%) 26px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      hsl(8 35% 18%),
+      hsl(12 40% 22%) 45px,
+      hsl(8 30% 16%) 50px,
+      hsl(0 0% 5%) 50px,
+      hsl(0 0% 5%) 52px,
+      hsl(10 38% 20%) 52px
+    )
+  `;
+
   return (
     <main className="min-h-screen flex items-center bg-background overflow-hidden relative" ref={containerRef}>
-      {/* Brick wall - only visible when CFL is on, with radial light mask */}
-      <div 
-        className={`fixed inset-0 transition-opacity duration-700 pointer-events-none ${
-          isPluggedIn ? "opacity-100" : "opacity-0"
-        }`}
-        style={{
-          backgroundImage: `
-            repeating-linear-gradient(
-              0deg,
-              transparent,
-              transparent 30px,
-              hsl(0 0% 8%) 30px,
-              hsl(0 0% 8%) 32px
-            ),
-            repeating-linear-gradient(
-              90deg,
-              hsl(15 40% 22%),
-              hsl(15 40% 22%) 60px,
-              hsl(0 0% 8%) 60px,
-              hsl(0 0% 8%) 62px
-            )
-          `,
-          backgroundSize: '124px 32px',
-          maskImage: isPluggedIn 
-            ? 'radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 30%, rgba(0,0,0,0) 70%)'
-            : 'none',
-          WebkitMaskImage: isPluggedIn 
-            ? 'radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 30%, rgba(0,0,0,0) 70%)'
-            : 'none',
-        }}
-      />
-      
-      {/* Ambient light glow behind text when on */}
-      <div 
-        className={`fixed inset-0 transition-opacity duration-700 pointer-events-none ${
-          isPluggedIn ? "opacity-40" : "opacity-0"
-        }`}
-        style={{
-          background: 'radial-gradient(ellipse 50% 40% at 50% 50%, hsl(60 80% 85% / 0.15) 0%, transparent 60%)',
-        }}
-      />
-
       <div className="w-full px-6 md:px-12 lg:px-20 relative z-10">
-        <h1 
-          className={`text-hero font-pixel transition-all duration-500 flex flex-col text-center md:text-left ${
-            isPluggedIn ? "cfl-tube cfl-glow" : "cfl-off"
-          }`}
-        >
-          {/* First line: anand prince */}
-          <span className="flex flex-wrap justify-center md:justify-start">
-            {["anand", "prince"].map((word, i) => 
-              renderWord(word, i, false)
-            )}
-          </span>
+        {/* Text container with brick reveal effect */}
+        <div className="relative">
+          {/* Brick wall layer - clipped to text shape, only visible when on */}
+          <h1 
+            aria-hidden="true"
+            className={`text-hero font-pixel flex flex-col text-center md:text-left select-none transition-opacity duration-500 ${
+              isPluggedIn ? "opacity-100" : "opacity-0"
+            }`}
+            style={{
+              backgroundImage: brickPattern,
+              backgroundSize: '104px 26px',
+              WebkitBackgroundClip: 'text',
+              backgroundClip: 'text',
+              color: 'transparent',
+              position: 'absolute',
+              inset: 0,
+              zIndex: 1,
+            }}
+          >
+            <span className="flex flex-wrap justify-center md:justify-start">
+              <span>anand&nbsp;</span>
+              <span>prince</span>
+            </span>
+            <span className="flex items-start justify-center md:justify-start">
+              <span>purty</span>
+            </span>
+          </h1>
 
-          {/* Second line: purty + cable */}
-          <span className="flex items-start justify-center md:justify-start">
-            <span className="flex items-center">
-              {renderWord("purty", 2, true)}
-              
-              {/* Fixed cable anchor point - attached to end of text */}
-              <span 
-                ref={anchorRef} 
-                className="relative inline-block w-0 h-0"
-                style={{ marginTop: '0.5em' }}
-              >
-                {/* SVG Cable - starts from anchor, extends to plug */}
-                <svg 
-                  className="absolute pointer-events-none"
-                  style={{
-                    left: 0,
-                    top: 0,
-                    width: Math.abs(plugPosition.x) + 50,
-                    height: Math.abs(plugPosition.y) + 50,
-                    overflow: 'visible',
-                  }}
-                >
-                  <path
-                    d={getCablePath()}
-                    stroke="hsl(0 0% 22%)"
-                    strokeWidth="5"
-                    strokeLinecap="round"
-                    className={`transition-all ${isDragging ? "duration-0" : "duration-500"} ease-out`}
-                    fill="none"
-                  />
-                </svg>
+          {/* Main glowing text layer */}
+          <h1 
+            className={`text-hero font-pixel transition-all duration-500 flex flex-col text-center md:text-left relative z-0 ${
+              isPluggedIn ? "cfl-tube cfl-glow" : "cfl-off"
+            }`}
+          >
+            {/* First line: anand prince */}
+            <span className="flex flex-wrap justify-center md:justify-start">
+              {["anand", "prince"].map((word, i) => 
+                renderWord(word, i, false)
+              )}
+            </span>
 
-                {/* Draggable Plug - positioned at end of cable */}
-                <div 
-                  onMouseDown={handleMouseDown}
-                  className={`absolute cursor-grab active:cursor-grabbing z-10 ${
-                    isDragging ? "" : "transition-all duration-500"
-                  }`}
-                  style={{
-                    left: plugPosition.x,
-                    top: plugPosition.y,
-                    transform: `translate(-8px, -50%) ${!isPluggedIn && !isDragging ? "rotate(90deg)" : "rotate(0deg)"}`,
-                    transformOrigin: 'left center',
-                  }}
+            {/* Second line: purty + cable */}
+            <span className="flex items-start justify-center md:justify-start">
+              <span className="flex items-center">
+                {renderWord("purty", 2, true)}
+                
+                {/* Fixed cable anchor point - attached to end of text */}
+                <span 
+                  ref={anchorRef} 
+                  className="relative inline-block w-0 h-0"
+                  style={{ marginTop: '0.5em' }}
                 >
-                  <div className="flex items-center">
-                    {/* Plug body */}
-                    <div className="w-5 h-5 md:w-6 md:h-6 bg-[hsl(0_0%_18%)] rounded-sm flex flex-col justify-center items-end pr-0.5 gap-1 shadow-md border border-[hsl(0_0%_25%)]">
-                      {/* Prongs */}
-                      <div className="w-3 h-1 bg-[hsl(45_60%_50%)] rounded-r-sm" />
-                      <div className="w-3 h-1 bg-[hsl(45_60%_50%)] rounded-r-sm" />
+                  {/* SVG Cable - starts from anchor, extends to plug */}
+                  <svg 
+                    className="absolute pointer-events-none"
+                    style={{
+                      left: 0,
+                      top: 0,
+                      width: Math.abs(plugPosition.x) + 50,
+                      height: Math.abs(plugPosition.y) + 50,
+                      overflow: 'visible',
+                    }}
+                  >
+                    <path
+                      d={getCablePath()}
+                      stroke="hsl(0 0% 22%)"
+                      strokeWidth="5"
+                      strokeLinecap="round"
+                      className={`transition-all ${isDragging ? "duration-0" : "duration-500"} ease-out`}
+                      fill="none"
+                    />
+                  </svg>
+
+                  {/* Draggable Plug - positioned at end of cable */}
+                  <div 
+                    onMouseDown={handleMouseDown}
+                    className={`absolute cursor-grab active:cursor-grabbing z-10 ${
+                      isDragging ? "" : "transition-all duration-500"
+                    }`}
+                    style={{
+                      left: plugPosition.x,
+                      top: plugPosition.y,
+                      transform: `translate(-8px, -50%) ${!isPluggedIn && !isDragging ? "rotate(90deg)" : "rotate(0deg)"}`,
+                      transformOrigin: 'left center',
+                    }}
+                  >
+                    <div className="flex items-center">
+                      {/* Plug body */}
+                      <div className="w-5 h-5 md:w-6 md:h-6 bg-[hsl(0_0%_18%)] rounded-sm flex flex-col justify-center items-end pr-0.5 gap-1 shadow-md border border-[hsl(0_0%_25%)]">
+                        {/* Prongs */}
+                        <div className="w-3 h-1 bg-[hsl(45_60%_50%)] rounded-r-sm" />
+                        <div className="w-3 h-1 bg-[hsl(45_60%_50%)] rounded-r-sm" />
+                      </div>
                     </div>
                   </div>
-                </div>
+                </span>
               </span>
             </span>
-          </span>
-        </h1>
+          </h1>
+        </div>
       </div>
 
       {/* Floor */}
