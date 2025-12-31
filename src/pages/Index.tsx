@@ -135,48 +135,52 @@ const Index = () => {
 
   return (
     <main className="min-h-screen flex items-center bg-background overflow-hidden relative" ref={containerRef}>
-      {/* Cobweb - Top Left */}
+      {/* Cobweb - Top Left (smaller) */}
       <svg 
-        className="fixed top-0 left-0 w-32 h-32 md:w-48 md:h-48 pointer-events-none opacity-30"
+        className="fixed top-0 left-0 w-24 h-24 md:w-36 md:h-36 pointer-events-none opacity-25"
         viewBox="0 0 100 100"
       >
-        {/* Radial threads */}
-        <path d="M0 0 L100 100" stroke="hsl(0 0% 60%)" strokeWidth="0.3" fill="none" />
-        <path d="M0 0 L70 100" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
-        <path d="M0 0 L40 100" stroke="hsl(0 0% 60%)" strokeWidth="0.3" fill="none" />
-        <path d="M0 0 L100 70" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
-        <path d="M0 0 L100 40" stroke="hsl(0 0% 60%)" strokeWidth="0.3" fill="none" />
-        <path d="M0 0 L100 15" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
-        <path d="M0 0 L15 100" stroke="hsl(0 0% 60%)" strokeWidth="0.3" fill="none" />
-        {/* Spiral threads */}
-        <path d="M8 2 Q12 8 2 10" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
-        <path d="M20 4 Q28 18 4 24" stroke="hsl(0 0% 60%)" strokeWidth="0.3" fill="none" />
-        <path d="M35 6 Q48 28 6 42" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
-        <path d="M55 8 Q72 42 8 62" stroke="hsl(0 0% 60%)" strokeWidth="0.3" fill="none" />
-        <path d="M78 10 Q95 58 10 85" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
-        <path d="M95 15 Q100 75 15 98" stroke="hsl(0 0% 60%)" strokeWidth="0.3" fill="none" />
+        {/* Radial threads - curved and irregular */}
+        <path d="M0 0 Q55 48 98 95" stroke="hsl(0 0% 60%)" strokeWidth="0.4" fill="none" />
+        <path d="M0 0 Q32 52 68 98" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
+        <path d="M0 0 Q18 45 38 96" stroke="hsl(0 0% 58%)" strokeWidth="0.35" fill="none" />
+        <path d="M0 0 Q52 32 96 68" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
+        <path d="M0 0 Q48 18 95 38" stroke="hsl(0 0% 60%)" strokeWidth="0.35" fill="none" />
+        <path d="M0 0 Q42 8 92 16" stroke="hsl(0 0% 52%)" strokeWidth="0.3" fill="none" />
+        <path d="M0 0 Q8 38 14 94" stroke="hsl(0 0% 58%)" strokeWidth="0.3" fill="none" />
+        {/* Spiral threads - wobbly curves */}
+        <path d="M6 3 Q10 7 4 11 Q2 9 6 3" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
+        <path d="M18 5 Q26 14 12 22 Q6 18 5 12" stroke="hsl(0 0% 58%)" strokeWidth="0.3" fill="none" />
+        <path d="M32 8 Q44 22 22 38 Q10 32 8 22" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
+        <path d="M52 12 Q68 35 32 58 Q14 48 12 34" stroke="hsl(0 0% 60%)" strokeWidth="0.3" fill="none" />
+        <path d="M74 16 Q92 52 48 82 Q22 68 18 48" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
       </svg>
 
-      {/* Cobweb - Top Right */}
+      {/* Cobweb - Top Right (larger, more elaborate) */}
       <svg 
-        className="fixed top-0 right-0 w-40 h-40 md:w-56 md:h-56 pointer-events-none opacity-30"
+        className="fixed top-0 right-0 w-44 h-44 md:w-64 md:h-64 pointer-events-none opacity-30"
         viewBox="0 0 100 100"
         style={{ transform: 'scaleX(-1)' }}
       >
-        {/* Radial threads */}
-        <path d="M0 0 L100 100" stroke="hsl(0 0% 60%)" strokeWidth="0.3" fill="none" />
-        <path d="M0 0 L65 100" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
-        <path d="M0 0 L35 100" stroke="hsl(0 0% 60%)" strokeWidth="0.3" fill="none" />
-        <path d="M0 0 L100 65" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
-        <path d="M0 0 L100 35" stroke="hsl(0 0% 60%)" strokeWidth="0.3" fill="none" />
-        <path d="M0 0 L100 12" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
-        <path d="M0 0 L12 100" stroke="hsl(0 0% 60%)" strokeWidth="0.3" fill="none" />
-        {/* Spiral threads */}
-        <path d="M10 2 Q14 10 2 12" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
-        <path d="M22 5 Q32 20 5 28" stroke="hsl(0 0% 60%)" strokeWidth="0.3" fill="none" />
-        <path d="M38 7 Q52 32 7 48" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
-        <path d="M58 9 Q78 48 9 68" stroke="hsl(0 0% 60%)" strokeWidth="0.3" fill="none" />
-        <path d="M80 12 Q98 65 12 88" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
+        {/* Radial threads - curved and irregular */}
+        <path d="M0 0 Q48 52 95 98" stroke="hsl(0 0% 58%)" strokeWidth="0.35" fill="none" />
+        <path d="M0 0 Q28 48 62 100" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
+        <path d="M0 0 Q15 42 32 98" stroke="hsl(0 0% 60%)" strokeWidth="0.35" fill="none" />
+        <path d="M0 0 Q48 28 100 58" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
+        <path d="M0 0 Q45 15 98 32" stroke="hsl(0 0% 58%)" strokeWidth="0.35" fill="none" />
+        <path d="M0 0 Q38 6 88 14" stroke="hsl(0 0% 52%)" strokeWidth="0.3" fill="none" />
+        <path d="M0 0 Q6 35 12 92" stroke="hsl(0 0% 60%)" strokeWidth="0.3" fill="none" />
+        <path d="M0 0 Q52 42 82 78" stroke="hsl(0 0% 55%)" strokeWidth="0.25" fill="none" />
+        {/* Spiral threads - wobbly irregular curves */}
+        <path d="M8 2 Q14 8 5 14 Q2 10 8 2" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
+        <path d="M20 4 Q32 16 14 28 Q5 22 4 14" stroke="hsl(0 0% 58%)" strokeWidth="0.3" fill="none" />
+        <path d="M36 7 Q52 25 28 45 Q12 38 8 25" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
+        <path d="M56 10 Q78 38 42 68 Q18 55 14 38" stroke="hsl(0 0% 60%)" strokeWidth="0.3" fill="none" />
+        <path d="M78 14 Q98 58 58 88 Q28 75 22 52" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
+        <path d="M92 18 Q100 72 68 96 Q35 88 28 62" stroke="hsl(0 0% 58%)" strokeWidth="0.25" fill="none" />
+        {/* Extra broken strand */}
+        <path d="M45 20 Q55 28 48 38" stroke="hsl(0 0% 50%)" strokeWidth="0.25" fill="none" />
+        <path d="M65 35 Q72 45 62 55" stroke="hsl(0 0% 52%)" strokeWidth="0.25" fill="none" />
       </svg>
 
       {/* Spider hanging from right cobweb */}
