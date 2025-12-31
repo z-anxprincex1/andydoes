@@ -95,9 +95,13 @@ const Index = () => {
     const endY = plugPosition.y;
     
     if (isPluggedIn && !isDragging) {
-      // Smooth curve when plugged in
-      const midY = endY * 0.3;
-      return `M 0 0 Q ${endX * 0.5} ${midY + 10} ${endX} ${endY}`;
+      // Natural sag when plugged in - gravity pulls the middle down
+      const cableLength = Math.sqrt(endX * endX + endY * endY);
+      const sagAmount = Math.max(40, cableLength * 0.25); // More sag for longer cables
+      const midX = endX * 0.5;
+      const midY = Math.max(endY * 0.5, endY * 0.3) + sagAmount;
+      
+      return `M 0 0 Q ${midX} ${midY} ${endX} ${endY}`;
     }
     
     // Smooth curvy zig-zag - like cable lying naturally
