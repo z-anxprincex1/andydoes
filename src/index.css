@@ -303,3 +303,16 @@
 .animate-spider-swing {
   animation: spider-swing 4s ease-in-out infinite;
 }
+
+@keyframes spider-blink {
+  0%, 90%, 100% { 
+    transform: scaleY(1); 
+  }
+  95% { 
+    transform: scaleY(0.1); 
+  }
+}
+
+.animate-spider-blink {
+  animation: spider-blink 3s ease-in-out infinite;
+}
