@@ -134,8 +134,13 @@
 }
 
 @keyframes legMove {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-2px); }
+  0%, 100% { transform: translateY(0) translateZ(var(--tw-translate-z, 0)); }
+  50% { transform: translateY(-3px) translateZ(var(--tw-translate-z, 0)); }
+}
+
+@keyframes legRun {
+  0%, 100% { transform: translateY(0) rotate(-15deg); }
+  50% { transform: translateY(-4px) rotate(15deg); }
 }
 
 @keyframes scratchLeg {
@@ -146,6 +151,21 @@
 @keyframes scratchBody {
   0%, 100% { transform: translateX(0); }
   50% { transform: translateX(2px); }
+}
+
+@keyframes tailSlow {
+  0%, 100% { transform: translateZ(-8px) rotate(-20deg); }
+  50% { transform: translateZ(-8px) rotate(-35deg); }
+}
+
+@keyframes headBob {
+  0%, 100% { transform: translateZ(10px) rotate(0deg); }
+  50% { transform: translateZ(10px) rotate(-5deg) translateY(2px); }
+}
+
+@keyframes lick {
+  0%, 100% { height: 0.5rem; }
+  50% { height: 0.75rem; }
 }
 
 @keyframes fadeIn {
