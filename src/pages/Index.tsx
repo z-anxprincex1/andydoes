@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from "react";
 const Index = () => {
   const [isPluggedIn, setIsPluggedIn] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
-  const [plugPosition, setPlugPosition] = useState({ x: 20, y: 100 }); // Hanging down by default
+  const [plugPosition, setPlugPosition] = useState({ x: 30, y: 180 }); // Hanging down longer by default
   const containerRef = useRef<HTMLDivElement>(null);
   const socketRef = useRef<HTMLDivElement>(null);
   const anchorRef = useRef<HTMLSpanElement>(null);
@@ -53,7 +53,7 @@ const Index = () => {
       setPlugPosition({ x: socketTargetX, y: socketTargetY });
     } else {
       // Drop and hang down
-      setPlugPosition({ x: 20, y: 100 });
+      setPlugPosition({ x: 30, y: 180 });
     }
   };
 
@@ -91,22 +91,29 @@ const Index = () => {
 
   // Cable path from fixed anchor (0,0) to plug position
   const getCablePath = () => {
-    const endX = plugPosition.x - 8; // End exactly at plug connector
+    const endX = plugPosition.x - 8;
     const endY = plugPosition.y;
     
     if (isPluggedIn && !isDragging) {
-      // Slight curve when plugged in
+      // Smooth curve when plugged in
       const midY = endY * 0.3;
       return `M 0 0 Q ${endX * 0.5} ${midY + 10} ${endX} ${endY}`;
     }
     
-    // Natural hanging cable with gravity sag
-    const distance = Math.sqrt(endX * endX + endY * endY);
-    const sagAmount = Math.min(80, distance * 0.3);
-    const controlX = endX * 0.3;
-    const controlY = Math.max(endY, sagAmount);
+    // Zig-zag hanging cable
+    const segments = 6;
+    const segmentLength = endY / segments;
+    const zigWidth = 12;
     
-    return `M 0 0 Q ${controlX} ${controlY} ${endX} ${endY}`;
+    let path = `M 0 0`;
+    for (let i = 1; i <= segments; i++) {
+      const y = segmentLength * i;
+      const xOffset = (i % 2 === 0 ? -zigWidth : zigWidth) + (endX / segments) * i;
+      path += ` L ${xOffset} ${y}`;
+    }
+    path += ` L ${endX} ${endY}`;
+    
+    return path;
   };
 
   return (
