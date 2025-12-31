@@ -301,8 +301,8 @@ const Index = () => {
                   isPluggedIn ? 'bg-[hsl(220_30%_8%)]' : 'bg-[hsl(0_0%_3%)]'
                 }`}
                 style={{
-                  width: 'clamp(280px, 70vw, 600px)',
-                  height: 'clamp(180px, 45vw, 380px)',
+                  width: 'clamp(320px, 80vw, 800px)',
+                  height: 'clamp(220px, 55vw, 500px)',
                   boxShadow: isPluggedIn 
                     ? 'inset 0 0 60px rgba(100,200,255,0.1), inset 0 0 100px rgba(0,0,0,0.8)'
                     : 'inset 0 0 100px rgba(0,0,0,0.9)',
