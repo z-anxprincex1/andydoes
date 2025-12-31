@@ -43,13 +43,18 @@ const Index = () => {
         {/* Text container */}
         <div className="px-6 md:px-12 lg:px-20 w-full md:w-auto md:shrink-0 flex justify-center md:justify-start">
           <h1 
-            className={`text-hero font-mono transition-all duration-500 flex flex-wrap justify-center md:justify-start text-center md:text-left ${
+            className={`text-hero font-mono transition-all duration-500 flex flex-col text-center md:text-left ${
               isPluggedIn ? "cfl-tube cfl-glow" : "cfl-off"
             }`}
           >
-            {["anand", "prince", "purty"].map((word, i, arr) => 
-              renderWord(word, i, i === arr.length - 1)
-            )}
+            <span className="flex flex-wrap justify-center md:justify-start">
+              {["anand", "prince"].map((word, i) => 
+                renderWord(word, i, false)
+              )}
+            </span>
+            <span className="flex justify-center md:justify-start">
+              {renderWord("purty", 2, true)}
+            </span>
           </h1>
         </div>
 
