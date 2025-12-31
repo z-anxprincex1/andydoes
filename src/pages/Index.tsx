@@ -132,7 +132,7 @@ const Index = () => {
     <main className="min-h-screen flex items-center bg-background overflow-hidden relative" ref={containerRef}>
       <div className="w-full px-6 md:px-12 lg:px-20">
         <h1 
-          className={`text-hero font-mono transition-all duration-500 flex flex-col text-center md:text-left ${
+          className={`text-hero font-pixel transition-all duration-500 flex flex-col text-center md:text-left ${
             isPluggedIn ? "cfl-tube cfl-glow" : "cfl-off"
           }`}
         >
