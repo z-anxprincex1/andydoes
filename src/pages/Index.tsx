@@ -129,7 +129,7 @@ const Index = () => {
   };
 
   return (
-    <main className="min-h-screen flex items-center bg-background overflow-hidden" ref={containerRef}>
+    <main className="min-h-screen flex items-center bg-background overflow-hidden relative" ref={containerRef}>
       <div className="w-full px-6 md:px-12 lg:px-20">
         <h1 
           className={`text-hero font-mono transition-all duration-500 flex flex-col text-center md:text-left ${
@@ -143,7 +143,7 @@ const Index = () => {
             )}
           </span>
 
-          {/* Second line: purty + cable + socket */}
+          {/* Second line: purty + cable */}
           <span className="flex items-start justify-center md:justify-start">
             <span className="flex items-center">
               {renderWord("purty", 2, true)}
@@ -199,32 +199,32 @@ const Index = () => {
                 </div>
               </span>
             </span>
-
-            {/* Socket - positioned with gap */}
-            <div 
-              ref={socketRef}
-              className={`ml-28 md:ml-44 mt-2 relative w-10 h-14 md:w-14 md:h-20 bg-[hsl(0_0%_8%)] rounded border-2 transition-all duration-300 shadow-[inset_0_2px_8px_rgba(0,0,0,0.6)] shrink-0 ${
-                isDragging 
-                  ? "border-[hsl(120_40%_30%)] shadow-[inset_0_2px_8px_rgba(0,0,0,0.6),0_0_15px_rgba(74,222,128,0.3)]" 
-                  : "border-[hsl(0_0%_18%)]"
-              }`}
-            >
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
-                <div className="flex gap-1.5 md:gap-2">
-                  <div className="w-1.5 h-3 md:w-2 md:h-4 bg-[hsl(0_0%_3%)] rounded-sm shadow-[inset_0_1px_3px_rgba(0,0,0,0.9)]" />
-                  <div className="w-1.5 h-3 md:w-2 md:h-4 bg-[hsl(0_0%_3%)] rounded-sm shadow-[inset_0_1px_3px_rgba(0,0,0,0.9)]" />
-                </div>
-                <div 
-                  className={`w-1.5 h-1.5 md:w-2 md:h-2 rounded-full transition-all duration-300 ${
-                    isPluggedIn 
-                      ? "bg-green-400 shadow-[0_0_6px_2px_rgba(74,222,128,0.6)]" 
-                      : "bg-[hsl(0_0%_20%)]"
-                  }`} 
-                />
-              </div>
-            </div>
           </span>
         </h1>
+      </div>
+
+      {/* Socket - fixed at bottom right */}
+      <div 
+        ref={socketRef}
+        className={`fixed bottom-8 right-8 md:bottom-12 md:right-12 w-12 h-16 md:w-16 md:h-24 bg-[hsl(0_0%_8%)] rounded border-2 transition-all duration-300 shadow-[inset_0_2px_8px_rgba(0,0,0,0.6)] z-20 ${
+          isDragging 
+            ? "border-[hsl(120_40%_30%)] shadow-[inset_0_2px_8px_rgba(0,0,0,0.6),0_0_15px_rgba(74,222,128,0.3)]" 
+            : "border-[hsl(0_0%_18%)]"
+        }`}
+      >
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
+          <div className="flex gap-2 md:gap-3">
+            <div className="w-2 h-4 md:w-2.5 md:h-5 bg-[hsl(0_0%_3%)] rounded-sm shadow-[inset_0_1px_3px_rgba(0,0,0,0.9)]" />
+            <div className="w-2 h-4 md:w-2.5 md:h-5 bg-[hsl(0_0%_3%)] rounded-sm shadow-[inset_0_1px_3px_rgba(0,0,0,0.9)]" />
+          </div>
+          <div 
+            className={`w-2 h-2 md:w-2.5 md:h-2.5 rounded-full transition-all duration-300 ${
+              isPluggedIn 
+                ? "bg-green-400 shadow-[0_0_6px_2px_rgba(74,222,128,0.6)]" 
+                : "bg-[hsl(0_0%_20%)]"
+            }`} 
+          />
+        </div>
       </div>
     </main>
   );
