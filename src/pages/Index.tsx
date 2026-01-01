@@ -780,11 +780,11 @@ const Index = () => {
         <div className="fixed top-0 left-0 right-0 flex justify-center z-15 pointer-events-none">
           <div className="animate-screen-down">
             {/* Screen mount bar */}
-            <div className="w-[75vw] h-3 bg-gradient-to-b from-[hsl(0_0%_25%)] to-[hsl(0_0%_15%)] rounded-b border-x-2 border-b-2 border-[hsl(0_0%_20%)]" />
+            <div className="w-[85vw] h-3 bg-gradient-to-b from-[hsl(0_0%_25%)] to-[hsl(0_0%_15%)] rounded-b border-x-2 border-b-2 border-[hsl(0_0%_20%)]" />
             {/* Screen */}
-            <div className="w-[75vw] h-[calc(100vh-10rem)] md:h-[calc(100vh-12rem)] bg-gradient-to-b from-[hsl(0_0%_95%)] to-[hsl(0_0%_88%)] border-x-4 border-b-4 border-[hsl(0_0%_20%)] shadow-[0_10px_40px_rgba(0,0,0,0.5)] relative">
+            <div className="w-[85vw] h-[calc(100vh-10rem)] md:h-[calc(100vh-12rem)] bg-gradient-to-b from-[hsl(0_0%_95%)] to-[hsl(0_0%_88%)] border-x-4 border-b-4 border-[hsl(0_0%_20%)] shadow-[0_10px_40px_rgba(0,0,0,0.5)] relative">
               {/* Folder tabs */}
-              <div className="absolute top-4 left-8 flex pointer-events-auto">
+              <div className="absolute top-4 left-[2.5%] flex pointer-events-auto">
                 {/* Projects tab */}
                 <button
                   onClick={() => setActiveFolder('projects')}
@@ -812,7 +812,7 @@ const Index = () => {
               </div>
 
               {/* Folder body */}
-              <div className="absolute top-[3.5rem] left-8 right-8 bottom-8 rounded-lg border-2 border-black bg-white shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)]">
+              <div className="absolute top-[3.5rem] left-[2.5%] right-[2.5%] bottom-4 rounded-lg border-2 border-black bg-white shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)]">
                 {/* Folder content */}
                 <div className="w-full h-full flex items-center justify-center p-8">
                   {activeFolder === 'projects' ? (
@@ -830,7 +830,7 @@ const Index = () => {
               </div>
             </div>
             {/* Screen bottom weight bar */}
-            <div className="w-[75vw] h-2 bg-gradient-to-b from-[hsl(0_0%_20%)] to-[hsl(0_0%_10%)] rounded-b" />
+            <div className="w-[85vw] h-2 bg-gradient-to-b from-[hsl(0_0%_20%)] to-[hsl(0_0%_10%)] rounded-b" />
           </div>
         </div>
       )}
