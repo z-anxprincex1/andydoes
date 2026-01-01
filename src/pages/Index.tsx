@@ -672,13 +672,13 @@ const Index = () => {
           </div>
           
           {/* Sofa arms - left */}
-          <div className="absolute left-0 top-0 w-10 md:w-12 h-32 md:h-40 bg-gradient-to-r from-[hsl(18_45%_30%)] via-[hsl(22_42%_36%)] to-[hsl(24_40%_40%)] rounded-l-[1.5rem] rounded-tr-xl shadow-[inset_3px_0_8px_rgba(255,255,255,0.15),inset_-2px_0_6px_rgba(0,0,0,0.2),-6px_4px_12px_rgba(0,0,0,0.3)]">
+          <div className="absolute left-0 top-0 w-10 md:w-12 h-32 md:h-40 bg-gradient-to-r from-[hsl(18_45%_30%)] via-[hsl(22_42%_36%)] to-[hsl(24_40%_40%)] rounded-l-[1.5rem] rounded-tr-[1.5rem] overflow-hidden shadow-[inset_3px_0_8px_rgba(255,255,255,0.15),inset_-2px_0_6px_rgba(0,0,0,0.2),-6px_4px_12px_rgba(0,0,0,0.3)]">
             {/* Arm top curve highlight */}
-            <div className="absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-[hsl(25_40%_45%)] to-transparent rounded-tl-[1.5rem] opacity-60" />
+            <div className="absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-[hsl(25_40%_45%)] to-transparent opacity-60" />
           </div>
           {/* Sofa arms - right */}
-          <div className="absolute right-0 top-0 w-10 md:w-12 h-32 md:h-40 bg-gradient-to-l from-[hsl(18_45%_30%)] via-[hsl(22_42%_36%)] to-[hsl(24_40%_40%)] rounded-r-[1.5rem] rounded-tl-xl shadow-[inset_-3px_0_8px_rgba(255,255,255,0.15),inset_2px_0_6px_rgba(0,0,0,0.2),6px_4px_12px_rgba(0,0,0,0.3)]">
-            <div className="absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-[hsl(25_40%_45%)] to-transparent rounded-tr-[1.5rem] opacity-60" />
+          <div className="absolute right-0 top-0 w-10 md:w-12 h-32 md:h-40 bg-gradient-to-l from-[hsl(18_45%_30%)] via-[hsl(22_42%_36%)] to-[hsl(24_40%_40%)] rounded-r-[1.5rem] rounded-tl-[1.5rem] overflow-hidden shadow-[inset_-3px_0_8px_rgba(255,255,255,0.15),inset_2px_0_6px_rgba(0,0,0,0.2),6px_4px_12px_rgba(0,0,0,0.3)]">
+            <div className="absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-[hsl(25_40%_45%)] to-transparent opacity-60" />
           </div>
           
           {/* Sofa seat - in front with 3D depth, no partition */}
