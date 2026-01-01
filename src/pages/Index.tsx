@@ -785,9 +785,9 @@ const Index = () => {
           }}
         >
           <svg 
-            width="60"
-            height="40"
-            viewBox="0 0 60 40"
+            width="90"
+            height="60"
+            viewBox="0 0 90 60"
           >
             <defs>
               <radialGradient id="lensGlow" cx="100%" cy="50%" r="100%">
@@ -797,10 +797,10 @@ const Index = () => {
               </radialGradient>
             </defs>
             <ellipse 
-              cx="55" 
-              cy="20" 
-              rx="50" 
-              ry="18" 
+              cx="80" 
+              cy="30" 
+              rx="75" 
+              ry="28" 
               fill="url(#lensGlow)"
             />
           </svg>
