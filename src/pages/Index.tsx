@@ -350,35 +350,75 @@ const Index = () => {
                         <Linkedin className="w-5 h-5 md:w-6 md:h-6 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)] absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2" />
                         
                         {/* Hand with pen writing on paper - bottom right */}
-                        <div className="absolute -bottom-2 -right-1 md:-bottom-3 md:-right-2">
+                        <div className="absolute -bottom-3 -right-2 md:-bottom-4 md:-right-3">
                           {/* Paper */}
-                          <div className="absolute bottom-1 right-3 md:bottom-2 md:right-4 w-5 h-6 md:w-6 md:h-7 bg-white rounded-[2px] shadow-md transform rotate-[-8deg]">
+                          <div className="absolute bottom-2 right-5 md:bottom-3 md:right-7 w-6 h-7 md:w-7 md:h-8 bg-white rounded-[2px] shadow-md transform rotate-[-5deg]">
                             {/* Written lines */}
-                            <div className="absolute top-1.5 left-1 right-1 flex flex-col gap-0.5">
-                              <div className="h-px bg-[hsl(201_100%_40%)] w-3/4" />
-                              <div className="h-px bg-[hsl(201_100%_40%)] w-full" />
-                              <div className="h-px bg-[hsl(201_100%_40%)] w-2/3" />
+                            <div className="absolute top-2 left-1 right-1 flex flex-col gap-[3px]">
+                              <div className="h-[0.5px] bg-[hsl(220_15%_60%)] w-[70%]" />
+                              <div className="h-[0.5px] bg-[hsl(220_15%_60%)] w-[90%]" />
+                              <div className="h-[0.5px] bg-[hsl(220_15%_60%)] w-[55%]" />
+                              <div className="h-[0.5px] bg-[hsl(220_15%_60%)] w-[80%]" />
                             </div>
                           </div>
                           
-                          {/* Hand holding pen */}
-                          <svg width="22" height="26" viewBox="0 0 16 20" className="md:w-7 md:h-9 animate-pen-write">
-                            {/* Palm */}
-                            <ellipse cx="10" cy="14" rx="5" ry="4" fill="hsl(30 60% 70%)" />
-                            {/* Thumb */}
-                            <ellipse cx="5" cy="11" rx="1.8" ry="3" fill="hsl(30 60% 70%)" transform="rotate(-30 5 11)" />
-                            {/* Index finger (holding pen) */}
-                            <rect x="6" y="3" width="2" height="8" rx="1" fill="hsl(30 60% 70%)" transform="rotate(15 7 7)" />
-                            {/* Middle finger */}
-                            <rect x="9" y="4" width="1.8" height="7" rx="0.9" fill="hsl(30 60% 70%)" transform="rotate(8 10 7)" />
-                            {/* Ring finger */}
-                            <rect x="11.5" y="5" width="1.6" height="6" rx="0.8" fill="hsl(30 60% 70%)" transform="rotate(3 12 8)" />
-                            {/* Pinky */}
-                            <rect x="13.5" y="6.5" width="1.4" height="5" rx="0.7" fill="hsl(30 60% 70%)" transform="rotate(-2 14 9)" />
-                            {/* Pen */}
-                            <rect x="3.5" y="0" width="1.5" height="12" rx="0.3" fill="hsl(0 0% 15%)" transform="rotate(20 4.25 6)" />
-                            {/* Pen tip */}
-                            <polygon points="3,11 4.25,14 5.5,11" fill="hsl(35 70% 50%)" transform="rotate(20 4.25 12.5)" />
+                          {/* Realistic hand holding pen */}
+                          <svg width="28" height="32" viewBox="0 0 24 28" className="md:w-9 md:h-11 animate-pen-write drop-shadow-sm">
+                            <defs>
+                              {/* Skin gradient for depth */}
+                              <linearGradient id="skinGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stopColor="hsl(25 55% 75%)" />
+                                <stop offset="50%" stopColor="hsl(25 50% 68%)" />
+                                <stop offset="100%" stopColor="hsl(25 45% 62%)" />
+                              </linearGradient>
+                              <linearGradient id="skinHighlight" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stopColor="hsl(25 60% 78%)" />
+                                <stop offset="100%" stopColor="hsl(25 50% 65%)" />
+                              </linearGradient>
+                              {/* Pen gradient */}
+                              <linearGradient id="penGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stopColor="hsl(220 20% 25%)" />
+                                <stop offset="50%" stopColor="hsl(220 15% 35%)" />
+                                <stop offset="100%" stopColor="hsl(220 20% 20%)" />
+                              </linearGradient>
+                            </defs>
+                            
+                            {/* Back of hand / palm area */}
+                            <ellipse cx="15" cy="20" rx="7" ry="5.5" fill="url(#skinGrad)" />
+                            {/* Wrist hint */}
+                            <rect x="12" y="23" width="8" height="5" rx="2" fill="url(#skinGrad)" />
+                            
+                            {/* Pinky - curled back */}
+                            <path d="M20 17 Q22 14 21.5 11 Q21 9 19.5 10 Q18.5 11 19 14 Q19.2 16 20 17" fill="url(#skinHighlight)" />
+                            
+                            {/* Ring finger - slightly curled */}
+                            <path d="M17.5 15 Q19.5 11 18.5 7 Q18 5 16.5 6 Q15.5 7 16 11 Q16.3 14 17.5 15" fill="url(#skinHighlight)" />
+                            
+                            {/* Middle finger - gripping pen */}
+                            <path d="M14 13 Q15 9 14 5 Q13.5 3 12 4 Q11 5 11.5 9 Q12 12 14 13" fill="url(#skinHighlight)" />
+                            
+                            {/* Index finger - on top of pen, curved naturally */}
+                            <path d="M10 11 Q10.5 7 9 3 Q8 1 6.5 2 Q5.5 3 6.5 7 Q7.5 10 10 11" fill="url(#skinHighlight)" />
+                            
+                            {/* Thumb - holding pen from below */}
+                            <path d="M8 18 Q5 16 4 13 Q3.5 11 5 10.5 Q6.5 10 7.5 12 Q9 15 8 18" fill="url(#skinHighlight)" />
+                            
+                            {/* Knuckle highlights */}
+                            <circle cx="18" cy="14" r="0.8" fill="hsl(25 40% 72%)" opacity="0.6" />
+                            <circle cx="15" cy="12" r="0.8" fill="hsl(25 40% 72%)" opacity="0.6" />
+                            <circle cx="12" cy="10" r="0.8" fill="hsl(25 40% 72%)" opacity="0.6" />
+                            <circle cx="8.5" cy="9" r="0.7" fill="hsl(25 40% 72%)" opacity="0.6" />
+                            
+                            {/* Pen body */}
+                            <rect x="4" y="1" width="2.2" height="16" rx="1.1" fill="url(#penGrad)" transform="rotate(25 5.1 9)" />
+                            {/* Pen clip */}
+                            <rect x="4.6" y="2" width="0.4" height="4" fill="hsl(45 70% 55%)" transform="rotate(25 5.1 4)" />
+                            {/* Pen grip section */}
+                            <rect x="4" y="10" width="2.2" height="4" rx="0.3" fill="hsl(0 0% 40%)" transform="rotate(25 5.1 12)" />
+                            {/* Pen tip cone */}
+                            <polygon points="4,16 5.1,20 6.2,16" fill="hsl(35 30% 35%)" transform="rotate(25 5.1 18)" />
+                            {/* Pen ball point */}
+                            <circle cx="5.1" cy="19.5" r="0.4" fill="hsl(0 0% 25%)" transform="rotate(25 5.1 19.5)" />
                           </svg>
                         </div>
                       </div>
