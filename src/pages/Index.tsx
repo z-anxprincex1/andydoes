@@ -389,11 +389,6 @@ const Index = () => {
                         {/* Animated eyes overlay on top of the Octocat */}
                         <div className="absolute inset-0 flex items-center justify-center">
                           <div className="relative -mt-1 md:-mt-2">
-                            {/* Eyebrows */}
-                            <div className="absolute -top-1.5 md:-top-2.5 left-1/2 -translate-x-1/2 flex gap-1.5 md:gap-3">
-                              <div className={`w-1 md:w-2 h-px md:h-0.5 bg-[hsl(0_0%_60%)] rounded-full transition-transform duration-300 origin-right ${githubEyeDirection === 'left' ? 'rotate-[-12deg]' : githubEyeDirection === 'right' ? 'rotate-[5deg]' : 'rotate-[-3deg]'}`} />
-                              <div className={`w-1 md:w-2 h-px md:h-0.5 bg-[hsl(0_0%_60%)] rounded-full transition-transform duration-300 origin-left ${githubEyeDirection === 'left' ? 'rotate-[-5deg]' : githubEyeDirection === 'right' ? 'rotate-[12deg]' : 'rotate-[3deg]'}`} />
-                            </div>
                             {/* Eyes container */}
                             <div className="flex gap-1 md:gap-2">
                               {/* Left eye */}
