@@ -790,8 +790,8 @@ const Index = () => {
                   onClick={() => setActiveFolder('projects')}
                   className={`relative px-6 py-2 text-sm md:text-base font-bold rounded-t-lg border-2 border-b-0 transition-all ${
                     activeFolder === 'projects'
-                      ? 'bg-[hsl(45_80%_75%)] border-[hsl(35_60%_40%)] text-[hsl(0_0%_15%)] z-10 -mb-[2px]'
-                      : 'bg-[hsl(45_60%_65%)] border-[hsl(35_50%_35%)] text-[hsl(0_0%_25%)] hover:bg-[hsl(45_70%_70%)]'
+                      ? 'bg-white border-black text-black z-10 -mb-[2px]'
+                      : 'bg-white/50 border-black/30 text-black/50 hover:bg-white/80'
                   }`}
                   style={{ fontFamily: 'Comic Sans MS, cursive' }}
                 >
@@ -802,8 +802,8 @@ const Index = () => {
                   onClick={() => setActiveFolder('experience')}
                   className={`relative px-6 py-2 text-sm md:text-base font-bold rounded-t-lg border-2 border-b-0 transition-all -ml-1 ${
                     activeFolder === 'experience'
-                      ? 'bg-[hsl(200_70%_75%)] border-[hsl(200_50%_40%)] text-[hsl(0_0%_15%)] z-10 -mb-[2px]'
-                      : 'bg-[hsl(200_50%_65%)] border-[hsl(200_40%_35%)] text-[hsl(0_0%_25%)] hover:bg-[hsl(200_60%_70%)]'
+                      ? 'bg-white border-black text-black z-10 -mb-[2px]'
+                      : 'bg-white/50 border-black/30 text-black/50 hover:bg-white/80'
                   }`}
                   style={{ fontFamily: 'Comic Sans MS, cursive' }}
                 >
@@ -812,22 +812,18 @@ const Index = () => {
               </div>
 
               {/* Folder body */}
-              <div className={`absolute top-[3.5rem] left-8 right-8 bottom-8 rounded-lg border-2 shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)] transition-colors duration-300 ${
-                activeFolder === 'projects'
-                  ? 'bg-[hsl(45_80%_75%)] border-[hsl(35_60%_40%)]'
-                  : 'bg-[hsl(200_70%_75%)] border-[hsl(200_50%_40%)]'
-              }`}>
+              <div className="absolute top-[3.5rem] left-8 right-8 bottom-8 rounded-lg border-2 border-black bg-white shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)]">
                 {/* Folder content */}
                 <div className="w-full h-full flex items-center justify-center p-8">
                   {activeFolder === 'projects' ? (
-                    <div className="text-[hsl(0_0%_20%)] text-center" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
+                    <div className="text-black text-center" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
                       <p className="text-2xl md:text-4xl font-bold mb-4">My Projects</p>
-                      <p className="text-sm md:text-lg opacity-70">Projects coming soon...</p>
+                      <p className="text-sm md:text-lg text-black/60">Projects coming soon...</p>
                     </div>
                   ) : (
-                    <div className="text-[hsl(0_0%_20%)] text-center" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
+                    <div className="text-black text-center" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
                       <p className="text-2xl md:text-4xl font-bold mb-4">My Experience</p>
-                      <p className="text-sm md:text-lg opacity-70">Experience coming soon...</p>
+                      <p className="text-sm md:text-lg text-black/60">Experience coming soon...</p>
                     </div>
                   )}
                 </div>
