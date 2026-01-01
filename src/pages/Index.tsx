@@ -778,7 +778,7 @@ const Index = () => {
       {/* Projector Light Beam - small glow at lens */}
       {isGeneratorOn && (
         <div 
-          className="fixed z-[19] pointer-events-none"
+          className="fixed z-[21] pointer-events-none"
           style={{
             bottom: 'calc(2rem + 1.5rem)',
             right: 'calc(6rem + 5.5rem)',
