@@ -47,7 +47,7 @@ const Index = () => {
   const [githubEyeDirection, setGithubEyeDirection] = useState<'center' | 'left' | 'right'>('center');
   const [githubBlinking, setGithubBlinking] = useState(false);
   const [linkedinPhase, setLinkedinPhase] = useState<'writing' | 'folding' | 'throwing'>('writing');
-  const [paperAirplanes, setPaperAirplanes] = useState<Array<{id: number; startX: number; startY: number; curveType: number; duration: number}>>([]);
+  const [paperAirplanes, setPaperAirplanes] = useState<Array<{id: number; startX: number; startY: number; curveType: number; duration: number; distanceMultiplier: number}>>([]);
   const containerRef = useRef<HTMLDivElement>(null);
   const socketRef = useRef<HTMLDivElement>(null);
   const anchorRef = useRef<HTMLSpanElement>(null);
@@ -76,14 +76,14 @@ const Index = () => {
     };
   }, []);
 
-  // LinkedIn hands animation cycle: write -> fold -> throw -> repeat
+  // LinkedIn hands animation cycle: write -> fold -> throw -> repeat (every ~5 seconds)
   useEffect(() => {
     const cycleAnimation = () => {
-      // Writing phase (2.5 seconds)
+      // Writing phase (3 seconds)
       setLinkedinPhase('writing');
       
       setTimeout(() => {
-        // Folding phase (1 second)
+        // Folding phase (1.2 seconds)
         setLinkedinPhase('folding');
         
         setTimeout(() => {
@@ -101,7 +101,10 @@ const Index = () => {
           const rect = frameEl.getBoundingClientRect();
           const newId = airplaneIdRef.current++;
           const curveType = Math.floor(Math.random() * 8); // 0-7 different curve types
-          const duration = 4 + Math.random() * 2.5; // 4-6.5 seconds flight time
+          const duration = 4.5 + Math.random() * 2; // 4.5-6.5 seconds flight time
+          
+          // Random travel distance multiplier (0.5x to 1.3x)
+          const distanceMultiplier = 0.5 + Math.random() * 0.8;
 
           // Start from the LEFT edge of the LinkedIn picture area
           const startX = rect.left + 2;
@@ -115,6 +118,7 @@ const Index = () => {
               startY,
               curveType,
               duration,
+              distanceMultiplier,
             },
           ]);
 
@@ -123,10 +127,10 @@ const Index = () => {
             setPaperAirplanes((prev) => prev.filter((p) => p.id !== newId));
           }, (duration + 1.25) * 1000);
           
-          // Restart cycle
-          setTimeout(cycleAnimation, 500);
-        }, 1000);
-      }, 2500);
+          // Restart cycle after ~5 seconds total (writing 3s + folding 1.2s + throwing 0.5s + gap 0.3s)
+          setTimeout(cycleAnimation, 300);
+        }, 1200);
+      }, 3000);
     };
     
     cycleAnimation();
@@ -549,6 +553,7 @@ const Index = () => {
             top: `${airplane.startY}px`,
             '--start-y': `${airplane.startY}px`,
             '--fly-duration': `${airplane.duration}s`,
+            '--distance-mult': `${airplane.distanceMultiplier}`,
           } as React.CSSProperties}
         >
           {/* Paper airplane SVG */}
