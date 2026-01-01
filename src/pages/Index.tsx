@@ -267,38 +267,43 @@ const Index = () => {
       />
 
       {/* Main content - picture left, text right */}
+      {/* About me tooltip - positioned above the main content */}
+      <div className={`fixed top-8 left-1/2 -translate-x-1/2 z-40 transition-all duration-300 ${
+        isAboutOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'
+      }`}>
+        <div className="relative bg-[hsl(50_90%_60%)] px-5 py-4 rounded-lg border-2 border-[hsl(0_0%_10%)] shadow-[4px_4px_0_hsl(0_0%_10%)] w-[90vw] max-w-xl md:max-w-2xl">
+          {/* Close button */}
+          <button 
+            onClick={() => setIsAboutOpen(false)}
+            className="absolute -top-2 -right-2 w-6 h-6 bg-[hsl(0_0%_10%)] rounded-full flex items-center justify-center hover:scale-110 transition-transform"
+          >
+            <X className="w-4 h-4 text-[hsl(50_90%_60%)]" />
+          </button>
+          
+          <div className="text-[hsl(0_0%_10%)] text-sm md:text-base" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
+            <span className="font-bold block mb-2 text-base md:text-lg">About Me</span>
+            <p>Hey! I&apos;m a Software developer and AI enthusiast who enjoys building practical tools and systems that solve real-world problems. I work across cloud platforms, machine learning pipelines, and data-driven applications. I enjoy learning through experimentation and iteration. Support helps me continue exploring ideas.</p>
+          </div>
+        </div>
+      </div>
+
       <div className="w-full px-6 md:px-12 lg:px-20 relative z-10 flex flex-col md:flex-row items-center gap-8 md:gap-12 lg:gap-16">
         {/* Profile picture with about me */}
         <div className="flex-shrink-0 flex flex-col items-center relative">
-          {/* Question mark icon */}
-          <button 
-            onClick={() => setIsAboutOpen(!isAboutOpen)}
-            className="absolute -top-2 right-0 md:right-4 lg:right-8 w-8 h-8 md:w-10 md:h-10 bg-[hsl(50_90%_60%)] rounded-full flex items-center justify-center border-2 border-[hsl(0_0%_10%)] shadow-[2px_2px_0_hsl(0_0%_10%)] hover:scale-110 transition-transform z-20"
-          >
-            <HelpCircle className="w-5 h-5 md:w-6 md:h-6 text-[hsl(0_0%_10%)]" />
-          </button>
-          
-          {/* About me tooltip */}
-          <div className={`absolute -top-4 left-1/2 -translate-x-1/2 -translate-y-full z-30 transition-all duration-300 ${
-            isAboutOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'
-          }`}>
-            <div className="relative bg-[hsl(50_90%_60%)] px-4 py-3 rounded-lg border-2 border-[hsl(0_0%_10%)] shadow-[4px_4px_0_hsl(0_0%_10%)] max-w-xs md:max-w-sm">
-              {/* Close button */}
-              <button 
-                onClick={() => setIsAboutOpen(false)}
-                className="absolute -top-2 -right-2 w-6 h-6 bg-[hsl(0_0%_10%)] rounded-full flex items-center justify-center"
-              >
-                <X className="w-4 h-4 text-[hsl(50_90%_60%)]" />
-              </button>
-              
-              <div className="text-[hsl(0_0%_10%)] text-xs md:text-sm" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
-                <span className="font-bold block mb-2">About Me</span>
-                <p>Hey! I&apos;m a Software developer and AI enthusiast who enjoys building practical tools and systems that solve real-world problems. I work across cloud platforms, machine learning pipelines, and data-driven applications. I enjoy learning through experimentation and iteration. Support helps me continue exploring ideas.</p>
-              </div>
-              
-              {/* Arrow pointing down */}
-              <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-t-[14px] border-t-[hsl(0_0%_10%)]" />
-              <div className="absolute -bottom-[9px] left-1/2 -translate-x-1/2 w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[12px] border-t-[hsl(50_90%_60%)]" />
+          {/* Question mark icon with connected tooltip arrow */}
+          <div className="absolute -top-2 right-0 md:right-4 lg:right-8 z-20">
+            <button 
+              onClick={() => setIsAboutOpen(!isAboutOpen)}
+              className="w-8 h-8 md:w-10 md:h-10 bg-[hsl(50_90%_60%)] rounded-full flex items-center justify-center border-2 border-[hsl(0_0%_10%)] shadow-[2px_2px_0_hsl(0_0%_10%)] hover:scale-110 transition-transform relative"
+            >
+              <HelpCircle className="w-5 h-5 md:w-6 md:h-6 text-[hsl(0_0%_10%)]" />
+            </button>
+            {/* Arrow connecting to tooltip */}
+            <div className={`absolute left-1/2 -translate-x-1/2 -top-3 transition-all duration-300 ${
+              isAboutOpen ? 'opacity-100' : 'opacity-0'
+            }`}>
+              <div className="w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-b-[12px] border-b-[hsl(0_0%_10%)]" />
+              <div className="absolute top-[2px] left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[10px] border-b-[hsl(50_90%_60%)]" />
             </div>
           </div>
           
