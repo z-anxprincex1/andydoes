@@ -718,7 +718,54 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Diesel Generator - center of floor */}
+      {/* Side Table with Coffee - behind everything */}
+      <div className="fixed bottom-8 md:bottom-12 right-[2%] md:right-[5%] z-[4] pointer-events-none">
+        <div className="relative" style={{ perspective: '400px' }}>
+          {/* Table top */}
+          <div className="w-14 md:w-20 h-14 md:h-20 bg-gradient-to-br from-[hsl(25_40%_35%)] via-[hsl(22_38%_28%)] to-[hsl(20_35%_22%)] rounded-full shadow-[0_4px_12px_rgba(0,0,0,0.4),inset_0_2px_4px_rgba(255,255,255,0.15),inset_0_-2px_6px_rgba(0,0,0,0.3)]" style={{ transform: 'rotateX(15deg)' }}>
+            {/* Wood grain texture */}
+            <div className="absolute inset-2 rounded-full opacity-20" style={{ background: 'repeating-radial-gradient(circle at 30% 30%, transparent, transparent 2px, rgba(0,0,0,0.1) 2px, rgba(0,0,0,0.1) 3px)' }} />
+            {/* Edge highlight */}
+            <div className="absolute inset-0 rounded-full border border-[hsl(25_35%_40%)] opacity-40" />
+          </div>
+          
+          {/* Table stem */}
+          <div className="absolute top-12 md:top-16 left-1/2 -translate-x-1/2 w-3 md:w-4 h-16 md:h-20 bg-gradient-to-r from-[hsl(20_35%_20%)] via-[hsl(22_38%_28%)] to-[hsl(20_35%_20%)] rounded-sm shadow-[2px_0_4px_rgba(0,0,0,0.3)]" />
+          
+          {/* Table base */}
+          <div className="absolute top-[6.5rem] md:top-[8.5rem] left-1/2 -translate-x-1/2 w-10 md:w-14 h-2 md:h-3 bg-gradient-to-b from-[hsl(22_38%_28%)] to-[hsl(20_35%_18%)] rounded-full shadow-[0_2px_6px_rgba(0,0,0,0.4)]" style={{ transform: 'rotateX(60deg)' }} />
+          
+          {/* Coffee cup - clickable */}
+          <a 
+            href="https://buymeacoffee.com/andydoes" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="absolute -top-6 md:-top-8 left-1/2 -translate-x-1/2 pointer-events-auto cursor-pointer group"
+          >
+            {/* Steam/vapor animation */}
+            <div className="absolute -top-4 md:-top-6 left-1/2 -translate-x-1/2 flex gap-1">
+              <div className="w-0.5 h-3 md:h-4 bg-gradient-to-t from-[hsl(0_0%_80%)/0.6] to-transparent rounded-full animate-[steam_2s_ease-in-out_infinite]" style={{ animationDelay: '0s' }} />
+              <div className="w-0.5 h-4 md:h-5 bg-gradient-to-t from-[hsl(0_0%_80%)/0.5] to-transparent rounded-full animate-[steam_2s_ease-in-out_infinite]" style={{ animationDelay: '0.3s' }} />
+              <div className="w-0.5 h-3 md:h-4 bg-gradient-to-t from-[hsl(0_0%_80%)/0.6] to-transparent rounded-full animate-[steam_2s_ease-in-out_infinite]" style={{ animationDelay: '0.6s' }} />
+            </div>
+            
+            {/* Cup body */}
+            <div className="w-6 md:w-8 h-7 md:h-9 bg-gradient-to-b from-[hsl(30_20%_95%)] via-[hsl(30_15%_90%)] to-[hsl(25_20%_85%)] rounded-b-lg rounded-t-sm shadow-[2px_3px_6px_rgba(0,0,0,0.3),inset_0_1px_2px_rgba(255,255,255,0.8),inset_0_-2px_4px_rgba(0,0,0,0.1)] group-hover:shadow-[2px_3px_8px_rgba(0,0,0,0.4),0_0_12px_rgba(255,200,100,0.3)] transition-shadow relative">
+              {/* Coffee inside */}
+              <div className="absolute top-1 left-1 right-1 h-2 md:h-3 bg-gradient-to-b from-[hsl(25_60%_20%)] to-[hsl(20_50%_15%)] rounded-sm" />
+              {/* Cup rim */}
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-b from-[hsl(30_20%_98%)] to-[hsl(30_15%_92%)] rounded-t-sm" />
+            </div>
+            
+            {/* Cup handle */}
+            <div className="absolute top-1 md:top-1.5 -right-1.5 md:-right-2 w-2 md:w-3 h-4 md:h-5 border-2 border-[hsl(30_15%_88%)] rounded-r-full bg-transparent shadow-[1px_1px_2px_rgba(0,0,0,0.2)]" />
+          </a>
+          
+          {/* Floor shadow */}
+          <div className="absolute top-[7rem] md:top-[9rem] left-1/2 -translate-x-1/2 w-12 md:w-16 h-3 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.3)_0%,transparent_70%)]" />
+        </div>
+      </div>
+
       <div 
         className="fixed bottom-8 md:bottom-12 left-1/2 -translate-x-1/2 z-20 cursor-pointer"
         onClick={() => setIsGeneratorOn(!isGeneratorOn)}

@@ -76,10 +76,21 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "steam": {
+          "0%, 100%": { 
+            opacity: "0.3",
+            transform: "translateY(0) scaleY(1)",
+          },
+          "50%": { 
+            opacity: "0.7",
+            transform: "translateY(-4px) scaleY(1.2)",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "steam": "steam 2s ease-in-out infinite",
       },
     },
   },
