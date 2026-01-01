@@ -313,6 +313,18 @@ const Index = () => {
         </div>
       )}
 
+      {/* Phewnn text - appears when generator turns off */}
+      {!isGeneratorOn && wasGeneratorOn && (
+        <div className="fixed top-1/2 left-1/2 z-50 pointer-events-none animate-phewnn-text">
+          <span 
+            className="text-[hsl(180_70%_60%)] text-4xl md:text-6xl font-extrabold whitespace-nowrap drop-shadow-[3px_3px_0_hsl(0_0%_10%)]" 
+            style={{ fontFamily: 'Comic Sans MS, cursive' }}
+          >
+            phewnn!
+          </span>
+        </div>
+      )}
+
       <div className={`w-full px-6 md:px-12 lg:px-20 relative z-10 flex flex-col md:flex-row items-center gap-8 md:gap-12 lg:gap-16 ${
         isGeneratorOn ? 'animate-whoosh-up pointer-events-none' : wasGeneratorOn ? 'animate-slide-down-in' : ''
       }`}>
