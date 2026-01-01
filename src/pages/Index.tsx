@@ -350,6 +350,22 @@ const Index = () => {
         </h1>
       </div>
 
+      {/* Retro tooltip above phone */}
+      <div 
+        className={`fixed left-4 md:left-8 z-30 transition-all duration-500 pointer-events-none ${
+          isPhoneOpen ? 'opacity-0 bottom-[520px] md:bottom-[580px]' : 'opacity-100 bottom-24 md:bottom-28'
+        }`}
+      >
+        <div className="relative bg-[hsl(50_90%_60%)] px-3 py-2 rounded-lg border-2 border-[hsl(0_0%_10%)] shadow-[3px_3px_0_hsl(0_0%_10%)]">
+          <span className="text-[hsl(0_0%_10%)] text-xs md:text-sm font-bold whitespace-nowrap" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
+            got a question for me?
+          </span>
+          {/* Arrow pointing down */}
+          <div className="absolute -bottom-3 left-6 w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[12px] border-t-[hsl(0_0%_10%)]" />
+          <div className="absolute -bottom-[9px] left-[26px] w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[10px] border-t-[hsl(50_90%_60%)]" />
+        </div>
+      </div>
+
       {/* Mobile phone - half visible at bottom left */}
       <div 
         className={`fixed left-4 md:left-8 z-30 cursor-pointer transition-all duration-500 ease-out ${
