@@ -223,6 +223,66 @@ const Index = () => {
     return path;
   };
   return <main className="h-screen flex items-center bg-background overflow-hidden relative" ref={containerRef}>
+      {/* Wall Cracks - Subtle zig-zag cracks */}
+      <svg className="fixed inset-0 w-full h-full pointer-events-none opacity-30" preserveAspectRatio="none">
+        {/* Crack 1 - Top left area */}
+        <path 
+          d="M 80 0 L 85 45 L 78 52 L 88 95 L 82 120 L 90 145" 
+          stroke="hsl(0 0% 8%)" 
+          strokeWidth="1.5" 
+          fill="none"
+          strokeLinecap="round"
+        />
+        <path 
+          d="M 85 45 L 95 55 L 92 70" 
+          stroke="hsl(0 0% 8%)" 
+          strokeWidth="1" 
+          fill="none"
+          strokeLinecap="round"
+        />
+        
+        {/* Crack 2 - Right side */}
+        <path 
+          d="M 92% 15% L 90% 18% L 93% 22% L 89% 28% L 91% 32% L 88% 38%" 
+          stroke="hsl(0 0% 6%)" 
+          strokeWidth="1.2" 
+          fill="none"
+          strokeLinecap="round"
+        />
+        <path 
+          d="M 90% 18% L 86% 20% L 85% 24%" 
+          stroke="hsl(0 0% 6%)" 
+          strokeWidth="0.8" 
+          fill="none"
+          strokeLinecap="round"
+        />
+        
+        {/* Crack 3 - Bottom left corner */}
+        <path 
+          d="M 5% 75% L 7% 80% L 4% 85% L 8% 90% L 6% 96%" 
+          stroke="hsl(0 0% 7%)" 
+          strokeWidth="1.3" 
+          fill="none"
+          strokeLinecap="round"
+        />
+        <path 
+          d="M 7% 80% L 12% 82% L 15% 86%" 
+          stroke="hsl(0 0% 7%)" 
+          strokeWidth="0.9" 
+          fill="none"
+          strokeLinecap="round"
+        />
+        
+        {/* Crack 4 - Small crack near center-right */}
+        <path 
+          d="M 78% 60% L 80% 63% L 77% 67% L 81% 72%" 
+          stroke="hsl(0 0% 5%)" 
+          strokeWidth="1" 
+          fill="none"
+          strokeLinecap="round"
+        />
+      </svg>
+
       {/* Cobweb - Top Left (smaller) */}
       <svg className="fixed top-0 left-0 w-24 h-24 md:w-36 md:h-36 pointer-events-none opacity-25" viewBox="0 0 100 100">
         {/* Radial threads - curved and irregular */}
