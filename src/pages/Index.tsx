@@ -750,30 +750,45 @@ const Index = () => {
             rel="noopener noreferrer"
             className="absolute top-0 md:top-0 left-1/2 -translate-x-1/2 pointer-events-auto cursor-pointer group"
           >
-            {/* Steam/vapor animation - more visible wavy steam */}
-            <div className="absolute -top-6 md:-top-8 left-1/2 -translate-x-1/2 flex gap-1">
-              <div className="w-1 h-5 md:h-7 bg-gradient-to-t from-[hsl(0_0%_95%)] via-[hsl(0_0%_90%)/0.7] to-transparent rounded-full animate-steam opacity-80" style={{ animationDelay: '0s' }} />
-              <div className="w-1.5 h-6 md:h-8 bg-gradient-to-t from-[hsl(0_0%_95%)] via-[hsl(0_0%_88%)/0.6] to-transparent rounded-full animate-steam opacity-70" style={{ animationDelay: '0.4s' }} />
-              <div className="w-1 h-5 md:h-7 bg-gradient-to-t from-[hsl(0_0%_95%)] via-[hsl(0_0%_90%)/0.7] to-transparent rounded-full animate-steam opacity-80" style={{ animationDelay: '0.8s' }} />
+            {/* Steam/vapor animation - wavy steam lines */}
+            <div className="absolute -top-7 md:-top-9 left-1/2 -translate-x-1/2 flex gap-1.5">
+              <svg className="w-2 h-5 md:h-6 animate-steam opacity-70" viewBox="0 0 8 20" style={{ animationDelay: '0s' }}>
+                <path d="M4 20 Q2 15 4 12 Q6 9 4 6 Q2 3 4 0" stroke="hsl(25 30% 45%)" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
+              </svg>
+              <svg className="w-2 h-6 md:h-7 animate-steam opacity-60" viewBox="0 0 8 24" style={{ animationDelay: '0.3s' }}>
+                <path d="M4 24 Q6 19 4 15 Q2 11 4 7 Q6 3 4 0" stroke="hsl(25 30% 45%)" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
+              </svg>
+              <svg className="w-2 h-5 md:h-6 animate-steam opacity-70" viewBox="0 0 8 20" style={{ animationDelay: '0.6s' }}>
+                <path d="M4 20 Q2 15 4 12 Q6 9 4 6 Q2 3 4 0" stroke="hsl(25 30% 45%)" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
+              </svg>
             </div>
             
-            {/* Cup body - more realistic ceramic mug */}
-            <div className="w-6 md:w-9 h-7 md:h-10 bg-gradient-to-br from-[hsl(35_25%_92%)] via-[hsl(30_20%_88%)] to-[hsl(25_18%_80%)] rounded-b-xl rounded-t-md shadow-[3px_4px_8px_rgba(0,0,0,0.35),inset_0_2px_3px_rgba(255,255,255,0.9),inset_-2px_-2px_4px_rgba(0,0,0,0.08)] group-hover:shadow-[3px_4px_10px_rgba(0,0,0,0.4),0_0_15px_rgba(255,200,100,0.4)] transition-shadow relative overflow-hidden">
-              {/* Coffee liquid inside with foam */}
-              <div className="absolute top-1.5 md:top-2 left-1 right-1 h-2 md:h-3 bg-gradient-to-b from-[hsl(30_50%_30%)] via-[hsl(25_55%_22%)] to-[hsl(20_60%_18%)] rounded-sm shadow-[inset_0_1px_2px_rgba(0,0,0,0.3)]">
-                {/* Coffee foam/crema */}
-                <div className="absolute top-0 left-0.5 right-0.5 h-0.5 md:h-1 bg-gradient-to-r from-[hsl(30_40%_45%)] via-[hsl(28_45%_50%)] to-[hsl(30_40%_45%)] rounded-full opacity-80" />
+            {/* Mug container */}
+            <div className="relative w-7 md:w-10 h-8 md:h-11">
+              {/* Cup rim - elliptical top opening */}
+              <div className="absolute top-0 left-0 right-0 h-2 md:h-3 bg-gradient-to-b from-[hsl(220_15%_92%)] to-[hsl(220_12%_85%)] rounded-[50%] shadow-[inset_0_1px_2px_rgba(255,255,255,0.9),0_1px_2px_rgba(0,0,0,0.1)]" />
+              
+              {/* Coffee liquid inside - elliptical shape */}
+              <div className="absolute top-0.5 md:top-1 left-0.5 right-0.5 h-1.5 md:h-2 bg-gradient-to-b from-[hsl(15_50%_25%)] to-[hsl(10_55%_20%)] rounded-[50%] shadow-[inset_0_1px_2px_rgba(0,0,0,0.4)]">
+                {/* Coffee shine bubbles */}
+                <div className="absolute top-0.5 left-1 w-0.5 h-0.5 md:w-1 md:h-1 bg-[hsl(30_40%_40%)] rounded-full opacity-60" />
+                <div className="absolute top-0.5 left-2 md:left-3 w-0.5 h-0.5 bg-[hsl(30_40%_45%)] rounded-full opacity-50" />
               </div>
-              {/* Cup rim - thicker and more visible */}
-              <div className="absolute top-0 left-0 right-0 h-1.5 md:h-2 bg-gradient-to-b from-[hsl(30_25%_98%)] via-[hsl(28_20%_94%)] to-[hsl(25_18%_88%)] rounded-t-md shadow-[inset_0_-1px_1px_rgba(0,0,0,0.05)]" />
-              {/* Cup body highlight */}
-              <div className="absolute top-3 left-0.5 bottom-1 w-1 bg-gradient-to-b from-[hsl(35_30%_96%)] to-transparent rounded-full opacity-60" />
-              {/* Cup base */}
-              <div className="absolute bottom-0 left-0.5 right-0.5 h-1 bg-gradient-to-t from-[hsl(25_15%_75%)] to-[hsl(28_18%_82%)] rounded-b-lg" />
+              
+              {/* Cup body - cylindrical ceramic mug */}
+              <div className="absolute top-1 md:top-1.5 left-0 right-0 bottom-0 bg-gradient-to-r from-[hsl(220_15%_88%)] via-[hsl(220_12%_94%)] to-[hsl(220_10%_85%)] rounded-b-lg shadow-[2px_3px_6px_rgba(0,0,0,0.25),inset_2px_0_4px_rgba(255,255,255,0.5)] group-hover:shadow-[2px_3px_8px_rgba(0,0,0,0.35),0_0_12px_rgba(255,200,100,0.3)] transition-shadow">
+                {/* Body highlight streak */}
+                <div className="absolute top-1 left-1 bottom-1 w-1 md:w-1.5 bg-gradient-to-b from-[hsl(220_20%_98%)] via-[hsl(220_15%_96%)] to-[hsl(220_12%_90%)] rounded-full opacity-70" />
+                {/* Body shadow on right */}
+                <div className="absolute top-1 right-0 bottom-1 w-1 bg-gradient-to-b from-[hsl(220_10%_80%)] to-[hsl(220_8%_75%)] rounded-r-lg opacity-40" />
+              </div>
+              
+              {/* Cup base ellipse */}
+              <div className="absolute -bottom-0.5 left-0 right-0 h-1 md:h-1.5 bg-gradient-to-b from-[hsl(220_10%_82%)] to-[hsl(220_8%_75%)] rounded-[50%] shadow-[0_1px_3px_rgba(0,0,0,0.2)]" />
+              
+              {/* Cup handle - thick curved handle on right */}
+              <div className="absolute top-2 md:top-3 -right-2.5 md:-right-3.5 w-3 md:w-4 h-4 md:h-5 border-[3px] md:border-4 border-[hsl(220_12%_90%)] rounded-[50%] bg-transparent shadow-[2px_2px_4px_rgba(0,0,0,0.2),inset_-1px_-1px_2px_rgba(0,0,0,0.1),inset_1px_1px_2px_rgba(255,255,255,0.6)]" />
             </div>
-            
-            {/* Cup handle - more realistic curved handle */}
-            <div className="absolute top-2 md:top-2.5 -right-2 md:-right-2.5 w-2.5 md:w-3.5 h-4 md:h-5 border-[2px] md:border-[2.5px] border-[hsl(30_20%_90%)] rounded-r-full bg-transparent shadow-[1px_2px_3px_rgba(0,0,0,0.25),inset_-1px_0_1px_rgba(255,255,255,0.5)]" />
           </a>
         </div>
       </div>
