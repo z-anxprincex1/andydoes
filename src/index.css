@@ -359,21 +359,6 @@
   }
 }
 
-@keyframes slide-back-down {
-  0% {
-    opacity: 0;
-    transform: translateY(-60vh) scale(0.7);
-  }
-  50% {
-    opacity: 0.8;
-    transform: translateY(-20vh) scale(0.9);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
 @keyframes whoosh-text {
   0% {
     opacity: 0;
@@ -389,21 +374,6 @@
   }
 }
 
-@keyframes phewnn-text {
-  0% {
-    opacity: 0;
-    transform: translateX(-50%) translateY(-80px) rotate(8deg) scale(0.5);
-  }
-  30% {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0) rotate(8deg) scale(1.3);
-  }
-  100% {
-    opacity: 0;
-    transform: translateX(-50%) translateY(40px) rotate(8deg) scale(0.9);
-  }
-}
-
 @keyframes screen-slide-down {
   0% {
     transform: scaleY(0);
@@ -411,17 +381,6 @@
   }
   100% {
     transform: scaleY(1);
-    transform-origin: top;
-  }
-}
-
-@keyframes screen-slide-up {
-  0% {
-    transform: scaleY(1);
-    transform-origin: top;
-  }
-  100% {
-    transform: scaleY(0);
     transform-origin: top;
   }
 }
@@ -435,234 +394,12 @@
   }
 }
 
-@keyframes light-beam-fade-out {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-@keyframes poof-out {
-  0% {
-    opacity: 1;
-    transform: translateX(-50%) scale(1) rotate(-6deg);
-    filter: blur(0px);
-  }
-  30% {
-    opacity: 0.9;
-    transform: translateX(-50%) scale(1.3) rotate(5deg);
-    filter: blur(1px);
-  }
-  60% {
-    opacity: 0.5;
-    transform: translateX(-50%) scale(1.6) rotate(-10deg);
-    filter: blur(3px);
-  }
-  100% {
-    opacity: 0;
-    transform: translateX(-50%) scale(2) rotate(-20deg);
-    filter: blur(6px);
-  }
-}
-
-@keyframes smoke-puff-1 {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, 0) scale(0.2);
-  }
-  15% {
-    opacity: 0.9;
-    transform: translate(-60%, -15px) scale(0.6);
-  }
-  50% {
-    opacity: 0.6;
-    transform: translate(-70%, -45px) scale(1.2);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(-80%, -90px) scale(1.8);
-  }
-}
-
-@keyframes smoke-puff-2 {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, 0) scale(0.3);
-  }
-  20% {
-    opacity: 0.85;
-    transform: translate(-40%, -20px) scale(0.7);
-  }
-  60% {
-    opacity: 0.5;
-    transform: translate(-30%, -55px) scale(1.4);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(-20%, -100px) scale(2);
-  }
-}
-
-@keyframes smoke-puff-3 {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, 0) scale(0.25);
-  }
-  25% {
-    opacity: 0.8;
-    transform: translate(-50%, -25px) scale(0.8);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(-50%, -80px) scale(1.6);
-  }
-}
-
-@keyframes smoke-fluff-1 {
-  0% {
-    opacity: 0;
-    transform: translate(-60%, 30px) scale(0.2);
-  }
-  20% {
-    opacity: 0.85;
-    transform: translate(-70%, 10px) scale(0.7);
-  }
-  60% {
-    opacity: 0.5;
-    transform: translate(-75%, -10px) scale(1.2);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(-80%, -30px) scale(1.5);
-  }
-}
-
-@keyframes smoke-fluff-2 {
-  0% {
-    opacity: 0;
-    transform: translate(-40%, 25px) scale(0.25);
-  }
-  25% {
-    opacity: 0.8;
-    transform: translate(-30%, 5px) scale(0.8);
-  }
-  65% {
-    opacity: 0.4;
-    transform: translate(-25%, -15px) scale(1.3);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(-20%, -35px) scale(1.6);
-  }
-}
-
-@keyframes smoke-fluff-3 {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, 20px) scale(0.3);
-  }
-  30% {
-    opacity: 0.75;
-    transform: translate(-50%, 0) scale(0.9);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(-50%, -25px) scale(1.4);
-  }
-}
-
-.animate-smoke-puff-1 {
-  animation: smoke-puff-1 0.7s ease-out forwards;
-}
-.animate-smoke-puff-2 {
-  animation: smoke-puff-2 0.8s ease-out forwards;
-  animation-delay: 0.05s;
-}
-.animate-smoke-puff-3 {
-  animation: smoke-puff-3 0.6s ease-out forwards;
-  animation-delay: 0.1s;
-}
-.animate-smoke-fluff-1 {
-  animation: smoke-fluff-1 0.7s ease-out forwards;
-}
-.animate-smoke-fluff-2 {
-  animation: smoke-fluff-2 0.75s ease-out forwards;
-  animation-delay: 0.08s;
-}
-.animate-smoke-fluff-3 {
-  animation: smoke-fluff-3 0.65s ease-out forwards;
-  animation-delay: 0.12s;
-}
-
-@keyframes poof-text {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.3) rotate(-15deg);
-  }
-  40% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1.4) rotate(5deg);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.8) rotate(-10deg);
-  }
-}
-
-@keyframes fluff-in {
-  0% {
-    opacity: 0;
-    transform: translateX(-50%) scale(0) rotate(20deg);
-    filter: blur(4px);
-  }
-  40% {
-    opacity: 0.7;
-    transform: translateX(-50%) scale(1.4) rotate(-15deg);
-    filter: blur(2px);
-  }
-  70% {
-    opacity: 1;
-    transform: translateX(-50%) scale(1.1) rotate(-3deg);
-    filter: blur(0px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(-50%) scale(1) rotate(-6deg);
-    filter: blur(0px);
-  }
-}
-
-@keyframes fluff-text {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.3) rotate(15deg);
-  }
-  40% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1.4) rotate(-5deg);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.8) rotate(10deg);
-  }
-}
-
 .animate-whoosh-up {
   animation: whoosh-up 0.8s ease-in forwards;
 }
 
-.animate-slide-back-down {
-  animation: slide-back-down 0.8s ease-out forwards;
-}
-
 .animate-whoosh-text {
   animation: whoosh-text 0.8s ease-out forwards;
-}
-
-.animate-phewnn-text {
-  animation: phewnn-text 0.9s ease-out forwards;
 }
 
 .animate-screen-down {
@@ -670,39 +407,7 @@
   transform: scaleY(0);
 }
 
-.animate-screen-up {
-  animation: screen-slide-up 0.5s ease-in forwards;
-}
-
 .animate-light-beam {
   animation: light-beam-fade 0.5s ease-out 0.6s forwards;
   opacity: 0;
-}
-
-.animate-light-beam-out {
-  animation: light-beam-fade-out 0.3s ease-in forwards;
-}
-
-.animate-poof-out {
-  animation: poof-out 0.6s ease-out forwards;
-}
-
-.animate-poof-text {
-  animation: poof-text 0.6s ease-out forwards;
-}
-
-.animate-fluff-in {
-  animation: fluff-in 0.7s ease-out forwards;
-}
-
-.animate-fluff-text {
-  animation: fluff-text 0.7s ease-out forwards;
-}
-
-.animate-smoke-puff {
-  animation: smoke-puff 0.7s ease-out forwards;
-}
-
-.animate-smoke-fluff {
-  animation: smoke-puff-fluff 0.6s ease-out forwards;
 }

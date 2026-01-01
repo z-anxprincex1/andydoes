@@ -12,16 +12,6 @@ const Index = () => {
   const [newMessage, setNewMessage] = useState("");
   const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [isGeneratorOn, setIsGeneratorOn] = useState(false);
-  const [wasGeneratorOn, setWasGeneratorOn] = useState(false);
-  const [showScreen, setShowScreen] = useState(false);
-  const [screenAnimating, setScreenAnimating] = useState<'in' | 'out' | null>(null);
-  const [tipAnimating, setTipAnimating] = useState<'poof' | 'fluff' | null>(null);
-  const [showPoofText, setShowPoofText] = useState(false);
-  const [showFluffText, setShowFluffText] = useState(false);
-  const [showPhewnnText, setShowPhewnnText] = useState(false);
-  const [showPoofSmoke, setShowPoofSmoke] = useState(false);
-  const [showFluffSmoke, setShowFluffSmoke] = useState(false);
-  const [profileSliding, setProfileSliding] = useState<'up' | 'down' | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [plugPosition, setPlugPosition] = useState({ x: 30, y: 180 }); // Hanging down longer by default
   const [spiderDescending, setSpiderDescending] = useState(false);
@@ -113,46 +103,6 @@ const Index = () => {
       };
     }
   }, [isDragging, plugPosition]);
-
-  // Handle generator on/off transitions
-  useEffect(() => {
-    if (isGeneratorOn && !wasGeneratorOn) {
-      // Turning ON
-      setTipAnimating('poof');
-      setShowPoofText(true);
-      setShowPoofSmoke(true);
-      setProfileSliding('up');
-      setScreenAnimating('in');
-      setShowScreen(true);
-      
-      setTimeout(() => setShowPoofText(false), 600);
-      setTimeout(() => setShowPoofSmoke(false), 900);
-      setTimeout(() => {
-        setTipAnimating(null);
-        setScreenAnimating(null);
-        setProfileSliding(null);
-      }, 800);
-    } else if (!isGeneratorOn && wasGeneratorOn) {
-      // Turning OFF
-      setTipAnimating('fluff');
-      setShowFluffText(true);
-      setShowFluffSmoke(true);
-      setShowPhewnnText(true);
-      setProfileSliding('down');
-      setScreenAnimating('out');
-      
-      setTimeout(() => setShowFluffText(false), 700);
-      setTimeout(() => setShowFluffSmoke(false), 900);
-      setTimeout(() => setShowPhewnnText(false), 900);
-      setTimeout(() => {
-        setShowScreen(false);
-        setTipAnimating(null);
-        setScreenAnimating(null);
-        setProfileSliding(null);
-      }, 800);
-    }
-    setWasGeneratorOn(isGeneratorOn);
-  }, [isGeneratorOn]);
 
   const renderWord = (word: string, wordIndex: number, isLast: boolean) => {
     return (
@@ -350,21 +300,9 @@ const Index = () => {
         </div>
       )}
 
-      {/* Phewnn text - appears when generator turns off */}
-      {showPhewnnText && (
-        <div className="fixed top-1/2 left-1/2 z-50 pointer-events-none animate-phewnn-text">
-          <span 
-            className="text-[hsl(180_70%_60%)] text-4xl md:text-6xl font-extrabold whitespace-nowrap drop-shadow-[3px_3px_0_hsl(0_0%_10%)]" 
-            style={{ fontFamily: 'Comic Sans MS, cursive' }}
-          >
-            phewnn!
-          </span>
-        </div>
-      )}
-
       <div className={`w-full px-6 md:px-12 lg:px-20 relative z-10 flex flex-col md:flex-row items-center gap-8 md:gap-12 lg:gap-16 transition-all duration-500 ${
-        profileSliding === 'up' ? 'animate-whoosh-up pointer-events-none' : ''
-      } ${profileSliding === 'down' ? 'animate-slide-back-down' : ''}`}>
+        isGeneratorOn ? 'animate-whoosh-up pointer-events-none' : ''
+      }`}>
         {/* Profile picture with about me */}
         <div className="flex-shrink-0 flex flex-col items-center relative">
           {/* Question mark icon with connected tooltip arrow */}
@@ -614,90 +552,14 @@ const Index = () => {
       </div>
 
       {/* Tip above generator */}
-      {!isGeneratorOn && (
-        <div className={`fixed bottom-[8.5rem] md:bottom-[10.5rem] left-[calc(50%-1rem)] md:left-[calc(50%-1.5rem)] -translate-x-1/2 z-20 pointer-events-none ${
-          tipAnimating === 'fluff' ? 'animate-fluff-in' : 'animate-bounce'
-        }`}>
-          <span 
-            className="text-[hsl(0_0%_100%)] text-sm md:text-base font-extrabold whitespace-nowrap drop-shadow-[2px_2px_0_hsl(0_0%_10%)] inline-block -rotate-6" 
-            style={{ fontFamily: 'Comic Sans MS, cursive' }}
-          >
-            click here to view my work!
-          </span>
-        </div>
-      )}
-
-      {/* Poof animation when tip disappears */}
-      {tipAnimating === 'poof' && (
-        <div className="fixed bottom-[8.5rem] md:bottom-[10.5rem] left-[calc(50%-1rem)] md:left-[calc(50%-1.5rem)] -translate-x-1/2 z-20 pointer-events-none animate-poof-out">
-          <span 
-            className="text-[hsl(0_0%_100%)] text-sm md:text-base font-extrabold whitespace-nowrap drop-shadow-[2px_2px_0_hsl(0_0%_10%)] inline-block -rotate-6" 
-            style={{ fontFamily: 'Comic Sans MS, cursive' }}
-          >
-            click here to view my work!
-          </span>
-        </div>
-      )}
-
-      {/* Smoke effect for poof - multiple particles */}
-      {showPoofSmoke && (
-        <div className="fixed bottom-[8.5rem] md:bottom-[10.5rem] left-1/2 z-25 pointer-events-none">
-          {/* Particle 1 - left drift */}
-          <div className="absolute animate-smoke-puff-1">
-            <div className="w-16 h-16 md:w-24 md:h-24 rounded-full bg-[hsl(0_0%_65%/0.8)] blur-lg" />
-          </div>
-          {/* Particle 2 - right drift */}
-          <div className="absolute animate-smoke-puff-2">
-            <div className="w-14 h-14 md:w-20 md:h-20 rounded-full bg-[hsl(320_30%_70%/0.7)] blur-lg" />
-          </div>
-          {/* Particle 3 - center rise */}
-          <div className="absolute animate-smoke-puff-3">
-            <div className="w-12 h-12 md:w-18 md:h-18 rounded-full bg-[hsl(0_0%_75%/0.75)] blur-md" />
-          </div>
-        </div>
-      )}
-
-      {/* Smoke effect for fluff - multiple particles */}
-      {showFluffSmoke && (
-        <div className="fixed bottom-[8.5rem] md:bottom-[10.5rem] left-1/2 z-25 pointer-events-none">
-          {/* Particle 1 */}
-          <div className="absolute animate-smoke-fluff-1">
-            <div className="w-14 h-14 md:w-20 md:h-20 rounded-full bg-[hsl(140_50%_65%/0.8)] blur-lg" />
-          </div>
-          {/* Particle 2 */}
-          <div className="absolute animate-smoke-fluff-2">
-            <div className="w-12 h-12 md:w-18 md:h-18 rounded-full bg-[hsl(160_40%_70%/0.7)] blur-lg" />
-          </div>
-          {/* Particle 3 */}
-          <div className="absolute animate-smoke-fluff-3">
-            <div className="w-10 h-10 md:w-16 md:h-16 rounded-full bg-[hsl(140_45%_75%/0.75)] blur-md" />
-          </div>
-        </div>
-      )}
-
-      {/* Poof text */}
-      {showPoofText && (
-        <div className="fixed bottom-[10rem] md:bottom-[12rem] left-1/2 z-50 pointer-events-none animate-poof-text">
-          <span 
-            className="text-[hsl(320_80%_65%)] text-2xl md:text-4xl font-extrabold whitespace-nowrap drop-shadow-[2px_2px_0_hsl(0_0%_10%)]" 
-            style={{ fontFamily: 'Comic Sans MS, cursive' }}
-          >
-            poof!
-          </span>
-        </div>
-      )}
-
-      {/* Fluff text */}
-      {showFluffText && (
-        <div className="fixed bottom-[10rem] md:bottom-[12rem] left-1/2 z-50 pointer-events-none animate-fluff-text">
-          <span 
-            className="text-[hsl(140_70%_55%)] text-2xl md:text-4xl font-extrabold whitespace-nowrap drop-shadow-[2px_2px_0_hsl(0_0%_10%)]" 
-            style={{ fontFamily: 'Comic Sans MS, cursive' }}
-          >
-            fluff!
-          </span>
-        </div>
-      )}
+      <div className="fixed bottom-[8.5rem] md:bottom-[10.5rem] left-[calc(50%-1rem)] md:left-[calc(50%-1.5rem)] -translate-x-1/2 z-20 pointer-events-none animate-bounce">
+        <span 
+          className="text-[hsl(0_0%_100%)] text-sm md:text-base font-extrabold whitespace-nowrap drop-shadow-[2px_2px_0_hsl(0_0%_10%)] inline-block -rotate-6" 
+          style={{ fontFamily: 'Comic Sans MS, cursive' }}
+        >
+          click here to view my work!
+        </span>
+      </div>
 
       {/* Diesel Generator - center of floor */}
       <div 
@@ -848,9 +710,9 @@ const Index = () => {
 
 
       {/* Projector Screen - slides down from top when generator is on */}
-      {showScreen && (
+      {isGeneratorOn && (
         <div className="fixed top-0 left-0 right-0 flex justify-center z-15 pointer-events-none">
-          <div className={screenAnimating === 'in' ? 'animate-screen-down' : screenAnimating === 'out' ? 'animate-screen-up' : ''}>
+          <div className="animate-screen-down">
             {/* Screen mount bar */}
             <div className="w-[75vw] h-3 bg-gradient-to-b from-[hsl(0_0%_25%)] to-[hsl(0_0%_15%)] rounded-b border-x-2 border-b-2 border-[hsl(0_0%_20%)]" />
             {/* Screen */}
