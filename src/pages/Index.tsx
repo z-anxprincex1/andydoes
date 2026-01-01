@@ -635,25 +635,50 @@ const Index = () => {
         </div>
       </div>
 
+      {/* Cable from generator to socket */}
+      <svg className="fixed bottom-10 md:bottom-14 left-1/2 right-8 md:right-12 h-8 z-15 pointer-events-none" style={{ width: 'calc(50% - 3rem)' }}>
+        <path 
+          d="M 0 15 Q 50% 25, 100% 10" 
+          stroke="hsl(0 0% 20%)" 
+          strokeWidth="4" 
+          fill="none"
+          strokeLinecap="round"
+        />
+      </svg>
+
+      {/* Cable from generator to projector */}
+      <svg className="fixed bottom-10 md:bottom-14 right-[calc(50%+2rem)] h-8 z-15 pointer-events-none" style={{ width: '8rem' }}>
+        <path 
+          d="M 100% 15 Q 50% 20, 0 12" 
+          stroke="hsl(0 0% 20%)" 
+          strokeWidth="4" 
+          fill="none"
+          strokeLinecap="round"
+        />
+      </svg>
+
       {/* Projector - lying on floor left of socket */}
-      <div className="fixed bottom-9 md:bottom-13 right-28 md:right-36 z-20">
+      <div className="fixed bottom-8 md:bottom-11 right-24 md:right-32 z-20">
         {/* Projector body */}
-        <div className="w-12 h-6 md:w-16 md:h-8 bg-[hsl(0_0%_15%)] rounded relative">
+        <div className="w-16 h-10 md:w-24 md:h-14 bg-[hsl(0_0%_15%)] rounded relative">
           {/* Lens */}
-          <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1 w-3 h-3 md:w-4 md:h-4 bg-[hsl(0_0%_8%)] rounded-full border-2 border-[hsl(0_0%_25%)]">
+          <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 w-5 h-5 md:w-7 md:h-7 bg-[hsl(0_0%_8%)] rounded-full border-2 border-[hsl(0_0%_25%)]">
             <div className="absolute inset-1 bg-[hsl(220_20%_15%)] rounded-full" />
           </div>
           {/* Top vent lines */}
-          <div className="absolute top-1 right-2 flex gap-0.5">
-            <div className="w-0.5 h-2 md:h-3 bg-[hsl(0_0%_10%)]" />
-            <div className="w-0.5 h-2 md:h-3 bg-[hsl(0_0%_10%)]" />
-            <div className="w-0.5 h-2 md:h-3 bg-[hsl(0_0%_10%)]" />
+          <div className="absolute top-1.5 right-3 flex gap-1">
+            <div className="w-0.5 h-3 md:h-5 bg-[hsl(0_0%_10%)]" />
+            <div className="w-0.5 h-3 md:h-5 bg-[hsl(0_0%_10%)]" />
+            <div className="w-0.5 h-3 md:h-5 bg-[hsl(0_0%_10%)]" />
+            <div className="w-0.5 h-3 md:h-5 bg-[hsl(0_0%_10%)]" />
           </div>
           {/* Power LED - off */}
-          <div className="absolute bottom-1 right-2 w-1 h-1 bg-[hsl(0_0%_25%)] rounded-full" />
+          <div className={`absolute bottom-1.5 right-3 w-1.5 h-1.5 md:w-2 md:h-2 rounded-full transition-all duration-300 ${
+            isGeneratorOn ? 'bg-[hsl(120_70%_45%)] shadow-[0_0_4px_rgba(74,222,128,0.6)]' : 'bg-[hsl(0_0%_25%)]'
+          }`} />
           {/* Feet */}
-          <div className="absolute -bottom-0.5 left-2 w-1.5 h-1 bg-[hsl(0_0%_10%)] rounded-sm" />
-          <div className="absolute -bottom-0.5 right-3 w-1.5 h-1 bg-[hsl(0_0%_10%)] rounded-sm" />
+          <div className="absolute -bottom-1 left-3 w-2 h-1.5 bg-[hsl(0_0%_10%)] rounded-sm" />
+          <div className="absolute -bottom-1 right-4 w-2 h-1.5 bg-[hsl(0_0%_10%)] rounded-sm" />
         </div>
       </div>
 
