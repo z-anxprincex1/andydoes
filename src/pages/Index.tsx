@@ -46,10 +46,13 @@ const Index = () => {
   const [spiderAtCoffee, setSpiderAtCoffee] = useState(false);
   const [githubEyeDirection, setGithubEyeDirection] = useState<'center' | 'left' | 'right'>('center');
   const [githubBlinking, setGithubBlinking] = useState(false);
+  const [linkedinPhase, setLinkedinPhase] = useState<'writing' | 'folding' | 'throwing'>('writing');
+  const [paperAirplanes, setPaperAirplanes] = useState<Array<{id: number; x: number; y: number; rotate: number}>>([]);
   const containerRef = useRef<HTMLDivElement>(null);
   const socketRef = useRef<HTMLDivElement>(null);
   const anchorRef = useRef<HTMLSpanElement>(null);
   const flickerClasses = ["flicker-1", "flicker-2", "flicker-3", "flicker-4", "flicker-5"];
+  const airplaneIdRef = useRef(0);
 
   // GitHub eyes random looking and blinking
   useEffect(() => {
@@ -70,6 +73,49 @@ const Index = () => {
       clearInterval(lookInterval);
       clearInterval(blinkInterval);
     };
+  }, []);
+
+  // LinkedIn hands animation cycle: write -> fold -> throw -> repeat
+  useEffect(() => {
+    const cycleAnimation = () => {
+      // Writing phase (2.5 seconds)
+      setLinkedinPhase('writing');
+      
+      setTimeout(() => {
+        // Folding phase (1 second)
+        setLinkedinPhase('folding');
+        
+        setTimeout(() => {
+          // Throwing phase (0.5 seconds)
+          setLinkedinPhase('throwing');
+          
+          // Launch paper airplane
+          const newId = airplaneIdRef.current++;
+          const randomX = 150 + Math.random() * 200; // Fly left and down
+          const randomY = 300 + Math.random() * 200;
+          const randomRotate = -30 + Math.random() * 60;
+          
+          setPaperAirplanes(prev => [...prev, {
+            id: newId,
+            x: -randomX,
+            y: randomY,
+            rotate: randomRotate
+          }]);
+          
+          // Remove airplane after it fades
+          setTimeout(() => {
+            setPaperAirplanes(prev => prev.filter(p => p.id !== newId));
+          }, 3500);
+          
+          // Restart cycle
+          setTimeout(cycleAnimation, 500);
+        }, 1000);
+      }, 2500);
+    };
+    
+    cycleAnimation();
+    
+    return () => {};
   }, []);
 
   // Spider descends randomly to unplug
@@ -345,9 +391,56 @@ const Index = () => {
                   <div className="w-full h-full rounded-sm bg-gradient-to-br from-[hsl(35_40%_22%)] via-[hsl(35_45%_28%)] to-[hsl(35_35%_20%)] p-0.5 shadow-[inset_1px_1px_3px_rgba(0,0,0,0.5)]">
                     {/* Inner gold rim */}
                     <div className="w-full h-full rounded-sm bg-gradient-to-br from-[hsl(35_58%_45%)] via-[hsl(35_52%_50%)] to-[hsl(35_48%_38%)] p-0.5">
-                      {/* Picture area - LinkedIn blue background */}
-                      <div className="w-full h-full rounded-sm bg-[hsl(201_100%_25%)] flex items-center justify-center group-hover:bg-[hsl(201_100%_35%)] transition-colors shadow-[inset_0_0_8px_rgba(0,0,0,0.4)]">
-                        <Linkedin className="w-5 h-5 md:w-6 md:h-6 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]" />
+                      {/* Picture area - LinkedIn blue background with animated hands */}
+                      <div className="w-full h-full rounded-sm bg-[hsl(201_100%_25%)] flex items-center justify-center group-hover:bg-[hsl(201_100%_35%)] transition-colors shadow-[inset_0_0_8px_rgba(0,0,0,0.4)] overflow-hidden relative">
+                        <Linkedin className="w-5 h-5 md:w-6 md:h-6 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-30" />
+                        
+                        {/* Animated hands container */}
+                        <div className="absolute inset-0 flex items-end justify-center pb-0.5">
+                          {/* Left hand */}
+                          <div className={`relative ${linkedinPhase === 'throwing' ? 'animate-hand-throw' : ''}`}>
+                            <svg width="12" height="14" viewBox="0 0 12 14" className="md:w-4 md:h-5">
+                              {/* Palm */}
+                              <ellipse cx="6" cy="10" rx="5" ry="3.5" fill="hsl(30 60% 70%)" />
+                              {/* Thumb */}
+                              <ellipse cx="2" cy="7" rx="1.5" ry="2.5" fill="hsl(30 60% 70%)" transform="rotate(-20 2 7)" />
+                              {/* Fingers */}
+                              <rect x="2.5" y="2" width="1.5" height="6" rx="0.7" fill="hsl(30 60% 70%)" className={linkedinPhase === 'writing' ? 'animate-hand-write' : ''} />
+                              <rect x="4.5" y="1" width="1.5" height="7" rx="0.7" fill="hsl(30 60% 70%)" className={linkedinPhase === 'writing' ? 'animate-hand-write' : ''} style={{animationDelay: '0.1s'}} />
+                              <rect x="6.5" y="1.5" width="1.5" height="6.5" rx="0.7" fill="hsl(30 60% 70%)" className={linkedinPhase === 'writing' ? 'animate-hand-write' : ''} style={{animationDelay: '0.2s'}} />
+                              <rect x="8.5" y="2.5" width="1.5" height="5.5" rx="0.7" fill="hsl(30 60% 70%)" className={linkedinPhase === 'writing' ? 'animate-hand-write' : ''} style={{animationDelay: '0.3s'}} />
+                            </svg>
+                          </div>
+                          
+                          {/* Paper/Letter being worked on */}
+                          <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${linkedinPhase === 'folding' ? 'animate-hand-fold' : ''}`}>
+                            {linkedinPhase !== 'throwing' && (
+                              <div className="w-2 h-2.5 md:w-3 md:h-3 bg-white rounded-[1px] shadow-sm flex items-center justify-center">
+                                {linkedinPhase === 'writing' && (
+                                  <div className="w-1 md:w-1.5 h-px bg-[hsl(201_100%_40%)] animate-pulse" />
+                                )}
+                                {linkedinPhase === 'folding' && (
+                                  <div className="w-0 h-0 border-l-[3px] border-l-transparent border-r-[3px] border-r-transparent border-b-[4px] border-b-[hsl(201_100%_40%)]" />
+                                )}
+                              </div>
+                            )}
+                          </div>
+                          
+                          {/* Right hand */}
+                          <div className={`relative ${linkedinPhase === 'folding' ? 'animate-hand-fold' : ''}`}>
+                            <svg width="12" height="14" viewBox="0 0 12 14" className="md:w-4 md:h-5 -scale-x-100">
+                              {/* Palm */}
+                              <ellipse cx="6" cy="10" rx="5" ry="3.5" fill="hsl(30 60% 70%)" />
+                              {/* Thumb */}
+                              <ellipse cx="2" cy="7" rx="1.5" ry="2.5" fill="hsl(30 60% 70%)" transform="rotate(-20 2 7)" />
+                              {/* Fingers */}
+                              <rect x="2.5" y="2" width="1.5" height="6" rx="0.7" fill="hsl(30 60% 70%)" className={linkedinPhase === 'folding' ? 'animate-hand-write' : ''} />
+                              <rect x="4.5" y="1" width="1.5" height="7" rx="0.7" fill="hsl(30 60% 70%)" className={linkedinPhase === 'folding' ? 'animate-hand-write' : ''} style={{animationDelay: '0.15s'}} />
+                              <rect x="6.5" y="1.5" width="1.5" height="6.5" rx="0.7" fill="hsl(30 60% 70%)" className={linkedinPhase === 'folding' ? 'animate-hand-write' : ''} style={{animationDelay: '0.25s'}} />
+                              <rect x="8.5" y="2.5" width="1.5" height="5.5" rx="0.7" fill="hsl(30 60% 70%)" className={linkedinPhase === 'folding' ? 'animate-hand-write' : ''} style={{animationDelay: '0.35s'}} />
+                            </svg>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -429,6 +522,35 @@ const Index = () => {
           </div>
         </a>
       </div>
+
+      {/* Paper airplanes flying from LinkedIn frame */}
+      {paperAirplanes.map(airplane => (
+        <div
+          key={airplane.id}
+          className="fixed top-32 md:top-40 right-12 md:right-28 z-[5] pointer-events-none animate-paper-fly"
+          style={{
+            '--fly-x': `${airplane.x}px`,
+            '--fly-y': `${airplane.y}px`,
+            '--fly-rotate': `${airplane.rotate}deg`,
+          } as React.CSSProperties}
+        >
+          {/* Paper airplane SVG */}
+          <svg width="16" height="12" viewBox="0 0 16 12" className="drop-shadow-md">
+            {/* Main body */}
+            <path 
+              d="M0 6 L16 0 L12 6 L16 12 L0 6 Z" 
+              fill="white" 
+              stroke="hsl(201 100% 40%)" 
+              strokeWidth="0.5"
+            />
+            {/* Fold line */}
+            <line x1="0" y1="6" x2="12" y2="6" stroke="hsl(201 100% 60%)" strokeWidth="0.3" />
+            {/* Wing crease */}
+            <line x1="4" y1="3" x2="12" y2="6" stroke="hsl(0 0% 80%)" strokeWidth="0.3" />
+            <line x1="4" y1="9" x2="12" y2="6" stroke="hsl(0 0% 80%)" strokeWidth="0.3" />
+          </svg>
+        </div>
+      ))}
 
       {/* Spider hanging from right cobweb */}
       <div className="fixed top-0 right-16 md:right-24 pointer-events-none z-30">
