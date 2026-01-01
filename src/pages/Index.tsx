@@ -268,15 +268,10 @@ const Index = () => {
           {/* Spider body */}
           <div className={`absolute bottom-0 left-1/2 -translate-x-1/2 ${!spiderDescending && !spiderAtCoffee ? 'animate-spider-bob' : ''}`}>
             {/* Speech bubble when at coffee - ellipse */}
-            <div className={`absolute -left-32 md:-left-36 -top-4 bg-white px-4 py-2 rounded-[50%] shadow-lg border border-[hsl(0_0%_70%)] w-[110px] md:w-[120px] h-[40px] md:h-[44px] flex items-center justify-center transform transition-all duration-500 ${spiderAtCoffee ? 'scale-100 opacity-100' : 'scale-0 opacity-0'}`}>
+            <div className={`absolute -left-32 md:-left-36 -top-4 bg-white px-4 py-2 rounded-[50%] shadow-lg border-2 border-black w-[110px] md:w-[120px] h-[40px] md:h-[44px] flex items-center justify-center transform transition-all duration-500 ${spiderAtCoffee ? 'scale-100 opacity-100' : 'scale-0 opacity-0'}`}>
               <p className="text-[10px] md:text-[12px] font-bold text-center text-black" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
                 buy me coffee!
               </p>
-              {/* Speech bubble arrow pointing to spider */}
-              <div className="absolute -right-5 top-1/2 -translate-y-1/2">
-                <div className="w-0 h-0 border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent border-l-[10px] border-l-white" />
-                <div className="absolute top-1/2 -translate-y-1/2 -left-[1px] w-0 h-0 border-t-[7px] border-t-transparent border-b-[7px] border-b-transparent border-l-[11px] border-l-[hsl(0_0%_70%)] -z-10" />
-              </div>
             </div>
             
             {/* Legs left */}
