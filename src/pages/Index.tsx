@@ -652,32 +652,31 @@ const Index = () => {
               </svg>
             </div>
             
-            {/* Mug container */}
-            <div className="relative w-7 md:w-10 h-8 md:h-11">
-              {/* Cup rim - elliptical top opening */}
-              <div className="absolute top-0 left-0 right-0 h-2 md:h-3 bg-gradient-to-b from-[hsl(220_15%_92%)] to-[hsl(220_12%_85%)] rounded-[50%] shadow-[inset_0_1px_2px_rgba(255,255,255,0.9),0_1px_2px_rgba(0,0,0,0.1)]" />
+            {/* Mug container with handle */}
+            <div className="relative w-10 md:w-14 h-8 md:h-11">
+              {/* Cup handle - curved handle on right, rendered first so mug overlaps */}
+              <div className="absolute top-2 md:top-3 right-0 md:right-0.5 w-3 md:w-4 h-4 md:h-5 border-[3px] md:border-4 border-[hsl(220_12%_85%)] rounded-r-full bg-transparent shadow-[1px_2px_3px_rgba(0,0,0,0.3)]" />
               
-              {/* Coffee liquid inside - elliptical shape */}
-              <div className="absolute top-0.5 md:top-1 left-0.5 right-0.5 h-1.5 md:h-2 bg-gradient-to-b from-[hsl(15_50%_25%)] to-[hsl(10_55%_20%)] rounded-[50%] shadow-[inset_0_1px_2px_rgba(0,0,0,0.4)]">
-                {/* Coffee shine bubbles */}
-                <div className="absolute top-0.5 left-1 w-0.5 h-0.5 md:w-1 md:h-1 bg-[hsl(30_40%_40%)] rounded-full opacity-60" />
-                <div className="absolute top-0.5 left-2 md:left-3 w-0.5 h-0.5 bg-[hsl(30_40%_45%)] rounded-full opacity-50" />
+              {/* Mug body container */}
+              <div className="absolute left-0 top-0 w-7 md:w-10 h-8 md:h-11">
+                {/* Cup rim - elliptical top opening */}
+                <div className="absolute top-0 left-0 right-0 h-2 md:h-3 bg-gradient-to-b from-[hsl(220_15%_92%)] to-[hsl(220_12%_85%)] rounded-[50%] shadow-[inset_0_1px_2px_rgba(255,255,255,0.9),0_1px_2px_rgba(0,0,0,0.1)] z-10" />
+                
+                {/* Coffee liquid inside - elliptical shape */}
+                <div className="absolute top-0.5 md:top-1 left-0.5 right-0.5 h-1.5 md:h-2 bg-gradient-to-b from-[hsl(15_50%_25%)] to-[hsl(10_55%_20%)] rounded-[50%] shadow-[inset_0_1px_2px_rgba(0,0,0,0.4)] z-10">
+                  {/* Coffee shine bubbles */}
+                  <div className="absolute top-0.5 left-1 w-0.5 h-0.5 md:w-1 md:h-1 bg-[hsl(30_40%_40%)] rounded-full opacity-60" />
+                  <div className="absolute top-0.5 left-2 md:left-3 w-0.5 h-0.5 bg-[hsl(30_40%_45%)] rounded-full opacity-50" />
+                </div>
+                
+                {/* Cup body - cylindrical ceramic mug */}
+                <div className="absolute top-1 md:top-1.5 left-0 right-0 bottom-1 bg-gradient-to-r from-[hsl(220_15%_88%)] via-[hsl(220_12%_94%)] to-[hsl(220_10%_85%)] rounded-b-lg shadow-[2px_3px_6px_rgba(0,0,0,0.25),inset_2px_0_4px_rgba(255,255,255,0.5)] group-hover:shadow-[2px_3px_8px_rgba(0,0,0,0.35),0_0_12px_rgba(255,200,100,0.3)] transition-shadow z-10">
+                  {/* Body highlight streak */}
+                  <div className="absolute top-1 left-1 bottom-1 w-1 md:w-1.5 bg-gradient-to-b from-[hsl(220_20%_98%)] via-[hsl(220_15%_96%)] to-[hsl(220_12%_90%)] rounded-full opacity-70" />
+                  {/* Body shadow on right */}
+                  <div className="absolute top-1 right-0 bottom-1 w-1 bg-gradient-to-b from-[hsl(220_10%_80%)] to-[hsl(220_8%_75%)] rounded-r-lg opacity-40" />
+                </div>
               </div>
-              
-              {/* Cup body - cylindrical ceramic mug */}
-              <div className="absolute top-1 md:top-1.5 left-0 right-0 bottom-1 bg-gradient-to-r from-[hsl(220_15%_88%)] via-[hsl(220_12%_94%)] to-[hsl(220_10%_85%)] rounded-b-lg shadow-[2px_3px_6px_rgba(0,0,0,0.25),inset_2px_0_4px_rgba(255,255,255,0.5)] group-hover:shadow-[2px_3px_8px_rgba(0,0,0,0.35),0_0_12px_rgba(255,200,100,0.3)] transition-shadow">
-                {/* Body highlight streak */}
-                <div className="absolute top-1 left-1 bottom-1 w-1 md:w-1.5 bg-gradient-to-b from-[hsl(220_20%_98%)] via-[hsl(220_15%_96%)] to-[hsl(220_12%_90%)] rounded-full opacity-70" />
-                {/* Body shadow on right */}
-                <div className="absolute top-1 right-0 bottom-1 w-1 bg-gradient-to-b from-[hsl(220_10%_80%)] to-[hsl(220_8%_75%)] rounded-r-lg opacity-40" />
-              </div>
-              
-              {/* Cup base ellipse - visible bottom */}
-              
-              
-              
-              {/* Cup handle - thick curved handle on right */}
-              <div className="absolute top-1.5 md:top-2 -right-2 md:-right-3 w-2.5 md:w-3.5 h-4 md:h-5 border-[2.5px] md:border-[3px] border-[hsl(220_12%_88%)] rounded-r-full bg-transparent shadow-[1px_1px_3px_rgba(0,0,0,0.25),inset_-1px_0_1px_rgba(0,0,0,0.1),inset_1px_1px_2px_rgba(255,255,255,0.5)]" />
             </div>
           </a>
         </div>
