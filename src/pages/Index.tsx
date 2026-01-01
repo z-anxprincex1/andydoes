@@ -809,19 +809,19 @@ const Index = () => {
             <div className="w-[85vw] h-[calc(100vh-10rem)] md:h-[calc(100vh-12rem)] bg-gradient-to-b from-[hsl(0_0%_95%)] to-[hsl(0_0%_88%)] border-x-4 border-b-4 border-[hsl(0_0%_20%)] shadow-[0_10px_40px_rgba(0,0,0,0.5)] relative">
               {/* Folder tabs with back button */}
               <div className="absolute top-4 left-[2.5%] flex items-center pointer-events-auto">
-                {/* Back button - only show when a project is selected */}
-                {selectedProject !== null && activeFolder === 'projects' && (
-                  <button
-                    onClick={() => setSelectedProject(null)}
-                    className="mr-2 px-3 py-2 text-sm md:text-base font-bold rounded-lg border-2 border-black bg-black text-white hover:bg-black/80 transition-all flex items-center gap-1"
-                    style={{ fontFamily: 'Comic Sans MS, cursive' }}
-                  >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                    </svg>
-                    back
-                  </button>
-                )}
+                {/* Back button - always takes space, visibility controlled */}
+                <button
+                  onClick={() => setSelectedProject(null)}
+                  className={`mr-2 px-3 py-2 text-sm md:text-base font-bold rounded-lg border-2 border-black bg-black text-white hover:bg-black/80 transition-all flex items-center gap-1 ${
+                    selectedProject !== null && activeFolder === 'projects' ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                  }`}
+                  style={{ fontFamily: 'Comic Sans MS, cursive' }}
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                  back
+                </button>
                 {/* Projects tab */}
                 <button
                   onClick={() => {
