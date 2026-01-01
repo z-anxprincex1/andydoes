@@ -783,8 +783,8 @@ const Index = () => {
                 <div className="absolute top-1 right-0 bottom-1 w-1 bg-gradient-to-b from-[hsl(220_10%_80%)] to-[hsl(220_8%_75%)] rounded-r-lg opacity-40" />
               </div>
               
-              {/* Cup base ellipse */}
-              <div className="absolute -bottom-0.5 left-0 right-0 h-1 md:h-1.5 bg-gradient-to-b from-[hsl(220_10%_82%)] to-[hsl(220_8%_75%)] rounded-[50%] shadow-[0_1px_3px_rgba(0,0,0,0.2)]" />
+              {/* Cup base ellipse - visible bottom */}
+              <div className="absolute -bottom-1 md:-bottom-1.5 left--0.5 right--0.5 h-1.5 md:h-2 bg-gradient-to-b from-[hsl(220_12%_85%)] to-[hsl(220_10%_78%)] rounded-[50%] shadow-[0_2px_4px_rgba(0,0,0,0.25)]" style={{ left: '-2px', right: '-2px' }} />
               
               {/* Cup handle - thick curved handle on right */}
               <div className="absolute top-2 md:top-3 -right-2.5 md:-right-3.5 w-3 md:w-4 h-4 md:h-5 border-[3px] md:border-4 border-[hsl(220_12%_90%)] rounded-[50%] bg-transparent shadow-[2px_2px_4px_rgba(0,0,0,0.2),inset_-1px_-1px_2px_rgba(0,0,0,0.1),inset_1px_1px_2px_rgba(255,255,255,0.6)]" />
