@@ -801,7 +801,7 @@ const Index = () => {
         <div 
           className="fixed z-[21] pointer-events-none"
           style={{
-            bottom: 'calc(2rem + 1.2rem)',
+            bottom: 'calc(2rem + 2rem)',
             right: 'calc(6rem + 7.5rem)',
           }}
         >
