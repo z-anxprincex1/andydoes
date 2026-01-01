@@ -272,8 +272,11 @@ const Index = () => {
               <p className="text-[10px] md:text-[12px] font-bold text-center text-black" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
                 buy me coffee!
               </p>
-              {/* Speech bubble tail */}
-              <div className="absolute -right-1 top-1/2 -translate-y-1/2 w-0 h-0 border-l-6 border-l-white border-t-3 border-t-transparent border-b-3 border-b-transparent" />
+              {/* Speech bubble arrow pointing to spider */}
+              <div className="absolute -right-2 top-1/2 -translate-y-1/2">
+                <div className="w-0 h-0 border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent border-l-[10px] border-l-white" />
+                <div className="absolute top-1/2 -translate-y-1/2 -left-[1px] w-0 h-0 border-t-[7px] border-t-transparent border-b-[7px] border-b-transparent border-l-[11px] border-l-[hsl(0_0%_70%)] -z-10" />
+              </div>
             </div>
             
             {/* Legs left */}
