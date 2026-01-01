@@ -239,7 +239,7 @@ const Index = () => {
       />
 
       {/* Hero Text with Cable */}
-      <div className="w-full flex items-center justify-center px-4 md:px-12 lg:px-20 relative z-10">
+      <div className="w-full flex items-center justify-end px-4 md:px-12 lg:px-20 relative z-10">
         <h1 
           className={`text-hero font-pixel transition-all duration-500 flex flex-col text-center relative ${
             isPluggedIn ? "cfl-tube cfl-glow" : "cfl-off"
