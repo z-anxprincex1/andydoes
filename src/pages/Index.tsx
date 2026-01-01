@@ -711,21 +711,23 @@ const Index = () => {
 
       {/* Projector Screen - slides down from top when generator is on */}
       {isGeneratorOn && (
-        <div className="fixed top-0 left-1/2 -translate-x-1/2 z-15 pointer-events-none animate-screen-down">
-          {/* Screen mount bar */}
-          <div className="w-[85vw] max-w-4xl h-3 bg-gradient-to-b from-[hsl(0_0%_25%)] to-[hsl(0_0%_15%)] rounded-b border-x-2 border-b-2 border-[hsl(0_0%_20%)]" />
-          {/* Screen */}
-          <div className="w-[85vw] max-w-4xl h-[50vh] md:h-[55vh] bg-gradient-to-b from-[hsl(0_0%_95%)] to-[hsl(0_0%_88%)] border-x-4 border-b-4 border-[hsl(0_0%_20%)] shadow-[0_10px_40px_rgba(0,0,0,0.5)]">
-            {/* Screen content area */}
-            <div className="w-full h-full flex items-center justify-center p-8">
-              <div className="text-[hsl(0_0%_20%)] text-center" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
-                <p className="text-2xl md:text-4xl font-bold mb-4">My Work</p>
-                <p className="text-sm md:text-lg opacity-70">Projects coming soon...</p>
+        <div className="fixed top-0 left-0 right-0 flex justify-center z-15 pointer-events-none">
+          <div className="animate-screen-down">
+            {/* Screen mount bar */}
+            <div className="w-[75vw] h-3 bg-gradient-to-b from-[hsl(0_0%_25%)] to-[hsl(0_0%_15%)] rounded-b border-x-2 border-b-2 border-[hsl(0_0%_20%)]" />
+            {/* Screen */}
+            <div className="w-[75vw] h-[50vh] md:h-[55vh] bg-gradient-to-b from-[hsl(0_0%_95%)] to-[hsl(0_0%_88%)] border-x-4 border-b-4 border-[hsl(0_0%_20%)] shadow-[0_10px_40px_rgba(0,0,0,0.5)]">
+              {/* Screen content area */}
+              <div className="w-full h-full flex items-center justify-center p-8">
+                <div className="text-[hsl(0_0%_20%)] text-center" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
+                  <p className="text-2xl md:text-4xl font-bold mb-4">My Work</p>
+                  <p className="text-sm md:text-lg opacity-70">Projects coming soon...</p>
+                </div>
               </div>
             </div>
+            {/* Screen bottom weight bar */}
+            <div className="w-[75vw] h-2 bg-gradient-to-b from-[hsl(0_0%_20%)] to-[hsl(0_0%_10%)] rounded-b" />
           </div>
-          {/* Screen bottom weight bar */}
-          <div className="w-[85vw] max-w-4xl h-2 bg-gradient-to-b from-[hsl(0_0%_20%)] to-[hsl(0_0%_10%)] rounded-b" />
         </div>
       )}
 
