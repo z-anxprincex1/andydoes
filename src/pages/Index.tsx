@@ -3,39 +3,6 @@ import { MapPin, HelpCircle, X } from "lucide-react";
 import Cat from "@/components/Cat";
 import profileImage from "@/assets/profile.png";
 
-const projects = [
-  {
-    id: 1,
-    title: "Multi-Modal Deep Learning for VQA",
-    description: "Constructed a multimodal architecture for Visual Question Answering by synthesizing image features via ResNet and textual embeddings via BERT, attaining high precision in contextual responses.",
-    details: "This project explores the intersection of computer vision and natural language processing. The architecture combines ResNet-50 for image feature extraction with BERT for text understanding, using attention mechanisms to align visual and textual information for accurate answer generation."
-  },
-  {
-    id: 2,
-    title: "VirtualEye – Drowning Detection",
-    description: "Deployed YOLOv5 on IBM Cloud to architect a real-time drowning detection system, triggering immediate alerts for drowning risks via Flask API endpoints.",
-    details: "A life-saving computer vision system that monitors swimming pools in real-time. Uses YOLOv5 object detection to identify abnormal swimming patterns and potential drowning situations. Deployed on IBM Cloud with Flask API for immediate alert notifications to lifeguards."
-  },
-  {
-    id: 3,
-    title: "Signease – Sign Language Detection",
-    description: "Developed a browser-based sign language translator leveraging Mobilenet SSD and TensorFlow.js, enabling seamless gesture-to-text conversion in real time.",
-    details: "An accessibility-focused web application that bridges communication gaps. Uses TensorFlow.js with MobileNet SSD for real-time hand gesture recognition directly in the browser, converting American Sign Language gestures to text without requiring server-side processing."
-  },
-  {
-    id: 4,
-    title: "Skin Disease Classification CNN",
-    description: "Built and fine-tuned a convolutional neural network achieving 93% accuracy in classifying dermatological conditions across multiple categories.",
-    details: "A medical AI application that assists in preliminary skin condition diagnosis. The CNN was trained on a large dataset of dermatological images, using transfer learning and data augmentation techniques to achieve 93% classification accuracy across multiple skin conditions."
-  },
-  {
-    id: 5,
-    title: "Smart Door Lock with Face Detection",
-    description: "Built a security system integrating Raspberry Pi, facial recognition, and fingerprint validation to automate intelligent door access.",
-    details: "A multi-factor authentication smart lock system using Raspberry Pi as the control unit. Combines facial recognition using OpenCV with fingerprint sensor validation for secure, automated door access. Includes mobile app integration for remote monitoring and access logs."
-  }
-];
-
 const Index = () => {
   const [isPluggedIn, setIsPluggedIn] = useState(false);
   const [isPhoneOpen, setIsPhoneOpen] = useState(false);
@@ -50,7 +17,6 @@ const Index = () => {
   const [catPosition, setCatPosition] = useState(20);
   const [plugPosition, setPlugPosition] = useState({ x: 30, y: 180 }); // Hanging down longer by default
   const [activeFolder, setActiveFolder] = useState<'projects' | 'experience'>('projects');
-  const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
   const plugRef = useRef<HTMLDivElement>(null);
   const plugPositionRef = useRef(plugPosition);
   const [spiderDescending, setSpiderDescending] = useState(false);
@@ -817,47 +783,32 @@ const Index = () => {
             <div className="w-[85vw] h-3 bg-gradient-to-b from-[hsl(0_0%_25%)] to-[hsl(0_0%_15%)] rounded-b border-x-2 border-b-2 border-[hsl(0_0%_20%)]" />
             {/* Screen */}
             <div className="w-[85vw] h-[calc(100vh-10rem)] md:h-[calc(100vh-12rem)] bg-gradient-to-b from-[hsl(0_0%_95%)] to-[hsl(0_0%_88%)] border-x-4 border-b-4 border-[hsl(0_0%_20%)] shadow-[0_10px_40px_rgba(0,0,0,0.5)] relative">
-              {/* Folder tabs and browser controls */}
-              <div className="absolute top-4 left-[2.5%] right-[2.5%] flex justify-between items-center pointer-events-auto">
-                <div className="flex">
-                  {/* Projects tab */}
-                  <button
-                    onClick={() => { setActiveFolder('projects'); setSelectedProject(null); }}
-                    className={`relative px-6 py-2 text-sm md:text-base font-bold rounded-t-lg border-2 border-b-0 transition-all ${
-                      activeFolder === 'projects'
-                        ? 'bg-white border-black text-black z-10 -mb-[2px]'
-                        : 'bg-white/50 border-black/30 text-black/50 hover:bg-white/80'
-                    }`}
-                    style={{ fontFamily: 'Comic Sans MS, cursive' }}
-                  >
-                    projects
-                  </button>
-                  {/* Experience tab */}
-                  <button
-                    onClick={() => { setActiveFolder('experience'); setSelectedProject(null); }}
-                    className={`relative px-6 py-2 text-sm md:text-base font-bold rounded-t-lg border-2 border-b-0 transition-all -ml-1 ${
-                      activeFolder === 'experience'
-                        ? 'bg-white border-black text-black z-10 -mb-[2px]'
-                        : 'bg-white/50 border-black/30 text-black/50 hover:bg-white/80'
-                    }`}
-                    style={{ fontFamily: 'Comic Sans MS, cursive' }}
-                  >
-                    experience
-                  </button>
-                </div>
-
-                {/* Browser-style back button */}
-                {selectedProject && (
-                  <button
-                    onClick={() => setSelectedProject(null)}
-                    className="flex items-center gap-2 px-3 py-1.5 bg-[hsl(0_0%_92%)] hover:bg-[hsl(0_0%_85%)] border border-[hsl(0_0%_70%)] rounded-md transition-colors shadow-sm"
-                  >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[hsl(0_0%_30%)]">
-                      <path d="M19 12H5M12 19l-7-7 7-7"/>
-                    </svg>
-                    <span className="text-xs md:text-sm text-[hsl(0_0%_30%)] font-medium" style={{ fontFamily: 'system-ui, sans-serif' }}>Back</span>
-                  </button>
-                )}
+              {/* Folder tabs */}
+              <div className="absolute top-4 left-[2.5%] flex pointer-events-auto">
+                {/* Projects tab */}
+                <button
+                  onClick={() => setActiveFolder('projects')}
+                  className={`relative px-6 py-2 text-sm md:text-base font-bold rounded-t-lg border-2 border-b-0 transition-all ${
+                    activeFolder === 'projects'
+                      ? 'bg-white border-black text-black z-10 -mb-[2px]'
+                      : 'bg-white/50 border-black/30 text-black/50 hover:bg-white/80'
+                  }`}
+                  style={{ fontFamily: 'Comic Sans MS, cursive' }}
+                >
+                  projects
+                </button>
+                {/* Experience tab */}
+                <button
+                  onClick={() => setActiveFolder('experience')}
+                  className={`relative px-6 py-2 text-sm md:text-base font-bold rounded-t-lg border-2 border-b-0 transition-all -ml-1 ${
+                    activeFolder === 'experience'
+                      ? 'bg-white border-black text-black z-10 -mb-[2px]'
+                      : 'bg-white/50 border-black/30 text-black/50 hover:bg-white/80'
+                  }`}
+                  style={{ fontFamily: 'Comic Sans MS, cursive' }}
+                >
+                  experience
+                </button>
               </div>
 
               {/* Folder body */}
@@ -865,38 +816,35 @@ const Index = () => {
                 {/* Folder content */}
                 <div className="w-full h-full overflow-y-auto p-4 md:p-6">
                   {activeFolder === 'projects' ? (
-                    selectedProject ? (
-                      /* Project Detail View */
-                      <div className="text-black" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
-                        <h2 className="text-xl md:text-2xl font-bold mb-4">{selectedProject.title}</h2>
-                        <div className="space-y-4">
-                          <div>
-                            <h3 className="font-bold text-sm md:text-base mb-2 text-black/80">Overview</h3>
-                            <p className="text-sm md:text-base text-black/70">{selectedProject.description}</p>
-                          </div>
-                          <div>
-                            <h3 className="font-bold text-sm md:text-base mb-2 text-black/80">Details</h3>
-                            <p className="text-sm md:text-base text-black/70">{selectedProject.details}</p>
-                          </div>
+                    <div className="text-black" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {/* Project 1 */}
+                        <div className="p-4 border-2 border-black rounded-lg hover:bg-black/5 transition-colors">
+                          <h3 className="font-bold text-sm md:text-base mb-2">Multi-Modal Deep Learning for VQA</h3>
+                          <p className="text-xs md:text-sm text-black/70">Constructed a multimodal architecture for Visual Question Answering by synthesizing image features via ResNet and textual embeddings via BERT, attaining high precision in contextual responses.</p>
+                        </div>
+                        {/* Project 2 */}
+                        <div className="p-4 border-2 border-black rounded-lg hover:bg-black/5 transition-colors">
+                          <h3 className="font-bold text-sm md:text-base mb-2">VirtualEye – Drowning Detection</h3>
+                          <p className="text-xs md:text-sm text-black/70">Deployed YOLOv5 on IBM Cloud to architect a real-time drowning detection system, triggering immediate alerts for drowning risks via Flask API endpoints.</p>
+                        </div>
+                        {/* Project 3 */}
+                        <div className="p-4 border-2 border-black rounded-lg hover:bg-black/5 transition-colors">
+                          <h3 className="font-bold text-sm md:text-base mb-2">Signease – Sign Language Detection</h3>
+                          <p className="text-xs md:text-sm text-black/70">Developed a browser-based sign language translator leveraging Mobilenet SSD and TensorFlow.js, enabling seamless gesture-to-text conversion in real time.</p>
+                        </div>
+                        {/* Project 4 */}
+                        <div className="p-4 border-2 border-black rounded-lg hover:bg-black/5 transition-colors">
+                          <h3 className="font-bold text-sm md:text-base mb-2">Skin Disease Classification CNN</h3>
+                          <p className="text-xs md:text-sm text-black/70">Built and fine-tuned a convolutional neural network achieving 93% accuracy in classifying dermatological conditions across multiple categories.</p>
+                        </div>
+                        {/* Project 5 */}
+                        <div className="p-4 border-2 border-black rounded-lg hover:bg-black/5 transition-colors">
+                          <h3 className="font-bold text-sm md:text-base mb-2">Smart Door Lock with Face Detection</h3>
+                          <p className="text-xs md:text-sm text-black/70">Built a security system integrating Raspberry Pi, facial recognition, and fingerprint validation to automate intelligent door access.</p>
                         </div>
                       </div>
-                    ) : (
-                      /* Projects List View */
-                      <div className="text-black" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                          {projects.map((project) => (
-                            <button
-                              key={project.id}
-                              onClick={() => setSelectedProject(project)}
-                              className="p-4 border-2 border-black rounded-lg hover:bg-black/5 transition-colors text-left cursor-pointer"
-                            >
-                              <h3 className="font-bold text-sm md:text-base mb-2">{project.title}</h3>
-                              <p className="text-xs md:text-sm text-black/70">{project.description}</p>
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                    )
+                    </div>
                   ) : (
                     <div className="text-black text-center" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
                       <p className="text-2xl md:text-4xl font-bold mb-4">My Experience</p>
