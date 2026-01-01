@@ -632,7 +632,7 @@ const Index = () => {
           <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-10 md:w-14 h-1.5 md:h-2 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.35)_0%,transparent_70%)]" />
           
           {/* Coffee cup - clickable, sitting on table top */}
-          <a href="https://buymeacoffee.com/andydoes" target="_blank" rel="noopener noreferrer" className="absolute -top-3 md:-top-4 left-1/2 -translate-x-1/2 pointer-events-auto cursor-pointer group">
+          <a href="https://buymeacoffee.com/andydoes" target="_blank" rel="noopener noreferrer" className="absolute -top-1 md:-top-2 left-1/2 -translate-x-1/2 pointer-events-auto cursor-pointer group">
             {/* Steam/vapor animation - wavy steam lines */}
             <div className="absolute -top-7 md:-top-9 left-1/2 -translate-x-1/2 flex gap-1.5">
               <svg className="w-2 h-5 md:h-6 animate-steam opacity-70" viewBox="0 0 8 20" style={{
