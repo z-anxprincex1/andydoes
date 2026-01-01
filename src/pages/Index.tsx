@@ -658,7 +658,7 @@ const Index = () => {
                 return (
                   <span 
                     key={skill}
-                    className="absolute text-[8px] md:text-[10px] lg:text-xs font-medium text-[hsl(180_70%_60%)] whitespace-nowrap"
+                    className="absolute text-[8px] md:text-[10px] lg:text-xs font-medium text-[hsl(50_90%_75%)] whitespace-nowrap"
                     style={{
                       left: `${x}%`,
                       top: `${y}%`,
