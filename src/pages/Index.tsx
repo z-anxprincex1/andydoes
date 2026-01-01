@@ -305,8 +305,6 @@ const Index = () => {
           rel="noopener noreferrer"
           className="group cursor-pointer transition-transform hover:scale-105 active:scale-95"
         >
-          {/* Hanging wire */}
-          <div className="w-px h-6 md:h-8 bg-gradient-to-b from-[hsl(35_30%_25%)] to-[hsl(35_20%_35%)] mx-auto" />
           {/* Frame - ornate 90s gold style circle */}
           <div className="relative w-16 h-16 md:w-20 md:h-20">
             {/* Outer ornate frame */}
@@ -334,8 +332,6 @@ const Index = () => {
           rel="noopener noreferrer"
           className="group cursor-pointer transition-transform hover:scale-105 active:scale-95"
         >
-          {/* Hanging wire */}
-          <div className="w-px h-4 md:h-6 bg-gradient-to-b from-[hsl(35_30%_25%)] to-[hsl(35_20%_35%)] mx-auto" />
           {/* Frame - ornate 90s gold style vertical ellipse */}
           <div className="relative w-14 h-20 md:w-18 md:h-24 mx-auto" style={{ width: 'clamp(3.5rem, 5vw, 4.5rem)', height: 'clamp(5rem, 7vw, 6rem)' }}>
             {/* Outer ornate frame */}
