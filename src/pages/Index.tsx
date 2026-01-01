@@ -47,7 +47,7 @@ const Index = () => {
   const [githubEyeDirection, setGithubEyeDirection] = useState<'center' | 'left' | 'right'>('center');
   const [githubBlinking, setGithubBlinking] = useState(false);
   const [linkedinPhase, setLinkedinPhase] = useState<'writing' | 'folding' | 'throwing'>('writing');
-  const [paperAirplanes, setPaperAirplanes] = useState<Array<{id: number; x: number; curveType: number; duration: number}>>([]);
+  const [paperAirplanes, setPaperAirplanes] = useState<Array<{id: number; x: number; y: number; curveType: number; duration: number}>>([]);
   const containerRef = useRef<HTMLDivElement>(null);
   const socketRef = useRef<HTMLDivElement>(null);
   const anchorRef = useRef<HTMLSpanElement>(null);
@@ -91,13 +91,18 @@ const Index = () => {
           
           // Launch paper airplane
           const newId = airplaneIdRef.current++;
-          const randomX = -200 - Math.random() * 300; // Fly further left (200-500px)
-          const curveType = Math.floor(Math.random() * 4); // 0-3 different curve types
-          const duration = 3 + Math.random() * 2; // 3-5 seconds flight time
+          const curveType = Math.floor(Math.random() * 8); // 0-7 different curve types
+          const duration = 3.5 + Math.random() * 2.5; // 3.5-6 seconds flight time
+          // More varied end positions
+          const randomX = curveType >= 4 
+            ? 200 + Math.random() * 400 // Some fly right (off-screen)
+            : -150 - Math.random() * 350; // Others fly left
+          const randomY = Math.random() * 100 - 50; // Add vertical variance
           
           setPaperAirplanes(prev => [...prev, {
             id: newId,
             x: randomX,
+            y: randomY,
             curveType,
             duration
           }]);
@@ -527,9 +532,10 @@ const Index = () => {
       {paperAirplanes.map(airplane => (
         <div
           key={airplane.id}
-          className={`fixed top-32 md:top-40 right-8 md:right-24 z-[15] pointer-events-none paper-airplane-${airplane.curveType}`}
+          className={`fixed top-32 md:top-40 right-8 md:right-24 z-[15] pointer-events-none opacity-0 paper-airplane-${airplane.curveType}`}
           style={{
             '--fly-end-x': `${airplane.x}px`,
+            '--fly-end-y': `${airplane.y}px`,
             '--fly-duration': `${airplane.duration}s`,
           } as React.CSSProperties}
         >
