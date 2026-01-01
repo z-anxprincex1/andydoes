@@ -595,15 +595,35 @@ const Index = () => {
       </div>
 
       {/* Tip above generator */}
-      <div className={`fixed bottom-[8.5rem] md:bottom-[10.5rem] left-[calc(50%-1rem)] md:left-[calc(50%-1.5rem)] -translate-x-1/2 z-20 pointer-events-none animate-bounce transition-opacity duration-500 ${
+      <div className={`fixed bottom-[8.5rem] md:bottom-[10.5rem] left-[calc(50%-1rem)] md:left-[calc(50%-1.5rem)] -translate-x-1/2 z-20 pointer-events-none transition-opacity duration-500 ${
         isGeneratorOn ? 'opacity-0' : 'opacity-100'
       }`}>
         <span 
-          className="text-[hsl(0_0%_100%)] text-sm md:text-base font-extrabold whitespace-nowrap drop-shadow-[2px_2px_0_hsl(0_0%_10%)] inline-block -rotate-6" 
+          className="text-[hsl(0_0%_100%)] text-sm md:text-base font-extrabold whitespace-nowrap drop-shadow-[2px_2px_0_hsl(0_0%_10%)] inline-block -rotate-6 animate-bounce" 
           style={{ fontFamily: 'Comic Sans MS, cursive' }}
         >
           click here to view my work!
         </span>
+        {/* Funky arrow pointing down */}
+        <svg 
+          className="w-12 h-16 md:w-16 md:h-20 mx-auto mt-1 animate-bounce"
+          viewBox="0 0 60 80"
+          style={{ animationDelay: '0.1s' }}
+        >
+          {/* Squiggly arrow shaft */}
+          <path 
+            d="M30 0 Q20 15, 35 25 Q50 35, 25 45 Q10 52, 30 60" 
+            stroke="hsl(50 90% 60%)" 
+            strokeWidth="4" 
+            fill="none"
+            strokeLinecap="round"
+          />
+          {/* Arrow head */}
+          <polygon 
+            points="30,80 20,60 30,65 40,60" 
+            fill="hsl(50 90% 60%)"
+          />
+        </svg>
       </div>
 
       {/* Diesel Generator - center of floor */}
