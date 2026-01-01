@@ -547,7 +547,7 @@ const Index = () => {
       {/* Tip above generator */}
       <div className="fixed bottom-[8.5rem] md:bottom-[10.5rem] left-[calc(50%-1rem)] md:left-[calc(50%-1.5rem)] -translate-x-1/2 z-20 pointer-events-none animate-bounce">
         <span 
-          className="text-[hsl(320_80%_55%)] text-sm md:text-base font-extrabold whitespace-nowrap drop-shadow-[2px_2px_0_hsl(0_0%_10%)]" 
+          className="text-[hsl(0_0%_100%)] text-sm md:text-base font-extrabold whitespace-nowrap drop-shadow-[2px_2px_0_hsl(0_0%_10%)] inline-block -rotate-6" 
           style={{ fontFamily: 'Comic Sans MS, cursive' }}
         >
           click here to view my work!
