@@ -245,8 +245,11 @@ const Index = () => {
             isPluggedIn ? "cfl-tube cfl-glow" : "cfl-off"
           }`}
         >
+          <span className="flex justify-end">{renderWord("anand", 0, true)}</span>
+          <span className="flex justify-end">{renderWord("prince", 1, true)}</span>
           <span className="flex justify-end">
-            {/* Cable anchor on left of first letter */}
+            {renderWord("purty", 2, true)}
+            {/* Cable anchor on last letter */}
             <span 
               ref={anchorRef}
               className="relative inline-block"
@@ -294,10 +297,7 @@ const Index = () => {
                 </div>
               </div>
             </span>
-            {renderWord("anand", 0, true)}
           </span>
-          <span className="flex justify-end">{renderWord("prince", 1, true)}</span>
-          <span className="flex justify-end">{renderWord("purty", 2, true)}</span>
         </h1>
       </div>
 
