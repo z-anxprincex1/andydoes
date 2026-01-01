@@ -347,12 +347,12 @@ const Index = () => {
                     <div className="w-full h-full rounded-sm bg-gradient-to-br from-[hsl(35_58%_45%)] via-[hsl(35_52%_50%)] to-[hsl(35_48%_38%)] p-0.5">
                       {/* Picture area - LinkedIn blue background with hand writing */}
                       <div className="w-full h-full rounded-sm bg-[hsl(201_100%_25%)] flex items-center justify-center group-hover:bg-[hsl(201_100%_35%)] transition-colors shadow-[inset_0_0_8px_rgba(0,0,0,0.4)] overflow-visible relative">
-                        <Linkedin className="w-5 h-5 md:w-6 md:h-6 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)] absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+                        <Linkedin className="w-5 h-5 md:w-6 md:h-6 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]" />
                         
-                        {/* Hand with pen writing on paper - bottom right */}
-                        <div className="absolute -bottom-4 -right-3 md:-bottom-5 md:-right-4">
+                        {/* Hand with pen writing on paper - bottom LEFT */}
+                        <div className="absolute -bottom-4 -left-3 md:-bottom-5 md:-left-4">
                           {/* Paper - positioned first (behind hand) */}
-                          <div className="absolute bottom-6 right-0 md:bottom-8 md:right-0 w-6 h-7 md:w-7 md:h-8 bg-white rounded-[2px] shadow-md transform rotate-[-8deg] z-0">
+                          <div className="absolute bottom-6 left-0 md:bottom-8 md:left-0 w-6 h-7 md:w-7 md:h-8 bg-white rounded-[2px] shadow-md transform rotate-[8deg] z-0">
                             {/* Written lines */}
                             <div className="absolute top-2 left-1 right-1 flex flex-col gap-[3px]">
                               <div className="h-[0.5px] bg-[hsl(220_15%_60%)] w-[70%]" />
@@ -362,8 +362,8 @@ const Index = () => {
                             </div>
                           </div>
                           
-                          {/* Realistic hand holding pen - positioned so pen tip is on paper */}
-                          <svg width="28" height="32" viewBox="0 0 24 28" className="md:w-9 md:h-11 animate-pen-write drop-shadow-sm relative z-10 transform -translate-x-1 translate-y-1 md:-translate-x-2 md:translate-y-2">
+                          {/* Realistic hand holding pen - mirrored for left side */}
+                          <svg width="28" height="32" viewBox="0 0 24 28" className="md:w-9 md:h-11 animate-pen-write drop-shadow-sm relative z-10 transform translate-x-1 translate-y-1 md:translate-x-2 md:translate-y-2 -scale-x-100">
                             <defs>
                               {/* Skin gradient for depth */}
                               <linearGradient id="skinGrad" x1="0%" y1="0%" x2="100%" y2="100%">
