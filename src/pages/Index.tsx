@@ -43,6 +43,7 @@ const Index = () => {
   const plugRef = useRef<HTMLDivElement>(null);
   const plugPositionRef = useRef(plugPosition);
   const [spiderDescending, setSpiderDescending] = useState(false);
+  const [spiderAtCoffee, setSpiderAtCoffee] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const socketRef = useRef<HTMLDivElement>(null);
   const anchorRef = useRef<HTMLSpanElement>(null);
@@ -73,6 +74,23 @@ const Index = () => {
     const timer = scheduleSpiderAttack();
     return () => clearTimeout(timer);
   }, [isPluggedIn]);
+
+  // Spider visits coffee randomly
+  useEffect(() => {
+    const scheduleCoffeeVisit = () => {
+      const delay = Math.random() * 20000 + 15000; // 15-35 seconds
+      return setTimeout(() => {
+        if (!spiderDescending && Math.random() > 0.4) {
+          setSpiderAtCoffee(true);
+          // Stay at coffee for a few seconds
+          setTimeout(() => setSpiderAtCoffee(false), 5000);
+        }
+        scheduleCoffeeVisit();
+      }, delay);
+    };
+    const timer = scheduleCoffeeVisit();
+    return () => clearTimeout(timer);
+  }, [spiderDescending]);
   const getFlickerClass = (index: number) => {
     return flickerClasses[index % flickerClasses.length];
   };
@@ -679,6 +697,58 @@ const Index = () => {
               </div>
             </div>
           </a>
+        </div>
+      </div>
+
+      {/* Spider visiting coffee with speech bubble */}
+      <div 
+        className={`fixed bottom-24 md:bottom-32 right-[8%] md:right-[12%] z-[26] pointer-events-none transition-all duration-1000 ${spiderAtCoffee ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-20'}`}
+      >
+        {/* Spider thread from top */}
+        <div className="absolute -top-32 left-1/2 w-px h-32 bg-[hsl(0_0%_50%)]" />
+        
+        {/* Speech bubble */}
+        <div className={`absolute -left-36 md:-left-44 top-0 bg-[hsl(45_90%_95%)] px-3 py-2 rounded-xl shadow-lg border-2 border-[hsl(30_60%_70%)] max-w-[140px] md:max-w-[180px] transform transition-all duration-500 ${spiderAtCoffee ? 'scale-100' : 'scale-0'}`}>
+          <p className="text-[10px] md:text-xs font-bold text-center" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
+            <span className="text-[hsl(340_70%_50%)]">Consider </span>
+            <span className="text-[hsl(200_70%_45%)]">supporting </span>
+            <span className="text-[hsl(120_50%_40%)]">me by </span>
+            <span className="text-[hsl(30_80%_50%)]">buying me </span>
+            <span className="text-[hsl(280_60%_55%)]">a coffee!</span>
+          </p>
+          {/* Speech bubble tail */}
+          <div className="absolute -right-2 top-3 w-0 h-0 border-l-8 border-l-[hsl(45_90%_95%)] border-t-4 border-t-transparent border-b-4 border-b-transparent" />
+        </div>
+        
+        {/* Spider body */}
+        <div className="relative">
+          {/* Legs left */}
+          <svg className="absolute -left-5 top-1 w-5 h-6 animate-spider-legs" viewBox="0 0 12 16">
+            <path d="M12 2 Q6 4 0 0" stroke="hsl(0 0% 15%)" strokeWidth="1.2" fill="none" />
+            <path d="M12 6 Q5 7 0 4" stroke="hsl(0 0% 15%)" strokeWidth="1.2" fill="none" />
+            <path d="M12 10 Q4 10 0 8" stroke="hsl(0 0% 15%)" strokeWidth="1.2" fill="none" />
+            <path d="M12 14 Q5 13 0 16" stroke="hsl(0 0% 15%)" strokeWidth="1.2" fill="none" />
+          </svg>
+          {/* Legs right */}
+          <svg className="absolute -right-5 top-1 w-5 h-6 animate-spider-legs" viewBox="0 0 12 16" style={{ transform: 'scaleX(-1)' }}>
+            <path d="M12 2 Q6 4 0 0" stroke="hsl(0 0% 15%)" strokeWidth="1.2" fill="none" />
+            <path d="M12 6 Q5 7 0 4" stroke="hsl(0 0% 15%)" strokeWidth="1.2" fill="none" />
+            <path d="M12 10 Q4 10 0 8" stroke="hsl(0 0% 15%)" strokeWidth="1.2" fill="none" />
+            <path d="M12 14 Q5 13 0 16" stroke="hsl(0 0% 15%)" strokeWidth="1.2" fill="none" />
+          </svg>
+          {/* Body */}
+          <div className="w-4 h-6 bg-[hsl(0_0%_12%)] rounded-full" />
+          {/* Head with cute eyes */}
+          <div className="w-4 h-4 bg-[hsl(0_0%_10%)] rounded-full -mt-1.5 mx-auto relative flex items-center justify-center gap-1">
+            {/* Left eye */}
+            <div className="w-1.5 h-1.5 bg-[hsl(0_0%_95%)] rounded-full relative animate-spider-blink">
+              <div className="absolute top-0.5 left-0.5 w-0.5 h-0.5 bg-[hsl(0_0%_5%)] rounded-full" />
+            </div>
+            {/* Right eye */}
+            <div className="w-1.5 h-1.5 bg-[hsl(0_0%_95%)] rounded-full relative animate-spider-blink">
+              <div className="absolute top-0.5 left-0.5 w-0.5 h-0.5 bg-[hsl(0_0%_5%)] rounded-full" />
+            </div>
+          </div>
         </div>
       </div>
 
