@@ -780,12 +780,8 @@ const Index = () => {
         <div 
           className="fixed inset-0 z-[19] pointer-events-none animate-light-beam"
           style={{
-            /* Cone shape: narrow at projector (bottom-right), wide at screen bottom (top-center) */
-            /* Screen: 75vw wide, centered = 12.5% from left to 87.5% from left */
-            /* Screen bottom (where beam hits): at calc(100vh - 10rem + 0.75rem + 0.5rem) ≈ 100vh - 8.75rem from top */
-            /* Projector lens: ~10.5rem from right edge, ~3.25rem from bottom */
             clipPath: 'polygon(12.5% calc(100% - 8.5rem), 87.5% calc(100% - 8.5rem), calc(100% - 10.5rem) calc(100% - 3.25rem), calc(100% - 10.5rem) calc(100% - 3.25rem))',
-            background: 'linear-gradient(to top, hsla(50, 80%, 90%, 0.5) 0%, hsla(50, 70%, 85%, 0.3) 30%, hsla(50, 60%, 80%, 0.15) 70%, hsla(50, 50%, 75%, 0.08) 100%)',
+            background: 'linear-gradient(to top, hsla(50, 90%, 95%, 0.7) 0%, hsla(50, 85%, 90%, 0.5) 15%, hsla(50, 70%, 80%, 0.25) 40%, hsla(50, 60%, 75%, 0.08) 70%, hsla(50, 50%, 70%, 0) 100%)',
           }}
         />
       )}
