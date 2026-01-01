@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { MapPin, HelpCircle, X } from "lucide-react";
-import Cat, { CatState } from "@/components/Cat";
+import Cat from "@/components/Cat";
 import profileImage from "@/assets/profile.png";
 
 const Index = () => {
@@ -15,14 +15,6 @@ const Index = () => {
   const [wasGeneratorOn, setWasGeneratorOn] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [catPosition, setCatPosition] = useState(20);
-  const [catState, setCatState] = useState<CatState>("idle");
-
-  // Light beam zone: approximately 55% to 95% of screen width (where projector light is)
-  const isInLightBeam = isGeneratorOn && catPosition >= 55 && catPosition <= 95;
-  const isWalking = catState === "walking-right" || catState === "walking-left";
-  const isRunning = catState === "running-right" || catState === "running-left";
-  const isLicking = catState === "idle-lick";
-  const isSitting = catState === "idle-sit";
   const [plugPosition, setPlugPosition] = useState({ x: 30, y: 180 }); // Hanging down longer by default
   const plugRef = useRef<HTMLDivElement>(null);
   const plugPositionRef = useRef(plugPosition);
@@ -771,79 +763,11 @@ const Index = () => {
             {/* Screen */}
             <div className="w-[75vw] h-[calc(100vh-10rem)] md:h-[calc(100vh-12rem)] bg-gradient-to-b from-[hsl(0_0%_95%)] to-[hsl(0_0%_88%)] border-x-4 border-b-4 border-[hsl(0_0%_20%)] shadow-[0_10px_40px_rgba(0,0,0,0.5)]">
               {/* Screen content area */}
-              <div className="w-full h-full flex items-center justify-center p-8 relative overflow-hidden">
+              <div className="w-full h-full flex items-center justify-center p-8">
                 <div className="text-[hsl(0_0%_20%)] text-center" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
                   <p className="text-2xl md:text-4xl font-bold mb-4">My Work</p>
                   <p className="text-sm md:text-lg opacity-70">Projects coming soon...</p>
                 </div>
-                
-                {/* Cat shadow on screen */}
-                {isInLightBeam && (
-                  <div 
-                    className="absolute bottom-0 transition-all duration-300 ease-out pointer-events-none"
-                    style={{
-                      left: `${((catPosition - 55) / 40) * 100}%`,
-                      transform: 'translateX(-50%)',
-                    }}
-                  >
-                    {/* Large cat shadow silhouette */}
-                    <svg 
-                      className="w-32 h-48 md:w-48 md:h-72 opacity-30 animate-fade-in"
-                      viewBox="0 0 100 150"
-                      style={{ filter: 'blur(4px)' }}
-                    >
-                      {/* Tail shadow - animated wag */}
-                      <ellipse 
-                        cx="20" 
-                        cy="115" 
-                        rx="18" 
-                        ry="6" 
-                        fill="hsl(0 0% 10%)" 
-                        className={isWalking || isRunning ? "animate-[shadowTailWag_0.3s_ease-in-out_infinite]" : ""}
-                        style={{ transformOrigin: '38px 115px' }}
-                      />
-                      {/* Cat body shadow */}
-                      <ellipse cx="50" cy="120" rx="35" ry="18" fill="hsl(0 0% 10%)" />
-                      {/* Cat head shadow - bob when licking */}
-                      <g className={isLicking ? "animate-[shadowHeadBob_0.5s_ease-in-out_infinite]" : ""} style={{ transformOrigin: '70px 95px' }}>
-                        <ellipse cx="70" cy="95" rx="20" ry="18" fill="hsl(0 0% 10%)" />
-                        {/* Left ear */}
-                        <polygon points="55,80 62,60 70,78" fill="hsl(0 0% 10%)" />
-                        {/* Right ear */}
-                        <polygon points="78,78 85,60 92,80" fill="hsl(0 0% 10%)" />
-                      </g>
-                      {/* Front legs - animated */}
-                      <rect 
-                        x="60" y="130" width="8" height="20" rx="3" fill="hsl(0 0% 10%)"
-                        className={isRunning ? "animate-[shadowLegRun_0.15s_ease-in-out_infinite]" : isWalking ? "animate-[shadowLegWalk_0.25s_ease-in-out_infinite]" : ""}
-                        style={{ transformOrigin: '64px 130px' }}
-                      />
-                      <rect 
-                        x="72" y="130" width="8" height="20" rx="3" fill="hsl(0 0% 10%)"
-                        className={isRunning ? "animate-[shadowLegRun_0.15s_ease-in-out_infinite_0.075s]" : isWalking ? "animate-[shadowLegWalk_0.25s_ease-in-out_infinite_0.125s]" : ""}
-                        style={{ transformOrigin: '76px 130px' }}
-                      />
-                      {/* Back legs - animated */}
-                      <rect 
-                        x="25" y="130" width="8" height="18" rx="3" fill="hsl(0 0% 10%)"
-                        className={isRunning ? "animate-[shadowLegRun_0.15s_ease-in-out_infinite_0.05s]" : isWalking ? "animate-[shadowLegWalk_0.25s_ease-in-out_infinite_0.05s]" : ""}
-                        style={{ transformOrigin: '29px 130px' }}
-                      />
-                      <rect 
-                        x="38" y="130" width="8" height="18" rx="3" fill="hsl(0 0% 10%)"
-                        className={isRunning ? "animate-[shadowLegRun_0.15s_ease-in-out_infinite_0.1s]" : isWalking ? "animate-[shadowLegWalk_0.25s_ease-in-out_infinite_0.175s]" : ""}
-                        style={{ transformOrigin: '42px 130px' }}
-                      />
-                      {/* Sitting pose - hide legs and show tucked */}
-                      {isSitting && (
-                        <>
-                          <ellipse cx="35" cy="135" rx="15" ry="8" fill="hsl(0 0% 10%)" />
-                          <ellipse cx="70" cy="138" rx="10" ry="6" fill="hsl(0 0% 10%)" />
-                        </>
-                      )}
-                    </svg>
-                  </div>
-                )}
               </div>
             </div>
             {/* Screen bottom weight bar */}
@@ -942,8 +866,6 @@ const Index = () => {
           setIsPluggedIn(false);
           setPlugPosition({ x: 30, y: 180 });
         }}
-        onPositionChange={setCatPosition}
-        onStateChange={setCatState}
       />
       </div>
     </main>
