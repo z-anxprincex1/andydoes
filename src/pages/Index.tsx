@@ -716,7 +716,7 @@ const Index = () => {
             {/* Screen mount bar */}
             <div className="w-[75vw] h-3 bg-gradient-to-b from-[hsl(0_0%_25%)] to-[hsl(0_0%_15%)] rounded-b border-x-2 border-b-2 border-[hsl(0_0%_20%)]" />
             {/* Screen */}
-            <div className="w-[75vw] h-[50vh] md:h-[55vh] bg-gradient-to-b from-[hsl(0_0%_95%)] to-[hsl(0_0%_88%)] border-x-4 border-b-4 border-[hsl(0_0%_20%)] shadow-[0_10px_40px_rgba(0,0,0,0.5)]">
+            <div className="w-[75vw] h-[calc(100vh-10rem)] md:h-[calc(100vh-12rem)] bg-gradient-to-b from-[hsl(0_0%_95%)] to-[hsl(0_0%_88%)] border-x-4 border-b-4 border-[hsl(0_0%_20%)] shadow-[0_10px_40px_rgba(0,0,0,0.5)]">
               {/* Screen content area */}
               <div className="w-full h-full flex items-center justify-center p-8">
                 <div className="text-[hsl(0_0%_20%)] text-center" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
