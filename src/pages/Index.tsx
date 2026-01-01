@@ -76,7 +76,7 @@ const Index = () => {
     };
   }, []);
 
-  // LinkedIn hands animation cycle: write -> fold -> throw -> repeat (every 5 seconds)
+  // LinkedIn hands animation cycle: write -> fold -> throw -> wait for landing + 5s -> repeat
   useEffect(() => {
     const cycleAnimation = () => {
       // Writing phase (2.5 seconds)
@@ -111,12 +111,14 @@ const Index = () => {
             { id: newId, startX, startY, curveType, duration, distanceMultiplier },
           ]);
 
+          const landingTime = (duration + 1.25) * 1000;
+
           setTimeout(() => {
             setPaperAirplanes((prev) => prev.filter((p) => p.id !== newId));
-          }, (duration + 1.25) * 1000);
+          }, landingTime);
           
-          // Wait 5 seconds before next cycle
-          setTimeout(cycleAnimation, 5000);
+          // Wait for landing + 5 seconds before next cycle
+          setTimeout(cycleAnimation, landingTime + 5000);
         }, 1000);
       }, 2500);
     };
