@@ -544,6 +544,21 @@ const Index = () => {
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[hsl(0_0%_20%)] to-transparent" />
       </div>
 
+      {/* Tip above generator */}
+      <div className="fixed bottom-[8.5rem] md:bottom-[10.5rem] left-1/2 -translate-x-1/2 z-20 pointer-events-none animate-bounce">
+        <div className="relative bg-[hsl(320_80%_55%)] px-4 py-2 rounded-xl border-3 border-[hsl(0_0%_10%)] shadow-[4px_4px_0_hsl(0_0%_10%)] transform -rotate-2">
+          <span 
+            className="text-[hsl(60_100%_95%)] text-sm md:text-base font-extrabold whitespace-nowrap drop-shadow-[2px_2px_0_hsl(0_0%_10%)]" 
+            style={{ fontFamily: 'Comic Sans MS, cursive' }}
+          >
+            ✨ click here to view my work! ✨
+          </span>
+          {/* Arrow pointing down */}
+          <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-t-[14px] border-t-[hsl(0_0%_10%)]" />
+          <div className="absolute -bottom-[10px] left-1/2 -translate-x-1/2 w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[12px] border-t-[hsl(320_80%_55%)]" />
+        </div>
+      </div>
+
       {/* Diesel Generator - center of floor */}
       <div 
         className="fixed bottom-8 md:bottom-12 left-1/2 -translate-x-1/2 z-20 cursor-pointer"
