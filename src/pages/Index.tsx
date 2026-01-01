@@ -4,6 +4,11 @@ import profileImage from "@/assets/profile.png";
 
 const Index = () => {
   const [isPluggedIn, setIsPluggedIn] = useState(false);
+  const [isPhoneOpen, setIsPhoneOpen] = useState(false);
+  const [chatMessages, setChatMessages] = useState<{text: string; isMe: boolean}[]>([
+    { text: "Hey! Welcome to my portfolio 👋", isMe: false },
+  ]);
+  const [newMessage, setNewMessage] = useState("");
   const [isDragging, setIsDragging] = useState(false);
   const [plugPosition, setPlugPosition] = useState({ x: 30, y: 180 }); // Hanging down longer by default
   const [spiderDescending, setSpiderDescending] = useState(false);
@@ -345,16 +350,124 @@ const Index = () => {
         </h1>
       </div>
 
-      {/* Mobile phone lying on floor - bottom left */}
-      <div className="fixed bottom-10 md:bottom-14 left-6 md:left-12 z-20">
-        {/* Minimal iPhone-style phone */}
-        <div className="w-8 h-16 md:w-10 md:h-20 bg-[hsl(0_0%_10%)] rounded-xl border border-[hsl(0_0%_20%)] relative">
+      {/* Mobile phone - half visible at bottom left */}
+      <div 
+        className={`fixed left-4 md:left-8 z-30 cursor-pointer transition-all duration-500 ease-out ${
+          isPhoneOpen 
+            ? 'bottom-4 md:bottom-8' 
+            : '-bottom-20 md:-bottom-24 hover:-bottom-16 md:hover:-bottom-20'
+        }`}
+        onClick={() => setIsPhoneOpen(true)}
+      >
+        {/* iPhone-style phone */}
+        <div className={`bg-[hsl(0_0%_10%)] rounded-[2rem] border-2 border-[hsl(0_0%_20%)] relative shadow-[0_0_30px_rgba(0,0,0,0.5)] transition-all duration-500 ${
+          isPhoneOpen ? 'w-72 h-[500px] md:w-80 md:h-[550px]' : 'w-20 h-40 md:w-24 md:h-48'
+        }`}>
           {/* Screen */}
-          <div className="absolute inset-[3px] bg-[hsl(0_0%_5%)] rounded-lg" />
+          <div className={`absolute bg-[hsl(0_0%_5%)] transition-all duration-500 ${
+            isPhoneOpen ? 'inset-2 rounded-[1.5rem]' : 'inset-[3px] rounded-2xl'
+          }`}>
+            {isPhoneOpen ? (
+              /* Chat interface */
+              <div className="h-full flex flex-col p-3 pt-8">
+                {/* Chat header */}
+                <div className="flex items-center gap-3 pb-3 border-b border-[hsl(0_0%_15%)]">
+                  <div className="w-8 h-8 rounded-full bg-[hsl(0_0%_20%)] overflow-hidden">
+                    <img src={profileImage} alt="Anand" className="w-full h-full object-cover" />
+                  </div>
+                  <div>
+                    <div className="text-white text-sm font-medium">Anand Prince Purty</div>
+                    <div className="text-[hsl(0_0%_50%)] text-xs">Online</div>
+                  </div>
+                </div>
+                
+                {/* Messages */}
+                <div className="flex-1 overflow-y-auto py-3 space-y-2">
+                  {chatMessages.map((msg, i) => (
+                    <div key={i} className={`flex ${msg.isMe ? 'justify-end' : 'justify-start'}`}>
+                      <div className={`max-w-[80%] px-3 py-2 rounded-2xl text-sm ${
+                        msg.isMe 
+                          ? 'bg-[hsl(210_100%_50%)] text-white rounded-br-md' 
+                          : 'bg-[hsl(0_0%_18%)] text-white rounded-bl-md'
+                      }`}>
+                        {msg.text}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                
+                {/* Input */}
+                <div className="flex gap-2 pt-2 border-t border-[hsl(0_0%_15%)]">
+                  <input
+                    type="text"
+                    value={newMessage}
+                    onChange={(e) => setNewMessage(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' && newMessage.trim()) {
+                        setChatMessages(prev => [...prev, { text: newMessage, isMe: true }]);
+                        setNewMessage('');
+                        // Auto reply after a short delay
+                        setTimeout(() => {
+                          setChatMessages(prev => [...prev, { text: "Thanks for reaching out! Feel free to connect with me on LinkedIn.", isMe: false }]);
+                        }, 1000);
+                      }
+                    }}
+                    placeholder="Type a message..."
+                    className="flex-1 bg-[hsl(0_0%_15%)] text-white text-sm px-4 py-2 rounded-full outline-none placeholder:text-[hsl(0_0%_40%)]"
+                    onClick={(e) => e.stopPropagation()}
+                  />
+                  <button 
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      if (newMessage.trim()) {
+                        setChatMessages(prev => [...prev, { text: newMessage, isMe: true }]);
+                        setNewMessage('');
+                        setTimeout(() => {
+                          setChatMessages(prev => [...prev, { text: "Thanks for reaching out! Feel free to connect with me on LinkedIn.", isMe: false }]);
+                        }, 1000);
+                      }
+                    }}
+                    className="w-9 h-9 bg-[hsl(210_100%_50%)] rounded-full flex items-center justify-center"
+                  >
+                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            ) : (
+              /* Minimized state - notification hint */
+              <div className="h-full flex flex-col items-center justify-center">
+                <div className="w-3 h-3 bg-[hsl(0_70%_50%)] rounded-full animate-pulse" />
+                <div className="text-[8px] text-[hsl(0_0%_40%)] mt-2">1 message</div>
+              </div>
+            )}
+          </div>
+          
           {/* Dynamic Island */}
-          <div className="absolute top-1.5 left-1/2 -translate-x-1/2 w-3 h-1 bg-[hsl(0_0%_15%)] rounded-full" />
+          <div className={`absolute left-1/2 -translate-x-1/2 bg-[hsl(0_0%_0%)] rounded-full transition-all duration-500 ${
+            isPhoneOpen ? 'top-3 w-24 h-6' : 'top-1.5 w-6 h-2'
+          }`} />
+          
           {/* Home indicator */}
-          <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-4 h-0.5 bg-[hsl(0_0%_25%)] rounded-full" />
+          <div className={`absolute bottom-2 left-1/2 -translate-x-1/2 bg-[hsl(0_0%_30%)] rounded-full transition-all duration-500 ${
+            isPhoneOpen ? 'w-32 h-1' : 'w-8 h-0.5'
+          }`} />
+          
+          {/* Close button when open */}
+          {isPhoneOpen && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsPhoneOpen(false);
+              }}
+              className="absolute -top-3 -right-3 w-8 h-8 bg-[hsl(0_0%_20%)] rounded-full flex items-center justify-center border border-[hsl(0_0%_30%)] hover:bg-[hsl(0_0%_25%)] transition-colors"
+            >
+              <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          )}
         </div>
       </div>
 
