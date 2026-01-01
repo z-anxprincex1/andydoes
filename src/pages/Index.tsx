@@ -781,7 +781,7 @@ const Index = () => {
           className="fixed inset-0 z-[19] pointer-events-none animate-light-beam"
           style={{
             clipPath: 'polygon(12.5% calc(100% - 8.5rem), 87.5% calc(100% - 8.5rem), calc(100% - 10.5rem) calc(100% - 3.25rem), calc(100% - 10.5rem) calc(100% - 3.25rem))',
-            background: 'linear-gradient(to top, hsla(50, 90%, 95%, 0.7) 0%, hsla(50, 85%, 90%, 0.5) 15%, hsla(50, 70%, 80%, 0.25) 40%, hsla(50, 60%, 75%, 0.08) 70%, hsla(50, 50%, 70%, 0) 100%)',
+            background: 'linear-gradient(to bottom, hsla(50, 50%, 70%, 0.03) 0%, hsla(50, 60%, 75%, 0.1) 20%, hsla(50, 75%, 85%, 0.35) 60%, hsla(50, 85%, 92%, 0.6) 85%, hsla(50, 95%, 98%, 0.85) 100%)',
           }}
         />
       )}
