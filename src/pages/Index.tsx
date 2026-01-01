@@ -259,18 +259,20 @@ const Index = () => {
         }}
       />
 
-      {/* Profile picture - left side */}
-      <div className="fixed left-[5%] md:left-[8%] lg:left-[10%] top-1/2 -translate-y-1/2 z-20">
-        <div className="w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 rounded-full overflow-hidden border-4 border-[hsl(0_0%_20%)] shadow-[0_0_30px_rgba(0,0,0,0.5)]">
-          <img 
-            src={profileImage} 
-            alt="Anand Prince Purty" 
-            className="w-full h-full object-cover"
-          />
+      {/* Main content - picture left, text right */}
+      <div className="w-full px-6 md:px-12 lg:px-20 relative z-10 flex flex-col md:flex-row items-center gap-8 md:gap-12 lg:gap-16">
+        {/* Profile picture */}
+        <div className="flex-shrink-0">
+          <div className="w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 rounded-full overflow-hidden border-4 border-[hsl(0_0%_20%)] shadow-[0_0_30px_rgba(0,0,0,0.5)]">
+            <img 
+              src={profileImage} 
+              alt="Anand Prince Purty" 
+              className="w-full h-full object-cover"
+            />
+          </div>
         </div>
-      </div>
 
-      <div className="w-full px-6 md:px-12 lg:px-20 relative z-10">
+        {/* Text */}
         <h1 
           className={`text-hero font-pixel transition-all duration-500 flex flex-col text-center md:text-left ${
             isPluggedIn ? "cfl-tube cfl-glow" : "cfl-off"
