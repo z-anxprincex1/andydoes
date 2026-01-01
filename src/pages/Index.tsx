@@ -775,36 +775,33 @@ const Index = () => {
         </div>
       )}
 
-      {/* Projector Light Beam - visible when generator is on */}
+      {/* Projector Light Beam - small glow at lens */}
       {isGeneratorOn && (
         <div 
-          className="fixed z-[19] pointer-events-none animate-light-beam"
+          className="fixed z-[19] pointer-events-none"
           style={{
-            bottom: 'calc(2rem + 0.5rem + 5px)',
-            right: 'calc(6rem + 4rem + 0.5rem)',
+            bottom: 'calc(2rem + 1.5rem)',
+            right: 'calc(6rem + 5.5rem)',
           }}
         >
           <svg 
-            style={{ 
-              width: 'calc(100vw - 14rem)',
-              height: '60vh',
-              transform: 'rotate(-25deg)',
-              transformOrigin: 'bottom right'
-            }}
-            viewBox="0 0 400 300"
-            preserveAspectRatio="none"
+            width="60"
+            height="40"
+            viewBox="0 0 60 40"
           >
             <defs>
-              <linearGradient id="beamGradient" x1="100%" y1="100%" x2="0%" y2="0%">
-                <stop offset="0%" stopColor="hsl(50 80% 90%)" stopOpacity="0.6" />
-                <stop offset="30%" stopColor="hsl(50 70% 85%)" stopOpacity="0.3" />
-                <stop offset="70%" stopColor="hsl(50 60% 80%)" stopOpacity="0.1" />
-                <stop offset="100%" stopColor="hsl(50 50% 75%)" stopOpacity="0" />
-              </linearGradient>
+              <radialGradient id="lensGlow" cx="100%" cy="50%" r="100%">
+                <stop offset="0%" stopColor="hsl(50 80% 90%)" stopOpacity="0.8" />
+                <stop offset="50%" stopColor="hsl(50 70% 85%)" stopOpacity="0.4" />
+                <stop offset="100%" stopColor="hsl(50 60% 80%)" stopOpacity="0" />
+              </radialGradient>
             </defs>
-            <polygon 
-              points="400,300 380,280 0,0 50,0" 
-              fill="url(#beamGradient)"
+            <ellipse 
+              cx="55" 
+              cy="20" 
+              rx="50" 
+              ry="18" 
+              fill="url(#lensGlow)"
             />
           </svg>
         </div>
