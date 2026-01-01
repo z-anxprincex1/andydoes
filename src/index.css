@@ -455,3 +455,24 @@
   animation: light-beam-fade 0.5s ease-out 0.6s forwards;
   opacity: 0;
 }
+
+/* Shadow leg animations for projector screen */
+@keyframes shadowLegWalk {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(-15deg); }
+}
+
+@keyframes shadowLegRun {
+  0%, 100% { transform: rotate(-20deg); }
+  50% { transform: rotate(20deg); }
+}
+
+@keyframes shadowTailWag {
+  0%, 100% { transform: rotate(-25deg); }
+  50% { transform: rotate(-45deg); }
+}
+
+@keyframes shadowHeadBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(3px) rotate(-3deg); }
+}
