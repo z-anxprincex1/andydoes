@@ -247,24 +247,6 @@ const Index = () => {
           </div>
         </div>
       </div>
-      {/* Brick wall - only visible when CFL is on, with radial light mask */}
-      <div 
-        className={`fixed inset-0 transition-opacity duration-700 pointer-events-none ${
-          isPluggedIn ? "opacity-100" : "opacity-0"
-        }`}
-        style={{
-          background: `
-            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='110' viewBox='0 0 220 110'%3E%3Cdefs%3E%3Cfilter id='rough'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04' numOctaves='2' result='noise'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='noise' scale='2' xChannelSelector='R' yChannelSelector='G'/%3E%3C/filter%3E%3C/defs%3E%3Crect fill='hsl(10, 20%25, 12%25)' width='220' height='110'/%3E%3Cpath fill='hsl(15, 40%25, 24%25)' d='M3 3 L58 4 L59 6 L60 24 L58 25 L4 24 L2 22 Z'/%3E%3Cpath fill='hsl(14, 38%25, 21%25)' d='M65 2 L134 4 L136 5 L137 23 L135 25 L64 24 L63 22 Z'/%3E%3Cpath fill='hsl(16, 42%25, 26%25)' d='M142 3 L213 2 L215 4 L216 23 L214 25 L143 24 L141 22 Z'/%3E%3Cpath fill='hsl(13, 36%25, 22%25)' d='M2 30 L44 31 L46 33 L47 49 L45 51 L3 50 L1 48 Z'/%3E%3Cpath fill='hsl(17, 44%25, 25%25)' d='M52 29 L117 31 L119 32 L120 50 L118 52 L51 51 L50 49 Z'/%3E%3Cpath fill='hsl(11, 34%25, 20%25)' d='M124 30 L163 29 L165 31 L166 49 L164 51 L123 50 L122 48 Z'/%3E%3Cpath fill='hsl(15, 39%25, 23%25)' d='M170 29 L216 30 L218 32 L217 50 L215 52 L169 51 L168 49 Z'/%3E%3Cpath fill='hsl(18, 45%25, 27%25)' d='M3 56 L53 57 L55 59 L56 76 L54 78 L4 77 L2 75 Z'/%3E%3Cpath fill='hsl(12, 33%25, 19%25)' d='M60 55 L135 57 L137 58 L138 76 L136 78 L59 77 L58 75 Z'/%3E%3Cpath fill='hsl(14, 41%25, 24%25)' d='M142 56 L215 55 L217 57 L218 75 L216 77 L143 78 L141 76 Z'/%3E%3Cpath fill='hsl(16, 37%25, 22%25)' d='M2 83 L65 84 L67 86 L68 104 L66 106 L3 105 L1 103 Z'/%3E%3Cpath fill='hsl(13, 43%25, 26%25)' d='M72 82 L125 84 L127 85 L128 103 L126 105 L71 104 L70 102 Z'/%3E%3Cpath fill='hsl(19, 38%25, 21%25)' d='M132 83 L216 82 L218 84 L217 103 L215 105 L133 106 L131 104 Z'/%3E%3C/svg%3E")
-          `,
-          backgroundSize: '220px 110px',
-          maskImage: isPluggedIn 
-            ? 'radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 30%, rgba(0,0,0,0) 70%)'
-            : 'none',
-          WebkitMaskImage: isPluggedIn 
-            ? 'radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 30%, rgba(0,0,0,0) 70%)'
-            : 'none',
-        }}
-      />
       
       {/* Ambient light glow behind text when on */}
       <div 
