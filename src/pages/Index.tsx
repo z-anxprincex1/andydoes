@@ -78,9 +78,9 @@ const Index = () => {
   // Spider visits coffee randomly
   useEffect(() => {
     const scheduleCoffeeVisit = () => {
-      const delay = Math.random() * 20000 + 15000; // 15-35 seconds
+      const delay = Math.random() * 40000 + 45000; // 45-85 seconds
       return setTimeout(() => {
-        if (!spiderDescending && Math.random() > 0.4) {
+        if (!spiderDescending && Math.random() > 0.6) {
           setSpiderAtCoffee(true);
           // Stay at coffee for a few seconds
           setTimeout(() => setSpiderAtCoffee(false), 5000);
