@@ -107,22 +107,25 @@ const Index = () => {
     }
   }, [isGeneratorOn]);
 
-  // Track anchor screen position for fixed plug
+  // Track anchor screen position for fixed plug - continuously during animations
   useEffect(() => {
+    let animationId: number;
     const updateAnchorPos = () => {
       if (anchorRef.current) {
         const rect = anchorRef.current.getBoundingClientRect();
         setAnchorScreenPos({ x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 });
       }
+      animationId = requestAnimationFrame(updateAnchorPos);
     };
     updateAnchorPos();
     window.addEventListener('resize', updateAnchorPos);
     window.addEventListener('scroll', updateAnchorPos);
     return () => {
+      cancelAnimationFrame(animationId);
       window.removeEventListener('resize', updateAnchorPos);
       window.removeEventListener('scroll', updateAnchorPos);
     };
-  }, [isGeneratorOn, wasGeneratorOn]);
+  }, []);
 
   useEffect(() => {
     if (isDragging) {
