@@ -617,9 +617,62 @@ const Index = () => {
             </button>
           </div>
           
-          <div className={`w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 rounded-full overflow-hidden border-4 border-[hsl(0_0%_20%)] shadow-[0_0_30px_rgba(0,0,0,0.5)] transition-all duration-700 ${isPluggedIn ? '' : 'grayscale'}`}>
-            <img src={profileImage} alt="Anand Prince Purty" className="w-full h-full object-cover" />
+          {/* Orbiting skills container */}
+          <div className="relative w-52 h-52 md:w-72 md:h-72 lg:w-96 lg:h-96">
+            {/* Outer ring - clockwise rotation */}
+            <div className="absolute inset-0 animate-spin-slow opacity-50">
+              {['Java', 'Python', 'TypeScript', 'React', 'Node.js', 'Docker', 'AWS', 'MongoDB', 'Kubernetes', 'TensorFlow'].map((skill, i) => {
+                const angle = (i * 36) * (Math.PI / 180);
+                const radius = 48; // percentage from center
+                const x = 50 + radius * Math.cos(angle);
+                const y = 50 + radius * Math.sin(angle);
+                return (
+                  <span 
+                    key={skill}
+                    className="absolute text-[8px] md:text-[10px] lg:text-xs font-medium text-[hsl(50_90%_60%)] whitespace-nowrap animate-counter-spin-slow"
+                    style={{
+                      left: `${x}%`,
+                      top: `${y}%`,
+                      transform: 'translate(-50%, -50%)'
+                    }}
+                  >
+                    {skill}
+                  </span>
+                );
+              })}
+            </div>
+            
+            {/* Inner ring - counter-clockwise rotation */}
+            <div className="absolute inset-0 animate-spin-slow-reverse opacity-50">
+              {['Flask', 'Spring Boot', 'PostgreSQL', 'Firebase', 'PyTorch', 'Spark', 'Redis', 'GraphQL'].map((skill, i) => {
+                const angle = (i * 45) * (Math.PI / 180);
+                const radius = 32; // percentage from center
+                const x = 50 + radius * Math.cos(angle);
+                const y = 50 + radius * Math.sin(angle);
+                return (
+                  <span 
+                    key={skill}
+                    className="absolute text-[8px] md:text-[10px] lg:text-xs font-medium text-[hsl(180_70%_60%)] whitespace-nowrap animate-counter-spin-slow-reverse"
+                    style={{
+                      left: `${x}%`,
+                      top: `${y}%`,
+                      transform: 'translate(-50%, -50%)'
+                    }}
+                  >
+                    {skill}
+                  </span>
+                );
+              })}
+            </div>
+            
+            {/* Profile picture in center */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className={`w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 rounded-full overflow-hidden border-4 border-[hsl(0_0%_20%)] shadow-[0_0_30px_rgba(0,0,0,0.5)] transition-all duration-700 ${isPluggedIn ? '' : 'grayscale'}`}>
+                <img src={profileImage} alt="Anand Prince Purty" className="w-full h-full object-cover" />
+              </div>
+            </div>
           </div>
+          
           {/* Location */}
           <div className="flex items-center gap-2 mt-4">
             <MapPin className="w-6 h-6 md:w-8 md:h-8 text-[hsl(0_70%_50%)]" />
