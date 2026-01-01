@@ -84,7 +84,7 @@ const Index = () => {
     const anchorY = anchorRect.top + anchorRect.height / 2;
     
     const socketTargetX = socketRect.left - anchorX;
-    const socketTargetY = socketRect.top + socketRect.height / 2 - anchorY;
+    const socketTargetY = socketRect.top + socketRect.height * 0.4 - anchorY; // Align with socket holes (upper-center)
     
     // Check if plug is close enough to socket to snap
     if (Math.abs(plugPosition.x - socketTargetX) < 60 && Math.abs(plugPosition.y - socketTargetY) < 40) {
