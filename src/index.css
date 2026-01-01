@@ -522,171 +522,21 @@
   }
 }
 
-@keyframes hand-fold {
-  0% { 
-    transform: rotate(0deg) translateY(0); 
+@keyframes pen-write {
+  0%, 100% { 
+    transform: translateY(0) rotate(0deg); 
   }
   25% { 
-    transform: rotate(-15deg) translateY(-2px); 
+    transform: translateY(-1px) translateX(1px) rotate(2deg); 
   }
   50% { 
-    transform: rotate(10deg) translateY(0); 
+    transform: translateY(1px) translateX(-1px) rotate(-1deg); 
   }
   75% { 
-    transform: rotate(-10deg) translateY(-1px); 
-  }
-  100% { 
-    transform: rotate(0deg) translateY(0); 
+    transform: translateY(-0.5px) translateX(0.5px) rotate(1deg); 
   }
 }
 
-@keyframes hand-throw {
-  0% { 
-    transform: rotate(0deg) translateX(0); 
-  }
-  50% { 
-    transform: rotate(-30deg) translateX(-3px); 
-  }
-  100% { 
-    transform: rotate(15deg) translateX(5px); 
-  }
-}
-
-/* Paper airplane flight paths - varied random trajectories */
-/* All paths use --distance-mult CSS variable for random travel distance */
-
-/* Path 0: Long glide left */
-@keyframes paper-fly-0 {
-  0% { opacity: 0; transform: translate(0, 0) rotate(-12deg) scale(1); }
-  3% { opacity: 1; transform: translate(calc(-40px * var(--distance-mult, 1)), -10px) rotate(-14deg) scale(1); }
-  25% { opacity: 1; transform: translate(calc(-280px * var(--distance-mult, 1)), -35px) rotate(-18deg) scale(1); }
-  50% { transform: translate(calc(-560px * var(--distance-mult, 1)), 10px) rotate(6deg) scale(0.96); }
-  75% { transform: translate(calc(-820px * var(--distance-mult, 1)), 80px) rotate(14deg) scale(0.92); }
-  90% { transform: translate(calc(-940px * var(--distance-mult, 1)), 220px) rotate(20deg) scale(0.88); }
-  100% { opacity: 1; transform: translate(calc(-1020px * var(--distance-mult, 1)), calc(100vh - 160px - var(--start-y))) rotate(26deg) scale(0.85); }
-}
-
-/* Path 1: Zig-zag left */
-@keyframes paper-fly-1 {
-  0% { opacity: 0; transform: translate(0, 0) rotate(-8deg) scale(1); }
-  3% { opacity: 1; transform: translate(calc(-35px * var(--distance-mult, 1)), 6px) rotate(-4deg) scale(1); }
-  20% { opacity: 1; transform: translate(calc(-240px * var(--distance-mult, 1)), 40px) rotate(18deg) scale(1); }
-  40% { transform: translate(calc(-520px * var(--distance-mult, 1)), -10px) rotate(-22deg) scale(0.98); }
-  60% { transform: translate(calc(-760px * var(--distance-mult, 1)), 55px) rotate(14deg) scale(0.94); }
-  80% { transform: translate(calc(-920px * var(--distance-mult, 1)), 140px) rotate(-10deg) scale(0.9); }
-  100% { opacity: 1; transform: translate(calc(-1040px * var(--distance-mult, 1)), calc(100vh - 160px - var(--start-y))) rotate(18deg) scale(0.84); }
-}
-
-/* Path 2: Curvy S glide */
-@keyframes paper-fly-2 {
-  0% { opacity: 0; transform: translate(0, 0) rotate(2deg) scale(1); }
-  3% { opacity: 1; transform: translate(calc(-30px * var(--distance-mult, 1)), -8px) rotate(-2deg) scale(1); }
-  25% { opacity: 1; transform: translate(calc(-260px * var(--distance-mult, 1)), -55px) rotate(-20deg) scale(1); }
-  45% { transform: translate(calc(-520px * var(--distance-mult, 1)), 25px) rotate(16deg) scale(0.97); }
-  65% { transform: translate(calc(-760px * var(--distance-mult, 1)), -15px) rotate(-12deg) scale(0.93); }
-  85% { transform: translate(calc(-960px * var(--distance-mult, 1)), 160px) rotate(22deg) scale(0.88); }
-  100% { opacity: 1; transform: translate(calc(-1120px * var(--distance-mult, 1)), calc(100vh - 155px - var(--start-y))) rotate(34deg) scale(0.82); }
-}
-
-/* Path 3: Fast left then late dive */
-@keyframes paper-fly-3 {
-  0% { opacity: 0; transform: translate(0, 0) rotate(-18deg) scale(1); }
-  3% { opacity: 1; transform: translate(calc(-50px * var(--distance-mult, 1)), 5px) rotate(-10deg) scale(1); }
-  20% { opacity: 1; transform: translate(calc(-320px * var(--distance-mult, 1)), 20px) rotate(28deg) scale(1); }
-  45% { transform: translate(calc(-700px * var(--distance-mult, 1)), 40px) rotate(-12deg) scale(0.96); }
-  70% { transform: translate(calc(-960px * var(--distance-mult, 1)), 90px) rotate(18deg) scale(0.91); }
-  90% { transform: translate(calc(-1100px * var(--distance-mult, 1)), 260px) rotate(-8deg) scale(0.86); }
-  100% { opacity: 1; transform: translate(calc(-1200px * var(--distance-mult, 1)), calc(100vh - 170px - var(--start-y))) rotate(30deg) scale(0.82); }
-}
-
-/* Path 4: Big arc + gentle wobble */
-@keyframes paper-fly-4 {
-  0% { opacity: 0; transform: translate(0, 0) rotate(10deg) scale(1); }
-  3% { opacity: 1; transform: translate(calc(-30px * var(--distance-mult, 1)), -12px) rotate(14deg) scale(1); }
-  20% { opacity: 1; transform: translate(calc(-220px * var(--distance-mult, 1)), -85px) rotate(30deg) scale(1); }
-  45% { transform: translate(calc(-520px * var(--distance-mult, 1)), -30px) rotate(-8deg) scale(0.97); }
-  70% { transform: translate(calc(-860px * var(--distance-mult, 1)), 40px) rotate(18deg) scale(0.93); }
-  85% { transform: translate(calc(-1020px * var(--distance-mult, 1)), 190px) rotate(8deg) scale(0.89); }
-  100% { opacity: 1; transform: translate(calc(-1160px * var(--distance-mult, 1)), calc(100vh - 165px - var(--start-y))) rotate(24deg) scale(0.84); }
-}
-
-/* Path 5: Wide zig-zag */
-@keyframes paper-fly-5 {
-  0% { opacity: 0; transform: translate(0, 0) rotate(8deg) scale(1); }
-  3% { opacity: 1; transform: translate(calc(-45px * var(--distance-mult, 1)), -6px) rotate(4deg) scale(1); }
-  18% { opacity: 1; transform: translate(calc(-260px * var(--distance-mult, 1)), -35px) rotate(-18deg) scale(1); }
-  36% { transform: translate(calc(-520px * var(--distance-mult, 1)), 55px) rotate(22deg) scale(0.98); }
-  54% { transform: translate(calc(-780px * var(--distance-mult, 1)), 10px) rotate(-10deg) scale(0.94); }
-  72% { transform: translate(calc(-960px * var(--distance-mult, 1)), 90px) rotate(18deg) scale(0.9); }
-  90% { transform: translate(calc(-1120px * var(--distance-mult, 1)), 240px) rotate(6deg) scale(0.86); }
-  100% { opacity: 1; transform: translate(calc(-1220px * var(--distance-mult, 1)), calc(100vh - 160px - var(--start-y))) rotate(22deg) scale(0.83); }
-}
-
-/* Path 6: Fly off-screen left (doesn't land) */
-@keyframes paper-fly-6 {
-  0% { opacity: 0; transform: translate(0, 0) rotate(-22deg) scale(1); }
-  3% { opacity: 1; transform: translate(calc(-40px * var(--distance-mult, 1)), -5px) rotate(-24deg) scale(1); }
-  30% { opacity: 1; transform: translate(calc(-420px * var(--distance-mult, 1)), -40px) rotate(-32deg) scale(1); }
-  60% { transform: translate(calc(-820px * var(--distance-mult, 1)), 40px) rotate(-18deg) scale(0.95); }
-  100% { opacity: 0; transform: translate(calc(-100vw - 140px), 120px) rotate(-10deg) scale(0.9); }
-}
-
-/* Path 7: High arc then steep late dive */
-@keyframes paper-fly-7 {
-  0% { opacity: 0; transform: translate(0, 0) rotate(4deg) scale(1); }
-  3% { opacity: 1; transform: translate(calc(-30px * var(--distance-mult, 1)), -15px) rotate(-4deg) scale(1); }
-  25% { opacity: 1; transform: translate(calc(-260px * var(--distance-mult, 1)), -120px) rotate(-28deg) scale(1); }
-  50% { transform: translate(calc(-560px * var(--distance-mult, 1)), -70px) rotate(12deg) scale(0.97); }
-  75% { transform: translate(calc(-900px * var(--distance-mult, 1)), 40px) rotate(30deg) scale(0.93); }
-  90% { transform: translate(calc(-1080px * var(--distance-mult, 1)), 230px) rotate(10deg) scale(0.88); }
-  100% { opacity: 1; transform: translate(calc(-1220px * var(--distance-mult, 1)), calc(100vh - 155px - var(--start-y))) rotate(32deg) scale(0.84); }
-}
-
-@keyframes paper-fade-floor {
-  0%, 80% { opacity: 1; }
-  100% { opacity: 0; }
-}
-
-.animate-hand-write {
-  animation: hand-write 0.5s ease-in-out infinite;
-}
-
-.animate-hand-fold {
-  animation: hand-fold 0.8s ease-in-out;
-}
-
-.animate-hand-throw {
-  animation: hand-throw 0.4s ease-out forwards;
-}
-
-.paper-airplane-0 {
-  animation: paper-fly-0 var(--fly-duration, 4s) cubic-bezier(0.25, 0.1, 0.25, 1) forwards, paper-fade-floor calc(var(--fly-duration, 4s) + 1s) ease-out forwards;
-}
-
-.paper-airplane-1 {
-  animation: paper-fly-1 var(--fly-duration, 4s) cubic-bezier(0.22, 0.1, 0.36, 1) forwards, paper-fade-floor calc(var(--fly-duration, 4s) + 1s) ease-out forwards;
-}
-
-.paper-airplane-2 {
-  animation: paper-fly-2 var(--fly-duration, 4s) cubic-bezier(0.4, 0, 0.2, 1) forwards, paper-fade-floor calc(var(--fly-duration, 4s) + 1s) ease-out forwards;
-}
-
-.paper-airplane-3 {
-  animation: paper-fly-3 var(--fly-duration, 4s) cubic-bezier(0.33, 0.1, 0.67, 1) forwards, paper-fade-floor calc(var(--fly-duration, 4s) + 1s) ease-out forwards;
-}
-
-.paper-airplane-4 {
-  animation: paper-fly-4 var(--fly-duration, 4s) cubic-bezier(0.25, 0.1, 0.25, 1) forwards, paper-fade-floor calc(var(--fly-duration, 4s) + 1s) ease-out forwards;
-}
-
-.paper-airplane-5 {
-  animation: paper-fly-5 var(--fly-duration, 4s) cubic-bezier(0.22, 0.1, 0.36, 1) forwards, paper-fade-floor calc(var(--fly-duration, 4s) + 1s) ease-out forwards;
-}
-
-.paper-airplane-6 {
-  animation: paper-fly-6 var(--fly-duration, 4s) cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-.paper-airplane-7 {
-  animation: paper-fly-7 var(--fly-duration, 4s) cubic-bezier(0.33, 0.1, 0.67, 1) forwards, paper-fade-floor calc(var(--fly-duration, 4s) + 1s) ease-out forwards;
+.animate-pen-write {
+  animation: pen-write 1.5s ease-in-out infinite;
 }
