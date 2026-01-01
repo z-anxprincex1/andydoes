@@ -837,43 +837,37 @@ const Index = () => {
 
               {/* Folder body - paper-like with imperfect edges */}
               <div className="absolute top-[3rem] left-2 right-2 bottom-2 md:left-3 md:right-3 md:bottom-3">
-                {/* Paper folder shape */}
-                <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
-                  <defs>
-                    <filter id="paperTexture" x="0%" y="0%" width="100%" height="100%">
-                      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise"/>
-                      <feDiffuseLighting in="noise" lightingColor="white" surfaceScale="1" result="light">
-                        <feDistantLight azimuth="45" elevation="60"/>
-                      </feDiffuseLighting>
-                      <feBlend in="SourceGraphic" in2="light" mode="multiply"/>
-                    </filter>
-                  </defs>
-                  <path 
-                    d={activeFolder === 'projects'
-                      ? "M2 3 Q0 0, 5 1 L98 0 Q100 1, 99 4 L100 96 Q99 100, 96 99 L4 100 Q1 99, 1 96 Z"
-                      : "M3 2 Q1 0, 6 1 L97 1 Q100 2, 99 5 L99 97 Q98 100, 95 99 L5 99 Q2 98, 2 95 Z"
-                    }
-                    fill={activeFolder === 'projects' ? 'hsl(45 80% 78%)' : 'hsl(200 70% 78%)'}
-                    stroke={activeFolder === 'projects' ? 'hsl(35 50% 45%)' : 'hsl(200 40% 45%)'}
-                    strokeWidth="0.5"
-                    vectorEffect="non-scaling-stroke"
-                  />
-                  {/* Paper edge shadows/highlights for depth */}
-                  <path 
-                    d="M3 5 L3 95"
-                    stroke={activeFolder === 'projects' ? 'hsl(35 40% 60%)' : 'hsl(200 30% 60%)'}
-                    strokeWidth="2"
-                    opacity="0.3"
-                    vectorEffect="non-scaling-stroke"
-                  />
-                  <path 
-                    d="M97 5 L97 95"
-                    stroke="hsl(0 0% 100%)"
-                    strokeWidth="1"
-                    opacity="0.4"
-                    vectorEffect="non-scaling-stroke"
-                  />
-                </svg>
+                {/* Paper folder background */}
+                <div 
+                  className={`absolute inset-0 transition-colors duration-300 ${
+                    activeFolder === 'projects' 
+                      ? 'bg-[hsl(45_80%_78%)]' 
+                      : 'bg-[hsl(200_70%_78%)]'
+                  }`}
+                  style={{
+                    clipPath: 'polygon(0% 1%, 1% 0%, 99% 0.5%, 100% 1.5%, 99.5% 99%, 98% 100%, 2% 99.5%, 0% 98%)',
+                    boxShadow: 'inset 2px 2px 8px rgba(255,255,255,0.3), inset -2px -2px 8px rgba(0,0,0,0.1)'
+                  }}
+                />
+                {/* Paper edge border */}
+                <div 
+                  className={`absolute inset-0 border-2 transition-colors duration-300 ${
+                    activeFolder === 'projects' 
+                      ? 'border-[hsl(35_50%_45%)]' 
+                      : 'border-[hsl(200_40%_45%)]'
+                  }`}
+                  style={{
+                    clipPath: 'polygon(0% 1%, 1% 0%, 99% 0.5%, 100% 1.5%, 99.5% 99%, 98% 100%, 2% 99.5%, 0% 98%)'
+                  }}
+                />
+                {/* Left edge shadow for depth */}
+                <div 
+                  className={`absolute left-1 top-2 bottom-2 w-1 opacity-20 ${
+                    activeFolder === 'projects' ? 'bg-[hsl(35_40%_30%)]' : 'bg-[hsl(200_30%_30%)]'
+                  }`} 
+                />
+                {/* Right edge highlight */}
+                <div className="absolute right-1 top-2 bottom-2 w-0.5 bg-white opacity-30" />
                 
                 {/* Folder content */}
                 <div className="relative w-full h-full flex items-center justify-center p-8">
