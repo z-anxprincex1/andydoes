@@ -780,30 +780,32 @@ const Index = () => {
         <div 
           className="fixed z-[19] pointer-events-none animate-light-beam"
           style={{
-            bottom: 'calc(2rem + 0.5rem + 5px)',
-            right: 'calc(6rem + 4rem + 0.5rem)',
+            /* Position at projector lens: projector is right-24 (6rem) + body width 4rem + lens offset 0.5rem */
+            bottom: 'calc(2rem + 1.25rem)', /* bottom-8 + half projector height */
+            right: 'calc(6rem + 4rem + 0.5rem)', /* right-24 + projector width + lens extends left */
           }}
         >
           <svg 
             style={{ 
-              width: 'calc(100vw - 14rem)',
-              height: '60vh',
-              transform: 'rotate(-25deg)',
-              transformOrigin: 'bottom right'
+              position: 'absolute',
+              right: 0,
+              bottom: 0,
+              width: 'calc(100vw - 12rem)',
+              height: '55vh',
             }}
             viewBox="0 0 400 300"
             preserveAspectRatio="none"
           >
             <defs>
               <linearGradient id="beamGradient" x1="100%" y1="100%" x2="0%" y2="0%">
-                <stop offset="0%" stopColor="hsl(50 80% 90%)" stopOpacity="0.6" />
-                <stop offset="30%" stopColor="hsl(50 70% 85%)" stopOpacity="0.3" />
-                <stop offset="70%" stopColor="hsl(50 60% 80%)" stopOpacity="0.1" />
+                <stop offset="0%" stopColor="hsl(50 80% 90%)" stopOpacity="0.5" />
+                <stop offset="20%" stopColor="hsl(50 70% 85%)" stopOpacity="0.25" />
+                <stop offset="60%" stopColor="hsl(50 60% 80%)" stopOpacity="0.08" />
                 <stop offset="100%" stopColor="hsl(50 50% 75%)" stopOpacity="0" />
               </linearGradient>
             </defs>
             <polygon 
-              points="400,300 380,280 0,0 50,0" 
+              points="400,300 390,285 50,20 80,10" 
               fill="url(#beamGradient)"
             />
           </svg>
