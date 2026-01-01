@@ -245,16 +245,13 @@ const Index = () => {
             isPluggedIn ? "cfl-tube cfl-glow" : "cfl-off"
           }`}
         >
-          <span className="flex flex-wrap justify-center">
-            {["anand", "prince"].map((word, i) => 
-              renderWord(word, i, false)
-            )}
-          </span>
-          <span className="flex justify-center">
+          <span className="flex justify-end">{renderWord("anand", 0, true)}</span>
+          <span className="flex justify-end">{renderWord("prince", 1, true)}</span>
+          <span className="flex justify-end">
             {renderWord("purty", 2, true)}
             {/* Cable anchor on last letter */}
             <span 
-              ref={anchorRef} 
+              ref={anchorRef}
               className="relative inline-block"
               style={{ width: 0, height: 0 }}
             >
