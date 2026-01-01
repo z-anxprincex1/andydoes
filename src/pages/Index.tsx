@@ -268,7 +268,7 @@ const Index = () => {
 
       {/* Main content - picture left, text right */}
       {/* About me tooltip - positioned above the main content */}
-      <div className={`fixed top-24 md:top-28 left-1/2 -translate-x-1/2 z-40 transition-all duration-300 ${
+      <div className={`fixed top-[38%] md:top-[35%] left-1/2 -translate-x-1/2 -translate-y-full z-40 transition-all duration-300 ${
         isAboutOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'
       }`}>
         <div className="relative bg-[hsl(50_90%_60%)] px-5 py-4 rounded-lg border-2 border-[hsl(0_0%_10%)] shadow-[4px_4px_0_hsl(0_0%_10%)] w-[90vw] max-w-xl md:max-w-2xl">
