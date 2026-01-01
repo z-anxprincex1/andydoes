@@ -206,7 +206,7 @@ const Index = () => {
   };
 
   return (
-    <main className="min-h-screen flex items-center bg-background overflow-hidden relative" ref={containerRef}>
+    <main className="h-screen flex items-center bg-background overflow-hidden relative" ref={containerRef}>
       {/* Cobweb - Top Left (smaller) */}
       <svg 
         className="fixed top-0 left-0 w-24 h-24 md:w-36 md:h-36 pointer-events-none opacity-25"
