@@ -402,7 +402,7 @@ const Index = () => {
                 {/* Draggable Plug - positioned at end of cable */}
                 <div 
                   onMouseDown={handleMouseDown}
-                  className={`absolute cursor-grab active:cursor-grabbing z-10 ${
+                  className={`absolute cursor-grab active:cursor-grabbing z-[100] ${
                     isDragging ? "" : "transition-all duration-500"
                   }`}
                   style={{
