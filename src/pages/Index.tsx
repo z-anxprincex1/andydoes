@@ -659,14 +659,8 @@ const Index = () => {
           <div className="absolute top-0 left-8 md:left-10 right-8 md:right-10 h-20 md:h-24 bg-gradient-to-b from-[hsl(25_38%_45%)] via-[hsl(22_40%_38%)] to-[hsl(20_42%_32%)] rounded-t-[2rem] md:rounded-t-[2.5rem] shadow-[inset_0_6px_12px_rgba(255,255,255,0.2),inset_0_-8px_16px_rgba(0,0,0,0.25),0_-4px_12px_rgba(0,0,0,0.15)] overflow-hidden" style={{ transform: 'rotateX(-5deg)', transformOrigin: 'bottom' }}>
             {/* Top edge dip at center - subtle smooth notch above partition */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3 md:w-4 h-1 md:h-1.5 bg-[hsl(20_42%_32%)] rounded-b-[100%] shadow-[inset_0_-1px_2px_rgba(0,0,0,0.3)]" />
-            {/* Center partition line - stitched seam */}
-            <div className="absolute top-3 bottom-2 left-1/2 -translate-x-1/2 w-1 bg-gradient-to-b from-[hsl(20_35%_28%)] to-[hsl(20_30%_22%)] rounded-full shadow-[inset_0_0_2px_rgba(0,0,0,0.5)]" />
-            {/* Stitching dots on partition */}
-            <div className="absolute top-4 left-1/2 -translate-x-1/2 flex flex-col gap-2">
-              {[...Array(5)].map((_, i) => (
-                <div key={i} className="w-0.5 h-1 bg-[hsl(35_30%_50%)] rounded-full opacity-60" />
-              ))}
-            </div>
+            {/* Center partition line - soft faded seam connecting dip to seat */}
+            <div className="absolute top-1 md:top-1.5 bottom-0 left-1/2 -translate-x-1/2 w-0.5 bg-gradient-to-b from-[hsl(20_30%_30%)/0.6] via-[hsl(20_28%_26%)/0.4] to-[hsl(20_25%_24%)/0.3] rounded-full" />
             {/* Left cushion puff */}
             <div className="absolute top-4 left-4 right-[52%] bottom-3 bg-gradient-to-br from-[hsl(24_36%_42%)] via-[hsl(22_38%_38%)] to-[hsl(20_40%_34%)] rounded-xl shadow-[inset_2px_2px_6px_rgba(255,255,255,0.15),inset_-2px_-2px_8px_rgba(0,0,0,0.2)]" />
             {/* Right cushion puff */}
