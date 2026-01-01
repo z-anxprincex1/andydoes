@@ -618,13 +618,13 @@ const Index = () => {
           </div>
           
           {/* Orbiting skills container */}
-          <div className="relative w-52 h-52 md:w-72 md:h-72 lg:w-96 lg:h-96">
+          <div className="relative w-72 h-72 md:w-96 md:h-96 lg:w-[28rem] lg:h-[28rem]">
             {/* Outer ring - clockwise rotation */}
             <div className="absolute inset-0 animate-spin-slow opacity-50">
               {['Java', 'Python', 'TypeScript', 'React', 'Node.js', 'Docker', 'AWS', 'MongoDB', 'Kubernetes', 'TensorFlow'].map((skill, i) => {
                 const angleDeg = i * 36;
                 const angle = angleDeg * (Math.PI / 180);
-                const radius = 48; // percentage from center
+                const radius = 46; // percentage from center
                 const x = 50 + radius * Math.cos(angle);
                 const y = 50 + radius * Math.sin(angle);
                 // Tangent rotation: angle + 90 degrees to be tangent to circle
@@ -650,7 +650,7 @@ const Index = () => {
               {['Flask', 'Spring Boot', 'PostgreSQL', 'Firebase', 'PyTorch', 'Spark', 'Redis', 'GraphQL'].map((skill, i) => {
                 const angleDeg = i * 45;
                 const angle = angleDeg * (Math.PI / 180);
-                const radius = 32; // percentage from center
+                const radius = 38; // percentage from center
                 const x = 50 + radius * Math.cos(angle);
                 const y = 50 + radius * Math.sin(angle);
                 // Tangent rotation: angle + 90 degrees to be tangent to circle
