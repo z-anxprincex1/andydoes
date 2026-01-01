@@ -719,7 +719,7 @@ const Index = () => {
       </div>
 
       {/* Side Table with Coffee - side view, in front of socket */}
-      <div className="fixed bottom-4 md:bottom-6 right-[2%] md:right-[5%] z-[15] pointer-events-none">
+      <div className="fixed bottom-4 md:bottom-6 right-[2%] md:right-[5%] z-[25] pointer-events-none">
         <div className="relative w-20 md:w-32 h-28 md:h-40">
           
           {/* Table top - ellipse from side view - maroon red - wider */}
