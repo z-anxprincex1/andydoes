@@ -19,6 +19,9 @@ const Index = () => {
   const [showPoofText, setShowPoofText] = useState(false);
   const [showFluffText, setShowFluffText] = useState(false);
   const [showPhewnnText, setShowPhewnnText] = useState(false);
+  const [showPoofSmoke, setShowPoofSmoke] = useState(false);
+  const [showFluffSmoke, setShowFluffSmoke] = useState(false);
+  const [profileSliding, setProfileSliding] = useState<'up' | 'down' | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [plugPosition, setPlugPosition] = useState({ x: 30, y: 180 }); // Hanging down longer by default
   const [spiderDescending, setSpiderDescending] = useState(false);
@@ -117,28 +120,36 @@ const Index = () => {
       // Turning ON
       setTipAnimating('poof');
       setShowPoofText(true);
+      setShowPoofSmoke(true);
+      setProfileSliding('up');
       setScreenAnimating('in');
       setShowScreen(true);
       
       setTimeout(() => setShowPoofText(false), 600);
+      setTimeout(() => setShowPoofSmoke(false), 700);
       setTimeout(() => {
         setTipAnimating(null);
         setScreenAnimating(null);
+        setProfileSliding(null);
       }, 800);
     } else if (!isGeneratorOn && wasGeneratorOn) {
       // Turning OFF
       setTipAnimating('fluff');
       setShowFluffText(true);
+      setShowFluffSmoke(true);
       setShowPhewnnText(true);
+      setProfileSliding('down');
       setScreenAnimating('out');
       
       setTimeout(() => setShowFluffText(false), 700);
+      setTimeout(() => setShowFluffSmoke(false), 600);
       setTimeout(() => setShowPhewnnText(false), 900);
       setTimeout(() => {
         setShowScreen(false);
         setTipAnimating(null);
         setScreenAnimating(null);
-      }, 500);
+        setProfileSliding(null);
+      }, 800);
     }
     setWasGeneratorOn(isGeneratorOn);
   }, [isGeneratorOn]);
@@ -352,8 +363,8 @@ const Index = () => {
       )}
 
       <div className={`w-full px-6 md:px-12 lg:px-20 relative z-10 flex flex-col md:flex-row items-center gap-8 md:gap-12 lg:gap-16 transition-all duration-500 ${
-        isGeneratorOn ? 'animate-whoosh-up pointer-events-none' : ''
-      } ${!isGeneratorOn && wasGeneratorOn ? 'animate-slide-back-down' : ''}`}>
+        profileSliding === 'up' ? 'animate-whoosh-up pointer-events-none' : ''
+      } ${profileSliding === 'down' ? 'animate-slide-back-down' : ''}`}>
         {/* Profile picture with about me */}
         <div className="flex-shrink-0 flex flex-col items-center relative">
           {/* Question mark icon with connected tooltip arrow */}
@@ -625,6 +636,24 @@ const Index = () => {
           >
             click here to view my work!
           </span>
+        </div>
+      )}
+
+      {/* Smoke effect for poof */}
+      {showPoofSmoke && (
+        <div className="fixed bottom-[8.5rem] md:bottom-[10.5rem] left-1/2 z-25 pointer-events-none">
+          <div className="animate-smoke-puff">
+            <div className="w-20 h-20 md:w-28 md:h-28 rounded-full bg-gradient-radial from-[hsl(0_0%_70%)] via-[hsl(0_0%_50%/0.6)] to-transparent blur-md" />
+          </div>
+        </div>
+      )}
+
+      {/* Smoke effect for fluff */}
+      {showFluffSmoke && (
+        <div className="fixed bottom-[8.5rem] md:bottom-[10.5rem] left-1/2 z-25 pointer-events-none">
+          <div className="animate-smoke-fluff">
+            <div className="w-20 h-20 md:w-28 md:h-28 rounded-full bg-gradient-radial from-[hsl(140_40%_70%)] via-[hsl(140_30%_50%/0.5)] to-transparent blur-md" />
+          </div>
         </div>
       )}
 
