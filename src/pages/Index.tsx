@@ -299,7 +299,7 @@ const Index = () => {
               <HelpCircle className="w-5 h-5 md:w-6 md:h-6 text-[hsl(0_0%_10%)]" />
             </button>
             {/* Arrow connecting to tooltip */}
-            <div className={`absolute left-1/2 -translate-x-1/2 -top-3 transition-all duration-300 ${
+            <div className={`absolute left-1/2 -translate-x-1/2 -top-5 transition-all duration-300 ${
               isAboutOpen ? 'opacity-100' : 'opacity-0'
             }`}>
               <div className="w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-b-[12px] border-b-[hsl(0_0%_10%)]" />
