@@ -781,7 +781,7 @@ const Index = () => {
           className="fixed z-[21] pointer-events-none"
           style={{
             bottom: 'calc(2rem + 1.2rem)',
-            right: 'calc(6rem + 7.5rem)',
+            right: 'calc(6rem + 9.5rem)',
           }}
         >
           <svg 
@@ -799,8 +799,8 @@ const Index = () => {
             <ellipse 
               cx="90" 
               cy="30" 
-              rx="75" 
-              ry="28" 
+              rx="70" 
+              ry="25" 
               fill="url(#lensGlow)"
             />
           </svg>
