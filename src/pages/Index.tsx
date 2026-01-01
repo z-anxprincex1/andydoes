@@ -673,7 +673,7 @@ const Index = () => {
               </div>
               
               {/* Cup base ellipse - visible bottom */}
-              <div className="absolute -bottom-0.5 left-0 right-0 h-1.5 md:h-2 bg-gradient-to-b from-[hsl(220_12%_82%)] to-[hsl(220_10%_75%)] rounded-[50%] shadow-[0_2px_3px_rgba(0,0,0,0.3)]" />
+              
               
               
               {/* Cup handle - thick curved handle on right */}
