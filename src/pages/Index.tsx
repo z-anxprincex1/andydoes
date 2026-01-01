@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { MapPin, HelpCircle, X } from "lucide-react";
+import { MapPin, HelpCircle, X, Github, Linkedin } from "lucide-react";
 import Cat from "@/components/Cat";
 import profileImage from "@/assets/profile.png";
 const Index = () => {
@@ -295,6 +295,67 @@ const Index = () => {
         <path d="M48 14 Q62 38 28 55" stroke="hsl(0 0% 58%)" strokeWidth="0.3" fill="none" />
         <path d="M72 22 Q85 52 45 75" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
       </svg>
+
+      {/* 90s Style Wall Frames - Right Side */}
+      <div className="fixed top-32 md:top-40 right-6 md:right-16 z-10 flex flex-col gap-6 md:gap-8">
+        {/* GitHub Frame - Circle */}
+        <a 
+          href="https://github.com/z-anxprincex1" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="group cursor-pointer transition-transform hover:scale-105 active:scale-95"
+        >
+          {/* Hanging wire */}
+          <div className="w-px h-6 md:h-8 bg-gradient-to-b from-[hsl(35_30%_25%)] to-[hsl(35_20%_35%)] mx-auto" />
+          {/* Frame - ornate 90s gold style circle */}
+          <div className="relative w-16 h-16 md:w-20 md:h-20">
+            {/* Outer ornate frame */}
+            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[hsl(35_50%_35%)] via-[hsl(35_60%_45%)] to-[hsl(35_40%_25%)] p-1 shadow-[2px_4px_8px_rgba(0,0,0,0.5),inset_1px_1px_2px_rgba(255,255,255,0.3)]">
+              {/* Inner groove */}
+              <div className="w-full h-full rounded-full bg-gradient-to-br from-[hsl(35_40%_20%)] via-[hsl(35_45%_30%)] to-[hsl(35_35%_22%)] p-1 shadow-[inset_2px_2px_4px_rgba(0,0,0,0.4)]">
+                {/* Inner gold rim */}
+                <div className="w-full h-full rounded-full bg-gradient-to-br from-[hsl(35_55%_40%)] via-[hsl(35_50%_50%)] to-[hsl(35_45%_35%)] p-0.5">
+                  {/* Picture area - dark background */}
+                  <div className="w-full h-full rounded-full bg-[hsl(0_0%_12%)] flex items-center justify-center group-hover:bg-[hsl(0_0%_18%)] transition-colors">
+                    <Github className="w-6 h-6 md:w-8 md:h-8 text-[hsl(0_0%_85%)] group-hover:text-white transition-colors" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/* Frame shadow on wall */}
+            <div className="absolute inset-0 rounded-full bg-black/20 translate-x-1 translate-y-1 -z-10 blur-sm" />
+          </div>
+        </a>
+
+        {/* LinkedIn Frame - Vertical Ellipse */}
+        <a 
+          href="https://www.linkedin.com/in/anandprince1/" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="group cursor-pointer transition-transform hover:scale-105 active:scale-95"
+        >
+          {/* Hanging wire */}
+          <div className="w-px h-4 md:h-6 bg-gradient-to-b from-[hsl(35_30%_25%)] to-[hsl(35_20%_35%)] mx-auto" />
+          {/* Frame - ornate 90s gold style vertical ellipse */}
+          <div className="relative w-14 h-20 md:w-18 md:h-24 mx-auto" style={{ width: 'clamp(3.5rem, 5vw, 4.5rem)', height: 'clamp(5rem, 7vw, 6rem)' }}>
+            {/* Outer ornate frame */}
+            <div className="absolute inset-0 rounded-[50%] bg-gradient-to-br from-[hsl(35_50%_35%)] via-[hsl(35_60%_45%)] to-[hsl(35_40%_25%)] p-1 shadow-[2px_4px_8px_rgba(0,0,0,0.5),inset_1px_1px_2px_rgba(255,255,255,0.3)]">
+              {/* Inner groove */}
+              <div className="w-full h-full rounded-[50%] bg-gradient-to-br from-[hsl(35_40%_20%)] via-[hsl(35_45%_30%)] to-[hsl(35_35%_22%)] p-1 shadow-[inset_2px_2px_4px_rgba(0,0,0,0.4)]">
+                {/* Inner gold rim */}
+                <div className="w-full h-full rounded-[50%] bg-gradient-to-br from-[hsl(35_55%_40%)] via-[hsl(35_50%_50%)] to-[hsl(35_45%_35%)] p-0.5">
+                  {/* Picture area - LinkedIn blue background */}
+                  <div className="w-full h-full rounded-[50%] bg-[hsl(201_100%_25%)] flex items-center justify-center group-hover:bg-[hsl(201_100%_35%)] transition-colors">
+                    <Linkedin className="w-5 h-5 md:w-7 md:h-7 text-white" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/* Frame shadow on wall */}
+            <div className="absolute inset-0 rounded-[50%] bg-black/20 translate-x-1 translate-y-1 -z-10 blur-sm" />
+          </div>
+        </a>
+      </div>
 
       {/* Spider hanging from right cobweb */}
       <div className="fixed top-0 right-16 md:right-24 pointer-events-none z-30">
