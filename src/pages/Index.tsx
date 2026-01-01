@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { MapPin } from "lucide-react";
 import Cat from "@/components/Cat";
 import profileImage from "@/assets/profile.png";
 
@@ -267,13 +268,18 @@ const Index = () => {
       {/* Main content - picture left, text right */}
       <div className="w-full px-6 md:px-12 lg:px-20 relative z-10 flex flex-col md:flex-row items-center gap-8 md:gap-12 lg:gap-16">
         {/* Profile picture */}
-        <div className="flex-shrink-0">
+        <div className="flex-shrink-0 flex flex-col items-center">
           <div className={`w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 rounded-full overflow-hidden border-4 border-[hsl(0_0%_20%)] shadow-[0_0_30px_rgba(0,0,0,0.5)] transition-all duration-700 ${isPluggedIn ? '' : 'grayscale'}`}>
             <img 
               src={profileImage} 
               alt="Anand Prince Purty" 
               className="w-full h-full object-cover"
             />
+          </div>
+          {/* Location */}
+          <div className="flex items-center gap-2 mt-4">
+            <MapPin className="w-6 h-6 md:w-8 md:h-8 text-[hsl(0_70%_50%)]" />
+            <span className="text-[hsl(0_0%_60%)] text-sm md:text-base font-medium">New York</span>
           </div>
         </div>
 
