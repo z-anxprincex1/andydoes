@@ -624,7 +624,7 @@ const Index = () => {
               {['Java', 'Python', 'TypeScript', 'React', 'Node.js', 'Docker', 'AWS', 'MongoDB', 'Kubernetes', 'TensorFlow'].map((skill, i) => {
                 const angleDeg = i * 36;
                 const angle = angleDeg * (Math.PI / 180);
-                const radius = 44; // percentage from center
+                const radius = 34; // percentage from center
                 const x = 50 + radius * Math.cos(angle);
                 const y = 50 + radius * Math.sin(angle);
                 // Tangent rotation: angle + 90 degrees to be tangent to circle
@@ -650,7 +650,7 @@ const Index = () => {
               {['Flask', 'Spring Boot', 'PostgreSQL', 'Firebase', 'PyTorch', 'Spark', 'Redis', 'GraphQL'].map((skill, i) => {
                 const angleDeg = i * 45;
                 const angle = angleDeg * (Math.PI / 180);
-                const radius = 40; // percentage from center
+                const radius = 30; // percentage from center
                 const x = 50 + radius * Math.cos(angle);
                 const y = 50 + radius * Math.sin(angle);
                 // Tangent rotation: angle + 90 degrees to be tangent to circle
