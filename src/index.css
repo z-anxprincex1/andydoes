@@ -448,14 +448,50 @@
   0% {
     opacity: 1;
     transform: translateX(-50%) scale(1) rotate(-6deg);
+    filter: blur(0px);
   }
-  50% {
-    opacity: 1;
-    transform: translateX(-50%) scale(1.5) rotate(10deg);
+  30% {
+    opacity: 0.9;
+    transform: translateX(-50%) scale(1.3) rotate(5deg);
+    filter: blur(1px);
+  }
+  60% {
+    opacity: 0.5;
+    transform: translateX(-50%) scale(1.6) rotate(-10deg);
+    filter: blur(3px);
   }
   100% {
     opacity: 0;
-    transform: translateX(-50%) scale(0) rotate(-20deg);
+    transform: translateX(-50%) scale(2) rotate(-20deg);
+    filter: blur(6px);
+  }
+}
+
+@keyframes smoke-puff {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 0) scale(0.3);
+  }
+  20% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -60px) scale(2);
+  }
+}
+
+@keyframes smoke-puff-fluff {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -40px) scale(0.3);
+  }
+  30% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, 10px) scale(1.8);
   }
 }
 
@@ -478,14 +514,22 @@
   0% {
     opacity: 0;
     transform: translateX(-50%) scale(0) rotate(20deg);
+    filter: blur(4px);
   }
-  60% {
+  40% {
+    opacity: 0.7;
+    transform: translateX(-50%) scale(1.4) rotate(-15deg);
+    filter: blur(2px);
+  }
+  70% {
     opacity: 1;
-    transform: translateX(-50%) scale(1.3) rotate(-10deg);
+    transform: translateX(-50%) scale(1.1) rotate(-3deg);
+    filter: blur(0px);
   }
   100% {
     opacity: 1;
     transform: translateX(-50%) scale(1) rotate(-6deg);
+    filter: blur(0px);
   }
 }
 
@@ -539,7 +583,7 @@
 }
 
 .animate-poof-out {
-  animation: poof-out 0.5s ease-out forwards;
+  animation: poof-out 0.6s ease-out forwards;
 }
 
 .animate-poof-text {
@@ -547,9 +591,17 @@
 }
 
 .animate-fluff-in {
-  animation: fluff-in 0.6s ease-out forwards;
+  animation: fluff-in 0.7s ease-out forwards;
 }
 
 .animate-fluff-text {
   animation: fluff-text 0.7s ease-out forwards;
+}
+
+.animate-smoke-puff {
+  animation: smoke-puff 0.7s ease-out forwards;
+}
+
+.animate-smoke-fluff {
+  animation: smoke-puff-fluff 0.6s ease-out forwards;
 }

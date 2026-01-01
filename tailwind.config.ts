@@ -12,7 +12,10 @@ export default {
         "2xl": "1400px",
       },
     },
-    extend: {
+	extend: {
+		backgroundImage: {
+			'gradient-radial': 'radial-gradient(ellipse at center, var(--tw-gradient-stops))',
+		},
       fontFamily: {
         mono: ['Atkinson Hyperlegible Mono', 'monospace'],
         pixel: ['"Press Start 2P"', 'cursive'],
