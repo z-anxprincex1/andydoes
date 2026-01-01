@@ -273,7 +273,7 @@ const Index = () => {
                 buy me coffee!
               </p>
               {/* Speech bubble arrow pointing to spider */}
-              <div className="absolute -right-2 top-1/2 -translate-y-1/2">
+              <div className="absolute -right-5 top-1/2 -translate-y-1/2">
                 <div className="w-0 h-0 border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent border-l-[10px] border-l-white" />
                 <div className="absolute top-1/2 -translate-y-1/2 -left-[1px] w-0 h-0 border-t-[7px] border-t-transparent border-b-[7px] border-b-transparent border-l-[11px] border-l-[hsl(0_0%_70%)] -z-10" />
               </div>
