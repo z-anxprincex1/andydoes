@@ -681,17 +681,16 @@ const Index = () => {
             <div className="absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-[hsl(25_40%_45%)] to-transparent rounded-tr-[1.5rem] opacity-60" />
           </div>
           
-          {/* Sofa seat - in front with 3D depth */}
+          {/* Sofa seat - in front with 3D depth, no partition */}
           <div className="absolute bottom-6 md:bottom-8 left-8 md:left-10 right-8 md:right-10 h-16 md:h-20 bg-gradient-to-b from-[hsl(22_42%_40%)] via-[hsl(20_44%_35%)] to-[hsl(18_46%_30%)] rounded-xl shadow-[0_8px_20px_rgba(0,0,0,0.4),inset_0_3px_6px_rgba(255,255,255,0.12),inset_0_-4px_8px_rgba(0,0,0,0.15)]" style={{ transform: 'rotateX(8deg)', transformOrigin: 'top' }}>
-            {/* Center partition line on seat */}
-            <div className="absolute top-2 bottom-2 left-1/2 -translate-x-1/2 w-1 bg-gradient-to-b from-[hsl(20_35%_30%)] to-[hsl(20_30%_25%)] rounded-full shadow-[inset_0_0_2px_rgba(0,0,0,0.4)]" />
-            {/* Left seat cushion indent */}
-            <div className="absolute top-3 left-3 right-[52%] bottom-3 bg-gradient-to-b from-[rgba(0,0,0,0.12)] via-[rgba(0,0,0,0.06)] to-transparent rounded-lg" />
-            {/* Right seat cushion indent */}
-            <div className="absolute top-3 left-[52%] right-3 bottom-3 bg-gradient-to-b from-[rgba(0,0,0,0.12)] via-[rgba(0,0,0,0.06)] to-transparent rounded-lg" />
+            {/* Single unified cushion indent */}
+            <div className="absolute top-3 left-4 right-4 bottom-3 bg-gradient-to-b from-[rgba(0,0,0,0.1)] via-[rgba(0,0,0,0.05)] to-transparent rounded-lg" />
             {/* Front edge highlight */}
             <div className="absolute bottom-0 left-2 right-2 h-2 bg-gradient-to-t from-[hsl(20_40%_28%)] to-transparent rounded-b-lg" />
           </div>
+          
+          {/* Sofa base - connects seat to legs with no gap */}
+          <div className="absolute bottom-2 md:bottom-3 left-8 md:left-10 right-8 md:right-10 h-5 md:h-6 bg-gradient-to-b from-[hsl(20_42%_28%)] to-[hsl(18_40%_22%)] rounded-b-lg shadow-[0_4px_8px_rgba(0,0,0,0.3)]" />
           
           {/* Throw pillows */}
           {/* Left pillow - burgundy */}
@@ -714,12 +713,12 @@ const Index = () => {
             </div>
           </div>
           
-          {/* Sofa legs - wooden with 3D */}
-          <div className="absolute -bottom-2 left-10 md:left-14 w-4 md:w-5 h-5 md:h-6 bg-gradient-to-b from-[hsl(30_45%_30%)] via-[hsl(28_40%_22%)] to-[hsl(25_35%_15%)] rounded-b-md shadow-[2px_3px_6px_rgba(0,0,0,0.5)]" />
-          <div className="absolute -bottom-2 right-10 md:right-14 w-4 md:w-5 h-5 md:h-6 bg-gradient-to-b from-[hsl(30_45%_30%)] via-[hsl(28_40%_22%)] to-[hsl(25_35%_15%)] rounded-b-md shadow-[2px_3px_6px_rgba(0,0,0,0.5)]" />
+          {/* Sofa legs - wooden, connected to base */}
+          <div className="absolute bottom-0 left-10 md:left-14 w-4 md:w-5 h-3 md:h-4 bg-gradient-to-b from-[hsl(30_45%_30%)] via-[hsl(28_40%_22%)] to-[hsl(25_35%_15%)] rounded-b-md shadow-[2px_3px_6px_rgba(0,0,0,0.5)]" />
+          <div className="absolute bottom-0 right-10 md:right-14 w-4 md:w-5 h-3 md:h-4 bg-gradient-to-b from-[hsl(30_45%_30%)] via-[hsl(28_40%_22%)] to-[hsl(25_35%_15%)] rounded-b-md shadow-[2px_3px_6px_rgba(0,0,0,0.5)]" />
           
           {/* Floor shadow - larger and softer */}
-          <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-[95%] h-5 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.35)_0%,transparent_70%)]" />
+          <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-[95%] h-4 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.35)_0%,transparent_70%)]" />
         </div>
       </div>
 
