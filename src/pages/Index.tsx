@@ -16,6 +16,7 @@ const Index = () => {
   const [isDragging, setIsDragging] = useState(false);
   const [catPosition, setCatPosition] = useState(20);
   const [plugPosition, setPlugPosition] = useState({ x: 30, y: 180 }); // Hanging down longer by default
+  const [activeFolder, setActiveFolder] = useState<'projects' | 'experience'>('projects');
   const plugRef = useRef<HTMLDivElement>(null);
   const plugPositionRef = useRef(plugPosition);
   const [spiderDescending, setSpiderDescending] = useState(false);
@@ -781,12 +782,54 @@ const Index = () => {
             {/* Screen mount bar */}
             <div className="w-[75vw] h-3 bg-gradient-to-b from-[hsl(0_0%_25%)] to-[hsl(0_0%_15%)] rounded-b border-x-2 border-b-2 border-[hsl(0_0%_20%)]" />
             {/* Screen */}
-            <div className="w-[75vw] h-[calc(100vh-10rem)] md:h-[calc(100vh-12rem)] bg-gradient-to-b from-[hsl(0_0%_95%)] to-[hsl(0_0%_88%)] border-x-4 border-b-4 border-[hsl(0_0%_20%)] shadow-[0_10px_40px_rgba(0,0,0,0.5)]">
-              {/* Screen content area */}
-              <div className="w-full h-full flex items-center justify-center p-8">
-                <div className="text-[hsl(0_0%_20%)] text-center" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
-                  <p className="text-2xl md:text-4xl font-bold mb-4">My Work</p>
-                  <p className="text-sm md:text-lg opacity-70">Projects coming soon...</p>
+            <div className="w-[75vw] h-[calc(100vh-10rem)] md:h-[calc(100vh-12rem)] bg-gradient-to-b from-[hsl(0_0%_95%)] to-[hsl(0_0%_88%)] border-x-4 border-b-4 border-[hsl(0_0%_20%)] shadow-[0_10px_40px_rgba(0,0,0,0.5)] relative">
+              {/* Folder tabs */}
+              <div className="absolute top-4 left-1/2 -translate-x-1/2 flex pointer-events-auto">
+                {/* Projects tab */}
+                <button
+                  onClick={() => setActiveFolder('projects')}
+                  className={`relative px-6 py-2 text-sm md:text-base font-bold rounded-t-lg border-2 border-b-0 transition-all ${
+                    activeFolder === 'projects'
+                      ? 'bg-[hsl(45_80%_75%)] border-[hsl(35_60%_40%)] text-[hsl(0_0%_15%)] z-10 -mb-[2px]'
+                      : 'bg-[hsl(45_60%_65%)] border-[hsl(35_50%_35%)] text-[hsl(0_0%_25%)] hover:bg-[hsl(45_70%_70%)]'
+                  }`}
+                  style={{ fontFamily: 'Comic Sans MS, cursive' }}
+                >
+                  projects
+                </button>
+                {/* Experience tab */}
+                <button
+                  onClick={() => setActiveFolder('experience')}
+                  className={`relative px-6 py-2 text-sm md:text-base font-bold rounded-t-lg border-2 border-b-0 transition-all -ml-1 ${
+                    activeFolder === 'experience'
+                      ? 'bg-[hsl(200_70%_75%)] border-[hsl(200_50%_40%)] text-[hsl(0_0%_15%)] z-10 -mb-[2px]'
+                      : 'bg-[hsl(200_50%_65%)] border-[hsl(200_40%_35%)] text-[hsl(0_0%_25%)] hover:bg-[hsl(200_60%_70%)]'
+                  }`}
+                  style={{ fontFamily: 'Comic Sans MS, cursive' }}
+                >
+                  experience
+                </button>
+              </div>
+
+              {/* Folder body */}
+              <div className={`absolute top-[3.5rem] left-8 right-8 bottom-8 rounded-lg border-2 shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)] transition-colors duration-300 ${
+                activeFolder === 'projects'
+                  ? 'bg-[hsl(45_80%_75%)] border-[hsl(35_60%_40%)]'
+                  : 'bg-[hsl(200_70%_75%)] border-[hsl(200_50%_40%)]'
+              }`}>
+                {/* Folder content */}
+                <div className="w-full h-full flex items-center justify-center p-8">
+                  {activeFolder === 'projects' ? (
+                    <div className="text-[hsl(0_0%_20%)] text-center" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
+                      <p className="text-2xl md:text-4xl font-bold mb-4">My Projects</p>
+                      <p className="text-sm md:text-lg opacity-70">Projects coming soon...</p>
+                    </div>
+                  ) : (
+                    <div className="text-[hsl(0_0%_20%)] text-center" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
+                      <p className="text-2xl md:text-4xl font-bold mb-4">My Experience</p>
+                      <p className="text-sm md:text-lg opacity-70">Experience coming soon...</p>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
