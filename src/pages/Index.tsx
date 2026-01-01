@@ -300,13 +300,6 @@ const Index = () => {
               <HelpCircle className="w-5 h-5 md:w-6 md:h-6 text-[hsl(0_0%_10%)]" />
             </button>
           </div>
-          {/* Arrow connecting to tooltip - positioned separately */}
-          <div className={`absolute -top-8 right-2 md:right-7 lg:right-11 z-30 transition-all duration-300 ${
-            isAboutOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
-          }`}>
-            <div className="w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-b-[14px] border-b-[hsl(0_0%_10%)]" />
-            <div className="absolute top-[3px] left-1/2 -translate-x-1/2 w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-b-[11px] border-b-[hsl(50_90%_60%)]" />
-          </div>
           
           <div className={`w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 rounded-full overflow-hidden border-4 border-[hsl(0_0%_20%)] shadow-[0_0_30px_rgba(0,0,0,0.5)] transition-all duration-700 ${isPluggedIn ? '' : 'grayscale'}`}>
             <img 
