@@ -268,9 +268,9 @@ const Index = () => {
           {/* Spider body */}
           <div className={`absolute bottom-0 left-1/2 -translate-x-1/2 ${!spiderDescending && !spiderAtCoffee ? 'animate-spider-bob' : ''}`}>
             {/* Speech bubble when at coffee - ellipse */}
-            <div className={`absolute -left-28 md:-left-32 -top-2 bg-white px-3 py-1.5 rounded-[50%] shadow-lg border border-[hsl(0_0%_70%)] w-[90px] md:w-[100px] h-[32px] md:h-[36px] flex items-center justify-center transform transition-all duration-500 ${spiderAtCoffee ? 'scale-100 opacity-100' : 'scale-0 opacity-0'}`}>
-              <p className="text-[8px] md:text-[10px] font-bold text-center text-black" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
-                buy me a coffee!
+            <div className={`absolute -left-32 md:-left-36 -top-4 bg-white px-4 py-2 rounded-[50%] shadow-lg border border-[hsl(0_0%_70%)] w-[110px] md:w-[120px] h-[40px] md:h-[44px] flex items-center justify-center transform transition-all duration-500 ${spiderAtCoffee ? 'scale-100 opacity-100' : 'scale-0 opacity-0'}`}>
+              <p className="text-[10px] md:text-[12px] font-bold text-center text-black" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
+                buy me coffee!
               </p>
               {/* Speech bubble tail */}
               <div className="absolute -right-1 top-1/2 -translate-y-1/2 w-0 h-0 border-l-6 border-l-white border-t-3 border-t-transparent border-b-3 border-b-transparent" />
