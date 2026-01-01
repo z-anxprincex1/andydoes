@@ -657,8 +657,8 @@ const Index = () => {
           
           {/* Sofa back rest - unified with center partition */}
           <div className="absolute top-0 left-8 md:left-10 right-8 md:right-10 h-20 md:h-24 bg-gradient-to-b from-[hsl(25_38%_45%)] via-[hsl(22_40%_38%)] to-[hsl(20_42%_32%)] rounded-t-[2rem] md:rounded-t-[2.5rem] shadow-[inset_0_6px_12px_rgba(255,255,255,0.2),inset_0_-8px_16px_rgba(0,0,0,0.25),0_-4px_12px_rgba(0,0,0,0.15)] overflow-hidden" style={{ transform: 'rotateX(-5deg)', transformOrigin: 'bottom' }}>
-            {/* Top edge dip at center - creates subtle curve */}
-            <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-8 md:w-12 h-3 md:h-4 bg-gradient-to-b from-[hsl(220_20%_12%)] to-[hsl(25_38%_45%)] rounded-b-full" />
+            {/* Top edge dip at center - subtle notch above partition */}
+            <div className="absolute -top-0.5 left-1/2 -translate-x-1/2 w-2 md:w-3 h-1.5 md:h-2 bg-gradient-to-b from-[hsl(220_20%_12%)] to-[hsl(25_38%_42%)] rounded-b-full" />
             {/* Center partition line - stitched seam */}
             <div className="absolute top-3 bottom-2 left-1/2 -translate-x-1/2 w-1 bg-gradient-to-b from-[hsl(20_35%_28%)] to-[hsl(20_30%_22%)] rounded-full shadow-[inset_0_0_2px_rgba(0,0,0,0.5)]" />
             {/* Stitching dots on partition */}
