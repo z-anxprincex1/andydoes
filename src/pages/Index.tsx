@@ -543,6 +543,40 @@ const Index = () => {
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[hsl(0_0%_20%)] to-transparent" />
       </div>
 
+      {/* Diesel Generator - center of floor */}
+      <div className="fixed bottom-8 md:bottom-12 left-1/2 -translate-x-1/2 z-20">
+        <div className="relative">
+          {/* Generator body */}
+          <div className="w-20 h-14 md:w-28 md:h-20 bg-[hsl(35_30%_25%)] rounded-sm border-2 border-[hsl(35_20%_18%)] shadow-[inset_0_2px_4px_rgba(255,255,255,0.1)]">
+            {/* Top panel */}
+            <div className="absolute top-1 left-1 right-1 h-3 md:h-4 bg-[hsl(35_25%_20%)] rounded-sm flex items-center justify-center gap-1">
+              {/* Control knobs */}
+              <div className="w-2 h-2 md:w-3 md:h-3 bg-[hsl(0_0%_15%)] rounded-full border border-[hsl(0_0%_25%)]" />
+              <div className="w-2 h-2 md:w-3 md:h-3 bg-[hsl(0_0%_15%)] rounded-full border border-[hsl(0_0%_25%)]" />
+              {/* Power indicator - off */}
+              <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-[hsl(0_0%_20%)] rounded-full ml-1" />
+            </div>
+            {/* Vent grilles */}
+            <div className="absolute bottom-2 left-2 right-2 flex gap-0.5 md:gap-1">
+              {[...Array(6)].map((_, i) => (
+                <div key={i} className="flex-1 h-4 md:h-6 bg-[hsl(35_20%_18%)] rounded-sm" />
+              ))}
+            </div>
+            {/* Side exhaust pipe */}
+            <div className="absolute -right-2 top-2 w-3 h-6 md:w-4 md:h-8 bg-[hsl(0_0%_20%)] rounded-r-sm border-2 border-l-0 border-[hsl(0_0%_15%)]" />
+          </div>
+          {/* Fuel tank */}
+          <div className="absolute -top-3 md:-top-4 left-2 w-6 h-4 md:w-8 md:h-5 bg-[hsl(0_70%_35%)] rounded-t-sm border border-[hsl(0_60%_25%)]">
+            <div className="absolute top-0.5 left-1/2 -translate-x-1/2 w-2 h-1 bg-[hsl(0_0%_20%)] rounded-sm" />
+          </div>
+          {/* Wheels */}
+          <div className="absolute -bottom-1 left-1 w-4 h-4 md:w-5 md:h-5 bg-[hsl(0_0%_12%)] rounded-full border-2 border-[hsl(0_0%_20%)]" />
+          <div className="absolute -bottom-1 right-3 w-4 h-4 md:w-5 md:h-5 bg-[hsl(0_0%_12%)] rounded-full border-2 border-[hsl(0_0%_20%)]" />
+          {/* Handle */}
+          <div className="absolute -top-2 right-3 w-6 h-1.5 md:w-8 md:h-2 bg-[hsl(0_0%_25%)] rounded-full" />
+        </div>
+      </div>
+
       {/* Projector - lying on floor left of socket */}
       <div className="fixed bottom-9 md:bottom-13 right-28 md:right-36 z-20">
         {/* Projector body */}
