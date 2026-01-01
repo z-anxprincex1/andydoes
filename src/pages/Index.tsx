@@ -707,17 +707,13 @@ const Index = () => {
         {/* Spider thread from top */}
         <div className="absolute -top-32 left-1/2 w-px h-32 bg-[hsl(0_0%_50%)]" />
         
-        {/* Speech bubble */}
-        <div className={`absolute -left-36 md:-left-44 top-0 bg-[hsl(45_90%_95%)] px-3 py-2 rounded-xl shadow-lg border-2 border-[hsl(30_60%_70%)] max-w-[140px] md:max-w-[180px] transform transition-all duration-500 ${spiderAtCoffee ? 'scale-100' : 'scale-0'}`}>
-          <p className="text-[10px] md:text-xs font-bold text-center" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
-            <span className="text-[hsl(340_70%_50%)]">Consider </span>
-            <span className="text-[hsl(200_70%_45%)]">supporting </span>
-            <span className="text-[hsl(120_50%_40%)]">me by </span>
-            <span className="text-[hsl(30_80%_50%)]">buying me </span>
-            <span className="text-[hsl(280_60%_55%)]">a coffee!</span>
+        {/* Speech bubble - ellipse */}
+        <div className={`absolute -left-40 md:-left-48 -top-2 bg-white px-5 py-3 rounded-[50%] shadow-lg border-2 border-[hsl(0_0%_70%)] w-[130px] md:w-[160px] h-[50px] md:h-[60px] flex items-center justify-center transform transition-all duration-500 ${spiderAtCoffee ? 'scale-100' : 'scale-0'}`}>
+          <p className="text-[9px] md:text-[11px] font-bold text-center text-black" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
+            Consider supporting me by buying me a coffee!
           </p>
           {/* Speech bubble tail */}
-          <div className="absolute -right-2 top-3 w-0 h-0 border-l-8 border-l-[hsl(45_90%_95%)] border-t-4 border-t-transparent border-b-4 border-b-transparent" />
+          <div className="absolute -right-1 top-1/2 -translate-y-1/2 w-0 h-0 border-l-8 border-l-white border-t-4 border-t-transparent border-b-4 border-b-transparent" />
         </div>
         
         {/* Spider body */}
