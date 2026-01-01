@@ -855,7 +855,7 @@ const Index = () => {
               </div>
 
               {/* Folder body */}
-              <div className="absolute top-[3.5rem] left-[1.5%] right-[1.5%] bottom-4 rounded-lg border-2 border-black bg-white shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)] overflow-hidden">
+              <div className="absolute top-[3.5rem] left-[1.5%] right-[1.5%] bottom-4 rounded-lg border-2 border-black bg-white shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)] overflow-hidden pointer-events-auto">
                 {/* Folder content */}
                 <div className="w-full h-full overflow-y-auto p-4 md:p-6">
                   {activeFolder === 'projects' ? (
