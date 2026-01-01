@@ -12,6 +12,13 @@ const Index = () => {
   const [newMessage, setNewMessage] = useState("");
   const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [isGeneratorOn, setIsGeneratorOn] = useState(false);
+  const [wasGeneratorOn, setWasGeneratorOn] = useState(false);
+  const [showScreen, setShowScreen] = useState(false);
+  const [screenAnimating, setScreenAnimating] = useState<'in' | 'out' | null>(null);
+  const [tipAnimating, setTipAnimating] = useState<'poof' | 'fluff' | null>(null);
+  const [showPoofText, setShowPoofText] = useState(false);
+  const [showFluffText, setShowFluffText] = useState(false);
+  const [showPhewnnText, setShowPhewnnText] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [plugPosition, setPlugPosition] = useState({ x: 30, y: 180 }); // Hanging down longer by default
   const [spiderDescending, setSpiderDescending] = useState(false);
@@ -103,6 +110,38 @@ const Index = () => {
       };
     }
   }, [isDragging, plugPosition]);
+
+  // Handle generator on/off transitions
+  useEffect(() => {
+    if (isGeneratorOn && !wasGeneratorOn) {
+      // Turning ON
+      setTipAnimating('poof');
+      setShowPoofText(true);
+      setScreenAnimating('in');
+      setShowScreen(true);
+      
+      setTimeout(() => setShowPoofText(false), 600);
+      setTimeout(() => {
+        setTipAnimating(null);
+        setScreenAnimating(null);
+      }, 800);
+    } else if (!isGeneratorOn && wasGeneratorOn) {
+      // Turning OFF
+      setTipAnimating('fluff');
+      setShowFluffText(true);
+      setShowPhewnnText(true);
+      setScreenAnimating('out');
+      
+      setTimeout(() => setShowFluffText(false), 700);
+      setTimeout(() => setShowPhewnnText(false), 900);
+      setTimeout(() => {
+        setShowScreen(false);
+        setTipAnimating(null);
+        setScreenAnimating(null);
+      }, 500);
+    }
+    setWasGeneratorOn(isGeneratorOn);
+  }, [isGeneratorOn]);
 
   const renderWord = (word: string, wordIndex: number, isLast: boolean) => {
     return (
@@ -300,9 +339,21 @@ const Index = () => {
         </div>
       )}
 
+      {/* Phewnn text - appears when generator turns off */}
+      {showPhewnnText && (
+        <div className="fixed top-1/2 left-1/2 z-50 pointer-events-none animate-phewnn-text">
+          <span 
+            className="text-[hsl(180_70%_60%)] text-4xl md:text-6xl font-extrabold whitespace-nowrap drop-shadow-[3px_3px_0_hsl(0_0%_10%)]" 
+            style={{ fontFamily: 'Comic Sans MS, cursive' }}
+          >
+            phewnn!
+          </span>
+        </div>
+      )}
+
       <div className={`w-full px-6 md:px-12 lg:px-20 relative z-10 flex flex-col md:flex-row items-center gap-8 md:gap-12 lg:gap-16 transition-all duration-500 ${
         isGeneratorOn ? 'animate-whoosh-up pointer-events-none' : ''
-      }`}>
+      } ${!isGeneratorOn && wasGeneratorOn ? 'animate-slide-back-down' : ''}`}>
         {/* Profile picture with about me */}
         <div className="flex-shrink-0 flex flex-col items-center relative">
           {/* Question mark icon with connected tooltip arrow */}
@@ -552,14 +603,54 @@ const Index = () => {
       </div>
 
       {/* Tip above generator */}
-      <div className="fixed bottom-[8.5rem] md:bottom-[10.5rem] left-[calc(50%-1rem)] md:left-[calc(50%-1.5rem)] -translate-x-1/2 z-20 pointer-events-none animate-bounce">
-        <span 
-          className="text-[hsl(0_0%_100%)] text-sm md:text-base font-extrabold whitespace-nowrap drop-shadow-[2px_2px_0_hsl(0_0%_10%)] inline-block -rotate-6" 
-          style={{ fontFamily: 'Comic Sans MS, cursive' }}
-        >
-          click here to view my work!
-        </span>
-      </div>
+      {!isGeneratorOn && (
+        <div className={`fixed bottom-[8.5rem] md:bottom-[10.5rem] left-[calc(50%-1rem)] md:left-[calc(50%-1.5rem)] -translate-x-1/2 z-20 pointer-events-none ${
+          tipAnimating === 'fluff' ? 'animate-fluff-in' : 'animate-bounce'
+        }`}>
+          <span 
+            className="text-[hsl(0_0%_100%)] text-sm md:text-base font-extrabold whitespace-nowrap drop-shadow-[2px_2px_0_hsl(0_0%_10%)] inline-block -rotate-6" 
+            style={{ fontFamily: 'Comic Sans MS, cursive' }}
+          >
+            click here to view my work!
+          </span>
+        </div>
+      )}
+
+      {/* Poof animation when tip disappears */}
+      {tipAnimating === 'poof' && (
+        <div className="fixed bottom-[8.5rem] md:bottom-[10.5rem] left-[calc(50%-1rem)] md:left-[calc(50%-1.5rem)] -translate-x-1/2 z-20 pointer-events-none animate-poof-out">
+          <span 
+            className="text-[hsl(0_0%_100%)] text-sm md:text-base font-extrabold whitespace-nowrap drop-shadow-[2px_2px_0_hsl(0_0%_10%)] inline-block -rotate-6" 
+            style={{ fontFamily: 'Comic Sans MS, cursive' }}
+          >
+            click here to view my work!
+          </span>
+        </div>
+      )}
+
+      {/* Poof text */}
+      {showPoofText && (
+        <div className="fixed bottom-[10rem] md:bottom-[12rem] left-1/2 z-50 pointer-events-none animate-poof-text">
+          <span 
+            className="text-[hsl(320_80%_65%)] text-2xl md:text-4xl font-extrabold whitespace-nowrap drop-shadow-[2px_2px_0_hsl(0_0%_10%)]" 
+            style={{ fontFamily: 'Comic Sans MS, cursive' }}
+          >
+            poof!
+          </span>
+        </div>
+      )}
+
+      {/* Fluff text */}
+      {showFluffText && (
+        <div className="fixed bottom-[10rem] md:bottom-[12rem] left-1/2 z-50 pointer-events-none animate-fluff-text">
+          <span 
+            className="text-[hsl(140_70%_55%)] text-2xl md:text-4xl font-extrabold whitespace-nowrap drop-shadow-[2px_2px_0_hsl(0_0%_10%)]" 
+            style={{ fontFamily: 'Comic Sans MS, cursive' }}
+          >
+            fluff!
+          </span>
+        </div>
+      )}
 
       {/* Diesel Generator - center of floor */}
       <div 
@@ -710,9 +801,9 @@ const Index = () => {
 
 
       {/* Projector Screen - slides down from top when generator is on */}
-      {isGeneratorOn && (
+      {showScreen && (
         <div className="fixed top-0 left-0 right-0 flex justify-center z-15 pointer-events-none">
-          <div className="animate-screen-down">
+          <div className={screenAnimating === 'in' ? 'animate-screen-down' : screenAnimating === 'out' ? 'animate-screen-up' : ''}>
             {/* Screen mount bar */}
             <div className="w-[75vw] h-3 bg-gradient-to-b from-[hsl(0_0%_25%)] to-[hsl(0_0%_15%)] rounded-b border-x-2 border-b-2 border-[hsl(0_0%_20%)]" />
             {/* Screen */}
