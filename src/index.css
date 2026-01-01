@@ -476,3 +476,32 @@
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(3px) rotate(-3deg); }
 }
+
+/* Filament Bulb Animations */
+@keyframes bulb-swing {
+  0%, 100% { 
+    transform: rotate(-2deg); 
+  }
+  50% { 
+    transform: rotate(2deg); 
+  }
+}
+
+@keyframes filament-glow {
+  0%, 100% { 
+    opacity: 1;
+    filter: brightness(1);
+  }
+  50% { 
+    opacity: 0.85;
+    filter: brightness(0.9);
+  }
+}
+
+.animate-bulb-swing {
+  animation: bulb-swing 4s ease-in-out infinite;
+}
+
+.animate-filament-glow {
+  animation: filament-glow 2s ease-in-out infinite;
+}

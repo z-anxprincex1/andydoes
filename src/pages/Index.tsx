@@ -223,6 +223,43 @@ const Index = () => {
     return path;
   };
   return <main className="h-screen flex items-center bg-background overflow-hidden relative" ref={containerRef}>
+      {/* Swinging Filament Bulb - Top Left */}
+      <div className="fixed top-0 left-12 md:left-20 z-20 pointer-events-none animate-bulb-swing origin-top">
+        {/* Cable */}
+        <div className="w-0.5 h-32 md:h-40 bg-gradient-to-b from-[hsl(0_0%_20%)] to-[hsl(0_0%_30%)] mx-auto" />
+        {/* Bulb socket/cap */}
+        <div className="w-5 h-4 bg-gradient-to-b from-[hsl(35_30%_25%)] via-[hsl(35_25%_35%)] to-[hsl(35_20%_28%)] mx-auto rounded-t-sm relative">
+          {/* Screw thread lines */}
+          <div className="absolute top-1 left-0 right-0 h-px bg-[hsl(35_20%_20%)]" />
+          <div className="absolute top-2 left-0 right-0 h-px bg-[hsl(35_20%_20%)]" />
+        </div>
+        {/* Glass bulb */}
+        <div className="w-8 h-10 mx-auto relative">
+          {/* Bulb glass shape */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[hsl(45_20%_25%/_0.4)] via-[hsl(45_15%_20%/_0.3)] to-[hsl(45_10%_15%/_0.4)] rounded-[40%_40%_50%_50%] border border-[hsl(45_10%_40%/_0.3)]" />
+          {/* Inner glass reflection */}
+          <div className="absolute top-1 left-1 w-2 h-3 bg-[hsl(45_20%_60%/_0.15)] rounded-full blur-[1px] rotate-[-20deg]" />
+          {/* Filament structure */}
+          <div className="absolute top-2 left-1/2 -translate-x-1/2 w-4 h-6">
+            {/* Filament support wires */}
+            <div className="absolute left-0.5 top-0 w-px h-full bg-[hsl(0_0%_40%)]" />
+            <div className="absolute right-0.5 top-0 w-px h-full bg-[hsl(0_0%_40%)]" />
+            {/* Filament coil - the glowing part */}
+            <div className="absolute top-1 left-1/2 -translate-x-1/2 w-2 h-4 flex flex-col items-center justify-center gap-px">
+              <div className="w-2 h-px bg-[hsl(35_80%_50%)] animate-filament-glow shadow-[0_0_4px_hsl(35_90%_60%),0_0_8px_hsl(35_90%_50%)]" />
+              <div className="w-2 h-px bg-[hsl(35_80%_50%)] animate-filament-glow shadow-[0_0_4px_hsl(35_90%_60%),0_0_8px_hsl(35_90%_50%)]" style={{ animationDelay: '0.1s' }} />
+              <div className="w-2.5 h-px bg-[hsl(35_80%_55%)] animate-filament-glow shadow-[0_0_5px_hsl(35_90%_60%),0_0_10px_hsl(35_90%_50%)]" style={{ animationDelay: '0.2s' }} />
+              <div className="w-2 h-px bg-[hsl(35_80%_50%)] animate-filament-glow shadow-[0_0_4px_hsl(35_90%_60%),0_0_8px_hsl(35_90%_50%)]" style={{ animationDelay: '0.15s' }} />
+              <div className="w-1.5 h-px bg-[hsl(35_80%_45%)] animate-filament-glow shadow-[0_0_3px_hsl(35_90%_60%),0_0_6px_hsl(35_90%_50%)]" style={{ animationDelay: '0.25s' }} />
+            </div>
+          </div>
+          {/* Bottom tip of bulb */}
+          <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-gradient-to-b from-[hsl(45_15%_20%/_0.3)] to-[hsl(45_10%_15%/_0.5)] rounded-full" />
+        </div>
+        {/* Warm glow around bulb */}
+        <div className="absolute top-28 md:top-36 left-1/2 -translate-x-1/2 w-16 h-16 bg-[hsl(35_80%_50%/_0.15)] rounded-full blur-xl animate-filament-glow" />
+      </div>
+
       {/* Cobweb - Top Left (smaller) */}
       <svg className="fixed top-0 left-0 w-24 h-24 md:w-36 md:h-36 pointer-events-none opacity-25" viewBox="0 0 100 100">
         {/* Radial threads - curved and irregular */}
