@@ -835,10 +835,10 @@ const Index = () => {
         </div>
       )}
 
-      {/* Projector Light Beam - small glow at lens */}
+      {/* Projector Light Beam - small glow at lens (desktop only) */}
       {isGeneratorOn && (
         <div 
-          className="fixed z-[21] pointer-events-none bottom-[calc(2rem+1.25rem)] md:bottom-[calc(2.75rem+1.5rem)] right-[calc(6rem+5.25rem)] md:right-[calc(8rem+5.5rem)]"
+          className="hidden md:block fixed z-[21] pointer-events-none md:bottom-[calc(2.75rem+1.5rem)] md:right-[calc(8rem+5.5rem)]"
         >
           <svg 
             width="90"
