@@ -619,8 +619,104 @@ const Index = () => {
           
           {/* Profile picture - maintains original size */}
           <div className="relative">
-            <div className={`w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 rounded-full overflow-hidden border-4 border-[hsl(0_0%_20%)] shadow-[0_0_30px_rgba(0,0,0,0.5)] transition-all duration-700 ${isPluggedIn ? '' : 'grayscale'}`}>
-              <img src={profileImage} alt="Anand Prince Purty" className="w-full h-full object-cover" />
+            {/* 90s ornate wooden frame */}
+            <div className="relative p-3 md:p-4 lg:p-5 rounded-full"
+              style={{
+                background: `
+                  linear-gradient(135deg, 
+                    hsl(30 45% 35%) 0%, 
+                    hsl(25 50% 28%) 20%, 
+                    hsl(20 55% 22%) 40%,
+                    hsl(25 50% 30%) 60%,
+                    hsl(30 45% 38%) 80%,
+                    hsl(25 40% 32%) 100%
+                  )
+                `,
+                boxShadow: `
+                  inset 3px 3px 6px rgba(255,255,255,0.15),
+                  inset -2px -2px 4px rgba(0,0,0,0.4),
+                  4px 6px 12px rgba(0,0,0,0.5),
+                  0 0 20px rgba(0,0,0,0.3)
+                `
+              }}
+            >
+              {/* Wood grain texture overlay */}
+              <div className="absolute inset-0 rounded-full opacity-30 pointer-events-none"
+                style={{
+                  backgroundImage: `
+                    repeating-linear-gradient(
+                      90deg,
+                      transparent 0px,
+                      rgba(0,0,0,0.03) 1px,
+                      transparent 2px,
+                      transparent 8px
+                    ),
+                    repeating-linear-gradient(
+                      95deg,
+                      transparent 0px,
+                      rgba(255,255,255,0.02) 2px,
+                      transparent 4px,
+                      transparent 12px
+                    )
+                  `
+                }}
+              />
+              
+              {/* Inner gold rim */}
+              <div className="p-1 md:p-1.5 rounded-full"
+                style={{
+                  background: `linear-gradient(145deg, 
+                    hsl(45 70% 55%) 0%,
+                    hsl(40 65% 45%) 30%,
+                    hsl(35 60% 35%) 50%,
+                    hsl(40 65% 48%) 70%,
+                    hsl(45 70% 52%) 100%
+                  )`,
+                  boxShadow: `
+                    inset 1px 1px 2px rgba(255,255,255,0.4),
+                    inset -1px -1px 2px rgba(0,0,0,0.3)
+                  `
+                }}
+              >
+                {/* Inner dark groove */}
+                <div className="p-0.5 md:p-1 rounded-full bg-gradient-to-br from-[hsl(30_40%_15%)] via-[hsl(25_35%_12%)] to-[hsl(30_30%_18%)]"
+                  style={{
+                    boxShadow: 'inset 2px 2px 4px rgba(0,0,0,0.6)'
+                  }}
+                >
+                  {/* Profile picture */}
+                  <div className={`w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 rounded-full overflow-hidden transition-all duration-700 ${isPluggedIn ? '' : 'grayscale'}`}
+                    style={{
+                      boxShadow: 'inset 0 0 20px rgba(0,0,0,0.4)'
+                    }}
+                  >
+                    <img src={profileImage} alt="Anand Prince Purty" className="w-full h-full object-cover" />
+                  </div>
+                </div>
+              </div>
+              
+              {/* Decorative corner studs */}
+              {[0, 90, 180, 270].map((angle) => (
+                <div 
+                  key={angle}
+                  className="absolute w-2 h-2 md:w-3 md:h-3 rounded-full"
+                  style={{
+                    background: `radial-gradient(circle at 30% 30%, 
+                      hsl(45 80% 60%) 0%,
+                      hsl(40 70% 45%) 40%,
+                      hsl(35 60% 30%) 100%
+                    )`,
+                    boxShadow: `
+                      inset 1px 1px 2px rgba(255,255,255,0.5),
+                      1px 1px 2px rgba(0,0,0,0.4)
+                    `,
+                    top: '50%',
+                    left: '50%',
+                    transform: `rotate(${angle}deg) translateY(-50%) translateX(${angle === 0 || angle === 180 ? '0' : '0'}px)`,
+                    transformOrigin: `0 ${angle === 0 ? '-70px' : angle === 90 ? '-70px' : angle === 180 ? '-70px' : '-70px'}`
+                  }}
+                />
+              ))}
             </div>
             
             {/* Orbiting skills - absolutely positioned, doesn't affect layout */}
