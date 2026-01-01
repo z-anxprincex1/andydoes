@@ -475,7 +475,7 @@ const Index = () => {
                         {/* GitHub Octocat logo */}
                         <Github className="w-8 h-8 md:w-12 md:h-12 text-[hsl(0_0%_85%)] group-hover:text-white transition-colors" />
                         {/* Animated eyes overlay on top of the Octocat */}
-                        <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                           <div className="relative -mt-1 md:-mt-2">
                             {/* Eyes container */}
                             <div className="flex gap-1 md:gap-2">
