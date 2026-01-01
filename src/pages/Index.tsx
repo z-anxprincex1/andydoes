@@ -11,6 +11,7 @@ const Index = () => {
   ]);
   const [newMessage, setNewMessage] = useState("");
   const [isAboutOpen, setIsAboutOpen] = useState(false);
+  const [isGeneratorOn, setIsGeneratorOn] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [plugPosition, setPlugPosition] = useState({ x: 30, y: 180 }); // Hanging down longer by default
   const [spiderDescending, setSpiderDescending] = useState(false);
@@ -544,8 +545,34 @@ const Index = () => {
       </div>
 
       {/* Diesel Generator - center of floor */}
-      <div className="fixed bottom-8 md:bottom-12 left-1/2 -translate-x-1/2 z-20">
-        <div className="relative">
+      <div 
+        className="fixed bottom-8 md:bottom-12 left-1/2 -translate-x-1/2 z-20 cursor-pointer"
+        onClick={() => setIsGeneratorOn(!isGeneratorOn)}
+      >
+        <div className={`relative ${isGeneratorOn ? 'animate-[vibrate_0.1s_linear_infinite]' : ''}`}>
+          {/* Large Rotor/Flywheel on the side */}
+          <div className="absolute -left-8 md:-left-10 top-1/2 -translate-y-1/2">
+            {/* Main rotor wheel */}
+            <div className={`w-12 h-12 md:w-16 md:h-16 bg-[hsl(0_0%_18%)] rounded-full border-4 border-[hsl(0_0%_25%)] relative ${isGeneratorOn ? 'animate-spin' : ''}`}
+              style={{ animationDuration: isGeneratorOn ? '0.5s' : undefined }}
+            >
+              {/* Rotor spokes */}
+              <div className="absolute inset-2 border-2 border-[hsl(0_0%_30%)] rounded-full" />
+              <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-[hsl(0_0%_30%)] -translate-y-1/2" />
+              <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-[hsl(0_0%_30%)] -translate-x-1/2" />
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 md:w-4 md:h-4 bg-[hsl(0_0%_15%)] rounded-full border-2 border-[hsl(0_0%_22%)]" />
+            </div>
+            {/* Belt connecting to generator */}
+            <div className={`absolute top-1/2 -translate-y-1/2 left-full w-4 md:w-5 h-1 bg-[hsl(0_0%_12%)] ${isGeneratorOn ? 'animate-pulse' : ''}`} />
+          </div>
+          
+          {/* Small pulley on generator body */}
+          <div className={`absolute -left-1 top-1/2 -translate-y-1/2 w-4 h-4 md:w-5 md:h-5 bg-[hsl(0_0%_20%)] rounded-full border-2 border-[hsl(0_0%_28%)] z-10 ${isGeneratorOn ? 'animate-spin' : ''}`}
+            style={{ animationDuration: isGeneratorOn ? '0.2s' : undefined }}
+          >
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-[hsl(0_0%_15%)] rounded-full" />
+          </div>
+          
           {/* Generator body */}
           <div className="w-20 h-14 md:w-28 md:h-20 bg-[hsl(35_30%_25%)] rounded-sm border-2 border-[hsl(35_20%_18%)] shadow-[inset_0_2px_4px_rgba(255,255,255,0.1)]">
             {/* Top panel */}
@@ -553,8 +580,10 @@ const Index = () => {
               {/* Control knobs */}
               <div className="w-2 h-2 md:w-3 md:h-3 bg-[hsl(0_0%_15%)] rounded-full border border-[hsl(0_0%_25%)]" />
               <div className="w-2 h-2 md:w-3 md:h-3 bg-[hsl(0_0%_15%)] rounded-full border border-[hsl(0_0%_25%)]" />
-              {/* Power indicator - off */}
-              <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-[hsl(0_0%_20%)] rounded-full ml-1" />
+              {/* Power indicator */}
+              <div className={`w-1.5 h-1.5 md:w-2 md:h-2 rounded-full ml-1 transition-all duration-300 ${
+                isGeneratorOn ? 'bg-[hsl(120_70%_45%)] shadow-[0_0_6px_2px_rgba(74,222,128,0.6)]' : 'bg-[hsl(0_0%_20%)]'
+              }`} />
             </div>
             {/* Vent grilles */}
             <div className="absolute bottom-2 left-2 right-2 flex gap-0.5 md:gap-1">
@@ -563,7 +592,15 @@ const Index = () => {
               ))}
             </div>
             {/* Side exhaust pipe */}
-            <div className="absolute -right-2 top-2 w-3 h-6 md:w-4 md:h-8 bg-[hsl(0_0%_20%)] rounded-r-sm border-2 border-l-0 border-[hsl(0_0%_15%)]" />
+            <div className="absolute -right-2 top-2 w-3 h-6 md:w-4 md:h-8 bg-[hsl(0_0%_20%)] rounded-r-sm border-2 border-l-0 border-[hsl(0_0%_15%)]">
+              {/* Exhaust smoke when on */}
+              {isGeneratorOn && (
+                <div className="absolute -top-2 left-1/2 -translate-x-1/2 flex flex-col gap-1">
+                  <div className="w-1 h-1 bg-[hsl(0_0%_40%)] rounded-full animate-ping opacity-50" />
+                  <div className="w-1.5 h-1.5 bg-[hsl(0_0%_35%)] rounded-full animate-ping opacity-40" style={{ animationDelay: '0.2s' }} />
+                </div>
+              )}
+            </div>
           </div>
           {/* Fuel tank */}
           <div className="absolute -top-3 md:-top-4 left-2 w-6 h-4 md:w-8 md:h-5 bg-[hsl(0_70%_35%)] rounded-t-sm border border-[hsl(0_60%_25%)]">
