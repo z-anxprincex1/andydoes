@@ -91,9 +91,9 @@ const Index = () => {
           
           // Launch paper airplane
           const newId = airplaneIdRef.current++;
-          const randomX = -100 - Math.random() * 150; // Fly left
+          const randomX = -200 - Math.random() * 300; // Fly further left (200-500px)
           const curveType = Math.floor(Math.random() * 4); // 0-3 different curve types
-          const duration = 2.5 + Math.random() * 1.5; // 2.5-4 seconds flight time
+          const duration = 3 + Math.random() * 2; // 3-5 seconds flight time
           
           setPaperAirplanes(prev => [...prev, {
             id: newId,
@@ -527,9 +527,9 @@ const Index = () => {
       {paperAirplanes.map(airplane => (
         <div
           key={airplane.id}
-          className={`fixed top-32 md:top-40 right-12 md:right-28 z-[5] pointer-events-none paper-airplane-${airplane.curveType}`}
+          className={`fixed top-32 md:top-40 right-8 md:right-24 z-[15] pointer-events-none paper-airplane-${airplane.curveType}`}
           style={{
-            '--fly-x': `${airplane.x}px`,
+            '--fly-end-x': `${airplane.x}px`,
             '--fly-duration': `${airplane.duration}s`,
           } as React.CSSProperties}
         >
