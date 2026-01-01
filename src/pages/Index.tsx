@@ -775,15 +775,39 @@ const Index = () => {
         </div>
       )}
 
-      {/* Projector Light Beam - cone from lens to screen corners */}
+      {/* Projector Light Beam - visible when generator is on */}
       {isGeneratorOn && (
         <div 
-          className="fixed inset-0 z-[25] pointer-events-none animate-light-beam"
+          className="fixed z-[19] pointer-events-none animate-light-beam"
           style={{
-            clipPath: 'polygon(12.5% calc(100% - 8.5rem), 87.5% calc(100% - 8.5rem), calc(100% - 10.5rem) calc(100% - 3.25rem), calc(100% - 10.5rem) calc(100% - 3.25rem))',
-            background: 'linear-gradient(to bottom, hsla(50, 50%, 80%, 0.08) 0%, hsla(50, 65%, 85%, 0.25) 25%, hsla(50, 80%, 90%, 0.5) 55%, hsla(50, 90%, 95%, 0.75) 80%, hsla(50, 100%, 98%, 0.95) 100%)',
+            bottom: 'calc(2rem + 0.5rem + 5px)',
+            right: 'calc(6rem + 4rem + 0.5rem)',
           }}
-        />
+        >
+          <svg 
+            style={{ 
+              width: 'calc(100vw - 14rem)',
+              height: '60vh',
+              transform: 'rotate(-25deg)',
+              transformOrigin: 'bottom right'
+            }}
+            viewBox="0 0 400 300"
+            preserveAspectRatio="none"
+          >
+            <defs>
+              <linearGradient id="beamGradient" x1="100%" y1="100%" x2="0%" y2="0%">
+                <stop offset="0%" stopColor="hsl(50 80% 90%)" stopOpacity="0.6" />
+                <stop offset="30%" stopColor="hsl(50 70% 85%)" stopOpacity="0.3" />
+                <stop offset="70%" stopColor="hsl(50 60% 80%)" stopOpacity="0.1" />
+                <stop offset="100%" stopColor="hsl(50 50% 75%)" stopOpacity="0" />
+              </linearGradient>
+            </defs>
+            <polygon 
+              points="400,300 380,280 0,0 50,0" 
+              fill="url(#beamGradient)"
+            />
+          </svg>
+        </div>
       )}
 
       {/* Projector - lying on floor left of socket */}
