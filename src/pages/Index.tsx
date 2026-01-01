@@ -76,61 +76,49 @@ const Index = () => {
     };
   }, []);
 
-  // LinkedIn hands animation cycle: write -> fold -> throw -> repeat (every ~5 seconds)
+  // LinkedIn hands animation cycle: write -> fold -> throw -> repeat (every 5 seconds)
   useEffect(() => {
     const cycleAnimation = () => {
-      // Writing phase (3 seconds)
+      // Writing phase (2.5 seconds)
       setLinkedinPhase('writing');
       
       setTimeout(() => {
-        // Folding phase (1.2 seconds)
+        // Folding phase (1 second)
         setLinkedinPhase('folding');
         
         setTimeout(() => {
-          // Throwing phase (0.5 seconds)
+          // Throwing phase
           setLinkedinPhase('throwing');
           
           // Launch paper airplane
           const frameEl = linkedinFrameRef.current;
           if (!frameEl) {
-            // Restart cycle if the frame isn't mounted yet
-            setTimeout(cycleAnimation, 500);
+            setTimeout(cycleAnimation, 5000);
             return;
           }
 
           const rect = frameEl.getBoundingClientRect();
           const newId = airplaneIdRef.current++;
-          const curveType = Math.floor(Math.random() * 8); // 0-7 different curve types
-          const duration = 4.5 + Math.random() * 2; // 4.5-6.5 seconds flight time
-          
-          // Random travel distance multiplier (0.5x to 1.3x)
+          const curveType = Math.floor(Math.random() * 8);
+          const duration = 4.5 + Math.random() * 2;
           const distanceMultiplier = 0.5 + Math.random() * 0.8;
 
-          // Start from the LEFT edge of the LinkedIn picture area
           const startX = rect.left + 2;
           const startY = rect.top + rect.height * 0.62;
 
           setPaperAirplanes((prev) => [
             ...prev,
-            {
-              id: newId,
-              startX,
-              startY,
-              curveType,
-              duration,
-              distanceMultiplier,
-            },
+            { id: newId, startX, startY, curveType, duration, distanceMultiplier },
           ]);
 
-          // Remove airplane after it lands and fades (duration + fade time)
           setTimeout(() => {
             setPaperAirplanes((prev) => prev.filter((p) => p.id !== newId));
           }, (duration + 1.25) * 1000);
           
-          // Restart cycle after ~5 seconds total (writing 3s + folding 1.2s + throwing 0.5s + gap 0.3s)
-          setTimeout(cycleAnimation, 300);
-        }, 1200);
-      }, 3000);
+          // Wait 5 seconds before next cycle
+          setTimeout(cycleAnimation, 5000);
+        }, 1000);
+      }, 2500);
     };
     
     cycleAnimation();
