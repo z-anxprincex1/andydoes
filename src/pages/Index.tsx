@@ -126,7 +126,7 @@ const Index = () => {
       setShowScreen(true);
       
       setTimeout(() => setShowPoofText(false), 600);
-      setTimeout(() => setShowPoofSmoke(false), 700);
+      setTimeout(() => setShowPoofSmoke(false), 900);
       setTimeout(() => {
         setTipAnimating(null);
         setScreenAnimating(null);
@@ -142,7 +142,7 @@ const Index = () => {
       setScreenAnimating('out');
       
       setTimeout(() => setShowFluffText(false), 700);
-      setTimeout(() => setShowFluffSmoke(false), 600);
+      setTimeout(() => setShowFluffSmoke(false), 900);
       setTimeout(() => setShowPhewnnText(false), 900);
       setTimeout(() => {
         setShowScreen(false);
@@ -639,20 +639,38 @@ const Index = () => {
         </div>
       )}
 
-      {/* Smoke effect for poof */}
+      {/* Smoke effect for poof - multiple particles */}
       {showPoofSmoke && (
         <div className="fixed bottom-[8.5rem] md:bottom-[10.5rem] left-1/2 z-25 pointer-events-none">
-          <div className="animate-smoke-puff">
-            <div className="w-20 h-20 md:w-28 md:h-28 rounded-full bg-gradient-radial from-[hsl(0_0%_70%)] via-[hsl(0_0%_50%/0.6)] to-transparent blur-md" />
+          {/* Particle 1 - left drift */}
+          <div className="absolute animate-smoke-puff-1">
+            <div className="w-16 h-16 md:w-24 md:h-24 rounded-full bg-[hsl(0_0%_65%/0.8)] blur-lg" />
+          </div>
+          {/* Particle 2 - right drift */}
+          <div className="absolute animate-smoke-puff-2">
+            <div className="w-14 h-14 md:w-20 md:h-20 rounded-full bg-[hsl(320_30%_70%/0.7)] blur-lg" />
+          </div>
+          {/* Particle 3 - center rise */}
+          <div className="absolute animate-smoke-puff-3">
+            <div className="w-12 h-12 md:w-18 md:h-18 rounded-full bg-[hsl(0_0%_75%/0.75)] blur-md" />
           </div>
         </div>
       )}
 
-      {/* Smoke effect for fluff */}
+      {/* Smoke effect for fluff - multiple particles */}
       {showFluffSmoke && (
         <div className="fixed bottom-[8.5rem] md:bottom-[10.5rem] left-1/2 z-25 pointer-events-none">
-          <div className="animate-smoke-fluff">
-            <div className="w-20 h-20 md:w-28 md:h-28 rounded-full bg-gradient-radial from-[hsl(140_40%_70%)] via-[hsl(140_30%_50%/0.5)] to-transparent blur-md" />
+          {/* Particle 1 */}
+          <div className="absolute animate-smoke-fluff-1">
+            <div className="w-14 h-14 md:w-20 md:h-20 rounded-full bg-[hsl(140_50%_65%/0.8)] blur-lg" />
+          </div>
+          {/* Particle 2 */}
+          <div className="absolute animate-smoke-fluff-2">
+            <div className="w-12 h-12 md:w-18 md:h-18 rounded-full bg-[hsl(160_40%_70%/0.7)] blur-lg" />
+          </div>
+          {/* Particle 3 */}
+          <div className="absolute animate-smoke-fluff-3">
+            <div className="w-10 h-10 md:w-16 md:h-16 rounded-full bg-[hsl(140_45%_75%/0.75)] blur-md" />
           </div>
         </div>
       )}
