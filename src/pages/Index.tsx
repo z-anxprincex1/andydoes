@@ -636,7 +636,7 @@ const Index = () => {
       </div>
 
       {/* Cable from generator to socket - curvy zig zag on floor */}
-      <div className="fixed bottom-6 md:bottom-10 left-1/2 z-15 pointer-events-none" style={{ width: 'calc(50% - 4rem)', marginLeft: '2rem' }}>
+      <div className="fixed bottom-5 md:bottom-8 z-15 pointer-events-none" style={{ left: 'calc(50% + 1rem)', width: 'calc(50% - 6rem)' }}>
         <svg className="w-full h-6" viewBox="0 0 200 20" preserveAspectRatio="none">
           <path 
             d="M 0 10 C 20 5, 30 15, 50 10 C 70 5, 80 15, 100 10 C 120 5, 130 15, 150 10 C 170 5, 180 15, 200 10" 
@@ -649,10 +649,10 @@ const Index = () => {
       </div>
 
       {/* Cable from generator to projector - curvy zig zag on floor */}
-      <div className="fixed bottom-6 md:bottom-10 right-1/2 z-15 pointer-events-none" style={{ width: '10rem', marginRight: '2rem' }}>
-        <svg className="w-full h-6" viewBox="0 0 150 20" preserveAspectRatio="none">
+      <div className="fixed bottom-5 md:bottom-8 z-15 pointer-events-none" style={{ right: 'calc(50% + 1rem)', width: '6rem' }}>
+        <svg className="w-full h-6" viewBox="0 0 100 20" preserveAspectRatio="none">
           <path 
-            d="M 150 10 C 130 5, 120 15, 100 10 C 80 5, 70 15, 50 10 C 30 5, 20 15, 0 10" 
+            d="M 100 10 C 85 5, 75 15, 60 10 C 45 5, 35 15, 20 10 C 10 15, 5 5, 0 10" 
             stroke="hsl(0 0% 22%)" 
             strokeWidth="3" 
             fill="none"
