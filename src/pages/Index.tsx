@@ -583,13 +583,15 @@ const Index = () => {
           </svg>
           
           {/* Small pulley on the right of generator */}
-          <div className={`absolute -right-6 md:-right-8 top-1/2 -translate-y-1/2 w-6 h-6 md:w-8 md:h-8 bg-[hsl(0_0%_20%)] rounded-full border-3 border-[hsl(0_0%_28%)] z-10 ${isGeneratorOn ? 'animate-spin' : ''}`}
-            style={{ animationDuration: isGeneratorOn ? '0.25s' : undefined, borderWidth: '3px' }}
-          >
-            {/* Pulley spokes */}
-            <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-[hsl(0_0%_30%)] -translate-y-1/2" />
-            <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-[hsl(0_0%_30%)] -translate-x-1/2" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-[hsl(0_0%_15%)] rounded-full" />
+          <div className="absolute -right-6 md:-right-8 top-1/2 -translate-y-1/2 z-10">
+            <div className={`w-6 h-6 md:w-8 md:h-8 bg-[hsl(0_0%_20%)] rounded-full border-[hsl(0_0%_28%)] relative ${isGeneratorOn ? 'animate-spin' : ''}`}
+              style={{ animationDuration: isGeneratorOn ? '0.25s' : undefined, borderWidth: '3px' }}
+            >
+              {/* Pulley spokes */}
+              <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-[hsl(0_0%_30%)] -translate-y-1/2" />
+              <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-[hsl(0_0%_30%)] -translate-x-1/2" />
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-[hsl(0_0%_15%)] rounded-full" />
+            </div>
           </div>
           
           {/* Generator body */}
