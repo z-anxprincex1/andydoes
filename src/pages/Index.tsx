@@ -718,51 +718,59 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Side Table with Coffee - behind everything */}
+      {/* Side Table with Coffee - side view, behind everything */}
       <div className="fixed bottom-8 md:bottom-12 right-[2%] md:right-[5%] z-[4] pointer-events-none">
-        <div className="relative" style={{ perspective: '400px' }}>
-          {/* Table top */}
-          <div className="w-14 md:w-20 h-14 md:h-20 bg-gradient-to-br from-[hsl(25_40%_35%)] via-[hsl(22_38%_28%)] to-[hsl(20_35%_22%)] rounded-full shadow-[0_4px_12px_rgba(0,0,0,0.4),inset_0_2px_4px_rgba(255,255,255,0.15),inset_0_-2px_6px_rgba(0,0,0,0.3)]" style={{ transform: 'rotateX(15deg)' }}>
-            {/* Wood grain texture */}
-            <div className="absolute inset-2 rounded-full opacity-20" style={{ background: 'repeating-radial-gradient(circle at 30% 30%, transparent, transparent 2px, rgba(0,0,0,0.1) 2px, rgba(0,0,0,0.1) 3px)' }} />
-            {/* Edge highlight */}
-            <div className="absolute inset-0 rounded-full border border-[hsl(25_35%_40%)] opacity-40" />
+        <div className="relative w-16 md:w-24 h-32 md:h-44">
+          
+          {/* Table top - ellipse from side view */}
+          <div className="absolute top-8 md:top-12 left-0 right-0 h-3 md:h-4 bg-gradient-to-b from-[hsl(25_40%_38%)] via-[hsl(22_38%_32%)] to-[hsl(20_35%_26%)] rounded-[50%] shadow-[0_2px_6px_rgba(0,0,0,0.4),inset_0_1px_2px_rgba(255,255,255,0.15)]">
+            {/* Top surface shine */}
+            <div className="absolute inset-x-2 top-0 h-1 bg-gradient-to-r from-transparent via-[hsl(25_35%_45%)] to-transparent rounded-full opacity-50" />
           </div>
           
-          {/* Table stem */}
-          <div className="absolute top-12 md:top-16 left-1/2 -translate-x-1/2 w-3 md:w-4 h-16 md:h-20 bg-gradient-to-r from-[hsl(20_35%_20%)] via-[hsl(22_38%_28%)] to-[hsl(20_35%_20%)] rounded-sm shadow-[2px_0_4px_rgba(0,0,0,0.3)]" />
+          {/* Table top thickness/edge */}
+          <div className="absolute top-[2.4rem] md:top-[3.4rem] left-1 md:left-1.5 right-1 md:right-1.5 h-1.5 md:h-2 bg-gradient-to-b from-[hsl(22_36%_28%)] to-[hsl(20_34%_22%)] rounded-b-sm" />
           
-          {/* Table base */}
-          <div className="absolute top-[6.5rem] md:top-[8.5rem] left-1/2 -translate-x-1/2 w-10 md:w-14 h-2 md:h-3 bg-gradient-to-b from-[hsl(22_38%_28%)] to-[hsl(20_35%_18%)] rounded-full shadow-[0_2px_6px_rgba(0,0,0,0.4)]" style={{ transform: 'rotateX(60deg)' }} />
+          {/* Table stem - visible from side */}
+          <div className="absolute top-[2.8rem] md:top-[4rem] left-1/2 -translate-x-1/2 w-2 md:w-3 h-14 md:h-20 bg-gradient-to-r from-[hsl(20_32%_22%)] via-[hsl(22_36%_30%)] to-[hsl(20_32%_22%)] rounded-sm shadow-[1px_2px_4px_rgba(0,0,0,0.3)]">
+            {/* Stem highlight */}
+            <div className="absolute inset-y-0 left-1/2 w-0.5 bg-gradient-to-b from-[hsl(25_38%_38%)] via-[hsl(22_35%_32%)] to-[hsl(25_38%_38%)] opacity-40" />
+          </div>
           
-          {/* Coffee cup - clickable */}
+          {/* Table base - ellipse from side view */}
+          <div className="absolute bottom-3 md:bottom-4 left-0 right-0 h-2 md:h-3 bg-gradient-to-b from-[hsl(22_36%_30%)] to-[hsl(20_34%_20%)] rounded-[50%] shadow-[0_2px_6px_rgba(0,0,0,0.4)]">
+            {/* Base top shine */}
+            <div className="absolute inset-x-3 top-0 h-0.5 bg-gradient-to-r from-transparent via-[hsl(25_35%_40%)] to-transparent rounded-full opacity-40" />
+          </div>
+          
+          {/* Coffee cup - clickable, sitting on table */}
           <a 
             href="https://buymeacoffee.com/andydoes" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="absolute -top-6 md:-top-8 left-1/2 -translate-x-1/2 pointer-events-auto cursor-pointer group"
+            className="absolute top-0 md:top-1 left-1/2 -translate-x-1/2 pointer-events-auto cursor-pointer group"
           >
             {/* Steam/vapor animation */}
-            <div className="absolute -top-4 md:-top-6 left-1/2 -translate-x-1/2 flex gap-1">
-              <div className="w-0.5 h-3 md:h-4 bg-gradient-to-t from-[hsl(0_0%_80%)/0.6] to-transparent rounded-full animate-[steam_2s_ease-in-out_infinite]" style={{ animationDelay: '0s' }} />
-              <div className="w-0.5 h-4 md:h-5 bg-gradient-to-t from-[hsl(0_0%_80%)/0.5] to-transparent rounded-full animate-[steam_2s_ease-in-out_infinite]" style={{ animationDelay: '0.3s' }} />
-              <div className="w-0.5 h-3 md:h-4 bg-gradient-to-t from-[hsl(0_0%_80%)/0.6] to-transparent rounded-full animate-[steam_2s_ease-in-out_infinite]" style={{ animationDelay: '0.6s' }} />
+            <div className="absolute -top-4 md:-top-5 left-1/2 -translate-x-1/2 flex gap-0.5">
+              <div className="w-0.5 h-3 md:h-4 bg-gradient-to-t from-[hsl(0_0%_80%)/0.6] to-transparent rounded-full animate-steam" style={{ animationDelay: '0s' }} />
+              <div className="w-0.5 h-4 md:h-5 bg-gradient-to-t from-[hsl(0_0%_80%)/0.5] to-transparent rounded-full animate-steam" style={{ animationDelay: '0.3s' }} />
+              <div className="w-0.5 h-3 md:h-4 bg-gradient-to-t from-[hsl(0_0%_80%)/0.6] to-transparent rounded-full animate-steam" style={{ animationDelay: '0.6s' }} />
             </div>
             
             {/* Cup body */}
-            <div className="w-6 md:w-8 h-7 md:h-9 bg-gradient-to-b from-[hsl(30_20%_95%)] via-[hsl(30_15%_90%)] to-[hsl(25_20%_85%)] rounded-b-lg rounded-t-sm shadow-[2px_3px_6px_rgba(0,0,0,0.3),inset_0_1px_2px_rgba(255,255,255,0.8),inset_0_-2px_4px_rgba(0,0,0,0.1)] group-hover:shadow-[2px_3px_8px_rgba(0,0,0,0.4),0_0_12px_rgba(255,200,100,0.3)] transition-shadow relative">
+            <div className="w-5 md:w-7 h-6 md:h-8 bg-gradient-to-b from-[hsl(30_20%_95%)] via-[hsl(30_15%_90%)] to-[hsl(25_20%_85%)] rounded-b-lg rounded-t-sm shadow-[2px_3px_6px_rgba(0,0,0,0.3),inset_0_1px_2px_rgba(255,255,255,0.8),inset_0_-2px_4px_rgba(0,0,0,0.1)] group-hover:shadow-[2px_3px_8px_rgba(0,0,0,0.4),0_0_12px_rgba(255,200,100,0.3)] transition-shadow relative">
               {/* Coffee inside */}
-              <div className="absolute top-1 left-1 right-1 h-2 md:h-3 bg-gradient-to-b from-[hsl(25_60%_20%)] to-[hsl(20_50%_15%)] rounded-sm" />
+              <div className="absolute top-1 left-0.5 right-0.5 h-1.5 md:h-2 bg-gradient-to-b from-[hsl(25_60%_20%)] to-[hsl(20_50%_15%)] rounded-sm" />
               {/* Cup rim */}
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-b from-[hsl(30_20%_98%)] to-[hsl(30_15%_92%)] rounded-t-sm" />
+              <div className="absolute top-0 left-0 right-0 h-0.5 md:h-1 bg-gradient-to-b from-[hsl(30_20%_98%)] to-[hsl(30_15%_92%)] rounded-t-sm" />
             </div>
             
             {/* Cup handle */}
-            <div className="absolute top-1 md:top-1.5 -right-1.5 md:-right-2 w-2 md:w-3 h-4 md:h-5 border-2 border-[hsl(30_15%_88%)] rounded-r-full bg-transparent shadow-[1px_1px_2px_rgba(0,0,0,0.2)]" />
+            <div className="absolute top-1 -right-1 md:-right-1.5 w-1.5 md:w-2 h-3 md:h-4 border-[1.5px] border-[hsl(30_15%_88%)] rounded-r-full bg-transparent shadow-[1px_1px_2px_rgba(0,0,0,0.2)]" />
           </a>
           
           {/* Floor shadow */}
-          <div className="absolute top-[7rem] md:top-[9rem] left-1/2 -translate-x-1/2 w-12 md:w-16 h-3 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.3)_0%,transparent_70%)]" />
+          <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-14 md:w-20 h-2 md:h-3 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.3)_0%,transparent_70%)]" />
         </div>
       </div>
 
