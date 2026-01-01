@@ -677,7 +677,7 @@ const Index = () => {
               
               
               {/* Cup handle - thick curved handle on right */}
-              <div className="absolute top-2 md:top-3 -right-2.5 md:-right-3.5 w-3 md:w-4 h-4 md:h-5 border-[3px] md:border-4 border-[hsl(220_12%_90%)] rounded-[50%] bg-transparent shadow-[2px_2px_4px_rgba(0,0,0,0.2),inset_-1px_-1px_2px_rgba(0,0,0,0.1),inset_1px_1px_2px_rgba(255,255,255,0.6)]" />
+              <div className="absolute top-1.5 md:top-2 -right-2 md:-right-3 w-2.5 md:w-3.5 h-4 md:h-5 border-[2.5px] md:border-[3px] border-[hsl(220_12%_88%)] rounded-r-full bg-transparent shadow-[1px_1px_3px_rgba(0,0,0,0.25),inset_-1px_0_1px_rgba(0,0,0,0.1),inset_1px_1px_2px_rgba(255,255,255,0.5)]" />
             </div>
           </a>
         </div>
