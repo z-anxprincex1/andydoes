@@ -15,6 +15,7 @@ const Index = () => {
   const [wasGeneratorOn, setWasGeneratorOn] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [plugPosition, setPlugPosition] = useState({ x: 30, y: 180 }); // Hanging down longer by default
+  const [anchorScreenPos, setAnchorScreenPos] = useState({ x: 0, y: 0 });
   const [spiderDescending, setSpiderDescending] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const socketRef = useRef<HTMLDivElement>(null);
@@ -105,6 +106,23 @@ const Index = () => {
       setWasGeneratorOn(true);
     }
   }, [isGeneratorOn]);
+
+  // Track anchor screen position for fixed plug
+  useEffect(() => {
+    const updateAnchorPos = () => {
+      if (anchorRef.current) {
+        const rect = anchorRef.current.getBoundingClientRect();
+        setAnchorScreenPos({ x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 });
+      }
+    };
+    updateAnchorPos();
+    window.addEventListener('resize', updateAnchorPos);
+    window.addEventListener('scroll', updateAnchorPos);
+    return () => {
+      window.removeEventListener('resize', updateAnchorPos);
+      window.removeEventListener('scroll', updateAnchorPos);
+    };
+  }, [isGeneratorOn, wasGeneratorOn]);
 
   useEffect(() => {
     if (isDragging) {
@@ -398,36 +416,35 @@ const Index = () => {
                     fill="none"
                   />
                 </svg>
-
-                {/* Draggable Plug - positioned at end of cable */}
-                <div 
-                  onMouseDown={handleMouseDown}
-                  className={`absolute cursor-grab active:cursor-grabbing z-[100] ${
-                    isDragging ? "" : "transition-all duration-500"
-                  }`}
-                  style={{
-                    left: plugPosition.x,
-                    top: plugPosition.y,
-                    transform: `translate(-8px, -50%) ${!isPluggedIn && !isDragging ? "rotate(90deg)" : "rotate(0deg)"}`,
-                    transformOrigin: 'left center',
-                  }}
-                >
-                  <div className="flex items-center">
-                    {/* Plug body */}
-                    <div className="w-5 h-5 md:w-6 md:h-6 bg-[hsl(0_0%_18%)] rounded-sm flex flex-col justify-center items-end pr-0.5 gap-1 shadow-md border border-[hsl(0_0%_25%)]">
-                      {/* Prongs */}
-                      <div className="w-3 h-1 bg-[hsl(45_60%_50%)] rounded-r-sm" />
-                      <div className="w-3 h-1 bg-[hsl(45_60%_50%)] rounded-r-sm" />
-                    </div>
-                  </div>
-                </div>
               </span>
             </span>
           </span>
         </h1>
       </div>
 
-      {/* Retro tooltip above phone */}
+      {/* Draggable Plug - fixed position, always on top */}
+      <div 
+        onMouseDown={handleMouseDown}
+        className={`fixed cursor-grab active:cursor-grabbing z-[9999] ${
+          isDragging ? "" : "transition-all duration-500"
+        } ${isGeneratorOn ? 'pointer-events-none opacity-0' : ''}`}
+        style={{
+          left: anchorScreenPos.x + plugPosition.x,
+          top: anchorScreenPos.y + plugPosition.y,
+          transform: `translate(-8px, -50%) ${!isPluggedIn && !isDragging ? "rotate(90deg)" : "rotate(0deg)"}`,
+          transformOrigin: 'left center',
+        }}
+      >
+        <div className="flex items-center">
+          {/* Plug body */}
+          <div className="w-5 h-5 md:w-6 md:h-6 bg-[hsl(0_0%_18%)] rounded-sm flex flex-col justify-center items-end pr-0.5 gap-1 shadow-md border border-[hsl(0_0%_25%)]">
+            {/* Prongs */}
+            <div className="w-3 h-1 bg-[hsl(45_60%_50%)] rounded-r-sm" />
+            <div className="w-3 h-1 bg-[hsl(45_60%_50%)] rounded-r-sm" />
+          </div>
+        </div>
+      </div>
+
       <div 
         className={`fixed left-4 md:left-8 z-30 transition-all duration-500 pointer-events-none ${
           isPhoneOpen ? 'opacity-0 bottom-[520px] md:bottom-[580px]' : 'opacity-100 bottom-24 md:bottom-28'
