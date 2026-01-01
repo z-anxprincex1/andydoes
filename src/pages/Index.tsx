@@ -4,7 +4,7 @@ import Cat from "@/components/Cat";
 const Index = () => {
   const [isPluggedIn, setIsPluggedIn] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
-  const [plugPosition, setPlugPosition] = useState({ x: 30, y: 180 }); // Hanging down longer by default
+  const [plugPosition, setPlugPosition] = useState({ x: 30, y: 180 });
   const [spiderDescending, setSpiderDescending] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const socketRef = useRef<HTMLDivElement>(null);
@@ -16,11 +16,10 @@ const Index = () => {
     if (!isPluggedIn) return;
     
     const scheduleSpiderAttack = () => {
-      const delay = Math.random() * 15000 + 10000; // 10-25 seconds
+      const delay = Math.random() * 15000 + 10000;
       return setTimeout(() => {
         if (isPluggedIn && Math.random() > 0.5) {
           setSpiderDescending(true);
-          // Spider reaches the cable and unplugs after animation
           setTimeout(() => {
             setIsPluggedIn(false);
             setPlugPosition({ x: 30, y: 180 });
@@ -74,12 +73,10 @@ const Index = () => {
     const socketTargetX = socketRect.left - anchorX;
     const socketTargetY = socketRect.top + socketRect.height / 2 - anchorY;
     
-    // Check if plug is close enough to socket to snap
     if (Math.abs(plugPosition.x - socketTargetX) < 60 && Math.abs(plugPosition.y - socketTargetY) < 40) {
       setIsPluggedIn(true);
       setPlugPosition({ x: socketTargetX, y: socketTargetY });
     } else {
-      // Drop and hang down
       setPlugPosition({ x: 30, y: 180 });
     }
   };
@@ -116,22 +113,19 @@ const Index = () => {
     );
   };
 
-  // Cable path from fixed anchor (0,0) to plug position
   const getCablePath = () => {
     const endX = plugPosition.x - 8;
     const endY = plugPosition.y;
     
     if (isPluggedIn && !isDragging) {
-      // Natural sag when plugged in - gravity pulls the middle down
       const cableLength = Math.sqrt(endX * endX + endY * endY);
-      const sagAmount = Math.max(40, cableLength * 0.25); // More sag for longer cables
+      const sagAmount = Math.max(40, cableLength * 0.25);
       const midX = endX * 0.5;
       const midY = Math.max(endY * 0.5, endY * 0.3) + sagAmount;
       
       return `M 0 0 Q ${midX} ${midY} ${endX} ${endY}`;
     }
     
-    // Smooth curvy zig-zag - like cable lying naturally
     const waveAmplitude = 18;
     const segments = 4;
     const segmentHeight = endY / segments;
@@ -146,14 +140,12 @@ const Index = () => {
       const xProgress = (endX / segments) * i;
       const xProgressNext = (endX / segments) * (i + 1);
       
-      // Alternate wave direction
       const waveDir = i % 2 === 0 ? 1 : -1;
       const controlX = xProgress + (xProgressNext - xProgress) / 2 + (waveAmplitude * waveDir);
       
       path += ` Q ${controlX} ${midY} ${xProgressNext} ${endSegY}`;
     }
     
-    // Final connection to plug
     path += ` L ${endX} ${endY}`;
     
     return path;
@@ -161,12 +153,11 @@ const Index = () => {
 
   return (
     <main className="min-h-screen flex items-center bg-background overflow-hidden relative" ref={containerRef}>
-      {/* Cobweb - Top Left (smaller) */}
+      {/* Cobweb - Top Left */}
       <svg 
         className="fixed top-0 left-0 w-24 h-24 md:w-36 md:h-36 pointer-events-none opacity-25"
         viewBox="0 0 100 100"
       >
-        {/* Radial threads - curved and irregular */}
         <path d="M0 0 Q55 48 98 95" stroke="hsl(0 0% 60%)" strokeWidth="0.4" fill="none" />
         <path d="M0 0 Q32 52 68 98" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
         <path d="M0 0 Q18 45 38 96" stroke="hsl(0 0% 58%)" strokeWidth="0.35" fill="none" />
@@ -174,7 +165,6 @@ const Index = () => {
         <path d="M0 0 Q48 18 95 38" stroke="hsl(0 0% 60%)" strokeWidth="0.35" fill="none" />
         <path d="M0 0 Q42 8 92 16" stroke="hsl(0 0% 52%)" strokeWidth="0.3" fill="none" />
         <path d="M0 0 Q8 38 14 94" stroke="hsl(0 0% 58%)" strokeWidth="0.3" fill="none" />
-        {/* Spiral threads - wobbly curves */}
         <path d="M6 3 Q10 7 4 11 Q2 9 6 3" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
         <path d="M18 5 Q26 14 12 22 Q6 18 5 12" stroke="hsl(0 0% 58%)" strokeWidth="0.3" fill="none" />
         <path d="M32 8 Q44 22 22 38 Q10 32 8 22" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
@@ -188,14 +178,12 @@ const Index = () => {
         viewBox="0 0 100 100"
         style={{ transform: 'scaleX(-1)' }}
       >
-        {/* Radial threads - organic curves */}
         <path d="M0 0 Q42 55 88 92" stroke="hsl(0 0% 55%)" strokeWidth="0.4" fill="none" />
         <path d="M0 0 Q22 48 55 95" stroke="hsl(0 0% 58%)" strokeWidth="0.35" fill="none" />
         <path d="M0 0 Q12 40 28 90" stroke="hsl(0 0% 52%)" strokeWidth="0.3" fill="none" />
         <path d="M0 0 Q50 25 92 52" stroke="hsl(0 0% 55%)" strokeWidth="0.35" fill="none" />
         <path d="M0 0 Q40 12 85 28" stroke="hsl(0 0% 58%)" strokeWidth="0.3" fill="none" />
         <path d="M0 0 Q5 32 10 88" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
-        {/* Connecting threads - sagging curves */}
         <path d="M12 4 Q16 10 6 15" stroke="hsl(0 0% 52%)" strokeWidth="0.3" fill="none" />
         <path d="M28 8 Q38 22 16 32" stroke="hsl(0 0% 55%)" strokeWidth="0.3" fill="none" />
         <path d="M48 14 Q62 38 28 55" stroke="hsl(0 0% 58%)" strokeWidth="0.3" fill="none" />
@@ -204,7 +192,6 @@ const Index = () => {
 
       {/* Spider hanging from right cobweb */}
       <div className="fixed top-0 right-16 md:right-24 pointer-events-none z-30">
-        {/* Spider thread - extends when descending */}
         <div 
           className={`w-px bg-[hsl(0_0%_50%)] origin-top transition-all duration-2000 ease-in-out ${
             !spiderDescending ? 'animate-spider-swing' : ''
@@ -213,33 +200,26 @@ const Index = () => {
             height: spiderDescending ? 'calc(100vh - 120px)' : '200px',
           }}
         >
-          {/* Spider body */}
           <div className={`absolute bottom-0 left-1/2 -translate-x-1/2 ${
             !spiderDescending ? 'animate-spider-bob' : ''
           }`}>
-            {/* Legs left */}
             <svg className={`absolute -left-5 top-1 w-5 h-6 ${spiderDescending ? 'animate-spider-legs' : ''}`} viewBox="0 0 12 16">
               <path d="M12 2 Q6 4 0 0" stroke="hsl(0 0% 15%)" strokeWidth="1.2" fill="none" />
               <path d="M12 6 Q5 7 0 4" stroke="hsl(0 0% 15%)" strokeWidth="1.2" fill="none" />
               <path d="M12 10 Q4 10 0 8" stroke="hsl(0 0% 15%)" strokeWidth="1.2" fill="none" />
               <path d="M12 14 Q5 13 0 16" stroke="hsl(0 0% 15%)" strokeWidth="1.2" fill="none" />
             </svg>
-            {/* Legs right */}
             <svg className={`absolute -right-5 top-1 w-5 h-6 ${spiderDescending ? 'animate-spider-legs' : ''}`} viewBox="0 0 12 16" style={{ transform: 'scaleX(-1)' }}>
               <path d="M12 2 Q6 4 0 0" stroke="hsl(0 0% 15%)" strokeWidth="1.2" fill="none" />
               <path d="M12 6 Q5 7 0 4" stroke="hsl(0 0% 15%)" strokeWidth="1.2" fill="none" />
               <path d="M12 10 Q4 10 0 8" stroke="hsl(0 0% 15%)" strokeWidth="1.2" fill="none" />
               <path d="M12 14 Q5 13 0 16" stroke="hsl(0 0% 15%)" strokeWidth="1.2" fill="none" />
             </svg>
-            {/* Body */}
             <div className="w-4 h-6 bg-[hsl(0_0%_12%)] rounded-full" />
-            {/* Head with cute eyes */}
             <div className="w-4 h-4 bg-[hsl(0_0%_10%)] rounded-full -mt-1.5 mx-auto relative flex items-center justify-center gap-1">
-              {/* Left eye */}
               <div className="w-1.5 h-1.5 bg-[hsl(0_0%_95%)] rounded-full relative animate-spider-blink">
                 <div className="absolute top-0.5 left-0.5 w-0.5 h-0.5 bg-[hsl(0_0%_5%)] rounded-full" />
               </div>
-              {/* Right eye */}
               <div className="w-1.5 h-1.5 bg-[hsl(0_0%_95%)] rounded-full relative animate-spider-blink">
                 <div className="absolute top-0.5 left-0.5 w-0.5 h-0.5 bg-[hsl(0_0%_5%)] rounded-full" />
               </div>
@@ -247,25 +227,7 @@ const Index = () => {
           </div>
         </div>
       </div>
-      {/* Brick wall - only visible when CFL is on, with radial light mask */}
-      <div 
-        className={`fixed inset-0 transition-opacity duration-700 pointer-events-none ${
-          isPluggedIn ? "opacity-100" : "opacity-0"
-        }`}
-        style={{
-          background: `
-            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='110' viewBox='0 0 220 110'%3E%3Cdefs%3E%3Cfilter id='rough'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04' numOctaves='2' result='noise'/%3E%3CfeDisplacementMap in='SourceGraphic' in2='noise' scale='2' xChannelSelector='R' yChannelSelector='G'/%3E%3C/filter%3E%3C/defs%3E%3Crect fill='hsl(10, 20%25, 12%25)' width='220' height='110'/%3E%3Cpath fill='hsl(15, 40%25, 24%25)' d='M3 3 L58 4 L59 6 L60 24 L58 25 L4 24 L2 22 Z'/%3E%3Cpath fill='hsl(14, 38%25, 21%25)' d='M65 2 L134 4 L136 5 L137 23 L135 25 L64 24 L63 22 Z'/%3E%3Cpath fill='hsl(16, 42%25, 26%25)' d='M142 3 L213 2 L215 4 L216 23 L214 25 L143 24 L141 22 Z'/%3E%3Cpath fill='hsl(13, 36%25, 22%25)' d='M2 30 L44 31 L46 33 L47 49 L45 51 L3 50 L1 48 Z'/%3E%3Cpath fill='hsl(17, 44%25, 25%25)' d='M52 29 L117 31 L119 32 L120 50 L118 52 L51 51 L50 49 Z'/%3E%3Cpath fill='hsl(11, 34%25, 20%25)' d='M124 30 L163 29 L165 31 L166 49 L164 51 L123 50 L122 48 Z'/%3E%3Cpath fill='hsl(15, 39%25, 23%25)' d='M170 29 L216 30 L218 32 L217 50 L215 52 L169 51 L168 49 Z'/%3E%3Cpath fill='hsl(18, 45%25, 27%25)' d='M3 56 L53 57 L55 59 L56 76 L54 78 L4 77 L2 75 Z'/%3E%3Cpath fill='hsl(12, 33%25, 19%25)' d='M60 55 L135 57 L137 58 L138 76 L136 78 L59 77 L58 75 Z'/%3E%3Cpath fill='hsl(14, 41%25, 24%25)' d='M142 56 L215 55 L217 57 L218 75 L216 77 L143 78 L141 76 Z'/%3E%3Cpath fill='hsl(16, 37%25, 22%25)' d='M2 83 L65 84 L67 86 L68 104 L66 106 L3 105 L1 103 Z'/%3E%3Cpath fill='hsl(13, 43%25, 26%25)' d='M72 82 L125 84 L127 85 L128 103 L126 105 L71 104 L70 102 Z'/%3E%3Cpath fill='hsl(19, 38%25, 21%25)' d='M132 83 L216 82 L218 84 L217 103 L215 105 L133 106 L131 104 Z'/%3E%3C/svg%3E")
-          `,
-          backgroundSize: '220px 110px',
-          maskImage: isPluggedIn 
-            ? 'radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 30%, rgba(0,0,0,0) 70%)'
-            : 'none',
-          WebkitMaskImage: isPluggedIn 
-            ? 'radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 30%, rgba(0,0,0,0) 70%)'
-            : 'none',
-        }}
-      />
-      
+
       {/* Ambient light glow behind text when on */}
       <div 
         className={`fixed inset-0 transition-opacity duration-700 pointer-events-none ${
@@ -276,139 +238,32 @@ const Index = () => {
         }}
       />
 
-      {/* 90s CRT Television */}
+      {/* Hero Text with Cable */}
       <div className="w-full flex items-center justify-center px-4 md:px-12 lg:px-20 relative z-10">
-        <div className="relative">
-          {/* TV Outer Shell - Beige/cream plastic body */}
-          <div 
-            className="relative bg-gradient-to-b from-[hsl(40_15%_75%)] to-[hsl(35_20%_60%)] rounded-lg p-3 md:p-5 shadow-2xl"
-            style={{
-              boxShadow: 'inset 2px 2px 8px rgba(255,255,255,0.3), inset -2px -2px 8px rgba(0,0,0,0.2), 8px 8px 30px rgba(0,0,0,0.5)',
-            }}
-          >
-            {/* Top vents */}
-            <div className="absolute top-2 left-1/2 -translate-x-1/2 flex gap-1">
-              {[...Array(8)].map((_, i) => (
-                <div key={i} className="w-4 md:w-6 h-1 bg-[hsl(35_15%_50%)] rounded-full opacity-60" />
-              ))}
-            </div>
-            
-            {/* Screen bezel - dark gray frame */}
-            <div className="bg-[hsl(0_0%_12%)] rounded p-2 md:p-3 mt-2">
-              {/* CRT Screen with slight curve effect */}
-              <div 
-                className={`relative overflow-hidden rounded transition-all duration-500 ${
-                  isPluggedIn ? 'bg-[hsl(220_30%_8%)]' : 'bg-[hsl(0_0%_3%)]'
-                }`}
-                style={{
-                  width: 'clamp(320px, 80vw, 800px)',
-                  height: 'clamp(220px, 55vw, 500px)',
-                  boxShadow: isPluggedIn 
-                    ? 'inset 0 0 60px rgba(100,200,255,0.1), inset 0 0 100px rgba(0,0,0,0.8)'
-                    : 'inset 0 0 100px rgba(0,0,0,0.9)',
-                }}
-              >
-                {/* Screen glare overlay */}
-                <div 
-                  className="absolute inset-0 pointer-events-none opacity-20"
-                  style={{
-                    background: 'linear-gradient(135deg, rgba(255,255,255,0.3) 0%, transparent 40%, transparent 60%, rgba(255,255,255,0.1) 100%)',
-                  }}
-                />
-                
-                {/* Scanlines effect */}
-                <div 
-                  className={`absolute inset-0 pointer-events-none transition-opacity duration-500 ${isPluggedIn ? 'opacity-30' : 'opacity-0'}`}
-                  style={{
-                    backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.3) 2px, rgba(0,0,0,0.3) 4px)',
-                  }}
-                />
-                
-                {/* Static noise when off */}
-                <div 
-                  className={`absolute inset-0 pointer-events-none transition-opacity duration-300 ${!isPluggedIn ? 'opacity-5' : 'opacity-0'}`}
-                  style={{
-                    backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E")`,
-                  }}
-                />
-                
-                {/* Text content on screen */}
-                <div className="absolute inset-0 flex items-center justify-center p-4">
-                  <h1 
-                    className={`text-hero font-pixel transition-all duration-500 flex flex-col text-center ${
-                      isPluggedIn ? "cfl-tube cfl-glow" : "cfl-off"
-                    }`}
-                    style={{
-                      fontSize: 'clamp(1.5rem, 6vw, 4rem)',
-                    }}
-                  >
-                    <span className="flex flex-wrap justify-center">
-                      {["anand", "prince"].map((word, i) => 
-                        renderWord(word, i, false)
-                      )}
-                    </span>
-                    <span className="flex justify-center">
-                      {renderWord("purty", 2, true)}
-                    </span>
-                  </h1>
-                </div>
-                
-                {/* Screen glow when on */}
-                <div 
-                  className={`absolute inset-0 pointer-events-none transition-opacity duration-700 ${
-                    isPluggedIn ? 'opacity-100' : 'opacity-0'
-                  }`}
-                  style={{
-                    boxShadow: 'inset 0 0 80px rgba(100,220,255,0.15)',
-                  }}
-                />
-              </div>
-            </div>
-            
-            {/* Control panel below screen */}
-            <div className="flex items-center justify-between mt-3 md:mt-4 px-2">
-              {/* Brand name */}
-              <div className="text-[hsl(35_10%_35%)] text-xs md:text-sm font-bold tracking-widest uppercase" style={{ fontFamily: 'Arial, sans-serif' }}>
-                Retrovision
-              </div>
-              
-              {/* Control buttons and knobs */}
-              <div className="flex items-center gap-2 md:gap-3">
-                {/* Channel/Volume knobs */}
-                <div className="flex gap-1 md:gap-2">
-                  <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-gradient-to-b from-[hsl(0_0%_25%)] to-[hsl(0_0%_15%)] border-2 border-[hsl(0_0%_20%)] shadow-inner flex items-center justify-center">
-                    <div className="w-0.5 h-2 md:h-3 bg-[hsl(0_0%_40%)]" />
-                  </div>
-                  <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-gradient-to-b from-[hsl(0_0%_25%)] to-[hsl(0_0%_15%)] border-2 border-[hsl(0_0%_20%)] shadow-inner flex items-center justify-center">
-                    <div className="w-0.5 h-2 md:h-3 bg-[hsl(0_0%_40%)]" />
-                  </div>
-                </div>
-                
-                {/* Power LED */}
-                <div 
-                  className={`w-2 h-2 md:w-3 md:h-3 rounded-full transition-all duration-300 ${
-                    isPluggedIn 
-                      ? 'bg-green-500 shadow-[0_0_8px_2px_rgba(34,197,94,0.6)]' 
-                      : 'bg-[hsl(0_0%_20%)]'
-                  }`}
-                />
-              </div>
-            </div>
-            
-            {/* Cable anchor point - bottom right of TV */}
+        <h1 
+          className={`text-hero font-pixel transition-all duration-500 flex flex-col text-center relative ${
+            isPluggedIn ? "cfl-tube cfl-glow" : "cfl-off"
+          }`}
+        >
+          <span className="flex flex-wrap justify-center">
+            {["anand", "prince"].map((word, i) => 
+              renderWord(word, i, false)
+            )}
+          </span>
+          <span className="flex justify-center">
+            {renderWord("purty", 2, true)}
+            {/* Cable anchor on last letter */}
             <span 
               ref={anchorRef} 
-              className="absolute -bottom-2 right-8 md:right-12"
+              className="relative inline-block"
+              style={{ width: 0, height: 0 }}
             >
-              {/* Cable exit port */}
-              <div className="w-4 h-3 bg-[hsl(0_0%_20%)] rounded-b" />
-              
-              {/* SVG Cable - starts from TV, extends to plug */}
+              {/* SVG Cable */}
               <svg 
                 className="absolute pointer-events-none"
                 style={{
-                  left: 8,
-                  top: 12,
+                  left: 0,
+                  top: 0,
                   width: Math.abs(plugPosition.x) + 50,
                   height: Math.abs(plugPosition.y) + 50,
                   overflow: 'visible',
@@ -424,51 +279,42 @@ const Index = () => {
                 />
               </svg>
 
-              {/* Draggable Plug - positioned at end of cable */}
+              {/* Draggable Plug */}
               <div 
                 onMouseDown={handleMouseDown}
                 className={`absolute cursor-grab active:cursor-grabbing z-10 ${
                   isDragging ? "" : "transition-all duration-500"
                 }`}
                 style={{
-                  left: plugPosition.x + 8,
-                  top: plugPosition.y + 12,
+                  left: plugPosition.x,
+                  top: plugPosition.y,
                   transform: `translate(-8px, -50%) ${!isPluggedIn && !isDragging ? "rotate(90deg)" : "rotate(0deg)"}`,
                   transformOrigin: 'left center',
                 }}
               >
                 <div className="flex items-center">
-                  {/* Plug body */}
                   <div className="w-5 h-5 md:w-6 md:h-6 bg-[hsl(0_0%_18%)] rounded-sm flex flex-col justify-center items-end pr-0.5 gap-1 shadow-md border border-[hsl(0_0%_25%)]">
-                    {/* Prongs */}
                     <div className="w-3 h-1 bg-[hsl(45_60%_50%)] rounded-r-sm" />
                     <div className="w-3 h-1 bg-[hsl(45_60%_50%)] rounded-r-sm" />
                   </div>
                 </div>
               </div>
             </span>
-          </div>
-          
-          {/* TV Stand/Base */}
-          <div className="flex justify-center mt-1">
-            <div className="w-32 md:w-48 h-3 md:h-4 bg-gradient-to-b from-[hsl(35_15%_55%)] to-[hsl(30_20%_45%)] rounded-b-lg shadow-lg" />
-          </div>
-        </div>
+          </span>
+        </h1>
       </div>
 
       {/* Floor */}
       <div className="fixed bottom-0 left-0 right-0 h-8 md:h-12 bg-[hsl(0_0%_6%)] border-t border-[hsl(0_0%_15%)] z-10">
-        {/* Floor texture lines */}
         <div className="absolute inset-0 opacity-30">
           <div className="h-full w-full" style={{
             backgroundImage: 'repeating-linear-gradient(90deg, transparent, transparent 40px, hsl(0 0% 12%) 40px, hsl(0 0% 12%) 41px)',
           }} />
         </div>
-        {/* Floor highlight */}
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[hsl(0_0%_20%)] to-transparent" />
       </div>
 
-      {/* Socket - fixed at bottom right, sitting on floor */}
+      {/* Socket */}
       <div 
         ref={socketRef}
         className={`fixed bottom-8 md:bottom-12 right-8 md:right-12 w-12 h-16 md:w-16 md:h-24 bg-[hsl(0_0%_8%)] rounded-t border-2 border-b-0 transition-all duration-300 shadow-[inset_0_2px_8px_rgba(0,0,0,0.6)] z-20 ${
@@ -489,13 +335,13 @@ const Index = () => {
                 : "bg-[hsl(0_0%_20%)]"
             }`} 
           />
-      </div>
+        </div>
 
-      {/* Cat */}
-      <Cat onScratchSocket={() => {
-        setIsPluggedIn(false);
-        setPlugPosition({ x: 30, y: 180 });
-      }} />
+        {/* Cat */}
+        <Cat onScratchSocket={() => {
+          setIsPluggedIn(false);
+          setPlugPosition({ x: 30, y: 180 });
+        }} />
       </div>
     </main>
   );
