@@ -270,7 +270,7 @@ const Index = () => {
             {/* Speech bubble when at coffee - ellipse */}
             <div className={`absolute -left-28 md:-left-32 -top-2 bg-white px-3 py-1.5 rounded-[50%] shadow-lg border border-[hsl(0_0%_70%)] w-[90px] md:w-[100px] h-[32px] md:h-[36px] flex items-center justify-center transform transition-all duration-500 ${spiderAtCoffee ? 'scale-100 opacity-100' : 'scale-0 opacity-0'}`}>
               <p className="text-[8px] md:text-[10px] font-bold text-center text-black" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
-                Buy me a coffee!
+                buy me a coffee!
               </p>
               {/* Speech bubble tail */}
               <div className="absolute -right-1 top-1/2 -translate-y-1/2 w-0 h-0 border-l-6 border-l-white border-t-3 border-t-transparent border-b-3 border-b-transparent" />
