@@ -836,7 +836,7 @@ const Index = () => {
               </div>
 
               {/* Folder body - paper-like with imperfect edges */}
-              <div className="absolute top-[3.5rem] left-8 right-8 bottom-8">
+              <div className="absolute top-[3.5rem] left-4 right-4 bottom-4 md:left-6 md:right-6 md:bottom-6">
                 {/* Paper folder shape */}
                 <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
                   <defs>
