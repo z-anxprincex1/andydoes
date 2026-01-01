@@ -47,7 +47,7 @@ const Index = () => {
   const [githubEyeDirection, setGithubEyeDirection] = useState<'center' | 'left' | 'right'>('center');
   const [githubBlinking, setGithubBlinking] = useState(false);
   const [linkedinPhase, setLinkedinPhase] = useState<'writing' | 'folding' | 'throwing'>('writing');
-  const [paperAirplanes, setPaperAirplanes] = useState<Array<{id: number; x: number; y: number; rotate: number}>>([]);
+  const [paperAirplanes, setPaperAirplanes] = useState<Array<{id: number; x: number; curveType: number; duration: number}>>([]);
   const containerRef = useRef<HTMLDivElement>(null);
   const socketRef = useRef<HTMLDivElement>(null);
   const anchorRef = useRef<HTMLSpanElement>(null);
@@ -91,21 +91,21 @@ const Index = () => {
           
           // Launch paper airplane
           const newId = airplaneIdRef.current++;
-          const randomX = 150 + Math.random() * 200; // Fly left and down
-          const randomY = 300 + Math.random() * 200;
-          const randomRotate = -30 + Math.random() * 60;
+          const randomX = -100 - Math.random() * 150; // Fly left
+          const curveType = Math.floor(Math.random() * 4); // 0-3 different curve types
+          const duration = 2.5 + Math.random() * 1.5; // 2.5-4 seconds flight time
           
           setPaperAirplanes(prev => [...prev, {
             id: newId,
-            x: -randomX,
-            y: randomY,
-            rotate: randomRotate
+            x: randomX,
+            curveType,
+            duration
           }]);
           
-          // Remove airplane after it fades
+          // Remove airplane after it lands and fades (duration + fade time)
           setTimeout(() => {
             setPaperAirplanes(prev => prev.filter(p => p.id !== newId));
-          }, 3500);
+          }, (duration + 1.5) * 1000);
           
           // Restart cycle
           setTimeout(cycleAnimation, 500);
@@ -392,14 +392,14 @@ const Index = () => {
                     {/* Inner gold rim */}
                     <div className="w-full h-full rounded-sm bg-gradient-to-br from-[hsl(35_58%_45%)] via-[hsl(35_52%_50%)] to-[hsl(35_48%_38%)] p-0.5">
                       {/* Picture area - LinkedIn blue background with animated hands */}
-                      <div className="w-full h-full rounded-sm bg-[hsl(201_100%_25%)] flex items-center justify-center group-hover:bg-[hsl(201_100%_35%)] transition-colors shadow-[inset_0_0_8px_rgba(0,0,0,0.4)] overflow-hidden relative">
-                        <Linkedin className="w-5 h-5 md:w-6 md:h-6 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-30" />
+                      <div className="w-full h-full rounded-sm bg-[hsl(201_100%_25%)] flex items-center justify-center group-hover:bg-[hsl(201_100%_35%)] transition-colors shadow-[inset_0_0_8px_rgba(0,0,0,0.4)] overflow-visible relative">
+                        <Linkedin className="w-5 h-5 md:w-6 md:h-6 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)] absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2" />
                         
-                        {/* Animated hands container */}
-                        <div className="absolute inset-0 flex items-end justify-center pb-0.5">
+                        {/* Animated hands container - positioned below frame */}
+                        <div className="absolute -bottom-3 md:-bottom-4 left-1/2 -translate-x-1/2 flex items-start justify-center gap-0.5">
                           {/* Left hand */}
                           <div className={`relative ${linkedinPhase === 'throwing' ? 'animate-hand-throw' : ''}`}>
-                            <svg width="12" height="14" viewBox="0 0 12 14" className="md:w-4 md:h-5">
+                            <svg width="16" height="18" viewBox="0 0 12 14" className="md:w-6 md:h-7">
                               {/* Palm */}
                               <ellipse cx="6" cy="10" rx="5" ry="3.5" fill="hsl(30 60% 70%)" />
                               {/* Thumb */}
@@ -412,15 +412,15 @@ const Index = () => {
                             </svg>
                           </div>
                           
-                          {/* Paper/Letter being worked on */}
-                          <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ${linkedinPhase === 'folding' ? 'animate-hand-fold' : ''}`}>
+                          {/* Paper/Letter being worked on - bigger */}
+                          <div className={`absolute -top-2 md:-top-3 left-1/2 -translate-x-1/2 ${linkedinPhase === 'folding' ? 'animate-hand-fold' : ''}`}>
                             {linkedinPhase !== 'throwing' && (
-                              <div className="w-2 h-2.5 md:w-3 md:h-3 bg-white rounded-[1px] shadow-sm flex items-center justify-center">
+                              <div className="w-4 h-5 md:w-5 md:h-6 bg-white rounded-[2px] shadow-md flex items-center justify-center">
                                 {linkedinPhase === 'writing' && (
-                                  <div className="w-1 md:w-1.5 h-px bg-[hsl(201_100%_40%)] animate-pulse" />
+                                  <div className="w-2 md:w-3 h-px bg-[hsl(201_100%_40%)] animate-pulse" />
                                 )}
                                 {linkedinPhase === 'folding' && (
-                                  <div className="w-0 h-0 border-l-[3px] border-l-transparent border-r-[3px] border-r-transparent border-b-[4px] border-b-[hsl(201_100%_40%)]" />
+                                  <div className="w-0 h-0 border-l-[5px] border-l-transparent border-r-[5px] border-r-transparent border-b-[7px] border-b-[hsl(201_100%_40%)]" />
                                 )}
                               </div>
                             )}
@@ -428,7 +428,7 @@ const Index = () => {
                           
                           {/* Right hand */}
                           <div className={`relative ${linkedinPhase === 'folding' ? 'animate-hand-fold' : ''}`}>
-                            <svg width="12" height="14" viewBox="0 0 12 14" className="md:w-4 md:h-5 -scale-x-100">
+                            <svg width="16" height="18" viewBox="0 0 12 14" className="md:w-6 md:h-7 -scale-x-100">
                               {/* Palm */}
                               <ellipse cx="6" cy="10" rx="5" ry="3.5" fill="hsl(30 60% 70%)" />
                               {/* Thumb */}
@@ -523,19 +523,18 @@ const Index = () => {
         </a>
       </div>
 
-      {/* Paper airplanes flying from LinkedIn frame */}
+      {/* Paper airplanes flying from LinkedIn frame to floor */}
       {paperAirplanes.map(airplane => (
         <div
           key={airplane.id}
-          className="fixed top-32 md:top-40 right-12 md:right-28 z-[5] pointer-events-none animate-paper-fly"
+          className={`fixed top-32 md:top-40 right-12 md:right-28 z-[5] pointer-events-none paper-airplane-${airplane.curveType}`}
           style={{
             '--fly-x': `${airplane.x}px`,
-            '--fly-y': `${airplane.y}px`,
-            '--fly-rotate': `${airplane.rotate}deg`,
+            '--fly-duration': `${airplane.duration}s`,
           } as React.CSSProperties}
         >
-          {/* Paper airplane SVG */}
-          <svg width="16" height="12" viewBox="0 0 16 12" className="drop-shadow-md">
+          {/* Paper airplane SVG - bigger */}
+          <svg width="32" height="24" viewBox="0 0 16 12" className="drop-shadow-lg">
             {/* Main body */}
             <path 
               d="M0 6 L16 0 L12 6 L16 12 L0 6 Z" 
