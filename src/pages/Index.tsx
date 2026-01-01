@@ -345,6 +345,37 @@ const Index = () => {
         </h1>
       </div>
 
+      {/* Mobile phone lying on floor - bottom left */}
+      <div 
+        className="fixed bottom-10 md:bottom-14 left-6 md:left-12 z-20"
+        style={{ transform: 'rotate(-15deg) perspective(200px) rotateX(60deg)' }}
+      >
+        {/* Phone body */}
+        <div className="w-10 h-20 md:w-12 md:h-24 bg-[hsl(0_0%_12%)] rounded-lg border border-[hsl(0_0%_20%)] shadow-[0_4px_12px_rgba(0,0,0,0.5)] relative">
+          {/* Screen */}
+          <div className="absolute inset-1 bg-[hsl(220_15%_8%)] rounded-md overflow-hidden">
+            {/* Screen reflection */}
+            <div className="absolute inset-0 bg-gradient-to-br from-[hsl(0_0%_25%)] via-transparent to-transparent opacity-20" />
+            {/* Screen content - time */}
+            <div className="absolute top-2 left-1/2 -translate-x-1/2 text-[6px] md:text-[8px] text-[hsl(0_0%_60%)] font-mono">
+              12:45
+            </div>
+            {/* App icons grid */}
+            <div className="absolute bottom-2 left-1 right-1 grid grid-cols-3 gap-0.5">
+              <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-[hsl(200_60%_40%)] rounded-sm opacity-60" />
+              <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-[hsl(120_50%_35%)] rounded-sm opacity-60" />
+              <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-[hsl(350_60%_45%)] rounded-sm opacity-60" />
+            </div>
+          </div>
+          {/* Camera notch */}
+          <div className="absolute top-0.5 left-1/2 -translate-x-1/2 w-3 h-0.5 bg-[hsl(0_0%_8%)] rounded-full" />
+          {/* Home indicator */}
+          <div className="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-4 h-0.5 bg-[hsl(0_0%_25%)] rounded-full" />
+        </div>
+        {/* Phone shadow on floor */}
+        <div className="absolute -bottom-1 left-1 right-1 h-2 bg-[hsl(0_0%_0%)] rounded-full blur-sm opacity-40" />
+      </div>
+
       {/* Floor */}
       <div className="fixed bottom-0 left-0 right-0 h-8 md:h-12 bg-[hsl(0_0%_6%)] border-t border-[hsl(0_0%_15%)] z-10">
         {/* Floor texture lines */}
