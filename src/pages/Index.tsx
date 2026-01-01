@@ -777,13 +777,16 @@ const Index = () => {
 
       {/* Projector Light Beam - visible when generator is on */}
       {isGeneratorOn && (
-        <div className="fixed bottom-8 md:bottom-11 right-24 md:right-32 z-19 pointer-events-none animate-light-beam">
+        <div 
+          className="fixed z-[19] pointer-events-none animate-light-beam"
+          style={{
+            bottom: 'calc(2rem + 0.5rem + 5px)',
+            right: 'calc(6rem + 4rem + 0.5rem)',
+          }}
+        >
           <svg 
-            className="absolute" 
             style={{ 
-              left: '-2rem',
-              bottom: '0.5rem',
-              width: 'calc(100vw - 10rem)',
+              width: 'calc(100vw - 14rem)',
               height: '60vh',
               transform: 'rotate(-25deg)',
               transformOrigin: 'bottom right'
