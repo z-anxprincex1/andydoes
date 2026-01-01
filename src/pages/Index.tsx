@@ -812,13 +812,38 @@ const Index = () => {
               </div>
 
               {/* Folder body */}
-              <div className="absolute top-[3.5rem] left-[1.5%] right-[1.5%] bottom-4 rounded-lg border-2 border-black bg-white shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)]">
+              <div className="absolute top-[3.5rem] left-[1.5%] right-[1.5%] bottom-4 rounded-lg border-2 border-black bg-white shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)] overflow-hidden">
                 {/* Folder content */}
-                <div className="w-full h-full flex items-center justify-center p-8">
+                <div className="w-full h-full overflow-y-auto p-4 md:p-6">
                   {activeFolder === 'projects' ? (
-                    <div className="text-black text-center" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
-                      <p className="text-2xl md:text-4xl font-bold mb-4">My Projects</p>
-                      <p className="text-sm md:text-lg text-black/60">Projects coming soon...</p>
+                    <div className="text-black" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {/* Project 1 */}
+                        <div className="p-4 border-2 border-black rounded-lg hover:bg-black/5 transition-colors">
+                          <h3 className="font-bold text-sm md:text-base mb-2">Multi-Modal Deep Learning for VQA</h3>
+                          <p className="text-xs md:text-sm text-black/70">Constructed a multimodal architecture for Visual Question Answering by synthesizing image features via ResNet and textual embeddings via BERT, attaining high precision in contextual responses.</p>
+                        </div>
+                        {/* Project 2 */}
+                        <div className="p-4 border-2 border-black rounded-lg hover:bg-black/5 transition-colors">
+                          <h3 className="font-bold text-sm md:text-base mb-2">VirtualEye – Drowning Detection</h3>
+                          <p className="text-xs md:text-sm text-black/70">Deployed YOLOv5 on IBM Cloud to architect a real-time drowning detection system, triggering immediate alerts for drowning risks via Flask API endpoints.</p>
+                        </div>
+                        {/* Project 3 */}
+                        <div className="p-4 border-2 border-black rounded-lg hover:bg-black/5 transition-colors">
+                          <h3 className="font-bold text-sm md:text-base mb-2">Signease – Sign Language Detection</h3>
+                          <p className="text-xs md:text-sm text-black/70">Developed a browser-based sign language translator leveraging Mobilenet SSD and TensorFlow.js, enabling seamless gesture-to-text conversion in real time.</p>
+                        </div>
+                        {/* Project 4 */}
+                        <div className="p-4 border-2 border-black rounded-lg hover:bg-black/5 transition-colors">
+                          <h3 className="font-bold text-sm md:text-base mb-2">Skin Disease Classification CNN</h3>
+                          <p className="text-xs md:text-sm text-black/70">Built and fine-tuned a convolutional neural network achieving 93% accuracy in classifying dermatological conditions across multiple categories.</p>
+                        </div>
+                        {/* Project 5 */}
+                        <div className="p-4 border-2 border-black rounded-lg hover:bg-black/5 transition-colors">
+                          <h3 className="font-bold text-sm md:text-base mb-2">Smart Door Lock with Face Detection</h3>
+                          <p className="text-xs md:text-sm text-black/70">Built a security system integrating Raspberry Pi, facial recognition, and fingerprint validation to automate intelligent door access.</p>
+                        </div>
+                      </div>
                     </div>
                   ) : (
                     <div className="text-black text-center" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
