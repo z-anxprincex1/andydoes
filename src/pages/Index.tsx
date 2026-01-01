@@ -370,6 +370,28 @@ const Index = () => {
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[hsl(0_0%_20%)] to-transparent" />
       </div>
 
+      {/* Projector - lying on floor left of socket */}
+      <div className="fixed bottom-9 md:bottom-13 right-28 md:right-36 z-20">
+        {/* Projector body */}
+        <div className="w-12 h-6 md:w-16 md:h-8 bg-[hsl(0_0%_15%)] rounded relative">
+          {/* Lens */}
+          <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1 w-3 h-3 md:w-4 md:h-4 bg-[hsl(0_0%_8%)] rounded-full border-2 border-[hsl(0_0%_25%)]">
+            <div className="absolute inset-1 bg-[hsl(220_20%_15%)] rounded-full" />
+          </div>
+          {/* Top vent lines */}
+          <div className="absolute top-1 right-2 flex gap-0.5">
+            <div className="w-0.5 h-2 md:h-3 bg-[hsl(0_0%_10%)]" />
+            <div className="w-0.5 h-2 md:h-3 bg-[hsl(0_0%_10%)]" />
+            <div className="w-0.5 h-2 md:h-3 bg-[hsl(0_0%_10%)]" />
+          </div>
+          {/* Power LED - off */}
+          <div className="absolute bottom-1 right-2 w-1 h-1 bg-[hsl(0_0%_25%)] rounded-full" />
+          {/* Feet */}
+          <div className="absolute -bottom-0.5 left-2 w-1.5 h-1 bg-[hsl(0_0%_10%)] rounded-sm" />
+          <div className="absolute -bottom-0.5 right-3 w-1.5 h-1 bg-[hsl(0_0%_10%)] rounded-sm" />
+        </div>
+      </div>
+
       {/* Socket - fixed at bottom right, sitting on floor */}
       <div 
         ref={socketRef}
