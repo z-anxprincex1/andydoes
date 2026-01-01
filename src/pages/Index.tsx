@@ -812,7 +812,7 @@ const Index = () => {
               </div>
 
               {/* Folder body */}
-              <div className="absolute top-[3.5rem] left-[2.5%] right-[2.5%] bottom-4 rounded-lg border-2 border-black bg-white shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)]">
+              <div className="absolute top-[3.5rem] left-[1.5%] right-[1.5%] bottom-4 rounded-lg border-2 border-black bg-white shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)]">
                 {/* Folder content */}
                 <div className="w-full h-full flex items-center justify-center p-8">
                   {activeFolder === 'projects' ? (
