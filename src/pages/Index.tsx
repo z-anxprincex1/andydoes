@@ -651,6 +651,35 @@ const Index = () => {
         </svg>
       </div>
 
+      {/* Sofa - behind everything */}
+      <div className="fixed bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 z-[5] pointer-events-none">
+        <div className="relative">
+          {/* Sofa back rest */}
+          <div className="w-80 md:w-[28rem] h-16 md:h-20 bg-gradient-to-b from-[hsl(20_45%_35%)] to-[hsl(20_50%_28%)] rounded-t-[2rem] border-2 border-b-0 border-[hsl(20_40%_20%)] shadow-[inset_0_2px_4px_rgba(255,255,255,0.1)]">
+            {/* Cushion pattern on back */}
+            <div className="flex justify-center gap-2 md:gap-4 pt-3 md:pt-4">
+              <div className="w-20 md:w-28 h-8 md:h-10 bg-[hsl(20_42%_32%)] rounded-lg border border-[hsl(20_35%_25%)]" />
+              <div className="w-20 md:w-28 h-8 md:h-10 bg-[hsl(20_42%_32%)] rounded-lg border border-[hsl(20_35%_25%)]" />
+              <div className="w-20 md:w-28 h-8 md:h-10 bg-[hsl(20_42%_32%)] rounded-lg border border-[hsl(20_35%_25%)]" />
+            </div>
+          </div>
+          {/* Sofa seat */}
+          <div className="w-80 md:w-[28rem] h-8 md:h-10 bg-gradient-to-b from-[hsl(20_48%_32%)] to-[hsl(20_50%_26%)] border-2 border-t-0 border-[hsl(20_40%_20%)] shadow-[0_4px_8px_rgba(0,0,0,0.3)]">
+            {/* Seat cushions */}
+            <div className="flex justify-center gap-1 md:gap-2 pt-1">
+              <div className="w-24 md:w-36 h-5 md:h-6 bg-[hsl(20_45%_30%)] rounded-b-lg border-x border-b border-[hsl(20_35%_22%)]" />
+              <div className="w-24 md:w-36 h-5 md:h-6 bg-[hsl(20_45%_30%)] rounded-b-lg border-x border-b border-[hsl(20_35%_22%)]" />
+            </div>
+          </div>
+          {/* Sofa arms */}
+          <div className="absolute -left-4 md:-left-6 bottom-0 w-6 md:w-8 h-20 md:h-24 bg-gradient-to-r from-[hsl(20_50%_30%)] to-[hsl(20_45%_35%)] rounded-l-xl border-2 border-r-0 border-[hsl(20_40%_20%)]" />
+          <div className="absolute -right-4 md:-right-6 bottom-0 w-6 md:w-8 h-20 md:h-24 bg-gradient-to-l from-[hsl(20_50%_30%)] to-[hsl(20_45%_35%)] rounded-r-xl border-2 border-l-0 border-[hsl(20_40%_20%)]" />
+          {/* Sofa legs */}
+          <div className="absolute -bottom-3 left-4 w-4 h-3 bg-[hsl(30_30%_20%)] rounded-b" />
+          <div className="absolute -bottom-3 right-4 w-4 h-3 bg-[hsl(30_30%_20%)] rounded-b" />
+        </div>
+      </div>
+
       {/* Diesel Generator - center of floor */}
       <div 
         className="fixed bottom-8 md:bottom-12 left-1/2 -translate-x-1/2 z-20 cursor-pointer"
