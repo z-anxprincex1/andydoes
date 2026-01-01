@@ -545,8 +545,8 @@ const Index = () => {
       </div>
 
       {/* Tip above generator */}
-      <div className="fixed bottom-[8.5rem] md:bottom-[10.5rem] left-1/2 -translate-x-1/2 z-20 pointer-events-none animate-bounce">
-        <div className="relative bg-[hsl(320_80%_55%)] px-4 py-2 rounded-xl border-3 border-[hsl(0_0%_10%)] shadow-[4px_4px_0_hsl(0_0%_10%)] transform -rotate-2">
+      <div className="fixed bottom-32 md:bottom-40 left-1/2 -translate-x-1/2 z-20 pointer-events-none animate-bounce">
+        <div className="relative bg-[hsl(320_80%_55%)] px-4 py-2 rounded-xl border-2 border-[hsl(0_0%_10%)] shadow-[4px_4px_0_hsl(0_0%_10%)]">
           <span 
             className="text-[hsl(60_100%_95%)] text-sm md:text-base font-extrabold whitespace-nowrap drop-shadow-[2px_2px_0_hsl(0_0%_10%)]" 
             style={{ fontFamily: 'Comic Sans MS, cursive' }}
