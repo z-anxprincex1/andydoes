@@ -554,26 +554,26 @@ const Index = () => {
           <div className="w-28 h-18 md:w-36 md:h-24 bg-gradient-to-b from-[hsl(35_25%_28%)] to-[hsl(35_30%_18%)] rounded border-2 border-[hsl(35_20%_22%)] shadow-[0_4px_8px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.1)] relative" style={{ height: '5rem' }}>
             
             {/* Flywheel viewing window on left side */}
-            <div className="absolute left-1 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 bg-[hsl(0_0%_5%)] rounded-full border-2 border-[hsl(35_15%_15%)] overflow-hidden shadow-[inset_0_2px_8px_rgba(0,0,0,0.8)]">
+            <div className="absolute left-1 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 bg-[hsl(0_0%_8%)] rounded-full border-2 border-[hsl(35_15%_20%)] overflow-hidden">
               {/* Visible flywheel inside */}
-              <div className={`absolute inset-1 bg-gradient-to-br from-[hsl(0_0%_28%)] to-[hsl(0_0%_15%)] rounded-full ${isGeneratorOn ? 'animate-spin' : ''}`}
+              <div className={`absolute inset-0 bg-gradient-to-br from-[hsl(0_0%_32%)] to-[hsl(0_0%_18%)] rounded-full ${isGeneratorOn ? 'animate-spin' : ''}`}
                 style={{ animationDuration: isGeneratorOn ? '0.3s' : undefined }}
               >
                 {/* Flywheel ridges */}
-                <div className="absolute inset-0.5 border-2 border-[hsl(0_0%_35%)] rounded-full" />
-                <div className="absolute inset-2 border border-[hsl(0_0%_25%)] rounded-full" />
+                <div className="absolute inset-1 border-2 border-[hsl(0_0%_42%)] rounded-full" />
+                <div className="absolute inset-2.5 border border-[hsl(0_0%_35%)] rounded-full" />
                 {/* Spokes */}
-                <div className="absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-[hsl(0_0%_20%)] via-[hsl(0_0%_40%)] to-[hsl(0_0%_20%)] -translate-y-1/2" />
-                <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-[hsl(0_0%_20%)] via-[hsl(0_0%_40%)] to-[hsl(0_0%_20%)] -translate-x-1/2" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-45 w-full h-0.5 bg-gradient-to-r from-transparent via-[hsl(0_0%_35%)] to-transparent" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-45 w-full h-0.5 bg-gradient-to-r from-transparent via-[hsl(0_0%_35%)] to-transparent" />
+                <div className="absolute top-1/2 left-0 right-0 h-1.5 bg-gradient-to-r from-[hsl(0_0%_25%)] via-[hsl(0_0%_50%)] to-[hsl(0_0%_25%)] -translate-y-1/2" />
+                <div className="absolute left-1/2 top-0 bottom-0 w-1.5 bg-gradient-to-b from-[hsl(0_0%_25%)] via-[hsl(0_0%_50%)] to-[hsl(0_0%_25%)] -translate-x-1/2" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-45 w-full h-1 bg-gradient-to-r from-transparent via-[hsl(0_0%_45%)] to-transparent" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-45 w-full h-1 bg-gradient-to-r from-transparent via-[hsl(0_0%_45%)] to-transparent" />
                 {/* Center hub */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 md:w-4 md:h-4 bg-gradient-to-br from-[hsl(0_0%_35%)] to-[hsl(0_0%_18%)] rounded-full border border-[hsl(0_0%_40%)] shadow-[inset_0_1px_2px_rgba(255,255,255,0.3)]">
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1 h-1 bg-[hsl(0_0%_15%)] rounded-full" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 md:w-4 md:h-4 bg-gradient-to-br from-[hsl(0_0%_45%)] to-[hsl(0_0%_25%)] rounded-full border-2 border-[hsl(0_0%_50%)] shadow-[inset_0_1px_2px_rgba(255,255,255,0.4)]">
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-[hsl(0_0%_20%)] rounded-full" />
                 </div>
               </div>
-              {/* Glass reflection */}
-              <div className="absolute inset-0 bg-gradient-to-br from-[hsl(0_0%_100%)] to-transparent opacity-10 rounded-full pointer-events-none" />
+              {/* Subtle glass reflection */}
+              <div className="absolute inset-0 bg-gradient-to-br from-[hsl(0_0%_100%)] to-transparent opacity-5 rounded-full pointer-events-none" />
             </div>
             
             {/* Top panel with controls */}
