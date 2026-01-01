@@ -15,7 +15,8 @@ const Index = () => {
   const [wasGeneratorOn, setWasGeneratorOn] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [plugPosition, setPlugPosition] = useState({ x: 30, y: 180 }); // Hanging down longer by default
-  const [anchorScreenPos, setAnchorScreenPos] = useState({ x: 0, y: 0 });
+  const plugRef = useRef<HTMLDivElement>(null);
+  const plugPositionRef = useRef(plugPosition);
   const [spiderDescending, setSpiderDescending] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const socketRef = useRef<HTMLDivElement>(null);
@@ -107,24 +108,26 @@ const Index = () => {
     }
   }, [isGeneratorOn]);
 
-  // Track anchor screen position for fixed plug - continuously during animations
+  // Keep latest plugPosition available for animation loop
   useEffect(() => {
-    let animationId: number;
-    const updateAnchorPos = () => {
-      if (anchorRef.current) {
+    plugPositionRef.current = plugPosition;
+  }, [plugPosition]);
+
+  // Keep the fixed plug glued to the moving anchor (no React render lag)
+  useEffect(() => {
+    let raf = 0;
+    const tick = () => {
+      if (anchorRef.current && plugRef.current) {
         const rect = anchorRef.current.getBoundingClientRect();
-        setAnchorScreenPos({ x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 });
+        const { x, y } = plugPositionRef.current;
+        plugRef.current.style.left = `${rect.left + rect.width / 2 + x}px`;
+        plugRef.current.style.top = `${rect.top + rect.height / 2 + y}px`;
       }
-      animationId = requestAnimationFrame(updateAnchorPos);
+      raf = requestAnimationFrame(tick);
     };
-    updateAnchorPos();
-    window.addEventListener('resize', updateAnchorPos);
-    window.addEventListener('scroll', updateAnchorPos);
-    return () => {
-      cancelAnimationFrame(animationId);
-      window.removeEventListener('resize', updateAnchorPos);
-      window.removeEventListener('scroll', updateAnchorPos);
-    };
+
+    tick();
+    return () => cancelAnimationFrame(raf);
   }, []);
 
   useEffect(() => {
@@ -427,13 +430,14 @@ const Index = () => {
 
       {/* Draggable Plug - fixed position, always on top */}
       <div 
+        ref={plugRef}
         onMouseDown={handleMouseDown}
         className={`fixed cursor-grab active:cursor-grabbing z-[9999] ${
-          isDragging ? "" : "transition-all duration-500"
+          isDragging ? "" : wasGeneratorOn ? "" : "transition-transform duration-500"
         } ${isGeneratorOn ? 'pointer-events-none opacity-0' : ''}`}
         style={{
-          left: anchorScreenPos.x + plugPosition.x,
-          top: anchorScreenPos.y + plugPosition.y,
+          left: 0,
+          top: 0,
           transform: `translate(-8px, -50%) ${!isPluggedIn && !isDragging ? "rotate(90deg)" : "rotate(0deg)"}`,
           transformOrigin: 'left center',
         }}
