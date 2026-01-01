@@ -617,64 +617,62 @@ const Index = () => {
             </button>
           </div>
           
-          {/* Orbiting skills container */}
-          <div className="relative w-72 h-72 md:w-96 md:h-96 lg:w-[28rem] lg:h-[28rem]">
-            {/* Outer ring - clockwise rotation */}
-            <div className="absolute inset-0 animate-spin-slow opacity-50">
-              {['Java', 'Python', 'TypeScript', 'React', 'Node.js', 'Docker', 'AWS', 'MongoDB', 'Kubernetes', 'TensorFlow'].map((skill, i) => {
-                const angleDeg = i * 36;
-                const angle = angleDeg * (Math.PI / 180);
-                const radius = 40; // percentage from center
-                const x = 50 + radius * Math.cos(angle);
-                const y = 50 + radius * Math.sin(angle);
-                // Tangent rotation: angle + 90 degrees to be tangent to circle
-                const tangentRotation = angleDeg + 90;
-                return (
-                  <span 
-                    key={skill}
-                    className="absolute text-[8px] md:text-[10px] lg:text-xs font-medium text-[hsl(50_90%_60%)] whitespace-nowrap"
-                    style={{
-                      left: `${x}%`,
-                      top: `${y}%`,
-                      transform: `translate(-50%, -50%) rotate(${tangentRotation}deg)`
-                    }}
-                  >
-                    {skill}
-                  </span>
-                );
-              })}
+          {/* Profile picture - maintains original size */}
+          <div className="relative">
+            <div className={`w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 rounded-full overflow-hidden border-4 border-[hsl(0_0%_20%)] shadow-[0_0_30px_rgba(0,0,0,0.5)] transition-all duration-700 ${isPluggedIn ? '' : 'grayscale'}`}>
+              <img src={profileImage} alt="Anand Prince Purty" className="w-full h-full object-cover" />
             </div>
             
-            {/* Inner ring - counter-clockwise rotation */}
-            <div className="absolute inset-0 animate-spin-slow-reverse opacity-50">
-              {['Flask', 'Spring Boot', 'PostgreSQL', 'Firebase', 'PyTorch', 'Spark', 'Redis', 'GraphQL'].map((skill, i) => {
-                const angleDeg = i * 45;
-                const angle = angleDeg * (Math.PI / 180);
-                const radius = 36; // percentage from center
-                const x = 50 + radius * Math.cos(angle);
-                const y = 50 + radius * Math.sin(angle);
-                // Tangent rotation: angle + 90 degrees to be tangent to circle
-                const tangentRotation = angleDeg + 90;
-                return (
-                  <span 
-                    key={skill}
-                    className="absolute text-[8px] md:text-[10px] lg:text-xs font-medium text-[hsl(50_90%_75%)] whitespace-nowrap"
-                    style={{
-                      left: `${x}%`,
-                      top: `${y}%`,
-                      transform: `translate(-50%, -50%) rotate(${tangentRotation}deg)`
-                    }}
-                  >
-                    {skill}
-                  </span>
-                );
-              })}
-            </div>
-            
-            {/* Profile picture in center */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className={`w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 rounded-full overflow-hidden border-4 border-[hsl(0_0%_20%)] shadow-[0_0_30px_rgba(0,0,0,0.5)] transition-all duration-700 ${isPluggedIn ? '' : 'grayscale'}`}>
-                <img src={profileImage} alt="Anand Prince Purty" className="w-full h-full object-cover" />
+            {/* Orbiting skills - absolutely positioned, doesn't affect layout */}
+            <div className="absolute inset-0 pointer-events-none" style={{ transform: 'scale(1.6)', transformOrigin: 'center center' }}>
+              {/* Outer ring - clockwise rotation */}
+              <div className="absolute inset-0 animate-spin-slow opacity-50">
+                {['Java', 'Python', 'TypeScript', 'React', 'Node.js', 'Docker', 'AWS', 'MongoDB', 'Kubernetes', 'TensorFlow'].map((skill, i) => {
+                  const angleDeg = i * 36;
+                  const angle = angleDeg * (Math.PI / 180);
+                  const radius = 46; // percentage from center
+                  const x = 50 + radius * Math.cos(angle);
+                  const y = 50 + radius * Math.sin(angle);
+                  const tangentRotation = angleDeg + 90;
+                  return (
+                    <span 
+                      key={skill}
+                      className="absolute text-[8px] md:text-[10px] lg:text-xs font-medium text-[hsl(50_90%_60%)] whitespace-nowrap"
+                      style={{
+                        left: `${x}%`,
+                        top: `${y}%`,
+                        transform: `translate(-50%, -50%) rotate(${tangentRotation}deg)`
+                      }}
+                    >
+                      {skill}
+                    </span>
+                  );
+                })}
+              </div>
+              
+              {/* Inner ring - counter-clockwise rotation */}
+              <div className="absolute inset-0 animate-spin-slow-reverse opacity-50">
+                {['Flask', 'Spring Boot', 'PostgreSQL', 'Firebase', 'PyTorch', 'Spark', 'Redis', 'GraphQL'].map((skill, i) => {
+                  const angleDeg = i * 45;
+                  const angle = angleDeg * (Math.PI / 180);
+                  const radius = 40; // percentage from center
+                  const x = 50 + radius * Math.cos(angle);
+                  const y = 50 + radius * Math.sin(angle);
+                  const tangentRotation = angleDeg + 90;
+                  return (
+                    <span 
+                      key={skill}
+                      className="absolute text-[8px] md:text-[10px] lg:text-xs font-medium text-[hsl(50_90%_75%)] whitespace-nowrap"
+                      style={{
+                        left: `${x}%`,
+                        top: `${y}%`,
+                        transform: `translate(-50%, -50%) rotate(${tangentRotation}deg)`
+                      }}
+                    >
+                      {skill}
+                    </span>
+                  );
+                })}
               </div>
             </div>
           </div>
