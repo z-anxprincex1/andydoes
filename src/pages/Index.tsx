@@ -550,88 +550,162 @@ const Index = () => {
         onClick={() => setIsGeneratorOn(!isGeneratorOn)}
       >
         <div className={`relative ${isGeneratorOn ? 'animate-[vibrate_0.1s_linear_infinite]' : ''}`}>
-          {/* Large Rotor/Flywheel on the left side */}
-          <div className="absolute -left-10 md:-left-12 top-1/2 -translate-y-1/2">
-            {/* Main rotor wheel */}
-            <div className={`w-14 h-14 md:w-18 md:h-18 bg-[hsl(0_0%_18%)] rounded-full border-4 border-[hsl(0_0%_25%)] relative ${isGeneratorOn ? 'animate-spin' : ''}`}
-              style={{ animationDuration: isGeneratorOn ? '0.5s' : undefined, width: '3.5rem', height: '3.5rem' }}
+          {/* Large Flywheel on the left side */}
+          <div className="absolute -left-12 md:-left-16 top-1/2 -translate-y-1/2">
+            {/* Flywheel housing */}
+            <div className="absolute -inset-1 bg-[hsl(0_0%_12%)] rounded-full opacity-50" />
+            {/* Main flywheel */}
+            <div className={`w-14 h-14 md:w-16 md:h-16 bg-gradient-to-br from-[hsl(0_0%_25%)] to-[hsl(0_0%_12%)] rounded-full border-4 border-[hsl(0_0%_30%)] relative shadow-[inset_0_2px_4px_rgba(255,255,255,0.1),inset_0_-2px_4px_rgba(0,0,0,0.3)] ${isGeneratorOn ? 'animate-spin' : ''}`}
+              style={{ animationDuration: isGeneratorOn ? '0.4s' : undefined }}
             >
-              {/* Rotor spokes */}
-              <div className="absolute inset-2 border-2 border-[hsl(0_0%_30%)] rounded-full" />
-              <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-[hsl(0_0%_30%)] -translate-y-1/2" />
-              <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-[hsl(0_0%_30%)] -translate-x-1/2" />
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 md:w-4 md:h-4 bg-[hsl(0_0%_15%)] rounded-full border-2 border-[hsl(0_0%_22%)]" />
+              {/* Flywheel ridges */}
+              <div className="absolute inset-1 border-2 border-[hsl(0_0%_35%)] rounded-full" />
+              <div className="absolute inset-3 border border-[hsl(0_0%_28%)] rounded-full" />
+              {/* Spokes */}
+              <div className="absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-[hsl(0_0%_20%)] via-[hsl(0_0%_35%)] to-[hsl(0_0%_20%)] -translate-y-1/2" />
+              <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-[hsl(0_0%_20%)] via-[hsl(0_0%_35%)] to-[hsl(0_0%_20%)] -translate-x-1/2" />
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-45 w-full h-1 bg-gradient-to-r from-transparent via-[hsl(0_0%_30%)] to-transparent" />
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-45 w-full h-1 bg-gradient-to-r from-transparent via-[hsl(0_0%_30%)] to-transparent" />
+              {/* Center hub */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 md:w-5 md:h-5 bg-gradient-to-br from-[hsl(0_0%_30%)] to-[hsl(0_0%_15%)] rounded-full border-2 border-[hsl(0_0%_35%)] shadow-[inset_0_1px_2px_rgba(255,255,255,0.2)]">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-[hsl(0_0%_20%)] rounded-full" />
+              </div>
             </div>
           </div>
           
-          {/* Belt system - connects large rotor to small pulley */}
-          <svg className="absolute -left-10 md:-left-12 top-1/2 -translate-y-1/2 w-48 h-20 md:w-56 md:h-24 pointer-events-none" style={{ left: '-2.5rem' }}>
-            {/* Top belt line */}
-            <line 
-              x1="28" y1="32" x2="135" y2="38" 
-              stroke="hsl(0 0% 15%)" 
-              strokeWidth="3" 
+          {/* Belt system */}
+          <svg className="absolute top-1/2 -translate-y-1/2 pointer-events-none" style={{ left: '-3rem', width: '5rem', height: '3rem' }}>
+            {/* Top belt */}
+            <path 
+              d="M 0 10 Q 40 8, 80 12" 
+              stroke="hsl(25 30% 15%)" 
+              strokeWidth="4" 
+              fill="none"
               className={isGeneratorOn ? 'animate-pulse' : ''}
             />
-            {/* Bottom belt line */}
-            <line 
-              x1="28" y1="48" x2="135" y2="50" 
-              stroke="hsl(0 0% 15%)" 
-              strokeWidth="3" 
+            {/* Bottom belt */}
+            <path 
+              d="M 0 26 Q 40 28, 80 24" 
+              stroke="hsl(25 30% 15%)" 
+              strokeWidth="4" 
+              fill="none"
               className={isGeneratorOn ? 'animate-pulse' : ''}
             />
           </svg>
           
-          {/* Small pulley on the right of generator */}
-          <div className="absolute -right-6 md:-right-8 top-1/2 -translate-y-1/2 z-10">
-            <div className={`w-6 h-6 md:w-8 md:h-8 bg-[hsl(0_0%_20%)] rounded-full border-[hsl(0_0%_28%)] relative ${isGeneratorOn ? 'animate-spin' : ''}`}
-              style={{ animationDuration: isGeneratorOn ? '0.25s' : undefined, borderWidth: '3px' }}
+          {/* Small pulley on the right */}
+          <div className="absolute -right-8 md:-right-10 top-1/2 -translate-y-1/2 z-10">
+            <div className={`w-7 h-7 md:w-9 md:h-9 bg-gradient-to-br from-[hsl(0_0%_28%)] to-[hsl(0_0%_15%)] rounded-full border-2 border-[hsl(0_0%_35%)] relative shadow-[inset_0_1px_3px_rgba(255,255,255,0.15)] ${isGeneratorOn ? 'animate-spin' : ''}`}
+              style={{ animationDuration: isGeneratorOn ? '0.2s' : undefined }}
             >
-              {/* Pulley spokes */}
-              <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-[hsl(0_0%_30%)] -translate-y-1/2" />
-              <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-[hsl(0_0%_30%)] -translate-x-1/2" />
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-[hsl(0_0%_15%)] rounded-full" />
+              <div className="absolute inset-1 border border-[hsl(0_0%_30%)] rounded-full" />
+              <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-[hsl(0_0%_35%)] -translate-y-1/2" />
+              <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-[hsl(0_0%_35%)] -translate-x-1/2" />
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-[hsl(0_0%_20%)] rounded-full border border-[hsl(0_0%_30%)]" />
             </div>
           </div>
           
-          {/* Generator body */}
-          <div className="w-20 h-14 md:w-28 md:h-20 bg-[hsl(35_30%_25%)] rounded-sm border-2 border-[hsl(35_20%_18%)] shadow-[inset_0_2px_4px_rgba(255,255,255,0.1)]">
-            {/* Top panel */}
-            <div className="absolute top-1 left-1 right-1 h-3 md:h-4 bg-[hsl(35_25%_20%)] rounded-sm flex items-center justify-center gap-1">
-              {/* Control knobs */}
-              <div className="w-2 h-2 md:w-3 md:h-3 bg-[hsl(0_0%_15%)] rounded-full border border-[hsl(0_0%_25%)]" />
-              <div className="w-2 h-2 md:w-3 md:h-3 bg-[hsl(0_0%_15%)] rounded-full border border-[hsl(0_0%_25%)]" />
+          {/* Generator body - main housing */}
+          <div className="w-24 h-16 md:w-32 md:h-22 bg-gradient-to-b from-[hsl(35_25%_28%)] to-[hsl(35_30%_18%)] rounded border-2 border-[hsl(35_20%_22%)] shadow-[0_4px_8px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.1)] relative" style={{ height: '4.5rem' }}>
+            {/* Top panel with controls */}
+            <div className="absolute top-1 left-1 right-1 h-4 md:h-5 bg-gradient-to-b from-[hsl(35_20%_22%)] to-[hsl(35_25%_18%)] rounded-sm flex items-center px-2 gap-1.5 border-b border-[hsl(35_15%_15%)]">
+              {/* Start switch */}
+              <div className="w-3 h-3 md:w-4 md:h-4 bg-[hsl(0_0%_12%)] rounded border border-[hsl(0_0%_25%)] flex items-center justify-center">
+                <div className={`w-1.5 h-1.5 rounded-full ${isGeneratorOn ? 'bg-[hsl(120_70%_45%)]' : 'bg-[hsl(0_0%_30%)]'}`} />
+              </div>
+              {/* Choke knob */}
+              <div className="w-2.5 h-2.5 md:w-3 md:h-3 bg-[hsl(0_0%_8%)] rounded-full border border-[hsl(0_0%_20%)] shadow-[inset_0_1px_2px_rgba(0,0,0,0.5)]" />
+              {/* Fuel valve */}
+              <div className="w-2 h-3 md:w-2.5 md:h-4 bg-[hsl(0_70%_30%)] rounded-sm border border-[hsl(0_60%_20%)]" />
               {/* Power indicator */}
-              <div className={`w-1.5 h-1.5 md:w-2 md:h-2 rounded-full ml-1 transition-all duration-300 ${
-                isGeneratorOn ? 'bg-[hsl(120_70%_45%)] shadow-[0_0_6px_2px_rgba(74,222,128,0.6)]' : 'bg-[hsl(0_0%_20%)]'
+              <div className={`w-2 h-2 md:w-2.5 md:h-2.5 rounded-full ml-auto transition-all duration-300 ${
+                isGeneratorOn ? 'bg-[hsl(120_70%_50%)] shadow-[0_0_8px_3px_rgba(74,222,128,0.7)]' : 'bg-[hsl(0_0%_15%)] border border-[hsl(0_0%_25%)]'
               }`} />
             </div>
-            {/* Vent grilles */}
-            <div className="absolute bottom-2 left-2 right-2 flex gap-0.5 md:gap-1">
-              {[...Array(6)].map((_, i) => (
-                <div key={i} className="flex-1 h-4 md:h-6 bg-[hsl(35_20%_18%)] rounded-sm" />
-              ))}
+            
+            {/* Engine block texture */}
+            <div className="absolute top-7 left-1 right-1 bottom-1 bg-[hsl(35_20%_15%)] rounded-sm overflow-hidden">
+              {/* Cooling fins */}
+              <div className="flex gap-0.5 h-full p-0.5">
+                {[...Array(10)].map((_, i) => (
+                  <div key={i} className="flex-1 bg-gradient-to-b from-[hsl(35_25%_22%)] to-[hsl(35_20%_12%)] rounded-sm shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]" />
+                ))}
+              </div>
             </div>
-            {/* Side exhaust pipe */}
-            <div className="absolute -right-2 top-2 w-3 h-6 md:w-4 md:h-8 bg-[hsl(0_0%_20%)] rounded-r-sm border-2 border-l-0 border-[hsl(0_0%_15%)]">
-              {/* Exhaust smoke when on */}
+            
+            {/* Side panel rivets */}
+            <div className="absolute top-2 left-0.5 flex flex-col gap-3">
+              <div className="w-1 h-1 bg-[hsl(0_0%_35%)] rounded-full shadow-[inset_0_-1px_1px_rgba(0,0,0,0.5)]" />
+              <div className="w-1 h-1 bg-[hsl(0_0%_35%)] rounded-full shadow-[inset_0_-1px_1px_rgba(0,0,0,0.5)]" />
+            </div>
+            <div className="absolute top-2 right-0.5 flex flex-col gap-3">
+              <div className="w-1 h-1 bg-[hsl(0_0%_35%)] rounded-full shadow-[inset_0_-1px_1px_rgba(0,0,0,0.5)]" />
+              <div className="w-1 h-1 bg-[hsl(0_0%_35%)] rounded-full shadow-[inset_0_-1px_1px_rgba(0,0,0,0.5)]" />
+            </div>
+            
+            {/* Exhaust muffler */}
+            <div className="absolute -right-4 top-3 w-5 h-8 md:w-6 md:h-10 bg-gradient-to-r from-[hsl(0_0%_18%)] to-[hsl(0_0%_12%)] rounded-r-lg border-2 border-l-0 border-[hsl(0_0%_22%)] shadow-[inset_0_2px_3px_rgba(0,0,0,0.4)]">
+              {/* Exhaust cap */}
+              <div className="absolute -top-1 left-1 right-0 h-2 bg-[hsl(0_0%_15%)] rounded-t border border-b-0 border-[hsl(0_0%_25%)]" />
+              {/* Heat lines */}
+              <div className="absolute top-3 left-1 right-1 flex flex-col gap-1">
+                <div className="h-px bg-[hsl(0_0%_25%)]" />
+                <div className="h-px bg-[hsl(0_0%_25%)]" />
+                <div className="h-px bg-[hsl(0_0%_25%)]" />
+              </div>
+              {/* Smoke */}
               {isGeneratorOn && (
-                <div className="absolute -top-2 left-1/2 -translate-x-1/2 flex flex-col gap-1">
-                  <div className="w-1 h-1 bg-[hsl(0_0%_40%)] rounded-full animate-ping opacity-50" />
-                  <div className="w-1.5 h-1.5 bg-[hsl(0_0%_35%)] rounded-full animate-ping opacity-40" style={{ animationDelay: '0.2s' }} />
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-0.5">
+                  <div className="w-1.5 h-1.5 bg-[hsl(0_0%_50%)] rounded-full animate-ping opacity-40" />
+                  <div className="w-2 h-2 bg-[hsl(0_0%_45%)] rounded-full animate-ping opacity-30" style={{ animationDelay: '0.15s' }} />
+                  <div className="w-2.5 h-2.5 bg-[hsl(0_0%_40%)] rounded-full animate-ping opacity-20" style={{ animationDelay: '0.3s' }} />
                 </div>
               )}
             </div>
           </div>
+          
           {/* Fuel tank */}
-          <div className="absolute -top-3 md:-top-4 left-2 w-6 h-4 md:w-8 md:h-5 bg-[hsl(0_70%_35%)] rounded-t-sm border border-[hsl(0_60%_25%)]">
-            <div className="absolute top-0.5 left-1/2 -translate-x-1/2 w-2 h-1 bg-[hsl(0_0%_20%)] rounded-sm" />
+          <div className="absolute -top-5 md:-top-6 left-1 w-8 h-5 md:w-10 md:h-6 bg-gradient-to-b from-[hsl(0_65%_40%)] to-[hsl(0_70%_28%)] rounded-t border border-[hsl(0_60%_22%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]">
+            {/* Fuel cap */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1 w-3 h-2 bg-[hsl(0_0%_15%)] rounded-t border border-[hsl(0_0%_25%)]" />
+            {/* Fuel level indicator */}
+            <div className="absolute bottom-1 left-1 right-1 h-1.5 bg-[hsl(0_0%_10%)] rounded-sm overflow-hidden">
+              <div className="h-full w-3/4 bg-gradient-to-r from-[hsl(35_80%_45%)] to-[hsl(35_70%_35%)]" />
+            </div>
           </div>
-          {/* Wheels */}
-          <div className="absolute -bottom-1 left-1 w-4 h-4 md:w-5 md:h-5 bg-[hsl(0_0%_12%)] rounded-full border-2 border-[hsl(0_0%_20%)]" />
-          <div className="absolute -bottom-1 right-3 w-4 h-4 md:w-5 md:h-5 bg-[hsl(0_0%_12%)] rounded-full border-2 border-[hsl(0_0%_20%)]" />
-          {/* Handle */}
-          <div className="absolute -top-2 right-3 w-6 h-1.5 md:w-8 md:h-2 bg-[hsl(0_0%_25%)] rounded-full" />
+          
+          {/* Frame/base */}
+          <div className="absolute -bottom-2 -left-1 -right-1 h-2 bg-gradient-to-b from-[hsl(0_0%_20%)] to-[hsl(0_0%_10%)] rounded-b border border-t-0 border-[hsl(0_0%_15%)]" />
+          
+          {/* Wheels with rubber tires */}
+          <div className="absolute -bottom-3 left-0 w-5 h-5 md:w-6 md:h-6">
+            <div className="w-full h-full bg-[hsl(0_0%_8%)] rounded-full border-2 border-[hsl(0_0%_15%)] shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
+              <div className="absolute inset-1 bg-[hsl(0_0%_25%)] rounded-full border border-[hsl(0_0%_30%)]">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1 h-1 bg-[hsl(0_0%_15%)] rounded-full" />
+              </div>
+            </div>
+          </div>
+          <div className="absolute -bottom-3 right-2 w-5 h-5 md:w-6 md:h-6">
+            <div className="w-full h-full bg-[hsl(0_0%_8%)] rounded-full border-2 border-[hsl(0_0%_15%)] shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
+              <div className="absolute inset-1 bg-[hsl(0_0%_25%)] rounded-full border border-[hsl(0_0%_30%)]">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1 h-1 bg-[hsl(0_0%_15%)] rounded-full" />
+              </div>
+            </div>
+          </div>
+          
+          {/* Folding handle */}
+          <div className="absolute -top-3 right-2 md:right-3">
+            <div className="w-10 h-2 md:w-12 md:h-2.5 bg-gradient-to-b from-[hsl(0_0%_30%)] to-[hsl(0_0%_18%)] rounded-full border border-[hsl(0_0%_35%)] shadow-[0_1px_2px_rgba(0,0,0,0.3)]" />
+            {/* Handle grips */}
+            <div className="absolute top-0.5 left-1 w-1 h-1 bg-[hsl(0_0%_40%)] rounded-full" />
+            <div className="absolute top-0.5 right-1 w-1 h-1 bg-[hsl(0_0%_40%)] rounded-full" />
+          </div>
+          
+          {/* Power output socket */}
+          <div className="absolute bottom-2 -right-2 w-3 h-4 bg-[hsl(0_0%_12%)] rounded border border-[hsl(0_0%_20%)]">
+            <div className="absolute top-1 left-1/2 -translate-x-1/2 w-1 h-0.5 bg-[hsl(0_0%_30%)]" />
+            <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-0.5 bg-[hsl(0_0%_30%)]" />
+          </div>
         </div>
       </div>
 
