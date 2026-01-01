@@ -52,15 +52,16 @@ const Index = () => {
     return flickerClasses[index % flickerClasses.length];
   };
 
-  const handleMouseDown = (e: React.MouseEvent) => {
+  const handlePointerDown = (e: React.PointerEvent) => {
     e.preventDefault();
+    (e.target as HTMLElement).setPointerCapture(e.pointerId);
     setIsDragging(true);
     if (isPluggedIn) {
       setIsPluggedIn(false);
     }
   };
 
-  const handleMouseMove = (e: MouseEvent) => {
+  const handlePointerMove = (e: React.PointerEvent) => {
     if (!isDragging || !anchorRef.current) return;
     
     const anchorRect = anchorRef.current.getBoundingClientRect();
@@ -73,8 +74,9 @@ const Index = () => {
     });
   };
 
-  const handleMouseUp = () => {
+  const handlePointerUp = (e: React.PointerEvent) => {
     if (!isDragging || !socketRef.current || !anchorRef.current) return;
+    (e.target as HTMLElement).releasePointerCapture(e.pointerId);
     setIsDragging(false);
     
     const socketRect = socketRef.current.getBoundingClientRect();
@@ -129,17 +131,6 @@ const Index = () => {
     tick();
     return () => cancelAnimationFrame(raf);
   }, []);
-
-  useEffect(() => {
-    if (isDragging) {
-      window.addEventListener("mousemove", handleMouseMove);
-      window.addEventListener("mouseup", handleMouseUp);
-      return () => {
-        window.removeEventListener("mousemove", handleMouseMove);
-        window.removeEventListener("mouseup", handleMouseUp);
-      };
-    }
-  }, [isDragging, plugPosition]);
 
   const renderWord = (word: string, wordIndex: number, isLast: boolean) => {
     return (
@@ -431,8 +422,10 @@ const Index = () => {
       {/* Draggable Plug - fixed position, always on top */}
       <div 
         ref={plugRef}
-        onMouseDown={handleMouseDown}
-        className={`fixed cursor-grab active:cursor-grabbing z-[9999] ${
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        className={`fixed cursor-grab active:cursor-grabbing z-[9999] touch-none ${
           isDragging ? "" : wasGeneratorOn ? "" : "transition-transform duration-500"
         } ${isGeneratorOn ? 'pointer-events-none opacity-0' : ''}`}
         style={{
