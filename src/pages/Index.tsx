@@ -552,8 +552,8 @@ const Index = () => {
       </div>
 
       {/* Tip above generator */}
-      <div className={`fixed bottom-[8.5rem] md:bottom-[10.5rem] left-[calc(50%-1rem)] md:left-[calc(50%-1.5rem)] -translate-x-1/2 z-20 pointer-events-none transition-all duration-500 ${
-        isGeneratorOn ? 'opacity-0 translate-y-4 pointer-events-none' : 'animate-bounce'
+      <div className={`fixed bottom-[8.5rem] md:bottom-[10.5rem] left-[calc(50%-1rem)] md:left-[calc(50%-1.5rem)] -translate-x-1/2 z-20 pointer-events-none animate-bounce transition-opacity duration-500 ${
+        isGeneratorOn ? 'opacity-0' : 'opacity-100'
       }`}>
         <span 
           className="text-[hsl(0_0%_100%)] text-sm md:text-base font-extrabold whitespace-nowrap drop-shadow-[2px_2px_0_hsl(0_0%_10%)] inline-block -rotate-6" 
