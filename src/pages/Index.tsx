@@ -550,11 +550,11 @@ const Index = () => {
         onClick={() => setIsGeneratorOn(!isGeneratorOn)}
       >
         <div className={`relative ${isGeneratorOn ? 'animate-[vibrate_0.1s_linear_infinite]' : ''}`}>
-          {/* Large Rotor/Flywheel on the side */}
-          <div className="absolute -left-8 md:-left-10 top-1/2 -translate-y-1/2">
+          {/* Large Rotor/Flywheel on the left side */}
+          <div className="absolute -left-10 md:-left-12 top-1/2 -translate-y-1/2">
             {/* Main rotor wheel */}
-            <div className={`w-12 h-12 md:w-16 md:h-16 bg-[hsl(0_0%_18%)] rounded-full border-4 border-[hsl(0_0%_25%)] relative ${isGeneratorOn ? 'animate-spin' : ''}`}
-              style={{ animationDuration: isGeneratorOn ? '0.5s' : undefined }}
+            <div className={`w-14 h-14 md:w-18 md:h-18 bg-[hsl(0_0%_18%)] rounded-full border-4 border-[hsl(0_0%_25%)] relative ${isGeneratorOn ? 'animate-spin' : ''}`}
+              style={{ animationDuration: isGeneratorOn ? '0.5s' : undefined, width: '3.5rem', height: '3.5rem' }}
             >
               {/* Rotor spokes */}
               <div className="absolute inset-2 border-2 border-[hsl(0_0%_30%)] rounded-full" />
@@ -562,15 +562,34 @@ const Index = () => {
               <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-[hsl(0_0%_30%)] -translate-x-1/2" />
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 md:w-4 md:h-4 bg-[hsl(0_0%_15%)] rounded-full border-2 border-[hsl(0_0%_22%)]" />
             </div>
-            {/* Belt connecting to generator */}
-            <div className={`absolute top-1/2 -translate-y-1/2 left-full w-4 md:w-5 h-1 bg-[hsl(0_0%_12%)] ${isGeneratorOn ? 'animate-pulse' : ''}`} />
           </div>
           
-          {/* Small pulley on generator body */}
-          <div className={`absolute -left-1 top-1/2 -translate-y-1/2 w-4 h-4 md:w-5 md:h-5 bg-[hsl(0_0%_20%)] rounded-full border-2 border-[hsl(0_0%_28%)] z-10 ${isGeneratorOn ? 'animate-spin' : ''}`}
-            style={{ animationDuration: isGeneratorOn ? '0.2s' : undefined }}
+          {/* Belt system - connects large rotor to small pulley */}
+          <svg className="absolute -left-10 md:-left-12 top-1/2 -translate-y-1/2 w-48 h-20 md:w-56 md:h-24 pointer-events-none" style={{ left: '-2.5rem' }}>
+            {/* Top belt line */}
+            <line 
+              x1="28" y1="32" x2="135" y2="38" 
+              stroke="hsl(0 0% 15%)" 
+              strokeWidth="3" 
+              className={isGeneratorOn ? 'animate-pulse' : ''}
+            />
+            {/* Bottom belt line */}
+            <line 
+              x1="28" y1="48" x2="135" y2="50" 
+              stroke="hsl(0 0% 15%)" 
+              strokeWidth="3" 
+              className={isGeneratorOn ? 'animate-pulse' : ''}
+            />
+          </svg>
+          
+          {/* Small pulley on the right of generator */}
+          <div className={`absolute -right-6 md:-right-8 top-1/2 -translate-y-1/2 w-6 h-6 md:w-8 md:h-8 bg-[hsl(0_0%_20%)] rounded-full border-3 border-[hsl(0_0%_28%)] z-10 ${isGeneratorOn ? 'animate-spin' : ''}`}
+            style={{ animationDuration: isGeneratorOn ? '0.25s' : undefined, borderWidth: '3px' }}
           >
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-[hsl(0_0%_15%)] rounded-full" />
+            {/* Pulley spokes */}
+            <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-[hsl(0_0%_30%)] -translate-y-1/2" />
+            <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-[hsl(0_0%_30%)] -translate-x-1/2" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-[hsl(0_0%_15%)] rounded-full" />
           </div>
           
           {/* Generator body */}
