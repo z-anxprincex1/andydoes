@@ -748,7 +748,7 @@ const Index = () => {
             href="https://buymeacoffee.com/andydoes" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="absolute top-0 md:top-0 left-1/2 -translate-x-1/2 pointer-events-auto cursor-pointer group"
+            className="absolute -top-3 md:-top-4 left-1/2 -translate-x-1/2 pointer-events-auto cursor-pointer group"
           >
             {/* Steam/vapor animation - wavy steam lines */}
             <div className="absolute -top-7 md:-top-9 left-1/2 -translate-x-1/2 flex gap-1.5">
