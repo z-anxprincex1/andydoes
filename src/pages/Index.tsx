@@ -622,18 +622,21 @@ const Index = () => {
             {/* Outer ring - clockwise rotation */}
             <div className="absolute inset-0 animate-spin-slow opacity-50">
               {['Java', 'Python', 'TypeScript', 'React', 'Node.js', 'Docker', 'AWS', 'MongoDB', 'Kubernetes', 'TensorFlow'].map((skill, i) => {
-                const angle = (i * 36) * (Math.PI / 180);
+                const angleDeg = i * 36;
+                const angle = angleDeg * (Math.PI / 180);
                 const radius = 48; // percentage from center
                 const x = 50 + radius * Math.cos(angle);
                 const y = 50 + radius * Math.sin(angle);
+                // Tangent rotation: angle + 90 degrees to be tangent to circle
+                const tangentRotation = angleDeg + 90;
                 return (
                   <span 
                     key={skill}
-                    className="absolute text-[8px] md:text-[10px] lg:text-xs font-medium text-[hsl(50_90%_60%)] whitespace-nowrap animate-counter-spin-slow"
+                    className="absolute text-[8px] md:text-[10px] lg:text-xs font-medium text-[hsl(50_90%_60%)] whitespace-nowrap"
                     style={{
                       left: `${x}%`,
                       top: `${y}%`,
-                      transform: 'translate(-50%, -50%)'
+                      transform: `translate(-50%, -50%) rotate(${tangentRotation}deg)`
                     }}
                   >
                     {skill}
@@ -645,18 +648,21 @@ const Index = () => {
             {/* Inner ring - counter-clockwise rotation */}
             <div className="absolute inset-0 animate-spin-slow-reverse opacity-50">
               {['Flask', 'Spring Boot', 'PostgreSQL', 'Firebase', 'PyTorch', 'Spark', 'Redis', 'GraphQL'].map((skill, i) => {
-                const angle = (i * 45) * (Math.PI / 180);
+                const angleDeg = i * 45;
+                const angle = angleDeg * (Math.PI / 180);
                 const radius = 32; // percentage from center
                 const x = 50 + radius * Math.cos(angle);
                 const y = 50 + radius * Math.sin(angle);
+                // Tangent rotation: angle + 90 degrees to be tangent to circle
+                const tangentRotation = angleDeg + 90;
                 return (
                   <span 
                     key={skill}
-                    className="absolute text-[8px] md:text-[10px] lg:text-xs font-medium text-[hsl(180_70%_60%)] whitespace-nowrap animate-counter-spin-slow-reverse"
+                    className="absolute text-[8px] md:text-[10px] lg:text-xs font-medium text-[hsl(180_70%_60%)] whitespace-nowrap"
                     style={{
                       left: `${x}%`,
                       top: `${y}%`,
-                      transform: 'translate(-50%, -50%)'
+                      transform: `translate(-50%, -50%) rotate(${tangentRotation}deg)`
                     }}
                   >
                     {skill}
