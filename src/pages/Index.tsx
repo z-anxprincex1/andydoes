@@ -12,6 +12,7 @@ const Index = () => {
   const [newMessage, setNewMessage] = useState("");
   const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [isGeneratorOn, setIsGeneratorOn] = useState(false);
+  const [wasGeneratorOn, setWasGeneratorOn] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [plugPosition, setPlugPosition] = useState({ x: 30, y: 180 }); // Hanging down longer by default
   const [spiderDescending, setSpiderDescending] = useState(false);
@@ -92,6 +93,18 @@ const Index = () => {
       setPlugPosition({ x: 30, y: 180 });
     }
   };
+
+  // Track when generator turns off
+  useEffect(() => {
+    if (!isGeneratorOn && wasGeneratorOn) {
+      // Generator just turned off, animation will play
+      const timer = setTimeout(() => setWasGeneratorOn(false), 1000);
+      return () => clearTimeout(timer);
+    }
+    if (isGeneratorOn) {
+      setWasGeneratorOn(true);
+    }
+  }, [isGeneratorOn]);
 
   useEffect(() => {
     if (isDragging) {
@@ -300,8 +313,8 @@ const Index = () => {
         </div>
       )}
 
-      <div className={`w-full px-6 md:px-12 lg:px-20 relative z-10 flex flex-col md:flex-row items-center gap-8 md:gap-12 lg:gap-16 transition-all duration-500 ${
-        isGeneratorOn ? 'animate-whoosh-up pointer-events-none' : ''
+      <div className={`w-full px-6 md:px-12 lg:px-20 relative z-10 flex flex-col md:flex-row items-center gap-8 md:gap-12 lg:gap-16 ${
+        isGeneratorOn ? 'animate-whoosh-up pointer-events-none' : wasGeneratorOn ? 'animate-slide-down-in' : ''
       }`}>
         {/* Profile picture with about me */}
         <div className="flex-shrink-0 flex flex-col items-center relative">
