@@ -236,7 +236,7 @@ const Index = () => {
         {/* Glass bulb */}
         <div className="w-8 h-10 mx-auto relative">
           {/* Bulb glass shape */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[hsl(45_20%_25%/_0.4)] via-[hsl(45_15%_20%/_0.3)] to-[hsl(45_10%_15%/_0.4)] rounded-[40%_40%_50%_50%] border border-[hsl(45_10%_40%/_0.3)]" />
+          <div className={`absolute inset-0 rounded-[40%_40%_50%_50%] border transition-all duration-300 ${isPluggedIn ? 'bg-gradient-to-b from-[hsl(45_40%_35%/_0.5)] via-[hsl(45_35%_30%/_0.4)] to-[hsl(45_30%_25%/_0.5)] border-[hsl(45_30%_50%/_0.4)]' : 'bg-gradient-to-b from-[hsl(45_10%_18%/_0.3)] via-[hsl(45_8%_15%/_0.25)] to-[hsl(45_5%_12%/_0.3)] border-[hsl(45_5%_25%/_0.2)]'}`} />
           {/* Inner glass reflection */}
           <div className="absolute top-1 left-1 w-2 h-3 bg-[hsl(45_20%_60%/_0.15)] rounded-full blur-[1px] rotate-[-20deg]" />
           {/* Filament structure */}
@@ -244,20 +244,20 @@ const Index = () => {
             {/* Filament support wires */}
             <div className="absolute left-0.5 top-0 w-px h-full bg-[hsl(0_0%_40%)]" />
             <div className="absolute right-0.5 top-0 w-px h-full bg-[hsl(0_0%_40%)]" />
-            {/* Filament coil - the glowing part */}
+            {/* Filament coil - only glows when plugged in */}
             <div className="absolute top-1 left-1/2 -translate-x-1/2 w-2 h-4 flex flex-col items-center justify-center gap-px">
-              <div className="w-2 h-px bg-[hsl(35_80%_50%)] animate-filament-glow shadow-[0_0_4px_hsl(35_90%_60%),0_0_8px_hsl(35_90%_50%)]" />
-              <div className="w-2 h-px bg-[hsl(35_80%_50%)] animate-filament-glow shadow-[0_0_4px_hsl(35_90%_60%),0_0_8px_hsl(35_90%_50%)]" style={{ animationDelay: '0.1s' }} />
-              <div className="w-2.5 h-px bg-[hsl(35_80%_55%)] animate-filament-glow shadow-[0_0_5px_hsl(35_90%_60%),0_0_10px_hsl(35_90%_50%)]" style={{ animationDelay: '0.2s' }} />
-              <div className="w-2 h-px bg-[hsl(35_80%_50%)] animate-filament-glow shadow-[0_0_4px_hsl(35_90%_60%),0_0_8px_hsl(35_90%_50%)]" style={{ animationDelay: '0.15s' }} />
-              <div className="w-1.5 h-px bg-[hsl(35_80%_45%)] animate-filament-glow shadow-[0_0_3px_hsl(35_90%_60%),0_0_6px_hsl(35_90%_50%)]" style={{ animationDelay: '0.25s' }} />
+              <div className={`w-2 h-px transition-all duration-300 ${isPluggedIn ? 'bg-[hsl(35_80%_50%)] flicker-1 shadow-[0_0_4px_hsl(35_90%_60%),0_0_8px_hsl(35_90%_50%)]' : 'bg-[hsl(0_0%_30%)]'}`} />
+              <div className={`w-2 h-px transition-all duration-300 ${isPluggedIn ? 'bg-[hsl(35_80%_50%)] flicker-2 shadow-[0_0_4px_hsl(35_90%_60%),0_0_8px_hsl(35_90%_50%)]' : 'bg-[hsl(0_0%_30%)]'}`} />
+              <div className={`w-2.5 h-px transition-all duration-300 ${isPluggedIn ? 'bg-[hsl(35_80%_55%)] flicker-3 shadow-[0_0_5px_hsl(35_90%_60%),0_0_10px_hsl(35_90%_50%)]' : 'bg-[hsl(0_0%_32%)]'}`} />
+              <div className={`w-2 h-px transition-all duration-300 ${isPluggedIn ? 'bg-[hsl(35_80%_50%)] flicker-4 shadow-[0_0_4px_hsl(35_90%_60%),0_0_8px_hsl(35_90%_50%)]' : 'bg-[hsl(0_0%_30%)]'}`} />
+              <div className={`w-1.5 h-px transition-all duration-300 ${isPluggedIn ? 'bg-[hsl(35_80%_45%)] flicker-5 shadow-[0_0_3px_hsl(35_90%_60%),0_0_6px_hsl(35_90%_50%)]' : 'bg-[hsl(0_0%_28%)]'}`} />
             </div>
           </div>
           {/* Bottom tip of bulb */}
           <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-gradient-to-b from-[hsl(45_15%_20%/_0.3)] to-[hsl(45_10%_15%/_0.5)] rounded-full" />
         </div>
-        {/* Warm glow around bulb */}
-        <div className="absolute top-28 md:top-36 left-1/2 -translate-x-1/2 w-16 h-16 bg-[hsl(35_80%_50%/_0.15)] rounded-full blur-xl animate-filament-glow" />
+        {/* Warm glow around bulb - only visible when plugged in */}
+        <div className={`absolute top-28 md:top-36 left-1/2 -translate-x-1/2 w-16 h-16 rounded-full blur-xl transition-opacity duration-500 flicker-1 ${isPluggedIn ? 'bg-[hsl(35_80%_50%/_0.2)] opacity-100' : 'opacity-0'}`} />
       </div>
 
       {/* Cobweb - Top Left (smaller) */}
