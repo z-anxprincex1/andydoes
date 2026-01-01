@@ -350,9 +350,9 @@ const Index = () => {
                         <Linkedin className="w-5 h-5 md:w-6 md:h-6 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]" />
                         
                         {/* Hand with pen writing on paper - bottom LEFT */}
-                        <div className="absolute -bottom-4 -left-3 md:-bottom-5 md:-left-4">
+                        <div className="absolute -bottom-6 -left-5 md:-bottom-8 md:-left-6">
                           {/* Paper - positioned first (behind hand) */}
-                          <div className="absolute bottom-6 left-0 md:bottom-8 md:left-0 w-6 h-7 md:w-7 md:h-8 bg-white rounded-[2px] shadow-md transform rotate-[8deg] z-0">
+                          <div className="absolute bottom-4 left-2 md:bottom-5 md:left-2 w-6 h-7 md:w-7 md:h-8 bg-white rounded-[2px] shadow-md transform rotate-[8deg] z-0">
                             {/* Written lines */}
                             <div className="absolute top-2 left-1 right-1 flex flex-col gap-[3px]">
                               <div className="h-[0.5px] bg-[hsl(220_15%_60%)] w-[70%]" />
@@ -362,20 +362,14 @@ const Index = () => {
                             </div>
                           </div>
                           
-                          {/* Realistic hand holding pen - mirrored for left side */}
-                          <svg width="28" height="32" viewBox="0 0 24 28" className="md:w-9 md:h-11 animate-pen-write drop-shadow-sm relative z-10 transform translate-x-1 translate-y-1 md:translate-x-2 md:translate-y-2 -scale-x-100">
+                          {/* Hand gripping pen properly */}
+                          <svg width="28" height="32" viewBox="0 0 28 32" className="md:w-9 md:h-11 animate-pen-write drop-shadow-sm relative z-10 transform translate-x-0 translate-y-2 md:translate-y-3 -scale-x-100">
                             <defs>
-                              {/* Skin gradient for depth */}
                               <linearGradient id="skinGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                                 <stop offset="0%" stopColor="hsl(25 55% 75%)" />
                                 <stop offset="50%" stopColor="hsl(25 50% 68%)" />
                                 <stop offset="100%" stopColor="hsl(25 45% 62%)" />
                               </linearGradient>
-                              <linearGradient id="skinHighlight" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" stopColor="hsl(25 60% 78%)" />
-                                <stop offset="100%" stopColor="hsl(25 50% 65%)" />
-                              </linearGradient>
-                              {/* Pen gradient */}
                               <linearGradient id="penGrad" x1="0%" y1="0%" x2="100%" y2="0%">
                                 <stop offset="0%" stopColor="hsl(220 20% 25%)" />
                                 <stop offset="50%" stopColor="hsl(220 15% 35%)" />
@@ -383,68 +377,63 @@ const Index = () => {
                               </linearGradient>
                             </defs>
                             
-                            {/* Complete hand shape - connected palm, fingers, and wrist */}
+                            {/* Pen - drawn first so hand overlaps it */}
+                            <rect x="8" y="2" width="2.5" height="18" rx="1.2" fill="url(#penGrad)" transform="rotate(30 9.25 11)" />
+                            <rect x="8.5" y="3" width="0.5" height="4" fill="hsl(45 70% 55%)" transform="rotate(30 9.25 5)" />
+                            <rect x="8" y="13" width="2.5" height="4" rx="0.3" fill="hsl(0 0% 40%)" transform="rotate(30 9.25 15)" />
+                            <polygon points="7.5,19 9.25,24 11,19" fill="hsl(35 30% 35%)" transform="rotate(30 9.25 21.5)" />
+                            <circle cx="9.25" cy="23" r="0.5" fill="hsl(0 0% 25%)" transform="rotate(30 9.25 23)" />
+                            
+                            {/* Hand - unified shape gripping pen */}
                             <path 
-                              d="M12 28 
-                                 L10 28 
-                                 Q8 27 8 24 
-                                 L8 20
-                                 Q6 19 5 17
-                                 Q3.5 14 4.5 12
-                                 Q5.5 10 7 11
-                                 L8 13
-                                 L8 11
-                                 Q7 7 7 4
-                                 Q7 1.5 9 2
-                                 Q11 2.5 10.5 6
-                                 L10 10
-                                 L11 9
-                                 Q11.5 5 12 3
-                                 Q12.5 1 14.5 2
-                                 Q16 3 15 6
-                                 L14 11
-                                 L15 10
-                                 Q16 6 17 4.5
-                                 Q18 3 19.5 4.5
-                                 Q20.5 6 19 9
-                                 L17 14
-                                 L18 13
-                                 Q19.5 10 20.5 9
-                                 Q22 8 22.5 10
-                                 Q23 12 21 15
-                                 L19 18
-                                 Q20 20 20 22
-                                 Q20 25 18 27
-                                 Q16 28 12 28
+                              d="M16 30 
+                                 L13 30 
+                                 Q11 29 11 26 
+                                 L11 22
+                                 Q11 20 12 18
+                                 L12 16
+                                 Q11 15 10 14
+                                 C8 12 8 10 10 9
+                                 C11 8.5 12 9 13 11
+                                 L14 14
+                                 L14 12
+                                 C14 9 14 6 16 6
+                                 C18 6 17.5 9 17 12
+                                 L16.5 15
+                                 L17.5 14
+                                 C18.5 11 19 8 21 8
+                                 C23 8.5 22 11 21 14
+                                 L19.5 17
+                                 L20.5 16
+                                 C21.5 13 22 11 24 11.5
+                                 C25.5 12 24.5 15 23 18
+                                 L21 21
+                                 Q22 23 22 25
+                                 Q22 28 20 29.5
+                                 Q18 30 16 30
                                  Z" 
                               fill="url(#skinGrad)" 
                             />
                             
-                            {/* Finger creases/definition lines */}
-                            <path d="M10 13 Q10.5 11 10.5 9" stroke="hsl(25 40% 55%)" strokeWidth="0.3" fill="none" opacity="0.5" />
-                            <path d="M13.5 12 Q14 10 14 8" stroke="hsl(25 40% 55%)" strokeWidth="0.3" fill="none" opacity="0.5" />
-                            <path d="M16.5 13 Q17 11 17.5 9" stroke="hsl(25 40% 55%)" strokeWidth="0.3" fill="none" opacity="0.5" />
-                            <path d="M19 15 Q19.5 13 20 11" stroke="hsl(25 40% 55%)" strokeWidth="0.3" fill="none" opacity="0.5" />
+                            {/* Thumb wrapping around pen */}
+                            <path 
+                              d="M12 18 
+                                 Q10 17 9 15
+                                 C7.5 12 8 10 10 10
+                                 C11 10 12 11 12.5 13
+                                 L13 16
+                                 Q12.5 17 12 18
+                                 Z" 
+                              fill="url(#skinGrad)" 
+                            />
                             
-                            {/* Knuckle highlights */}
-                            <circle cx="10" cy="8" r="0.6" fill="hsl(25 50% 75%)" opacity="0.5" />
-                            <circle cx="13.5" cy="7" r="0.6" fill="hsl(25 50% 75%)" opacity="0.5" />
-                            <circle cx="17" cy="8" r="0.6" fill="hsl(25 50% 75%)" opacity="0.5" />
-                            <circle cx="19.5" cy="10" r="0.5" fill="hsl(25 50% 75%)" opacity="0.5" />
+                            {/* Finger joints/creases */}
+                            <path d="M15 13 L15.5 11" stroke="hsl(25 40% 55%)" strokeWidth="0.4" fill="none" opacity="0.6" />
+                            <path d="M18 13 L18.5 11" stroke="hsl(25 40% 55%)" strokeWidth="0.4" fill="none" opacity="0.6" />
+                            <path d="M21 15 L21.5 13" stroke="hsl(25 40% 55%)" strokeWidth="0.4" fill="none" opacity="0.6" />
                             
-                            {/* Palm highlight */}
-                            <ellipse cx="14" cy="20" rx="3" ry="2" fill="hsl(25 55% 72%)" opacity="0.3" />
-                            
-                            {/* Pen body */}
-                            <rect x="4" y="1" width="2.2" height="16" rx="1.1" fill="url(#penGrad)" transform="rotate(25 5.1 9)" />
-                            {/* Pen clip */}
-                            <rect x="4.6" y="2" width="0.4" height="4" fill="hsl(45 70% 55%)" transform="rotate(25 5.1 4)" />
-                            {/* Pen grip section */}
-                            <rect x="4" y="10" width="2.2" height="4" rx="0.3" fill="hsl(0 0% 40%)" transform="rotate(25 5.1 12)" />
-                            {/* Pen tip cone */}
-                            <polygon points="4,16 5.1,20 6.2,16" fill="hsl(35 30% 35%)" transform="rotate(25 5.1 18)" />
-                            {/* Pen ball point */}
-                            <circle cx="5.1" cy="19.5" r="0.4" fill="hsl(0 0% 25%)" transform="rotate(25 5.1 19.5)" />
+                            {/* Palm shadow */}
+                            <ellipse cx="17" cy="23" rx="3" ry="2" fill="hsl(25 35% 55%)" opacity="0.25" />
                           </svg>
                         </div>
                       </div>
