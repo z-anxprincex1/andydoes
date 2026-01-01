@@ -728,9 +728,6 @@ const Index = () => {
             <div className="absolute inset-x-2 top-0 h-1 bg-gradient-to-r from-transparent via-[hsl(350_40%_42%)] to-transparent rounded-full opacity-50" />
           </div>
           
-          {/* Table top thickness/edge */}
-          <div className="absolute top-[2rem] md:top-[2.7rem] left-1 md:left-2 right-1 md:right-2 h-1 md:h-1.5 bg-gradient-to-b from-[hsl(345_40%_24%)] to-[hsl(340_38%_18%)] rounded-b-sm" />
-          
           {/* Table stem - connected from top edge to base */}
           <div className="absolute top-[2.2rem] md:top-[3rem] bottom-1 md:bottom-1.5 left-1/2 -translate-x-1/2 w-1.5 md:w-2 bg-gradient-to-r from-[hsl(340_38%_18%)] via-[hsl(345_42%_28%)] to-[hsl(340_38%_18%)] shadow-[1px_2px_4px_rgba(0,0,0,0.3)]">
             {/* Stem highlight */}
