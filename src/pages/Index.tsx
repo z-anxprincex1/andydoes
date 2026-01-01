@@ -784,7 +784,7 @@ const Index = () => {
             {/* Screen */}
             <div className="w-[75vw] h-[calc(100vh-10rem)] md:h-[calc(100vh-12rem)] bg-gradient-to-b from-[hsl(0_0%_95%)] to-[hsl(0_0%_88%)] border-x-4 border-b-4 border-[hsl(0_0%_20%)] shadow-[0_10px_40px_rgba(0,0,0,0.5)] relative">
               {/* Folder tabs */}
-              <div className="absolute top-4 left-1/2 -translate-x-1/2 flex pointer-events-auto">
+              <div className="absolute top-4 left-8 flex pointer-events-auto">
                 {/* Projects tab */}
                 <button
                   onClick={() => setActiveFolder('projects')}
