@@ -1019,7 +1019,7 @@ const Index = () => {
 
 
       {/* Projector Screen - slides down from top when generator is on */}
-      {isGeneratorOn && <div className="fixed top-0 left-0 right-0 flex justify-center z-15 pointer-events-none">
+      {isGeneratorOn && <div className="fixed top-0 left-0 right-0 flex justify-center z-20 pointer-events-none">
           <div className="animate-screen-down">
             {/* Screen mount bar */}
             <div className="w-[85vw] h-3 bg-gradient-to-b from-[hsl(0_0%_25%)] to-[hsl(0_0%_15%)] rounded-b border-x-2 border-b-2 border-[hsl(0_0%_20%)]" />
