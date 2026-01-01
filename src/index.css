@@ -553,85 +553,85 @@
 }
 
 /* Paper airplane flight paths - varied random trajectories */
-/* All paths: strong horizontal travel first, then descend to the floor */
+/* All paths use --distance-mult CSS variable for random travel distance */
 
 /* Path 0: Long glide left */
 @keyframes paper-fly-0 {
   0% { opacity: 1; transform: translate(0, 0) rotate(-12deg) scale(1); }
-  25% { transform: translate(-280px, -35px) rotate(-18deg) scale(1); }
-  50% { transform: translate(-560px, 10px) rotate(6deg) scale(0.96); }
-  75% { transform: translate(-820px, 80px) rotate(14deg) scale(0.92); }
-  90% { transform: translate(-940px, 220px) rotate(20deg) scale(0.88); }
-  100% { opacity: 1; transform: translate(-1020px, calc(100vh - 160px - var(--start-y))) rotate(26deg) scale(0.85); }
+  25% { transform: translate(calc(-280px * var(--distance-mult, 1)), -35px) rotate(-18deg) scale(1); }
+  50% { transform: translate(calc(-560px * var(--distance-mult, 1)), 10px) rotate(6deg) scale(0.96); }
+  75% { transform: translate(calc(-820px * var(--distance-mult, 1)), 80px) rotate(14deg) scale(0.92); }
+  90% { transform: translate(calc(-940px * var(--distance-mult, 1)), 220px) rotate(20deg) scale(0.88); }
+  100% { opacity: 1; transform: translate(calc(-1020px * var(--distance-mult, 1)), calc(100vh - 160px - var(--start-y))) rotate(26deg) scale(0.85); }
 }
 
 /* Path 1: Zig-zag left */
 @keyframes paper-fly-1 {
   0% { opacity: 1; transform: translate(0, 0) rotate(-8deg) scale(1); }
-  20% { transform: translate(-240px, 40px) rotate(18deg) scale(1); }
-  40% { transform: translate(-520px, -10px) rotate(-22deg) scale(0.98); }
-  60% { transform: translate(-760px, 55px) rotate(14deg) scale(0.94); }
-  80% { transform: translate(-920px, 140px) rotate(-10deg) scale(0.9); }
-  100% { opacity: 1; transform: translate(-1040px, calc(100vh - 160px - var(--start-y))) rotate(18deg) scale(0.84); }
+  20% { transform: translate(calc(-240px * var(--distance-mult, 1)), 40px) rotate(18deg) scale(1); }
+  40% { transform: translate(calc(-520px * var(--distance-mult, 1)), -10px) rotate(-22deg) scale(0.98); }
+  60% { transform: translate(calc(-760px * var(--distance-mult, 1)), 55px) rotate(14deg) scale(0.94); }
+  80% { transform: translate(calc(-920px * var(--distance-mult, 1)), 140px) rotate(-10deg) scale(0.9); }
+  100% { opacity: 1; transform: translate(calc(-1040px * var(--distance-mult, 1)), calc(100vh - 160px - var(--start-y))) rotate(18deg) scale(0.84); }
 }
 
 /* Path 2: Curvy S glide */
 @keyframes paper-fly-2 {
   0% { opacity: 1; transform: translate(0, 0) rotate(2deg) scale(1); }
-  25% { transform: translate(-260px, -55px) rotate(-20deg) scale(1); }
-  45% { transform: translate(-520px, 25px) rotate(16deg) scale(0.97); }
-  65% { transform: translate(-760px, -15px) rotate(-12deg) scale(0.93); }
-  85% { transform: translate(-960px, 160px) rotate(22deg) scale(0.88); }
-  100% { opacity: 1; transform: translate(-1120px, calc(100vh - 155px - var(--start-y))) rotate(34deg) scale(0.82); }
+  25% { transform: translate(calc(-260px * var(--distance-mult, 1)), -55px) rotate(-20deg) scale(1); }
+  45% { transform: translate(calc(-520px * var(--distance-mult, 1)), 25px) rotate(16deg) scale(0.97); }
+  65% { transform: translate(calc(-760px * var(--distance-mult, 1)), -15px) rotate(-12deg) scale(0.93); }
+  85% { transform: translate(calc(-960px * var(--distance-mult, 1)), 160px) rotate(22deg) scale(0.88); }
+  100% { opacity: 1; transform: translate(calc(-1120px * var(--distance-mult, 1)), calc(100vh - 155px - var(--start-y))) rotate(34deg) scale(0.82); }
 }
 
 /* Path 3: Fast left then late dive */
 @keyframes paper-fly-3 {
   0% { opacity: 1; transform: translate(0, 0) rotate(-18deg) scale(1); }
-  20% { transform: translate(-320px, 20px) rotate(28deg) scale(1); }
-  45% { transform: translate(-700px, 40px) rotate(-12deg) scale(0.96); }
-  70% { transform: translate(-960px, 90px) rotate(18deg) scale(0.91); }
-  90% { transform: translate(-1100px, 260px) rotate(-8deg) scale(0.86); }
-  100% { opacity: 1; transform: translate(-1200px, calc(100vh - 170px - var(--start-y))) rotate(30deg) scale(0.82); }
+  20% { transform: translate(calc(-320px * var(--distance-mult, 1)), 20px) rotate(28deg) scale(1); }
+  45% { transform: translate(calc(-700px * var(--distance-mult, 1)), 40px) rotate(-12deg) scale(0.96); }
+  70% { transform: translate(calc(-960px * var(--distance-mult, 1)), 90px) rotate(18deg) scale(0.91); }
+  90% { transform: translate(calc(-1100px * var(--distance-mult, 1)), 260px) rotate(-8deg) scale(0.86); }
+  100% { opacity: 1; transform: translate(calc(-1200px * var(--distance-mult, 1)), calc(100vh - 170px - var(--start-y))) rotate(30deg) scale(0.82); }
 }
 
 /* Path 4: Big arc + gentle wobble */
 @keyframes paper-fly-4 {
   0% { opacity: 1; transform: translate(0, 0) rotate(10deg) scale(1); }
-  20% { transform: translate(-220px, -85px) rotate(30deg) scale(1); }
-  45% { transform: translate(-520px, -30px) rotate(-8deg) scale(0.97); }
-  70% { transform: translate(-860px, 40px) rotate(18deg) scale(0.93); }
-  85% { transform: translate(-1020px, 190px) rotate(8deg) scale(0.89); }
-  100% { opacity: 1; transform: translate(-1160px, calc(100vh - 165px - var(--start-y))) rotate(24deg) scale(0.84); }
+  20% { transform: translate(calc(-220px * var(--distance-mult, 1)), -85px) rotate(30deg) scale(1); }
+  45% { transform: translate(calc(-520px * var(--distance-mult, 1)), -30px) rotate(-8deg) scale(0.97); }
+  70% { transform: translate(calc(-860px * var(--distance-mult, 1)), 40px) rotate(18deg) scale(0.93); }
+  85% { transform: translate(calc(-1020px * var(--distance-mult, 1)), 190px) rotate(8deg) scale(0.89); }
+  100% { opacity: 1; transform: translate(calc(-1160px * var(--distance-mult, 1)), calc(100vh - 165px - var(--start-y))) rotate(24deg) scale(0.84); }
 }
 
 /* Path 5: Wide zig-zag */
 @keyframes paper-fly-5 {
   0% { opacity: 1; transform: translate(0, 0) rotate(8deg) scale(1); }
-  18% { transform: translate(-260px, -35px) rotate(-18deg) scale(1); }
-  36% { transform: translate(-520px, 55px) rotate(22deg) scale(0.98); }
-  54% { transform: translate(-780px, 10px) rotate(-10deg) scale(0.94); }
-  72% { transform: translate(-960px, 90px) rotate(18deg) scale(0.9); }
-  90% { transform: translate(-1120px, 240px) rotate(6deg) scale(0.86); }
-  100% { opacity: 1; transform: translate(-1220px, calc(100vh - 160px - var(--start-y))) rotate(22deg) scale(0.83); }
+  18% { transform: translate(calc(-260px * var(--distance-mult, 1)), -35px) rotate(-18deg) scale(1); }
+  36% { transform: translate(calc(-520px * var(--distance-mult, 1)), 55px) rotate(22deg) scale(0.98); }
+  54% { transform: translate(calc(-780px * var(--distance-mult, 1)), 10px) rotate(-10deg) scale(0.94); }
+  72% { transform: translate(calc(-960px * var(--distance-mult, 1)), 90px) rotate(18deg) scale(0.9); }
+  90% { transform: translate(calc(-1120px * var(--distance-mult, 1)), 240px) rotate(6deg) scale(0.86); }
+  100% { opacity: 1; transform: translate(calc(-1220px * var(--distance-mult, 1)), calc(100vh - 160px - var(--start-y))) rotate(22deg) scale(0.83); }
 }
 
 /* Path 6: Fly off-screen left (doesn't land) */
 @keyframes paper-fly-6 {
   0% { opacity: 1; transform: translate(0, 0) rotate(-22deg) scale(1); }
-  30% { transform: translate(-420px, -40px) rotate(-32deg) scale(1); }
-  60% { transform: translate(-820px, 40px) rotate(-18deg) scale(0.95); }
+  30% { transform: translate(calc(-420px * var(--distance-mult, 1)), -40px) rotate(-32deg) scale(1); }
+  60% { transform: translate(calc(-820px * var(--distance-mult, 1)), 40px) rotate(-18deg) scale(0.95); }
   100% { opacity: 0; transform: translate(calc(-100vw - 140px), 120px) rotate(-10deg) scale(0.9); }
 }
 
 /* Path 7: High arc then steep late dive */
 @keyframes paper-fly-7 {
   0% { opacity: 1; transform: translate(0, 0) rotate(4deg) scale(1); }
-  25% { transform: translate(-260px, -120px) rotate(-28deg) scale(1); }
-  50% { transform: translate(-560px, -70px) rotate(12deg) scale(0.97); }
-  75% { transform: translate(-900px, 40px) rotate(30deg) scale(0.93); }
-  90% { transform: translate(-1080px, 230px) rotate(10deg) scale(0.88); }
-  100% { opacity: 1; transform: translate(-1220px, calc(100vh - 155px - var(--start-y))) rotate(32deg) scale(0.84); }
+  25% { transform: translate(calc(-260px * var(--distance-mult, 1)), -120px) rotate(-28deg) scale(1); }
+  50% { transform: translate(calc(-560px * var(--distance-mult, 1)), -70px) rotate(12deg) scale(0.97); }
+  75% { transform: translate(calc(-900px * var(--distance-mult, 1)), 40px) rotate(30deg) scale(0.93); }
+  90% { transform: translate(calc(-1080px * var(--distance-mult, 1)), 230px) rotate(10deg) scale(0.88); }
+  100% { opacity: 1; transform: translate(calc(-1220px * var(--distance-mult, 1)), calc(100vh - 155px - var(--start-y))) rotate(32deg) scale(0.84); }
 }
 
 @keyframes paper-fade-floor {
