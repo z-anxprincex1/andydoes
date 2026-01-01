@@ -278,14 +278,9 @@ const Index = () => {
             isPluggedIn ? "cfl-tube cfl-glow" : "cfl-off"
           }`}
         >
-          {/* First line: anand prince */}
-          <span className="flex flex-wrap justify-center md:justify-start">
-            {["anand", "prince"].map((word, i) => 
-              renderWord(word, i, false)
-            )}
-          </span>
-
-          {/* Second line: purty + cable */}
+          {/* Each word on its own line */}
+          <span className="flex justify-center md:justify-start">{renderWord("anand", 0, true)}</span>
+          <span className="flex justify-center md:justify-start">{renderWord("prince", 1, true)}</span>
           <span className="flex items-start justify-center md:justify-start">
             <span className="flex items-center">
               {renderWord("purty", 2, true)}
