@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { MapPin, HelpCircle, X, Github, Linkedin } from "lucide-react";
+import { MapPin, HelpCircle, X, Linkedin } from "lucide-react";
 import Cat from "@/components/Cat";
 import profileImage from "@/assets/profile.png";
 const Index = () => {
@@ -44,10 +44,33 @@ const Index = () => {
   const plugPositionRef = useRef(plugPosition);
   const [spiderDescending, setSpiderDescending] = useState(false);
   const [spiderAtCoffee, setSpiderAtCoffee] = useState(false);
+  const [githubEyeDirection, setGithubEyeDirection] = useState<'center' | 'left' | 'right'>('center');
+  const [githubBlinking, setGithubBlinking] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const socketRef = useRef<HTMLDivElement>(null);
   const anchorRef = useRef<HTMLSpanElement>(null);
   const flickerClasses = ["flicker-1", "flicker-2", "flicker-3", "flicker-4", "flicker-5"];
+
+  // GitHub eyes random looking and blinking
+  useEffect(() => {
+    // Random eye direction changes
+    const lookInterval = setInterval(() => {
+      const directions: ('center' | 'left' | 'right')[] = ['center', 'left', 'right', 'center'];
+      const randomDirection = directions[Math.floor(Math.random() * directions.length)];
+      setGithubEyeDirection(randomDirection);
+    }, 2000 + Math.random() * 3000);
+
+    // Random blinking
+    const blinkInterval = setInterval(() => {
+      setGithubBlinking(true);
+      setTimeout(() => setGithubBlinking(false), 150);
+    }, 3000 + Math.random() * 4000);
+
+    return () => {
+      clearInterval(lookInterval);
+      clearInterval(blinkInterval);
+    };
+  }, []);
 
   // Spider descends randomly to unplug
   useEffect(() => {
@@ -359,9 +382,49 @@ const Index = () => {
                   <div className="w-full h-full rounded-full bg-gradient-to-br from-[hsl(35_40%_22%)] via-[hsl(35_45%_28%)] to-[hsl(35_35%_20%)] p-0.5 shadow-[inset_1px_1px_3px_rgba(0,0,0,0.5)]">
                     {/* Inner gold rim */}
                     <div className="w-full h-full rounded-full bg-gradient-to-br from-[hsl(35_58%_45%)] via-[hsl(35_52%_50%)] to-[hsl(35_48%_38%)] p-0.5">
-                      {/* Picture area - dark background */}
-                      <div className="w-full h-full rounded-full bg-[hsl(0_0%_10%)] flex items-center justify-center group-hover:bg-[hsl(0_0%_16%)] transition-colors shadow-[inset_0_0_10px_rgba(0,0,0,0.5)]">
-                        <Github className="w-8 h-8 md:w-12 md:h-12 text-[hsl(0_0%_85%)] group-hover:text-white transition-colors drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]" />
+                      {/* Picture area - dark background with animated eyes */}
+                      <div className="w-full h-full rounded-full bg-[hsl(0_0%_10%)] flex items-center justify-center group-hover:bg-[hsl(0_0%_16%)] transition-colors shadow-[inset_0_0_10px_rgba(0,0,0,0.5)] relative">
+                        {/* GitHub-style face with eyes */}
+                        <div className="flex flex-col items-center gap-0.5 md:gap-1">
+                          {/* Eyebrows */}
+                          <div className="flex gap-2 md:gap-4 -mb-0.5">
+                            <div className={`w-2 md:w-3 h-0.5 md:h-1 bg-[hsl(0_0%_70%)] rounded-full transition-transform duration-300 ${githubEyeDirection === 'left' ? 'rotate-[-8deg]' : githubEyeDirection === 'right' ? 'rotate-[8deg]' : ''}`} />
+                            <div className={`w-2 md:w-3 h-0.5 md:h-1 bg-[hsl(0_0%_70%)] rounded-full transition-transform duration-300 ${githubEyeDirection === 'left' ? 'rotate-[8deg]' : githubEyeDirection === 'right' ? 'rotate-[-8deg]' : ''}`} />
+                          </div>
+                          {/* Eyes */}
+                          <div className="flex gap-2 md:gap-4">
+                            {/* Left eye */}
+                            <div className={`w-3 h-3 md:w-5 md:h-5 bg-[hsl(0_0%_95%)] rounded-full relative overflow-hidden transition-all duration-100 ${githubBlinking ? 'scale-y-[0.1]' : 'scale-y-100'}`}>
+                              {/* Pupil */}
+                              <div 
+                                className="absolute w-1.5 h-1.5 md:w-2.5 md:h-2.5 bg-[hsl(0_0%_8%)] rounded-full transition-all duration-300"
+                                style={{
+                                  top: '50%',
+                                  left: '50%',
+                                  transform: `translate(-50%, -50%) translateX(${githubEyeDirection === 'left' ? '-2px' : githubEyeDirection === 'right' ? '2px' : '0'})`,
+                                }}
+                              >
+                                {/* Eye shine */}
+                                <div className="absolute top-0.5 left-0.5 w-0.5 h-0.5 md:w-1 md:h-1 bg-white rounded-full" />
+                              </div>
+                            </div>
+                            {/* Right eye */}
+                            <div className={`w-3 h-3 md:w-5 md:h-5 bg-[hsl(0_0%_95%)] rounded-full relative overflow-hidden transition-all duration-100 ${githubBlinking ? 'scale-y-[0.1]' : 'scale-y-100'}`}>
+                              {/* Pupil */}
+                              <div 
+                                className="absolute w-1.5 h-1.5 md:w-2.5 md:h-2.5 bg-[hsl(0_0%_8%)] rounded-full transition-all duration-300"
+                                style={{
+                                  top: '50%',
+                                  left: '50%',
+                                  transform: `translate(-50%, -50%) translateX(${githubEyeDirection === 'left' ? '-2px' : githubEyeDirection === 'right' ? '2px' : '0'})`,
+                                }}
+                              >
+                                {/* Eye shine */}
+                                <div className="absolute top-0.5 left-0.5 w-0.5 h-0.5 md:w-1 md:h-1 bg-white rounded-full" />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
