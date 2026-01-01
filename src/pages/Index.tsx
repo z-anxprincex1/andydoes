@@ -573,22 +573,24 @@ const Index = () => {
             </div>
           </div>
           
-          {/* Belt system */}
-          <svg className="absolute top-1/2 -translate-y-1/2 pointer-events-none" style={{ left: '-3rem', width: '5rem', height: '3rem' }}>
-            {/* Top belt */}
+          {/* Belt system - tangent to both pulleys */}
+          <svg className="absolute top-1/2 -translate-y-1/2 pointer-events-none overflow-visible" style={{ left: '-4.5rem', width: '7rem', height: '4rem' }}>
+            {/* Top belt - tangent to top of large rotor and top of small pulley */}
             <path 
-              d="M 0 10 Q 40 8, 80 12" 
-              stroke="hsl(25 30% 15%)" 
-              strokeWidth="4" 
+              d="M 8 8 L 95 14" 
+              stroke="hsl(25 25% 18%)" 
+              strokeWidth="3" 
               fill="none"
+              strokeLinecap="round"
               className={isGeneratorOn ? 'animate-pulse' : ''}
             />
-            {/* Bottom belt */}
+            {/* Bottom belt - tangent to bottom of large rotor and bottom of small pulley */}
             <path 
-              d="M 0 26 Q 40 28, 80 24" 
-              stroke="hsl(25 30% 15%)" 
-              strokeWidth="4" 
+              d="M 8 40 L 95 34" 
+              stroke="hsl(25 25% 18%)" 
+              strokeWidth="3" 
               fill="none"
+              strokeLinecap="round"
               className={isGeneratorOn ? 'animate-pulse' : ''}
             />
           </svg>
