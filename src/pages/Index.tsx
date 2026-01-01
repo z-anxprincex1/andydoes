@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { MapPin, HelpCircle, X, Linkedin } from "lucide-react";
+import { MapPin, HelpCircle, X, Github, Linkedin } from "lucide-react";
 import Cat from "@/components/Cat";
 import profileImage from "@/assets/profile.png";
 const Index = () => {
@@ -382,45 +382,43 @@ const Index = () => {
                   <div className="w-full h-full rounded-full bg-gradient-to-br from-[hsl(35_40%_22%)] via-[hsl(35_45%_28%)] to-[hsl(35_35%_20%)] p-0.5 shadow-[inset_1px_1px_3px_rgba(0,0,0,0.5)]">
                     {/* Inner gold rim */}
                     <div className="w-full h-full rounded-full bg-gradient-to-br from-[hsl(35_58%_45%)] via-[hsl(35_52%_50%)] to-[hsl(35_48%_38%)] p-0.5">
-                      {/* Picture area - dark background with animated eyes */}
-                      <div className="w-full h-full rounded-full bg-[hsl(0_0%_10%)] flex items-center justify-center group-hover:bg-[hsl(0_0%_16%)] transition-colors shadow-[inset_0_0_10px_rgba(0,0,0,0.5)] relative">
-                        {/* GitHub-style face with eyes */}
-                        <div className="flex flex-col items-center gap-0.5 md:gap-1">
-                          {/* Eyebrows */}
-                          <div className="flex gap-2 md:gap-4 -mb-0.5">
-                            <div className={`w-2 md:w-3 h-0.5 md:h-1 bg-[hsl(0_0%_70%)] rounded-full transition-transform duration-300 ${githubEyeDirection === 'left' ? 'rotate-[-8deg]' : githubEyeDirection === 'right' ? 'rotate-[8deg]' : ''}`} />
-                            <div className={`w-2 md:w-3 h-0.5 md:h-1 bg-[hsl(0_0%_70%)] rounded-full transition-transform duration-300 ${githubEyeDirection === 'left' ? 'rotate-[8deg]' : githubEyeDirection === 'right' ? 'rotate-[-8deg]' : ''}`} />
-                          </div>
-                          {/* Eyes */}
-                          <div className="flex gap-2 md:gap-4">
-                            {/* Left eye */}
-                            <div className={`w-3 h-3 md:w-5 md:h-5 bg-[hsl(0_0%_95%)] rounded-full relative overflow-hidden transition-all duration-100 ${githubBlinking ? 'scale-y-[0.1]' : 'scale-y-100'}`}>
-                              {/* Pupil */}
-                              <div 
-                                className="absolute w-1.5 h-1.5 md:w-2.5 md:h-2.5 bg-[hsl(0_0%_8%)] rounded-full transition-all duration-300"
-                                style={{
-                                  top: '50%',
-                                  left: '50%',
-                                  transform: `translate(-50%, -50%) translateX(${githubEyeDirection === 'left' ? '-2px' : githubEyeDirection === 'right' ? '2px' : '0'})`,
-                                }}
-                              >
-                                {/* Eye shine */}
-                                <div className="absolute top-0.5 left-0.5 w-0.5 h-0.5 md:w-1 md:h-1 bg-white rounded-full" />
-                              </div>
+                      {/* Picture area - dark background with GitHub logo and animated eyes */}
+                      <div className="w-full h-full rounded-full bg-[hsl(0_0%_10%)] flex items-center justify-center group-hover:bg-[hsl(0_0%_16%)] transition-colors shadow-[inset_0_0_10px_rgba(0,0,0,0.5)] relative overflow-hidden">
+                        {/* GitHub Octocat logo */}
+                        <Github className="w-8 h-8 md:w-12 md:h-12 text-[hsl(0_0%_85%)] group-hover:text-white transition-colors" />
+                        {/* Animated eyes overlay on top of the Octocat */}
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <div className="relative -mt-1 md:-mt-2">
+                            {/* Eyebrows */}
+                            <div className="absolute -top-1.5 md:-top-2.5 left-1/2 -translate-x-1/2 flex gap-1.5 md:gap-3">
+                              <div className={`w-1 md:w-2 h-px md:h-0.5 bg-[hsl(0_0%_60%)] rounded-full transition-transform duration-300 origin-right ${githubEyeDirection === 'left' ? 'rotate-[-12deg]' : githubEyeDirection === 'right' ? 'rotate-[5deg]' : 'rotate-[-3deg]'}`} />
+                              <div className={`w-1 md:w-2 h-px md:h-0.5 bg-[hsl(0_0%_60%)] rounded-full transition-transform duration-300 origin-left ${githubEyeDirection === 'left' ? 'rotate-[-5deg]' : githubEyeDirection === 'right' ? 'rotate-[12deg]' : 'rotate-[3deg]'}`} />
                             </div>
-                            {/* Right eye */}
-                            <div className={`w-3 h-3 md:w-5 md:h-5 bg-[hsl(0_0%_95%)] rounded-full relative overflow-hidden transition-all duration-100 ${githubBlinking ? 'scale-y-[0.1]' : 'scale-y-100'}`}>
-                              {/* Pupil */}
-                              <div 
-                                className="absolute w-1.5 h-1.5 md:w-2.5 md:h-2.5 bg-[hsl(0_0%_8%)] rounded-full transition-all duration-300"
-                                style={{
-                                  top: '50%',
-                                  left: '50%',
-                                  transform: `translate(-50%, -50%) translateX(${githubEyeDirection === 'left' ? '-2px' : githubEyeDirection === 'right' ? '2px' : '0'})`,
-                                }}
-                              >
-                                {/* Eye shine */}
-                                <div className="absolute top-0.5 left-0.5 w-0.5 h-0.5 md:w-1 md:h-1 bg-white rounded-full" />
+                            {/* Eyes container */}
+                            <div className="flex gap-1 md:gap-2">
+                              {/* Left eye */}
+                              <div className={`w-1.5 h-1.5 md:w-2.5 md:h-2.5 bg-[hsl(0_0%_95%)] rounded-full relative overflow-hidden transition-all duration-100 ${githubBlinking ? 'scale-y-[0.15]' : 'scale-y-100'}`}>
+                                {/* Pupil */}
+                                <div 
+                                  className="absolute w-0.5 h-0.5 md:w-1 md:h-1 bg-[hsl(0_0%_5%)] rounded-full transition-all duration-300"
+                                  style={{
+                                    top: '50%',
+                                    left: '50%',
+                                    transform: `translate(-50%, -50%) translateX(${githubEyeDirection === 'left' ? '-1px' : githubEyeDirection === 'right' ? '1px' : '0'})`,
+                                  }}
+                                />
+                              </div>
+                              {/* Right eye */}
+                              <div className={`w-1.5 h-1.5 md:w-2.5 md:h-2.5 bg-[hsl(0_0%_95%)] rounded-full relative overflow-hidden transition-all duration-100 ${githubBlinking ? 'scale-y-[0.15]' : 'scale-y-100'}`}>
+                                {/* Pupil */}
+                                <div 
+                                  className="absolute w-0.5 h-0.5 md:w-1 md:h-1 bg-[hsl(0_0%_5%)] rounded-full transition-all duration-300"
+                                  style={{
+                                    top: '50%',
+                                    left: '50%',
+                                    transform: `translate(-50%, -50%) translateX(${githubEyeDirection === 'left' ? '-1px' : githubEyeDirection === 'right' ? '1px' : '0'})`,
+                                  }}
+                                />
                               </div>
                             </div>
                           </div>
