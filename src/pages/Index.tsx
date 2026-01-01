@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import Cat from "@/components/Cat";
+import profileImage from "@/assets/profile.png";
 
 const Index = () => {
   const [isPluggedIn, setIsPluggedIn] = useState(false);
@@ -257,6 +258,17 @@ const Index = () => {
           background: 'radial-gradient(ellipse 50% 40% at 50% 50%, hsl(60 80% 85% / 0.15) 0%, transparent 60%)',
         }}
       />
+
+      {/* Profile picture - right side */}
+      <div className="fixed right-8 md:right-16 lg:right-24 top-1/2 -translate-y-1/2 z-20">
+        <div className="w-32 h-32 md:w-48 md:h-48 lg:w-56 lg:h-56 rounded-full overflow-hidden border-4 border-[hsl(0_0%_20%)] shadow-[0_0_30px_rgba(0,0,0,0.5)]">
+          <img 
+            src={profileImage} 
+            alt="Anand Prince Purty" 
+            className="w-full h-full object-cover"
+          />
+        </div>
+      </div>
 
       <div className="w-full px-6 md:px-12 lg:px-20 relative z-10">
         <h1 
