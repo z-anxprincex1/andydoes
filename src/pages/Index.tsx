@@ -665,7 +665,7 @@ const Index = () => {
               </div>
               
               {/* Cup body - cylindrical ceramic mug */}
-              <div className="absolute top-1 md:top-1.5 left-0 right-0 bottom-0 bg-gradient-to-r from-[hsl(220_15%_88%)] via-[hsl(220_12%_94%)] to-[hsl(220_10%_85%)] rounded-b-lg shadow-[2px_3px_6px_rgba(0,0,0,0.25),inset_2px_0_4px_rgba(255,255,255,0.5)] group-hover:shadow-[2px_3px_8px_rgba(0,0,0,0.35),0_0_12px_rgba(255,200,100,0.3)] transition-shadow">
+              <div className="absolute top-1 md:top-1.5 left-0 right-0 bottom-1 bg-gradient-to-r from-[hsl(220_15%_88%)] via-[hsl(220_12%_94%)] to-[hsl(220_10%_85%)] rounded-b-lg shadow-[2px_3px_6px_rgba(0,0,0,0.25),inset_2px_0_4px_rgba(255,255,255,0.5)] group-hover:shadow-[2px_3px_8px_rgba(0,0,0,0.35),0_0_12px_rgba(255,200,100,0.3)] transition-shadow">
                 {/* Body highlight streak */}
                 <div className="absolute top-1 left-1 bottom-1 w-1 md:w-1.5 bg-gradient-to-b from-[hsl(220_20%_98%)] via-[hsl(220_15%_96%)] to-[hsl(220_12%_90%)] rounded-full opacity-70" />
                 {/* Body shadow on right */}
@@ -673,6 +673,7 @@ const Index = () => {
               </div>
               
               {/* Cup base ellipse - visible bottom */}
+              <div className="absolute -bottom-0.5 left-0 right-0 h-1.5 md:h-2 bg-gradient-to-b from-[hsl(220_12%_82%)] to-[hsl(220_10%_75%)] rounded-[50%] shadow-[0_2px_3px_rgba(0,0,0,0.3)]" />
               
               
               {/* Cup handle - thick curved handle on right */}
