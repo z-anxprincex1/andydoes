@@ -288,7 +288,21 @@ const Index = () => {
         </div>
       </div>
 
-      <div className="w-full px-6 md:px-12 lg:px-20 relative z-10 flex flex-col md:flex-row items-center gap-8 md:gap-12 lg:gap-16">
+      {/* Whoosh text - appears when generator turns on */}
+      {isGeneratorOn && (
+        <div className="fixed top-1/2 left-1/2 z-50 pointer-events-none animate-whoosh-text">
+          <span 
+            className="text-[hsl(50_90%_60%)] text-4xl md:text-6xl font-extrabold whitespace-nowrap drop-shadow-[3px_3px_0_hsl(0_0%_10%)]" 
+            style={{ fontFamily: 'Comic Sans MS, cursive' }}
+          >
+            whoosh!
+          </span>
+        </div>
+      )}
+
+      <div className={`w-full px-6 md:px-12 lg:px-20 relative z-10 flex flex-col md:flex-row items-center gap-8 md:gap-12 lg:gap-16 transition-all duration-500 ${
+        isGeneratorOn ? 'animate-whoosh-up pointer-events-none' : ''
+      }`}>
         {/* Profile picture with about me */}
         <div className="flex-shrink-0 flex flex-col items-center relative">
           {/* Question mark icon with connected tooltip arrow */}
@@ -695,13 +709,69 @@ const Index = () => {
       </div>
 
 
+      {/* Projector Screen - slides down from top when generator is on */}
+      {isGeneratorOn && (
+        <div className="fixed top-0 left-1/2 -translate-x-1/2 z-15 pointer-events-none animate-screen-down">
+          {/* Screen mount bar */}
+          <div className="w-[85vw] max-w-4xl h-3 bg-gradient-to-b from-[hsl(0_0%_25%)] to-[hsl(0_0%_15%)] rounded-b border-x-2 border-b-2 border-[hsl(0_0%_20%)]" />
+          {/* Screen */}
+          <div className="w-[85vw] max-w-4xl h-[50vh] md:h-[55vh] bg-gradient-to-b from-[hsl(0_0%_95%)] to-[hsl(0_0%_88%)] border-x-4 border-b-4 border-[hsl(0_0%_20%)] shadow-[0_10px_40px_rgba(0,0,0,0.5)]">
+            {/* Screen content area */}
+            <div className="w-full h-full flex items-center justify-center p-8">
+              <div className="text-[hsl(0_0%_20%)] text-center" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
+                <p className="text-2xl md:text-4xl font-bold mb-4">My Work</p>
+                <p className="text-sm md:text-lg opacity-70">Projects coming soon...</p>
+              </div>
+            </div>
+          </div>
+          {/* Screen bottom weight bar */}
+          <div className="w-[85vw] max-w-4xl h-2 bg-gradient-to-b from-[hsl(0_0%_20%)] to-[hsl(0_0%_10%)] rounded-b" />
+        </div>
+      )}
+
+      {/* Projector Light Beam - visible when generator is on */}
+      {isGeneratorOn && (
+        <div className="fixed bottom-8 md:bottom-11 right-24 md:right-32 z-19 pointer-events-none animate-light-beam">
+          <svg 
+            className="absolute" 
+            style={{ 
+              left: '-2rem',
+              bottom: '0.5rem',
+              width: 'calc(100vw - 10rem)',
+              height: '60vh',
+              transform: 'rotate(-25deg)',
+              transformOrigin: 'bottom right'
+            }}
+            viewBox="0 0 400 300"
+            preserveAspectRatio="none"
+          >
+            <defs>
+              <linearGradient id="beamGradient" x1="100%" y1="100%" x2="0%" y2="0%">
+                <stop offset="0%" stopColor="hsl(50 80% 90%)" stopOpacity="0.6" />
+                <stop offset="30%" stopColor="hsl(50 70% 85%)" stopOpacity="0.3" />
+                <stop offset="70%" stopColor="hsl(50 60% 80%)" stopOpacity="0.1" />
+                <stop offset="100%" stopColor="hsl(50 50% 75%)" stopOpacity="0" />
+              </linearGradient>
+            </defs>
+            <polygon 
+              points="400,300 380,280 0,0 50,0" 
+              fill="url(#beamGradient)"
+            />
+          </svg>
+        </div>
+      )}
+
       {/* Projector - lying on floor left of socket */}
       <div className="fixed bottom-8 md:bottom-11 right-24 md:right-32 z-20">
         {/* Projector body */}
         <div className="w-16 h-10 md:w-24 md:h-14 bg-[hsl(0_0%_15%)] rounded relative">
           {/* Lens */}
-          <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 w-5 h-5 md:w-7 md:h-7 bg-[hsl(0_0%_8%)] rounded-full border-2 border-[hsl(0_0%_25%)]">
-            <div className="absolute inset-1 bg-[hsl(220_20%_15%)] rounded-full" />
+          <div className={`absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 w-5 h-5 md:w-7 md:h-7 bg-[hsl(0_0%_8%)] rounded-full border-2 border-[hsl(0_0%_25%)] transition-all duration-300 ${
+            isGeneratorOn ? 'shadow-[0_0_15px_5px_rgba(255,220,100,0.6)]' : ''
+          }`}>
+            <div className={`absolute inset-1 rounded-full transition-all duration-300 ${
+              isGeneratorOn ? 'bg-[hsl(50_80%_70%)]' : 'bg-[hsl(220_20%_15%)]'
+            }`} />
           </div>
           {/* Top vent lines */}
           <div className="absolute top-1.5 right-3 flex gap-1">
