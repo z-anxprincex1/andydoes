@@ -780,8 +780,8 @@ const Index = () => {
         <div 
           className="fixed z-[21] pointer-events-none"
           style={{
-            bottom: 'calc(2rem + 1.5rem)',
-            right: 'calc(6rem + 5.5rem)',
+            bottom: 'calc(2rem + 1.2rem)',
+            right: 'calc(6rem + 7.5rem)',
           }}
         >
           <svg 
@@ -797,7 +797,7 @@ const Index = () => {
               </radialGradient>
             </defs>
             <ellipse 
-              cx="80" 
+              cx="90" 
               cy="30" 
               rx="75" 
               ry="28" 
