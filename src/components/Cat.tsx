@@ -184,7 +184,7 @@ const Cat = ({ onScratchSocket }: CatProps) => {
 
   return (
     <div
-      className="fixed bottom-8 md:bottom-12 z-20"
+      className="fixed bottom-8 md:bottom-12 z-[10000]"
       style={{
         left: `${position}%`,
         transitionProperty: "left",
