@@ -553,81 +553,85 @@
 }
 
 /* Paper airplane flight paths - varied random trajectories */
-/* Path 0: Gentle arc to the left */
+/* All paths: strong horizontal travel first, then descend to the floor */
+
+/* Path 0: Long glide left */
 @keyframes paper-fly-0 {
-  0% { opacity: 1; transform: translate(0, 0) rotate(-15deg) scale(1); }
-  25% { transform: translate(-100px, -30px) rotate(-25deg) scale(1); }
-  50% { transform: translate(-220px, 100px) rotate(5deg) scale(0.95); }
-  75% { transform: translate(-350px, 280px) rotate(15deg) scale(0.9); }
-  100% { opacity: 1; transform: translate(-420px, calc(100vh - 180px)) rotate(25deg) scale(0.85); }
+  0% { opacity: 1; transform: translate(0, 0) rotate(-12deg) scale(1); }
+  25% { transform: translate(-280px, -35px) rotate(-18deg) scale(1); }
+  50% { transform: translate(-560px, 10px) rotate(6deg) scale(0.96); }
+  75% { transform: translate(-820px, 80px) rotate(14deg) scale(0.92); }
+  90% { transform: translate(-940px, 220px) rotate(20deg) scale(0.88); }
+  100% { opacity: 1; transform: translate(-1020px, calc(100vh - 160px - var(--start-y))) rotate(26deg) scale(0.85); }
 }
 
 /* Path 1: Zig-zag left */
 @keyframes paper-fly-1 {
-  0% { opacity: 1; transform: translate(0, 0) rotate(-10deg) scale(1); }
-  20% { transform: translate(-80px, 50px) rotate(20deg) scale(1); }
-  40% { transform: translate(-180px, -10px) rotate(-25deg) scale(0.97); }
-  60% { transform: translate(-300px, 120px) rotate(15deg) scale(0.93); }
-  80% { transform: translate(-420px, 80px) rotate(-10deg) scale(0.88); }
-  100% { opacity: 1; transform: translate(-500px, calc(100vh - 160px)) rotate(20deg) scale(0.82); }
+  0% { opacity: 1; transform: translate(0, 0) rotate(-8deg) scale(1); }
+  20% { transform: translate(-240px, 40px) rotate(18deg) scale(1); }
+  40% { transform: translate(-520px, -10px) rotate(-22deg) scale(0.98); }
+  60% { transform: translate(-760px, 55px) rotate(14deg) scale(0.94); }
+  80% { transform: translate(-920px, 140px) rotate(-10deg) scale(0.9); }
+  100% { opacity: 1; transform: translate(-1040px, calc(100vh - 160px - var(--start-y))) rotate(18deg) scale(0.84); }
 }
 
-/* Path 2: Wide loop left */
+/* Path 2: Curvy S glide */
 @keyframes paper-fly-2 {
-  0% { opacity: 1; transform: translate(0, 0) rotate(0deg) scale(1); }
-  30% { transform: translate(-120px, -80px) rotate(-35deg) scale(1); }
-  50% { transform: translate(-260px, 60px) rotate(30deg) scale(0.95); }
-  70% { transform: translate(-380px, 220px) rotate(-15deg) scale(0.9); }
-  100% { opacity: 1; transform: translate(-480px, calc(100vh - 150px)) rotate(40deg) scale(0.8); }
+  0% { opacity: 1; transform: translate(0, 0) rotate(2deg) scale(1); }
+  25% { transform: translate(-260px, -55px) rotate(-20deg) scale(1); }
+  45% { transform: translate(-520px, 25px) rotate(16deg) scale(0.97); }
+  65% { transform: translate(-760px, -15px) rotate(-12deg) scale(0.93); }
+  85% { transform: translate(-960px, 160px) rotate(22deg) scale(0.88); }
+  100% { opacity: 1; transform: translate(-1120px, calc(100vh - 155px - var(--start-y))) rotate(34deg) scale(0.82); }
 }
 
-/* Path 3: Steep dive with zig-zag left */
+/* Path 3: Fast left then late dive */
 @keyframes paper-fly-3 {
-  0% { opacity: 1; transform: translate(0, 0) rotate(-20deg) scale(1); }
-  15% { transform: translate(-60px, 70px) rotate(25deg) scale(1); }
-  30% { transform: translate(-150px, 30px) rotate(-20deg) scale(0.98); }
-  50% { transform: translate(-280px, 180px) rotate(30deg) scale(0.94); }
-  70% { transform: translate(-400px, 120px) rotate(-15deg) scale(0.88); }
-  100% { opacity: 1; transform: translate(-520px, calc(100vh - 170px)) rotate(35deg) scale(0.8); }
+  0% { opacity: 1; transform: translate(0, 0) rotate(-18deg) scale(1); }
+  20% { transform: translate(-320px, 20px) rotate(28deg) scale(1); }
+  45% { transform: translate(-700px, 40px) rotate(-12deg) scale(0.96); }
+  70% { transform: translate(-960px, 90px) rotate(18deg) scale(0.91); }
+  90% { transform: translate(-1100px, 260px) rotate(-8deg) scale(0.86); }
+  100% { opacity: 1; transform: translate(-1200px, calc(100vh - 170px - var(--start-y))) rotate(30deg) scale(0.82); }
 }
 
-/* Path 4: Fly right and land far */
+/* Path 4: Big arc + gentle wobble */
 @keyframes paper-fly-4 {
-  0% { opacity: 1; transform: translate(0, 0) rotate(15deg) scale(1); }
-  20% { transform: translate(-40px, -60px) rotate(35deg) scale(1); }
-  40% { transform: translate(-120px, 40px) rotate(10deg) scale(0.97); }
-  60% { transform: translate(-80px, 150px) rotate(-5deg) scale(0.93); }
-  80% { transform: translate(-200px, 300px) rotate(20deg) scale(0.88); }
-  100% { opacity: 1; transform: translate(-300px, calc(100vh - 180px)) rotate(30deg) scale(0.85); }
+  0% { opacity: 1; transform: translate(0, 0) rotate(10deg) scale(1); }
+  20% { transform: translate(-220px, -85px) rotate(30deg) scale(1); }
+  45% { transform: translate(-520px, -30px) rotate(-8deg) scale(0.97); }
+  70% { transform: translate(-860px, 40px) rotate(18deg) scale(0.93); }
+  85% { transform: translate(-1020px, 190px) rotate(8deg) scale(0.89); }
+  100% { opacity: 1; transform: translate(-1160px, calc(100vh - 165px - var(--start-y))) rotate(24deg) scale(0.84); }
 }
 
 /* Path 5: Wide zig-zag */
 @keyframes paper-fly-5 {
-  0% { opacity: 1; transform: translate(0, 0) rotate(10deg) scale(1); }
-  15% { transform: translate(-100px, -40px) rotate(-20deg) scale(1); }
-  30% { transform: translate(-50px, 80px) rotate(25deg) scale(0.97); }
-  50% { transform: translate(-200px, 40px) rotate(-15deg) scale(0.93); }
-  70% { transform: translate(-150px, 200px) rotate(20deg) scale(0.88); }
-  85% { transform: translate(-350px, 280px) rotate(5deg) scale(0.85); }
-  100% { opacity: 1; transform: translate(-380px, calc(100vh - 160px)) rotate(25deg) scale(0.82); }
+  0% { opacity: 1; transform: translate(0, 0) rotate(8deg) scale(1); }
+  18% { transform: translate(-260px, -35px) rotate(-18deg) scale(1); }
+  36% { transform: translate(-520px, 55px) rotate(22deg) scale(0.98); }
+  54% { transform: translate(-780px, 10px) rotate(-10deg) scale(0.94); }
+  72% { transform: translate(-960px, 90px) rotate(18deg) scale(0.9); }
+  90% { transform: translate(-1120px, 240px) rotate(6deg) scale(0.86); }
+  100% { opacity: 1; transform: translate(-1220px, calc(100vh - 160px - var(--start-y))) rotate(22deg) scale(0.83); }
 }
 
-/* Path 6: Fly off screen left */
+/* Path 6: Fly off-screen left (doesn't land) */
 @keyframes paper-fly-6 {
-  0% { opacity: 1; transform: translate(0, 0) rotate(-25deg) scale(1); }
-  30% { transform: translate(-200px, -40px) rotate(-35deg) scale(1); }
-  60% { transform: translate(-450px, 60px) rotate(-20deg) scale(0.95); }
-  100% { opacity: 0; transform: translate(calc(-100vw - 50px), 120px) rotate(-15deg) scale(0.9); }
+  0% { opacity: 1; transform: translate(0, 0) rotate(-22deg) scale(1); }
+  30% { transform: translate(-420px, -40px) rotate(-32deg) scale(1); }
+  60% { transform: translate(-820px, 40px) rotate(-18deg) scale(0.95); }
+  100% { opacity: 0; transform: translate(calc(-100vw - 140px), 120px) rotate(-10deg) scale(0.9); }
 }
 
-/* Path 7: High arc then steep dive */
+/* Path 7: High arc then steep late dive */
 @keyframes paper-fly-7 {
-  0% { opacity: 1; transform: translate(0, 0) rotate(5deg) scale(1); }
-  20% { transform: translate(-80px, -120px) rotate(-30deg) scale(1); }
-  40% { transform: translate(-200px, -80px) rotate(15deg) scale(0.97); }
-  60% { transform: translate(-340px, 80px) rotate(35deg) scale(0.93); }
-  80% { transform: translate(-450px, 260px) rotate(10deg) scale(0.88); }
-  100% { opacity: 1; transform: translate(-550px, calc(100vh - 155px)) rotate(35deg) scale(0.82); }
+  0% { opacity: 1; transform: translate(0, 0) rotate(4deg) scale(1); }
+  25% { transform: translate(-260px, -120px) rotate(-28deg) scale(1); }
+  50% { transform: translate(-560px, -70px) rotate(12deg) scale(0.97); }
+  75% { transform: translate(-900px, 40px) rotate(30deg) scale(0.93); }
+  90% { transform: translate(-1080px, 230px) rotate(10deg) scale(0.88); }
+  100% { opacity: 1; transform: translate(-1220px, calc(100vh - 155px - var(--start-y))) rotate(32deg) scale(0.84); }
 }
 
 @keyframes paper-fade-floor {

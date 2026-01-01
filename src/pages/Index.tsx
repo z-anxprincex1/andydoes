@@ -47,12 +47,13 @@ const Index = () => {
   const [githubEyeDirection, setGithubEyeDirection] = useState<'center' | 'left' | 'right'>('center');
   const [githubBlinking, setGithubBlinking] = useState(false);
   const [linkedinPhase, setLinkedinPhase] = useState<'writing' | 'folding' | 'throwing'>('writing');
-  const [paperAirplanes, setPaperAirplanes] = useState<Array<{id: number; x: number; y: number; curveType: number; duration: number}>>([]);
+  const [paperAirplanes, setPaperAirplanes] = useState<Array<{id: number; startX: number; startY: number; curveType: number; duration: number}>>([]);
   const containerRef = useRef<HTMLDivElement>(null);
   const socketRef = useRef<HTMLDivElement>(null);
   const anchorRef = useRef<HTMLSpanElement>(null);
   const flickerClasses = ["flicker-1", "flicker-2", "flicker-3", "flicker-4", "flicker-5"];
   const airplaneIdRef = useRef(0);
+  const linkedinFrameRef = useRef<HTMLDivElement>(null);
 
   // GitHub eyes random looking and blinking
   useEffect(() => {
@@ -90,27 +91,37 @@ const Index = () => {
           setLinkedinPhase('throwing');
           
           // Launch paper airplane
+          const frameEl = linkedinFrameRef.current;
+          if (!frameEl) {
+            // Restart cycle if the frame isn't mounted yet
+            setTimeout(cycleAnimation, 500);
+            return;
+          }
+
+          const rect = frameEl.getBoundingClientRect();
           const newId = airplaneIdRef.current++;
           const curveType = Math.floor(Math.random() * 8); // 0-7 different curve types
-          const duration = 3.5 + Math.random() * 2.5; // 3.5-6 seconds flight time
-          // More varied end positions
-          const randomX = curveType >= 4 
-            ? 200 + Math.random() * 400 // Some fly right (off-screen)
-            : -150 - Math.random() * 350; // Others fly left
-          const randomY = Math.random() * 100 - 50; // Add vertical variance
-          
-          setPaperAirplanes(prev => [...prev, {
-            id: newId,
-            x: randomX,
-            y: randomY,
-            curveType,
-            duration
-          }]);
-          
+          const duration = 4 + Math.random() * 2.5; // 4-6.5 seconds flight time
+
+          // Start from the LEFT edge of the LinkedIn picture area
+          const startX = rect.left + 2;
+          const startY = rect.top + rect.height * 0.62;
+
+          setPaperAirplanes((prev) => [
+            ...prev,
+            {
+              id: newId,
+              startX,
+              startY,
+              curveType,
+              duration,
+            },
+          ]);
+
           // Remove airplane after it lands and fades (duration + fade time)
           setTimeout(() => {
-            setPaperAirplanes(prev => prev.filter(p => p.id !== newId));
-          }, (duration + 1.5) * 1000);
+            setPaperAirplanes((prev) => prev.filter((p) => p.id !== newId));
+          }, (duration + 1.25) * 1000);
           
           // Restart cycle
           setTimeout(cycleAnimation, 500);
@@ -397,7 +408,7 @@ const Index = () => {
                     {/* Inner gold rim */}
                     <div className="w-full h-full rounded-sm bg-gradient-to-br from-[hsl(35_58%_45%)] via-[hsl(35_52%_50%)] to-[hsl(35_48%_38%)] p-0.5">
                       {/* Picture area - LinkedIn blue background with animated hands */}
-                      <div className="w-full h-full rounded-sm bg-[hsl(201_100%_25%)] flex items-center justify-center group-hover:bg-[hsl(201_100%_35%)] transition-colors shadow-[inset_0_0_8px_rgba(0,0,0,0.4)] overflow-visible relative">
+                      <div ref={linkedinFrameRef} className="w-full h-full rounded-sm bg-[hsl(201_100%_25%)] flex items-center justify-center group-hover:bg-[hsl(201_100%_35%)] transition-colors shadow-[inset_0_0_8px_rgba(0,0,0,0.4)] overflow-visible relative">
                         <Linkedin className="w-5 h-5 md:w-6 md:h-6 text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)] absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2" />
                         
                         {/* Animated hands container - positioned below frame */}
@@ -529,30 +540,31 @@ const Index = () => {
       </div>
 
       {/* Paper airplanes flying from LinkedIn frame to floor */}
-      {paperAirplanes.map(airplane => (
+      {paperAirplanes.map((airplane) => (
         <div
           key={airplane.id}
-          className={`fixed top-32 md:top-40 right-8 md:right-24 z-[15] pointer-events-none opacity-0 paper-airplane-${airplane.curveType}`}
+          className={`fixed z-[25] pointer-events-none opacity-0 paper-airplane-${airplane.curveType}`}
           style={{
-            '--fly-end-x': `${airplane.x}px`,
-            '--fly-end-y': `${airplane.y}px`,
+            left: `${airplane.startX}px`,
+            top: `${airplane.startY}px`,
+            '--start-y': `${airplane.startY}px`,
             '--fly-duration': `${airplane.duration}s`,
           } as React.CSSProperties}
         >
-          {/* Paper airplane SVG - bigger */}
+          {/* Paper airplane SVG */}
           <svg width="32" height="24" viewBox="0 0 16 12" className="drop-shadow-lg">
             {/* Main body */}
-            <path 
-              d="M0 6 L16 0 L12 6 L16 12 L0 6 Z" 
-              fill="white" 
-              stroke="hsl(201 100% 40%)" 
-              strokeWidth="0.5"
+            <path
+              d="M0 6 L16 0 L12 6 L16 12 L0 6 Z"
+              fill="white"
+              stroke="hsl(var(--foreground))"
+              strokeWidth="0.6"
             />
             {/* Fold line */}
-            <line x1="0" y1="6" x2="12" y2="6" stroke="hsl(201 100% 60%)" strokeWidth="0.3" />
-            {/* Wing crease */}
-            <line x1="4" y1="3" x2="12" y2="6" stroke="hsl(0 0% 80%)" strokeWidth="0.3" />
-            <line x1="4" y1="9" x2="12" y2="6" stroke="hsl(0 0% 80%)" strokeWidth="0.3" />
+            <line x1="0" y1="6" x2="12" y2="6" stroke="hsl(var(--foreground))" strokeWidth="0.35" />
+            {/* Wing creases */}
+            <line x1="4" y1="3" x2="12" y2="6" stroke="hsl(var(--muted-foreground))" strokeWidth="0.35" />
+            <line x1="4" y1="9" x2="12" y2="6" stroke="hsl(var(--muted-foreground))" strokeWidth="0.35" />
           </svg>
         </div>
       ))}
