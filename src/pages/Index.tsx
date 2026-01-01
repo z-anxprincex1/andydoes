@@ -783,94 +783,42 @@ const Index = () => {
             <div className="w-[75vw] h-3 bg-gradient-to-b from-[hsl(0_0%_25%)] to-[hsl(0_0%_15%)] rounded-b border-x-2 border-b-2 border-[hsl(0_0%_20%)]" />
             {/* Screen */}
             <div className="w-[75vw] h-[calc(100vh-10rem)] md:h-[calc(100vh-12rem)] bg-gradient-to-b from-[hsl(0_0%_95%)] to-[hsl(0_0%_88%)] border-x-4 border-b-4 border-[hsl(0_0%_20%)] shadow-[0_10px_40px_rgba(0,0,0,0.5)] relative">
-              {/* Folder tabs - aligned left */}
-              <div className="absolute top-4 left-12 flex pointer-events-auto">
+              {/* Folder tabs */}
+              <div className="absolute top-4 left-1/2 -translate-x-1/2 flex pointer-events-auto">
                 {/* Projects tab */}
                 <button
                   onClick={() => setActiveFolder('projects')}
-                  className={`relative px-5 py-2 text-sm md:text-base font-bold transition-all ${
+                  className={`relative px-6 py-2 text-sm md:text-base font-bold rounded-t-lg border-2 border-b-0 transition-all ${
                     activeFolder === 'projects'
-                      ? 'text-[hsl(0_0%_15%)] z-10'
-                      : 'text-[hsl(0_0%_30%)] hover:text-[hsl(0_0%_20%)]'
+                      ? 'bg-[hsl(45_80%_75%)] border-[hsl(35_60%_40%)] text-[hsl(0_0%_15%)] z-10 -mb-[2px]'
+                      : 'bg-[hsl(45_60%_65%)] border-[hsl(35_50%_35%)] text-[hsl(0_0%_25%)] hover:bg-[hsl(45_70%_70%)]'
                   }`}
                   style={{ fontFamily: 'Comic Sans MS, cursive' }}
                 >
-                  {/* Paper tab shape */}
-                  <svg className="absolute inset-0 w-full h-full -z-10" viewBox="0 0 100 40" preserveAspectRatio="none">
-                    <path 
-                      d={activeFolder === 'projects' 
-                        ? "M5 40 L3 8 Q4 2, 12 3 L88 5 Q96 4, 97 12 L95 40 Z"
-                        : "M8 40 L6 12 Q7 5, 15 6 L85 8 Q93 7, 94 15 L92 40 Z"
-                      }
-                      fill={activeFolder === 'projects' ? 'hsl(45 80% 78%)' : 'hsl(45 60% 68%)'}
-                      stroke="hsl(35 50% 45%)"
-                      strokeWidth="1.5"
-                    />
-                  </svg>
                   projects
                 </button>
                 {/* Experience tab */}
                 <button
                   onClick={() => setActiveFolder('experience')}
-                  className={`relative px-5 py-2 text-sm md:text-base font-bold transition-all -ml-2 ${
+                  className={`relative px-6 py-2 text-sm md:text-base font-bold rounded-t-lg border-2 border-b-0 transition-all -ml-1 ${
                     activeFolder === 'experience'
-                      ? 'text-[hsl(0_0%_15%)] z-10'
-                      : 'text-[hsl(0_0%_30%)] hover:text-[hsl(0_0%_20%)]'
+                      ? 'bg-[hsl(200_70%_75%)] border-[hsl(200_50%_40%)] text-[hsl(0_0%_15%)] z-10 -mb-[2px]'
+                      : 'bg-[hsl(200_50%_65%)] border-[hsl(200_40%_35%)] text-[hsl(0_0%_25%)] hover:bg-[hsl(200_60%_70%)]'
                   }`}
                   style={{ fontFamily: 'Comic Sans MS, cursive' }}
                 >
-                  {/* Paper tab shape */}
-                  <svg className="absolute inset-0 w-full h-full -z-10" viewBox="0 0 120 40" preserveAspectRatio="none">
-                    <path 
-                      d={activeFolder === 'experience'
-                        ? "M5 40 L2 10 Q3 3, 14 4 L106 6 Q117 5, 118 14 L115 40 Z"
-                        : "M8 40 L5 14 Q6 6, 17 7 L103 9 Q114 8, 115 17 L112 40 Z"
-                      }
-                      fill={activeFolder === 'experience' ? 'hsl(200 70% 78%)' : 'hsl(200 50% 68%)'}
-                      stroke="hsl(200 40% 45%)"
-                      strokeWidth="1.5"
-                    />
-                  </svg>
                   experience
                 </button>
               </div>
 
-              {/* Folder body - paper-like with imperfect edges */}
-              <div className="absolute top-[3rem] left-2 right-2 bottom-2 md:left-3 md:right-3 md:bottom-3">
-                {/* Paper folder background */}
-                <div 
-                  className={`absolute inset-0 transition-colors duration-300 ${
-                    activeFolder === 'projects' 
-                      ? 'bg-[hsl(45_80%_78%)]' 
-                      : 'bg-[hsl(200_70%_78%)]'
-                  }`}
-                  style={{
-                    clipPath: 'polygon(0% 1%, 1% 0%, 99% 0.5%, 100% 1.5%, 99.5% 99%, 98% 100%, 2% 99.5%, 0% 98%)',
-                    boxShadow: 'inset 2px 2px 8px rgba(255,255,255,0.3), inset -2px -2px 8px rgba(0,0,0,0.1)'
-                  }}
-                />
-                {/* Paper edge border */}
-                <div 
-                  className={`absolute inset-0 border-2 transition-colors duration-300 ${
-                    activeFolder === 'projects' 
-                      ? 'border-[hsl(35_50%_45%)]' 
-                      : 'border-[hsl(200_40%_45%)]'
-                  }`}
-                  style={{
-                    clipPath: 'polygon(0% 1%, 1% 0%, 99% 0.5%, 100% 1.5%, 99.5% 99%, 98% 100%, 2% 99.5%, 0% 98%)'
-                  }}
-                />
-                {/* Left edge shadow for depth */}
-                <div 
-                  className={`absolute left-1 top-2 bottom-2 w-1 opacity-20 ${
-                    activeFolder === 'projects' ? 'bg-[hsl(35_40%_30%)]' : 'bg-[hsl(200_30%_30%)]'
-                  }`} 
-                />
-                {/* Right edge highlight */}
-                <div className="absolute right-1 top-2 bottom-2 w-0.5 bg-white opacity-30" />
-                
+              {/* Folder body */}
+              <div className={`absolute top-[3.5rem] left-8 right-8 bottom-8 rounded-lg border-2 shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)] transition-colors duration-300 ${
+                activeFolder === 'projects'
+                  ? 'bg-[hsl(45_80%_75%)] border-[hsl(35_60%_40%)]'
+                  : 'bg-[hsl(200_70%_75%)] border-[hsl(200_50%_40%)]'
+              }`}>
                 {/* Folder content */}
-                <div className="relative w-full h-full flex items-center justify-center p-8">
+                <div className="w-full h-full flex items-center justify-center p-8">
                   {activeFolder === 'projects' ? (
                     <div className="text-[hsl(0_0%_20%)] text-center" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
                       <p className="text-2xl md:text-4xl font-bold mb-4">My Projects</p>
