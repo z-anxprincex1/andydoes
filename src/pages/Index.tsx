@@ -383,31 +383,57 @@ const Index = () => {
                               </linearGradient>
                             </defs>
                             
-                            {/* Back of hand / palm area */}
-                            <ellipse cx="15" cy="20" rx="7" ry="5.5" fill="url(#skinGrad)" />
-                            {/* Wrist hint */}
-                            <rect x="12" y="23" width="8" height="5" rx="2" fill="url(#skinGrad)" />
+                            {/* Complete hand shape - connected palm, fingers, and wrist */}
+                            <path 
+                              d="M12 28 
+                                 L10 28 
+                                 Q8 27 8 24 
+                                 L8 20
+                                 Q6 19 5 17
+                                 Q3.5 14 4.5 12
+                                 Q5.5 10 7 11
+                                 L8 13
+                                 L8 11
+                                 Q7 7 7 4
+                                 Q7 1.5 9 2
+                                 Q11 2.5 10.5 6
+                                 L10 10
+                                 L11 9
+                                 Q11.5 5 12 3
+                                 Q12.5 1 14.5 2
+                                 Q16 3 15 6
+                                 L14 11
+                                 L15 10
+                                 Q16 6 17 4.5
+                                 Q18 3 19.5 4.5
+                                 Q20.5 6 19 9
+                                 L17 14
+                                 L18 13
+                                 Q19.5 10 20.5 9
+                                 Q22 8 22.5 10
+                                 Q23 12 21 15
+                                 L19 18
+                                 Q20 20 20 22
+                                 Q20 25 18 27
+                                 Q16 28 12 28
+                                 Z" 
+                              fill="url(#skinGrad)" 
+                            />
                             
-                            {/* Pinky - curled back */}
-                            <path d="M20 17 Q22 14 21.5 11 Q21 9 19.5 10 Q18.5 11 19 14 Q19.2 16 20 17" fill="url(#skinHighlight)" />
-                            
-                            {/* Ring finger - slightly curled */}
-                            <path d="M17.5 15 Q19.5 11 18.5 7 Q18 5 16.5 6 Q15.5 7 16 11 Q16.3 14 17.5 15" fill="url(#skinHighlight)" />
-                            
-                            {/* Middle finger - gripping pen */}
-                            <path d="M14 13 Q15 9 14 5 Q13.5 3 12 4 Q11 5 11.5 9 Q12 12 14 13" fill="url(#skinHighlight)" />
-                            
-                            {/* Index finger - on top of pen, curved naturally */}
-                            <path d="M10 11 Q10.5 7 9 3 Q8 1 6.5 2 Q5.5 3 6.5 7 Q7.5 10 10 11" fill="url(#skinHighlight)" />
-                            
-                            {/* Thumb - holding pen from below */}
-                            <path d="M8 18 Q5 16 4 13 Q3.5 11 5 10.5 Q6.5 10 7.5 12 Q9 15 8 18" fill="url(#skinHighlight)" />
+                            {/* Finger creases/definition lines */}
+                            <path d="M10 13 Q10.5 11 10.5 9" stroke="hsl(25 40% 55%)" strokeWidth="0.3" fill="none" opacity="0.5" />
+                            <path d="M13.5 12 Q14 10 14 8" stroke="hsl(25 40% 55%)" strokeWidth="0.3" fill="none" opacity="0.5" />
+                            <path d="M16.5 13 Q17 11 17.5 9" stroke="hsl(25 40% 55%)" strokeWidth="0.3" fill="none" opacity="0.5" />
+                            <path d="M19 15 Q19.5 13 20 11" stroke="hsl(25 40% 55%)" strokeWidth="0.3" fill="none" opacity="0.5" />
                             
                             {/* Knuckle highlights */}
-                            <circle cx="18" cy="14" r="0.8" fill="hsl(25 40% 72%)" opacity="0.6" />
-                            <circle cx="15" cy="12" r="0.8" fill="hsl(25 40% 72%)" opacity="0.6" />
-                            <circle cx="12" cy="10" r="0.8" fill="hsl(25 40% 72%)" opacity="0.6" />
-                            <circle cx="8.5" cy="9" r="0.7" fill="hsl(25 40% 72%)" opacity="0.6" />
+                            <circle cx="10" cy="8" r="0.6" fill="hsl(25 50% 75%)" opacity="0.5" />
+                            <circle cx="13.5" cy="7" r="0.6" fill="hsl(25 50% 75%)" opacity="0.5" />
+                            <circle cx="17" cy="8" r="0.6" fill="hsl(25 50% 75%)" opacity="0.5" />
+                            <circle cx="19.5" cy="10" r="0.5" fill="hsl(25 50% 75%)" opacity="0.5" />
+                            
+                            {/* Palm highlight */}
+                            <ellipse cx="14" cy="20" rx="3" ry="2" fill="hsl(25 55% 72%)" opacity="0.3" />
                             
                             {/* Pen body */}
                             <rect x="4" y="1" width="2.2" height="16" rx="1.1" fill="url(#penGrad)" transform="rotate(25 5.1 9)" />
