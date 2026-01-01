@@ -652,7 +652,7 @@ const Index = () => {
       </div>
 
       {/* Sofa - behind everything */}
-      <div className="fixed bottom-2 md:bottom-4 left-1/2 -translate-x-1/2 z-[5] pointer-events-none">
+      <div className="fixed bottom-2 md:bottom-4 right-[5%] md:right-[15%] z-[5] pointer-events-none">
         <div className="relative">
           {/* Sofa back rest */}
           <div className="w-52 md:w-72 h-20 md:h-28 bg-gradient-to-b from-[hsl(20_45%_35%)] to-[hsl(20_50%_28%)] rounded-t-[2.5rem] border-2 border-b-0 border-[hsl(20_40%_20%)] shadow-[inset_0_2px_4px_rgba(255,255,255,0.1)]">
