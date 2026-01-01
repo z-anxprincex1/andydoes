@@ -259,8 +259,8 @@ const Index = () => {
         }}
       />
 
-      {/* Profile picture - right side */}
-      <div className="fixed right-[20%] md:right-[15%] lg:right-[18%] top-1/2 -translate-y-1/2 z-20">
+      {/* Profile picture - left side */}
+      <div className="fixed left-[5%] md:left-[8%] lg:left-[10%] top-1/2 -translate-y-1/2 z-20">
         <div className="w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 rounded-full overflow-hidden border-4 border-[hsl(0_0%_20%)] shadow-[0_0_30px_rgba(0,0,0,0.5)]">
           <img 
             src={profileImage} 
