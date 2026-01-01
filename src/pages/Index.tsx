@@ -720,16 +720,16 @@ const Index = () => {
 
       {/* Side Table with Coffee - side view, in front of socket */}
       <div className="fixed bottom-8 md:bottom-12 right-[2%] md:right-[5%] z-[15] pointer-events-none">
-        <div className="relative w-16 md:w-24 h-32 md:h-44">
+        <div className="relative w-20 md:w-32 h-32 md:h-44">
           
-          {/* Table top - ellipse from side view - maroon red */}
+          {/* Table top - ellipse from side view - maroon red - wider */}
           <div className="absolute top-8 md:top-12 left-0 right-0 h-3 md:h-4 bg-gradient-to-b from-[hsl(350_45%_35%)] via-[hsl(345_42%_28%)] to-[hsl(340_40%_22%)] rounded-[50%] shadow-[0_2px_6px_rgba(0,0,0,0.4),inset_0_1px_2px_rgba(255,255,255,0.15)]">
             {/* Top surface shine */}
             <div className="absolute inset-x-2 top-0 h-1 bg-gradient-to-r from-transparent via-[hsl(350_40%_42%)] to-transparent rounded-full opacity-50" />
           </div>
           
           {/* Table top thickness/edge */}
-          <div className="absolute top-[2.4rem] md:top-[3.4rem] left-1 md:left-1.5 right-1 md:right-1.5 h-1.5 md:h-2 bg-gradient-to-b from-[hsl(345_40%_24%)] to-[hsl(340_38%_18%)] rounded-b-sm" />
+          <div className="absolute top-[2.4rem] md:top-[3.4rem] left-1 md:left-2 right-1 md:right-2 h-1.5 md:h-2 bg-gradient-to-b from-[hsl(345_40%_24%)] to-[hsl(340_38%_18%)] rounded-b-sm" />
           
           {/* Table stem - visible from side - maroon red */}
           <div className="absolute top-[2.8rem] md:top-[4rem] left-1/2 -translate-x-1/2 w-2 md:w-3 h-14 md:h-20 bg-gradient-to-r from-[hsl(340_38%_18%)] via-[hsl(345_42%_26%)] to-[hsl(340_38%_18%)] rounded-sm shadow-[1px_2px_4px_rgba(0,0,0,0.3)]">
@@ -737,10 +737,10 @@ const Index = () => {
             <div className="absolute inset-y-0 left-1/2 w-0.5 bg-gradient-to-b from-[hsl(350_42%_32%)] via-[hsl(345_40%_28%)] to-[hsl(350_42%_32%)] opacity-40" />
           </div>
           
-          {/* Table base - ellipse from side view - maroon red */}
-          <div className="absolute bottom-3 md:bottom-4 left-0 right-0 h-2 md:h-3 bg-gradient-to-b from-[hsl(345_42%_26%)] to-[hsl(340_40%_16%)] rounded-[50%] shadow-[0_2px_6px_rgba(0,0,0,0.4)]">
+          {/* Table base - ellipse from side view - smaller */}
+          <div className="absolute bottom-3 md:bottom-4 left-4 md:left-8 right-4 md:right-8 h-2 md:h-2.5 bg-gradient-to-b from-[hsl(345_42%_26%)] to-[hsl(340_40%_16%)] rounded-[50%] shadow-[0_2px_6px_rgba(0,0,0,0.4)]">
             {/* Base top shine */}
-            <div className="absolute inset-x-3 top-0 h-0.5 bg-gradient-to-r from-transparent via-[hsl(350_40%_35%)] to-transparent rounded-full opacity-40" />
+            <div className="absolute inset-x-2 top-0 h-0.5 bg-gradient-to-r from-transparent via-[hsl(350_40%_35%)] to-transparent rounded-full opacity-40" />
           </div>
           
           {/* Coffee cup - clickable, sitting on table top */}
