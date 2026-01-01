@@ -778,10 +778,10 @@ const Index = () => {
       {/* Projector Light Beam - cone from lens to screen corners */}
       {isGeneratorOn && (
         <div 
-          className="fixed inset-0 z-[19] pointer-events-none animate-light-beam"
+          className="fixed inset-0 z-[25] pointer-events-none animate-light-beam"
           style={{
             clipPath: 'polygon(12.5% calc(100% - 8.5rem), 87.5% calc(100% - 8.5rem), calc(100% - 10.5rem) calc(100% - 3.25rem), calc(100% - 10.5rem) calc(100% - 3.25rem))',
-            background: 'linear-gradient(to bottom, hsla(50, 50%, 70%, 0.03) 0%, hsla(50, 60%, 75%, 0.1) 20%, hsla(50, 75%, 85%, 0.35) 60%, hsla(50, 85%, 92%, 0.6) 85%, hsla(50, 95%, 98%, 0.85) 100%)',
+            background: 'linear-gradient(to bottom, hsla(50, 50%, 80%, 0.08) 0%, hsla(50, 65%, 85%, 0.25) 25%, hsla(50, 80%, 90%, 0.5) 55%, hsla(50, 90%, 95%, 0.75) 80%, hsla(50, 100%, 98%, 0.95) 100%)',
           }}
         />
       )}
