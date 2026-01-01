@@ -651,7 +651,7 @@ const Index = () => {
             {/* Orbiting skills - absolutely positioned, doesn't affect layout */}
             <div className="absolute inset-0 pointer-events-none" style={{ transform: 'scale(1.5)', transformOrigin: 'center center' }}>
               {/* Outer ring - clockwise rotation */}
-              <div className="absolute inset-0 animate-spin-slow opacity-[0.03]">
+              <div className="absolute inset-0 animate-spin-slow opacity-[0.15]">
                 {['Java', 'Python', 'TypeScript', 'React', 'Node.js', 'Docker', 'AWS', 'MongoDB', 'Kubernetes', 'TensorFlow'].map((skill, i) => {
                   const angleDeg = i * 36;
                   const angle = angleDeg * (Math.PI / 180);
@@ -676,7 +676,7 @@ const Index = () => {
               </div>
               
               {/* Inner ring - counter-clockwise rotation */}
-              <div className="absolute inset-0 animate-spin-slow-reverse opacity-[0.03]">
+              <div className="absolute inset-0 animate-spin-slow-reverse opacity-[0.15]">
                 {['Flask', 'Spring Boot', 'PostgreSQL', 'Firebase', 'PyTorch', 'Spark', 'Redis', 'GraphQL'].map((skill, i) => {
                   const angleDeg = i * 45;
                   const angle = angleDeg * (Math.PI / 180);
