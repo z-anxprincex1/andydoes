@@ -76,24 +76,42 @@ const Index = () => {
     };
   }, []);
 
-  // LinkedIn hands animation cycle: write -> fold -> throw -> wait for landing + 5s -> repeat
+  // LinkedIn hands animation cycle: write -> fold -> throw (one plane), then next plane throws 5s after landing
   useEffect(() => {
+    const timeouts: number[] = [];
+    const setT = (fn: () => void, ms: number) => {
+      const id = window.setTimeout(fn, ms);
+      timeouts.push(id);
+      return id;
+    };
+
+    let cancelled = false;
+
+    // Clear any leftover planes (helps during hot-reload/dev)
+    setPaperAirplanes([]);
+
     const cycleAnimation = () => {
+      if (cancelled) return;
+
       // Writing phase (2.5 seconds)
       setLinkedinPhase('writing');
-      
-      setTimeout(() => {
+
+      setT(() => {
+        if (cancelled) return;
+
         // Folding phase (1 second)
         setLinkedinPhase('folding');
-        
-        setTimeout(() => {
+
+        setT(() => {
+          if (cancelled) return;
+
           // Throwing phase
           setLinkedinPhase('throwing');
-          
+
           // Launch paper airplane
           const frameEl = linkedinFrameRef.current;
           if (!frameEl) {
-            setTimeout(cycleAnimation, 5000);
+            setT(cycleAnimation, 2000);
             return;
           }
 
@@ -106,26 +124,30 @@ const Index = () => {
           const startX = rect.left + 2;
           const startY = rect.top + rect.height * 0.62;
 
-          setPaperAirplanes((prev) => [
-            ...prev,
-            { id: newId, startX, startY, curveType, duration, distanceMultiplier },
-          ]);
+          // Ensure only one plane exists at a time
+          setPaperAirplanes([{ id: newId, startX, startY, curveType, duration, distanceMultiplier }]);
 
           const landingTime = (duration + 1.25) * 1000;
 
-          setTimeout(() => {
+          setT(() => {
             setPaperAirplanes((prev) => prev.filter((p) => p.id !== newId));
           }, landingTime);
-          
-          // Wait for landing + 5 seconds before next cycle
-          setTimeout(cycleAnimation, landingTime + 5000);
+
+          // Make the next plane throw 5s after landing.
+          // (We start the next writing phase earlier to account for the 3.5s prep: 2.5s writing + 1s folding.)
+          const prepTime = 3500;
+          const untilNextCycleStart = Math.max(0, landingTime + 5000 - prepTime);
+          setT(cycleAnimation, untilNextCycleStart);
         }, 1000);
       }, 2500);
     };
-    
+
     cycleAnimation();
-    
-    return () => {};
+
+    return () => {
+      cancelled = true;
+      timeouts.forEach((id) => clearTimeout(id));
+    };
   }, []);
 
   // Spider descends randomly to unplug
