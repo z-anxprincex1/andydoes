@@ -679,7 +679,7 @@ const Index = () => {
       </div>
 
       {/* Cable from generator to socket - curvy zig zag on floor */}
-      <div className="fixed bottom-6 md:bottom-9 pointer-events-none z-20" style={{ left: 'calc(50% + 1rem)', width: 'calc(50% - 6rem)' }}>
+      <div className="fixed bottom-6 md:bottom-9 pointer-events-none z-10" style={{ left: 'calc(50% + 1rem)', width: 'calc(50% - 6rem)' }}>
         <svg className="w-full h-6" viewBox="0 0 200 20" preserveAspectRatio="none">
           <path 
             d="M 0 10 C 20 5, 30 15, 50 10 C 70 5, 80 15, 100 10 C 120 5, 130 15, 150 10 C 170 5, 180 15, 200 10" 
