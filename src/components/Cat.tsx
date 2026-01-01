@@ -15,9 +15,12 @@ type CatState =
 interface CatProps {
   onScratchSocket?: () => void;
   onPositionChange?: (position: number) => void;
+  onStateChange?: (state: CatState) => void;
 }
 
-const Cat = ({ onScratchSocket, onPositionChange }: CatProps) => {
+export type { CatState };
+
+const Cat = ({ onScratchSocket, onPositionChange, onStateChange }: CatProps) => {
   const [position, setPosition] = useState(20);
   const [catState, setCatState] = useState<CatState>("idle");
   const [facingRight, setFacingRight] = useState(true);
@@ -25,6 +28,7 @@ const Cat = ({ onScratchSocket, onPositionChange }: CatProps) => {
   const positionRef = useRef(position);
   const onScratchRef = useRef(onScratchSocket);
   const onPositionChangeRef = useRef(onPositionChange);
+  const onStateChangeRef = useRef(onStateChange);
   const busyRef = useRef(false);
   const timersRef = useRef<number[]>([]);
 
@@ -34,8 +38,16 @@ const Cat = ({ onScratchSocket, onPositionChange }: CatProps) => {
   }, [position]);
 
   useEffect(() => {
+    onStateChangeRef.current?.(catState);
+  }, [catState]);
+
+  useEffect(() => {
     onPositionChangeRef.current = onPositionChange;
   }, [onPositionChange]);
+
+  useEffect(() => {
+    onStateChangeRef.current = onStateChange;
+  }, [onStateChange]);
 
   useEffect(() => {
     onScratchRef.current = onScratchSocket;
