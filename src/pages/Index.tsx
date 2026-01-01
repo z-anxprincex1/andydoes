@@ -692,20 +692,20 @@ const Index = () => {
           {/* Sofa base - connects seat to legs with no gap */}
           <div className="absolute bottom-2 md:bottom-3 left-8 md:left-10 right-8 md:right-10 h-5 md:h-6 bg-gradient-to-b from-[hsl(20_42%_28%)] to-[hsl(18_40%_22%)] rounded-b-lg shadow-[0_4px_8px_rgba(0,0,0,0.3)]" />
           
-          {/* Throw pillows */}
+          {/* Throw pillows - positioned on seat, leaning against back */}
           {/* Left pillow - burgundy */}
-          <div className="absolute top-4 md:top-5 left-12 md:left-16 w-10 md:w-14 h-12 md:h-16 z-10" style={{ transform: 'rotate(-12deg)' }}>
-            <div className="w-full h-full bg-gradient-to-br from-[hsl(350_50%_40%)] via-[hsl(345_45%_35%)] to-[hsl(340_40%_28%)] rounded-lg shadow-[2px_4px_8px_rgba(0,0,0,0.3),inset_0_2px_4px_rgba(255,255,255,0.15),inset_0_-2px_4px_rgba(0,0,0,0.2)]">
+          <div className="absolute bottom-[4.5rem] md:bottom-[6rem] left-12 md:left-16 w-10 md:w-14 h-10 md:h-14 z-10" style={{ transform: 'rotate(-8deg) skewY(3deg)' }}>
+            <div className="w-full h-full bg-gradient-to-br from-[hsl(350_50%_40%)] via-[hsl(345_45%_35%)] to-[hsl(340_40%_28%)] rounded-lg shadow-[2px_3px_6px_rgba(0,0,0,0.35),inset_0_2px_4px_rgba(255,255,255,0.15),inset_0_-2px_4px_rgba(0,0,0,0.2)]">
               {/* Pillow puff effect */}
               <div className="absolute inset-1 bg-gradient-to-br from-[hsl(350_52%_45%)] to-transparent rounded-lg opacity-50" />
               {/* Decorative pattern */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 md:w-6 md:h-6 border border-[hsl(350_60%_55%)] rounded-sm opacity-40 rotate-45" />
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 md:w-5 md:h-5 border border-[hsl(350_60%_55%)] rounded-sm opacity-40 rotate-45" />
             </div>
           </div>
           
           {/* Right pillow - golden/mustard */}
-          <div className="absolute top-3 md:top-4 right-12 md:right-16 w-11 md:w-16 h-10 md:h-14 z-10" style={{ transform: 'rotate(8deg)' }}>
-            <div className="w-full h-full bg-gradient-to-bl from-[hsl(45_60%_45%)] via-[hsl(40_55%_38%)] to-[hsl(35_50%_30%)] rounded-lg shadow-[2px_4px_8px_rgba(0,0,0,0.3),inset_0_2px_4px_rgba(255,255,255,0.2),inset_0_-2px_4px_rgba(0,0,0,0.15)]">
+          <div className="absolute bottom-[4.5rem] md:bottom-[6rem] right-12 md:right-16 w-11 md:w-16 h-9 md:h-12 z-10" style={{ transform: 'rotate(6deg) skewY(-2deg)' }}>
+            <div className="w-full h-full bg-gradient-to-bl from-[hsl(45_60%_45%)] via-[hsl(40_55%_38%)] to-[hsl(35_50%_30%)] rounded-lg shadow-[2px_3px_6px_rgba(0,0,0,0.35),inset_0_2px_4px_rgba(255,255,255,0.2),inset_0_-2px_4px_rgba(0,0,0,0.15)]">
               <div className="absolute inset-1 bg-gradient-to-bl from-[hsl(48_65%_52%)] to-transparent rounded-lg opacity-40" />
               {/* Decorative lines */}
               <div className="absolute top-2 left-2 right-2 h-px bg-[hsl(50_70%_60%)] opacity-30" />
