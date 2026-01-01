@@ -635,27 +635,31 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Cable from generator to socket */}
-      <svg className="fixed bottom-10 md:bottom-14 left-1/2 right-8 md:right-12 h-8 z-15 pointer-events-none" style={{ width: 'calc(50% - 3rem)' }}>
-        <path 
-          d="M 0 15 Q 50% 25, 100% 10" 
-          stroke="hsl(0 0% 20%)" 
-          strokeWidth="4" 
-          fill="none"
-          strokeLinecap="round"
-        />
-      </svg>
+      {/* Cable from generator to socket - curvy zig zag on floor */}
+      <div className="fixed bottom-6 md:bottom-10 left-1/2 z-15 pointer-events-none" style={{ width: 'calc(50% - 4rem)', marginLeft: '2rem' }}>
+        <svg className="w-full h-6" viewBox="0 0 200 20" preserveAspectRatio="none">
+          <path 
+            d="M 0 10 C 20 5, 30 15, 50 10 C 70 5, 80 15, 100 10 C 120 5, 130 15, 150 10 C 170 5, 180 15, 200 10" 
+            stroke="hsl(0 0% 22%)" 
+            strokeWidth="3" 
+            fill="none"
+            strokeLinecap="round"
+          />
+        </svg>
+      </div>
 
-      {/* Cable from generator to projector */}
-      <svg className="fixed bottom-10 md:bottom-14 right-[calc(50%+2rem)] h-8 z-15 pointer-events-none" style={{ width: '8rem' }}>
-        <path 
-          d="M 100% 15 Q 50% 20, 0 12" 
-          stroke="hsl(0 0% 20%)" 
-          strokeWidth="4" 
-          fill="none"
-          strokeLinecap="round"
-        />
-      </svg>
+      {/* Cable from generator to projector - curvy zig zag on floor */}
+      <div className="fixed bottom-6 md:bottom-10 right-1/2 z-15 pointer-events-none" style={{ width: '10rem', marginRight: '2rem' }}>
+        <svg className="w-full h-6" viewBox="0 0 150 20" preserveAspectRatio="none">
+          <path 
+            d="M 150 10 C 130 5, 120 15, 100 10 C 80 5, 70 15, 50 10 C 30 5, 20 15, 0 10" 
+            stroke="hsl(0 0% 22%)" 
+            strokeWidth="3" 
+            fill="none"
+            strokeLinecap="round"
+          />
+        </svg>
+      </div>
 
       {/* Projector - lying on floor left of socket */}
       <div className="fixed bottom-8 md:bottom-11 right-24 md:right-32 z-20">
