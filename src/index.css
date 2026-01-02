@@ -353,15 +353,15 @@
 @keyframes whoosh-up {
   0% {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateX(-50%) translateY(-50%) scale(1);
   }
   50% {
     opacity: 0.8;
-    transform: translateY(-30vh) scale(0.9);
+    transform: translateX(-50%) translateY(calc(-50% - 30vh)) scale(0.9);
   }
   100% {
     opacity: 0;
-    transform: translateY(-60vh) scale(0.7);
+    transform: translateX(-50%) translateY(calc(-50% - 60vh)) scale(0.7);
   }
 }
 
@@ -403,15 +403,15 @@
 @keyframes slide-down-in {
   0% {
     opacity: 0;
-    transform: translateY(-60vh) scale(0.7);
+    transform: translateX(-50%) translateY(calc(-50% - 60vh)) scale(0.7);
   }
   50% {
     opacity: 0.8;
-    transform: translateY(-20vh) scale(0.9);
+    transform: translateX(-50%) translateY(calc(-50% - 20vh)) scale(0.9);
   }
   100% {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateX(-50%) translateY(-50%) scale(1);
   }
 }
 
