@@ -245,7 +245,7 @@ const Index = () => {
     path += ` L ${endX} ${endY}`;
     return path;
   };
-  return <main className="h-screen flex items-center bg-background overflow-hidden relative" ref={containerRef}>
+  return <main className="fixed inset-0 flex items-center bg-background overflow-hidden" ref={containerRef}>
       {/* Swinging Filament Bulb - Top Left */}
       <div className="fixed top-0 left-12 md:left-20 z-20 pointer-events-none animate-bulb-swing origin-top">
         {/* Cable */}
