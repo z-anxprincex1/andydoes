@@ -611,7 +611,7 @@ const Index = () => {
         {/* Profile picture with about me */}
         <div className="flex-shrink-0 flex flex-col items-center relative">
           {/* Question mark icon with connected tooltip arrow */}
-          <div className="absolute -top-2 right-0 md:right-4 lg:right-8 z-20">
+          <div className="absolute -top-2 left-0 md:left-4 lg:left-8 z-20">
             <button onClick={() => setIsAboutOpen(!isAboutOpen)} className="w-8 h-8 md:w-10 md:h-10 bg-[hsl(50_90%_60%)] rounded-full flex items-center justify-center border-2 border-[hsl(0_0%_10%)] shadow-[2px_2px_0_hsl(0_0%_10%)] hover:scale-110 transition-transform">
               <HelpCircle className="w-5 h-5 md:w-6 md:h-6 text-[hsl(0_0%_10%)]" />
             </button>
