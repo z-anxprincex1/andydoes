@@ -727,7 +727,7 @@ const Index = () => {
         </div>
 
         {/* Text */}
-        <h1 className={`text-hero font-pixel transition-all duration-500 flex flex-col text-center md:text-left ${isPluggedIn ? "cfl-tube cfl-glow" : "cfl-off"}`}>
+        <h1 className={`text-hero font-pixel transition-all duration-500 flex flex-col text-center md:text-left drop-shadow-[3px_3px_0_hsl(0_0%_10%)] ${isPluggedIn ? "cfl-tube cfl-glow" : "cfl-off"}`}>
           {/* First line: anand prince */}
           <span className="flex flex-wrap justify-center md:justify-start">
             {["anand", "prince"].map((word, i) => renderWord(word, i, false))}
