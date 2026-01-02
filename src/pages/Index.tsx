@@ -737,7 +737,7 @@ const Index = () => {
       </div>
 
       {/* Draggable Plug - fixed position, always on top */}
-      <div ref={plugRef} onPointerDown={handlePointerDown} onPointerMove={handlePointerMove} onPointerUp={handlePointerUp} className={`fixed cursor-grab active:cursor-grabbing z-[9998] touch-none ${isDragging ? "" : wasGeneratorOn ? "" : "transition-transform duration-500"} ${isGeneratorOn ? 'pointer-events-none opacity-0' : ''}`} style={{
+      <div ref={plugRef} onPointerDown={handlePointerDown} onPointerMove={handlePointerMove} onPointerUp={handlePointerUp} className={`fixed cursor-grab active:cursor-grabbing z-[9999] touch-none ${isDragging ? "" : wasGeneratorOn ? "" : "transition-transform duration-500"} ${isGeneratorOn ? 'pointer-events-none opacity-0' : ''}`} style={{
       left: 0,
       top: 0,
       transform: `translate(-8px, -50%) ${!isPluggedIn && !isDragging ? "rotate(90deg)" : "rotate(0deg)"}`,
