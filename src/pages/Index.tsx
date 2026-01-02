@@ -607,7 +607,7 @@ const Index = () => {
           </span>
         </div>}
 
-      <div className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 px-6 md:px-12 lg:px-20 z-10 flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12 lg:gap-16 ${isGeneratorOn ? 'animate-whoosh-up pointer-events-none' : wasGeneratorOn ? 'animate-slide-down-in' : ''}`}>
+      <div className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 md:-translate-y-1/2 -translate-y-[60%] px-6 md:px-12 lg:px-20 z-10 flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12 lg:gap-16 ${isGeneratorOn ? 'animate-whoosh-up pointer-events-none' : wasGeneratorOn ? 'animate-slide-down-in' : ''}`}>
         {/* Profile picture with about me */}
         <div className="flex-shrink-0 flex flex-col items-center relative">
           {/* Question mark icon with connected tooltip arrow */}
