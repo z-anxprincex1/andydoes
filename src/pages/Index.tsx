@@ -619,26 +619,21 @@ const Index = () => {
           
           {/* Profile picture - maintains original size */}
           <div className="relative">
-            {/* 90s ornate gold frame - matching GitHub style */}
-            <div className="relative w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80">
+            {/* 90s ornate gold frame - slim version */}
+            <div className="relative w-44 h-44 md:w-60 md:h-60 lg:w-76 lg:h-76">
               {/* Decorative outer ring */}
-              <div className="absolute inset-[-4px] rounded-full border border-[hsl(35_50%_40%/_0.5)]" />
-              {/* Beaded edge detail */}
-              <div className="absolute inset-[-2px] rounded-full border-2 border-dotted border-[hsl(35_55%_45%/_0.6)]" />
+              <div className="absolute inset-[-2px] rounded-full border border-[hsl(35_50%_40%/_0.5)]" />
               {/* Outer ornate frame with beveled effect */}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[hsl(35_55%_45%)] via-[hsl(35_50%_35%)] to-[hsl(35_40%_25%)] p-1 shadow-[3px_5px_10px_rgba(0,0,0,0.6),inset_2px_2px_3px_rgba(255,255,255,0.4),inset_-1px_-1px_2px_rgba(0,0,0,0.3)]">
+              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[hsl(35_55%_45%)] via-[hsl(35_50%_35%)] to-[hsl(35_40%_25%)] p-0.5 shadow-[2px_3px_8px_rgba(0,0,0,0.5),inset_1px_1px_2px_rgba(255,255,255,0.4),inset_-1px_-1px_1px_rgba(0,0,0,0.3)]">
                 {/* Ridge detail */}
-                <div className="w-full h-full rounded-full bg-gradient-to-br from-[hsl(35_45%_28%)] to-[hsl(35_40%_22%)] p-1 shadow-[inset_1px_1px_2px_rgba(255,255,255,0.15)]">
+                <div className="w-full h-full rounded-full bg-gradient-to-br from-[hsl(35_45%_28%)] to-[hsl(35_40%_22%)] p-0.5 shadow-[inset_1px_1px_1px_rgba(255,255,255,0.15)]">
                   {/* Inner raised rim */}
-                  <div className="w-full h-full rounded-full bg-gradient-to-br from-[hsl(35_60%_48%)] via-[hsl(35_55%_42%)] to-[hsl(35_50%_35%)] p-2 shadow-[inset_2px_2px_4px_rgba(0,0,0,0.3)]">
+                  <div className="w-full h-full rounded-full bg-gradient-to-br from-[hsl(35_60%_48%)] via-[hsl(35_55%_42%)] to-[hsl(35_50%_35%)] p-0.5 shadow-[inset_1px_1px_2px_rgba(0,0,0,0.3)]">
                     {/* Inner groove */}
-                    <div className="w-full h-full rounded-full bg-gradient-to-br from-[hsl(35_40%_22%)] via-[hsl(35_45%_28%)] to-[hsl(35_35%_20%)] p-1 shadow-[inset_1px_1px_3px_rgba(0,0,0,0.5)]">
-                      {/* Inner gold rim */}
-                      <div className="w-full h-full rounded-full bg-gradient-to-br from-[hsl(35_58%_45%)] via-[hsl(35_52%_50%)] to-[hsl(35_48%_38%)] p-1">
-                        {/* Picture area */}
-                        <div className={`w-full h-full rounded-full overflow-hidden shadow-[inset_0_0_10px_rgba(0,0,0,0.5)] transition-all duration-700 ${isPluggedIn ? '' : 'grayscale'}`}>
-                          <img src={profileImage} alt="Anand Prince Purty" className="w-full h-full object-cover" />
-                        </div>
+                    <div className="w-full h-full rounded-full bg-gradient-to-br from-[hsl(35_40%_22%)] via-[hsl(35_45%_28%)] to-[hsl(35_35%_20%)] p-0.5 shadow-[inset_1px_1px_2px_rgba(0,0,0,0.5)]">
+                      {/* Picture area */}
+                      <div className={`w-full h-full rounded-full overflow-hidden shadow-[inset_0_0_10px_rgba(0,0,0,0.5)] transition-all duration-700 ${isPluggedIn ? '' : 'grayscale'}`}>
+                        <img src={profileImage} alt="Anand Prince Purty" className="w-full h-full object-cover" />
                       </div>
                     </div>
                   </div>
@@ -651,7 +646,7 @@ const Index = () => {
             {/* Orbiting skills - absolutely positioned, doesn't affect layout */}
             <div className="absolute inset-0 pointer-events-none" style={{ transform: 'scale(1.5)', transformOrigin: 'center center' }}>
               {/* Outer ring - clockwise rotation */}
-              <div className="absolute inset-0 animate-spin-slow opacity-[0.15]">
+              <div className="absolute inset-0 animate-spin-slow opacity-[0.05]">
                 {['Java', 'Python', 'TypeScript', 'React', 'Node.js', 'Docker', 'AWS', 'MongoDB', 'Kubernetes', 'TensorFlow'].map((skill, i) => {
                   const angleDeg = i * 36;
                   const angle = angleDeg * (Math.PI / 180);
@@ -676,7 +671,7 @@ const Index = () => {
               </div>
               
               {/* Inner ring - counter-clockwise rotation */}
-              <div className="absolute inset-0 animate-spin-slow-reverse opacity-[0.15]">
+              <div className="absolute inset-0 animate-spin-slow-reverse opacity-[0.05]">
                 {['Flask', 'Spring Boot', 'PostgreSQL', 'Firebase', 'PyTorch', 'Spark', 'Redis', 'GraphQL'].map((skill, i) => {
                   const angleDeg = i * 45;
                   const angle = angleDeg * (Math.PI / 180);
