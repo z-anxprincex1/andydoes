@@ -647,24 +647,35 @@ const Index = () => {
             <div className="absolute inset-0 pointer-events-none" style={{ transform: 'scale(1.5)', transformOrigin: 'center center' }}>
               {/* Outer ring - clockwise rotation */}
               <div className="absolute inset-0 animate-spin-slow opacity-[0.05]">
-                {['Java', 'Python', 'TypeScript', 'React', 'Node.js', 'Docker', 'AWS', 'MongoDB', 'Kubernetes', 'TensorFlow'].map((skill, i) => {
-                  const angleDeg = i * 36;
-                  const angle = angleDeg * (Math.PI / 180);
-                  const radius = 46; // percentage from center
-                  const x = 50 + radius * Math.cos(angle);
-                  const y = 50 + radius * Math.sin(angle);
-                  const tangentRotation = angleDeg + 90;
+                {['Java', 'Python', 'TypeScript', 'React', 'Node.js', 'Docker', 'AWS', 'MongoDB', 'Kubernetes', 'TensorFlow'].map((skill, skillIndex) => {
+                  const baseAngleDeg = skillIndex * 36;
+                  const radius = 46;
+                  const charSpacing = 2.5; // degrees between characters
+                  const totalWidth = (skill.length - 1) * charSpacing;
+                  const startAngle = baseAngleDeg - totalWidth / 2;
+                  
                   return (
-                    <span 
-                      key={skill}
-                      className="absolute text-[8px] md:text-[10px] lg:text-xs font-medium text-[hsl(50_90%_60%)] whitespace-nowrap"
-                      style={{
-                        left: `${x}%`,
-                        top: `${y}%`,
-                        transform: `translate(-50%, -50%) rotate(${tangentRotation}deg)`
-                      }}
-                    >
-                      {skill}
+                    <span key={skill} className="absolute inset-0">
+                      {skill.split('').map((char, charIndex) => {
+                        const charAngleDeg = startAngle + charIndex * charSpacing;
+                        const charAngle = charAngleDeg * (Math.PI / 180);
+                        const x = 50 + radius * Math.cos(charAngle);
+                        const y = 50 + radius * Math.sin(charAngle);
+                        const tangentRotation = charAngleDeg + 90;
+                        return (
+                          <span
+                            key={charIndex}
+                            className="absolute text-[8px] md:text-[10px] lg:text-xs font-medium text-[hsl(50_90%_60%)]"
+                            style={{
+                              left: `${x}%`,
+                              top: `${y}%`,
+                              transform: `translate(-50%, -50%) rotate(${tangentRotation}deg)`
+                            }}
+                          >
+                            {char}
+                          </span>
+                        );
+                      })}
                     </span>
                   );
                 })}
@@ -672,24 +683,35 @@ const Index = () => {
               
               {/* Inner ring - counter-clockwise rotation */}
               <div className="absolute inset-0 animate-spin-slow-reverse opacity-[0.05]">
-                {['Flask', 'Spring Boot', 'PostgreSQL', 'Firebase', 'PyTorch', 'Spark', 'Redis', 'GraphQL'].map((skill, i) => {
-                  const angleDeg = i * 45;
-                  const angle = angleDeg * (Math.PI / 180);
-                  const radius = 40; // percentage from center
-                  const x = 50 + radius * Math.cos(angle);
-                  const y = 50 + radius * Math.sin(angle);
-                  const tangentRotation = angleDeg + 90;
+                {['Flask', 'Spring Boot', 'PostgreSQL', 'Firebase', 'PyTorch', 'Spark', 'Redis', 'GraphQL'].map((skill, skillIndex) => {
+                  const baseAngleDeg = skillIndex * 45;
+                  const radius = 40;
+                  const charSpacing = 2.8; // degrees between characters
+                  const totalWidth = (skill.length - 1) * charSpacing;
+                  const startAngle = baseAngleDeg - totalWidth / 2;
+                  
                   return (
-                    <span 
-                      key={skill}
-                      className="absolute text-[8px] md:text-[10px] lg:text-xs font-medium text-[hsl(50_90%_75%)] whitespace-nowrap"
-                      style={{
-                        left: `${x}%`,
-                        top: `${y}%`,
-                        transform: `translate(-50%, -50%) rotate(${tangentRotation}deg)`
-                      }}
-                    >
-                      {skill}
+                    <span key={skill} className="absolute inset-0">
+                      {skill.split('').map((char, charIndex) => {
+                        const charAngleDeg = startAngle + charIndex * charSpacing;
+                        const charAngle = charAngleDeg * (Math.PI / 180);
+                        const x = 50 + radius * Math.cos(charAngle);
+                        const y = 50 + radius * Math.sin(charAngle);
+                        const tangentRotation = charAngleDeg + 90;
+                        return (
+                          <span
+                            key={charIndex}
+                            className="absolute text-[8px] md:text-[10px] lg:text-xs font-medium text-[hsl(50_90%_75%)]"
+                            style={{
+                              left: `${x}%`,
+                              top: `${y}%`,
+                              transform: `translate(-50%, -50%) rotate(${tangentRotation}deg)`
+                            }}
+                          >
+                            {char}
+                          </span>
+                        );
+                      })}
                     </span>
                   );
                 })}
