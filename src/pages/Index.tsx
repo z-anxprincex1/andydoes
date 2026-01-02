@@ -455,7 +455,7 @@ const Index = () => {
           className="group cursor-pointer transition-transform hover:scale-105 active:scale-95"
         >
           {/* Frame - ornate 90s gold style circle - BIGGER */}
-          <div className="relative w-20 h-20 md:w-28 md:h-28">
+          <div className="relative w-20 h-20 md:w-28 md:h-28 pointer-events-auto">
             {/* Decorative outer ring */}
             <div className="absolute inset-[-4px] rounded-full border border-[hsl(35_50%_40%/_0.5)]" />
             {/* Beaded edge detail */}
