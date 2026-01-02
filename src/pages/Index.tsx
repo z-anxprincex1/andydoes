@@ -320,7 +320,7 @@ const Index = () => {
       </svg>
 
       {/* 90s Style Wall Frames - Right Side */}
-      <div className="fixed top-32 md:top-40 right-12 md:right-28 z-10 flex flex-col gap-6 md:gap-8 items-center">
+      <div className="fixed top-32 md:top-40 right-4 md:right-28 z-10 flex flex-col gap-6 md:gap-8 items-center">
         {/* LinkedIn Frame - Square (now first/top) */}
         <a 
           href="https://www.linkedin.com/in/anandprince1/" 
