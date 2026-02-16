@@ -5,6 +5,23 @@ import profileImage from "@/assets/profile.png";
 const Index = () => {
   const [isPluggedIn, setIsPluggedIn] = useState(false);
   const [isPhoneOpen, setIsPhoneOpen] = useState(false);
+  const getBotReply = (userMsg: string) => {
+    const msg = userMsg.toLowerCase();
+    if (msg.includes('hire') || msg.includes('job') || msg.includes('work') || msg.includes('opportunity'))
+      return "That sounds exciting! I'm always open to new opportunities. Let's connect and discuss further on LinkedIn 😊";
+    if (msg.includes('project') || msg.includes('collaborate') || msg.includes('collab'))
+      return "I'd love to chat about collaborating! Let's take this conversation to LinkedIn 😊";
+    if (msg.includes('hello') || msg.includes('hi') || msg.includes('hey') || msg.includes('sup'))
+      return "Hey there! Great to hear from you. If you'd like to chat more, feel free to connect on LinkedIn 😊";
+    if (msg.includes('skill') || msg.includes('tech') || msg.includes('stack') || msg.includes('experience'))
+      return "Great question! I'd be happy to share more about my skills and experience. Let's connect on LinkedIn 😊";
+    if (msg.includes('contact') || msg.includes('reach') || msg.includes('connect') || msg.includes('email'))
+      return "The best way to reach me is through LinkedIn — let's connect! 😊";
+    if (msg.includes('who') || msg.includes('about'))
+      return "I'm a Software Developer & AI Enthusiast based in New York! Let's connect on LinkedIn to learn more 😊";
+    return "Thanks for reaching out! I'd love to continue this conversation — feel free to connect with me on LinkedIn 😊";
+  };
+
   const [chatMessages, setChatMessages] = useState<{
     text: string;
     isMe: boolean;
@@ -833,15 +850,16 @@ const Index = () => {
                 <div className="flex gap-2 pt-2 border-t border-[hsl(0_0%_15%)]">
                   <input type="text" value={newMessage} onChange={e => setNewMessage(e.target.value)} onKeyDown={e => {
                 if (e.key === 'Enter' && newMessage.trim()) {
+                  const userMsg = newMessage;
                   setChatMessages(prev => [...prev, {
-                    text: newMessage,
+                    text: userMsg,
                     isMe: true
                   }]);
                   setNewMessage('');
                   // Auto reply after a short delay
                    setTimeout(() => {
                     setChatMessages(prev => [...prev, {
-                      text: "Thanks for reaching out! Feel free to connect with me on LinkedIn 😊",
+                      text: getBotReply(userMsg),
                       isMe: false,
                       linkedinButton: true
                     }]);
@@ -855,10 +873,11 @@ const Index = () => {
                     text: newMessage,
                     isMe: true
                   }]);
+                  const userMsg = newMessage;
                   setNewMessage('');
                   setTimeout(() => {
                     setChatMessages(prev => [...prev, {
-                      text: "Thanks for reaching out! Feel free to connect with me on LinkedIn 😊",
+                      text: getBotReply(userMsg),
                       isMe: false,
                       linkedinButton: true
                     }]);
