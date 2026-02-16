@@ -3,6 +3,7 @@ import { MapPin, HelpCircle, X, Github, Linkedin } from "lucide-react";
 import Cat from "@/components/Cat";
 import profileImage from "@/assets/profile.png";
 const Index = () => {
+  const chatContainerRef = useRef<HTMLDivElement>(null);
   const [isPluggedIn, setIsPluggedIn] = useState(false);
   const [isPhoneOpen, setIsPhoneOpen] = useState(false);
   const getBotReply = (userMsg: string) => {
@@ -31,6 +32,13 @@ const Index = () => {
     isMe: false
   }]);
   const [newMessage, setNewMessage] = useState("");
+
+  useEffect(() => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
+  }, [chatMessages]);
+
   const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [isGeneratorOn, setIsGeneratorOn] = useState(false);
   const [wasGeneratorOn, setWasGeneratorOn] = useState(false);
@@ -826,7 +834,7 @@ const Index = () => {
                 </div>
                 
                 {/* Messages */}
-                <div className="flex-1 overflow-y-auto py-3 space-y-2">
+                <div className="flex-1 overflow-y-auto py-3 space-y-2" ref={chatContainerRef}>
                   {chatMessages.map((msg, i) => <div key={i} className={`flex ${msg.isMe ? 'justify-end' : 'justify-start'}`}>
                       <div className={`max-w-[80%] px-3 py-2 rounded-2xl text-sm ${msg.isMe ? 'bg-[hsl(210_100%_50%)] text-white rounded-br-md' : 'bg-[hsl(0_0%_18%)] text-white rounded-bl-md'}`}>
                         {msg.text}
