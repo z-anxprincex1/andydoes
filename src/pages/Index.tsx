@@ -8,6 +8,7 @@ const Index = () => {
   const [chatMessages, setChatMessages] = useState<{
     text: string;
     isMe: boolean;
+    linkedinButton?: boolean;
   }[]>([{
     text: "Hey! Welcome to my portfolio 👋",
     isMe: false
@@ -812,6 +813,18 @@ const Index = () => {
                   {chatMessages.map((msg, i) => <div key={i} className={`flex ${msg.isMe ? 'justify-end' : 'justify-start'}`}>
                       <div className={`max-w-[80%] px-3 py-2 rounded-2xl text-sm ${msg.isMe ? 'bg-[hsl(210_100%_50%)] text-white rounded-br-md' : 'bg-[hsl(0_0%_18%)] text-white rounded-bl-md'}`}>
                         {msg.text}
+                        {msg.linkedinButton && (
+                          <a
+                            href="https://www.linkedin.com/in/anandprince1/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="mt-2 flex items-center gap-1.5 bg-[hsl(210_80%_45%)] hover:bg-[hsl(210_80%_40%)] text-white text-xs font-medium px-3 py-1.5 rounded-full w-fit transition-colors"
+                            onClick={e => e.stopPropagation()}
+                          >
+                            <Linkedin className="w-3 h-3" />
+                            Connect on LinkedIn
+                          </a>
+                        )}
                       </div>
                     </div>)}
                 </div>
@@ -826,10 +839,11 @@ const Index = () => {
                   }]);
                   setNewMessage('');
                   // Auto reply after a short delay
-                  setTimeout(() => {
+                   setTimeout(() => {
                     setChatMessages(prev => [...prev, {
-                      text: "Thanks for reaching out! Feel free to connect with me on LinkedIn.",
-                      isMe: false
+                      text: "Thanks for reaching out! Feel free to connect with me on LinkedIn 😊",
+                      isMe: false,
+                      linkedinButton: true
                     }]);
                   }, 1000);
                 }
@@ -844,8 +858,9 @@ const Index = () => {
                   setNewMessage('');
                   setTimeout(() => {
                     setChatMessages(prev => [...prev, {
-                      text: "Thanks for reaching out! Feel free to connect with me on LinkedIn.",
-                      isMe: false
+                      text: "Thanks for reaching out! Feel free to connect with me on LinkedIn 😊",
+                      isMe: false,
+                      linkedinButton: true
                     }]);
                   }, 1000);
                 }
