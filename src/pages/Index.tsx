@@ -834,7 +834,7 @@ const Index = () => {
                 </div>
                 
                 {/* Messages */}
-                <div className="flex-1 overflow-y-auto py-3 space-y-2" ref={chatContainerRef}>
+                <div className="flex-1 overflow-y-auto py-3 space-y-2 scrollbar-hide" ref={chatContainerRef} style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                   {chatMessages.map((msg, i) => <div key={i} className={`flex ${msg.isMe ? 'justify-end' : 'justify-start'}`}>
                       <div className={`max-w-[80%] px-3 py-2 rounded-2xl text-sm ${msg.isMe ? 'bg-[hsl(210_100%_50%)] text-white rounded-br-md' : 'bg-[hsl(0_0%_18%)] text-white rounded-bl-md'}`}>
                         {msg.text}
