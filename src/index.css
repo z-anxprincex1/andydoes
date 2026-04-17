@@ -132,6 +132,23 @@
   .cable-hover:hover path {
     animation: cableLift 0.4s ease-out forwards;
   }
+
+  .typing-dot {
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 9999px;
+    background: hsl(0 0% 100% / 0.82);
+    display: inline-block;
+    animation: chatTyping 1.15s ease-in-out infinite;
+  }
+
+  .typing-dot:nth-child(2) {
+    animation-delay: 0.18s;
+  }
+
+  .typing-dot:nth-child(3) {
+    animation-delay: 0.36s;
+  }
 }
 
 @keyframes tailWag {
@@ -187,6 +204,18 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes chatTyping {
+  0%, 60%, 100% {
+    transform: translateY(0);
+    opacity: 0.35;
+  }
+
+  30% {
+    transform: translateY(-3px);
+    opacity: 1;
   }
 }
 

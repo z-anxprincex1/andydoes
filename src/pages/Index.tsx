@@ -1,43 +1,442 @@
 import { useState, useRef, useEffect } from "react";
-import { MapPin, HelpCircle, X, Github, Linkedin } from "lucide-react";
+import { MapPin, HelpCircle, X, Github, Linkedin, Mail, Globe } from "lucide-react";
 import Cat from "@/components/Cat";
 import profileImage from "@/assets/profile.png";
+
+type ProjectStep = {
+  label: string;
+  detail: string;
+};
+
+type Project = {
+  title: string;
+  description: string;
+  overview: string;
+  stack: string[];
+  highlights: string[];
+  workflowTitle: string;
+  workflowSteps: ProjectStep[];
+};
+
+type Experience = {
+  company: string;
+  role: string;
+  period: string;
+  summary: string;
+  stack: string[];
+  highlights: string[];
+};
+
+type ChatMessage = {
+  text: string;
+  isMe: boolean;
+  actionButtons?: Array<{
+    label: string;
+    href: string;
+    icon: "linkedin" | "github" | "portfolio" | "email";
+  }>;
+};
+
+const WorkflowDiagram = ({ steps }: { steps: ProjectStep[] }) => <div className="rounded-2xl border-2 border-black bg-[linear-gradient(180deg,#fff8dc_0%,#fff2bf_100%)] p-4 md:p-5 shadow-[6px_6px_0_rgba(0,0,0,0.12)]">
+    <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-[repeat(4,minmax(0,1fr))]">
+      {steps.map((step, index) => <div key={step.label} className="relative">
+          <div className="h-full rounded-xl border-2 border-black bg-white p-4 shadow-[3px_3px_0_rgba(0,0,0,0.08)]">
+            <div className="mb-3 inline-flex h-8 w-8 items-center justify-center rounded-full border-2 border-black bg-[#fde68a] text-xs font-bold">
+              {index + 1}
+            </div>
+            <h4 className="mb-2 text-sm md:text-base font-bold">{step.label}</h4>
+            <p className="text-xs md:text-sm leading-relaxed text-black/70">{step.detail}</p>
+          </div>
+          {index < steps.length - 1 && <div className="pointer-events-none hidden xl:flex absolute top-1/2 -right-3 z-10 h-8 w-6 -translate-y-1/2 items-center justify-center text-lg font-bold text-black/60">
+              -&gt;
+            </div>}
+        </div>)}
+    </div>
+  </div>;
+
+const renderChatText = (text: string) => text.split("\n").map((line, lineIndex) => <span key={`${line}-${lineIndex}`} className="block">
+    {line.split(/(\*\*.*?\*\*)/g).filter(Boolean).map((part, partIndex) => {
+    const isBold = /^\*\*.*\*\*$/.test(part);
+    const content = isBold ? part.slice(2, -2) : part;
+    return isBold ? <strong key={`${part}-${partIndex}`} className="font-bold">
+            {content}
+          </strong> : <span key={`${part}-${partIndex}`}>{content}</span>;
+  })}
+  </span>);
+
+const buildActionButtons = (text: string) => {
+  const lower = text.toLowerCase();
+  const buttons: ChatMessage["actionButtons"] = [];
+
+  if (lower.includes("linkedin")) {
+    buttons?.push({
+      label: "Connect on LinkedIn",
+      href: "https://www.linkedin.com/in/anandprince1/",
+      icon: "linkedin"
+    });
+  }
+
+  if (lower.includes("github")) {
+    buttons?.push({
+      label: "View GitHub",
+      href: "https://github.com/z-anxprincex1",
+      icon: "github"
+    });
+  }
+
+  if (lower.includes("portfolio") || lower.includes("andydoes.tech")) {
+    buttons?.push({
+      label: "Open Portfolio",
+      href: "https://andydoes.tech",
+      icon: "portfolio"
+    });
+  }
+
+  if (lower.includes("email") || lower.includes("gmail") || lower.includes("reach me")) {
+    buttons?.push({
+      label: "Send Email",
+      href: "mailto:anandprincepurty@gmail.com",
+      icon: "email"
+    });
+  }
+
+  return buttons?.length ? buttons : undefined;
+};
+
+const cleanReplyText = (text: string, hasActionButtons: boolean) => {
+  if (!hasActionButtons) return text.trim();
+
+  const lines = text
+    .split("\n")
+    .map(line => line.trim())
+    .filter(Boolean)
+    .filter(line => {
+      const lower = line.toLowerCase();
+      if (lower.includes("linkedin.com/")) return false;
+      if (lower.includes("github.com/")) return false;
+      if (lower.includes("andydoes.tech")) return false;
+      if (lower.includes("gmail.com")) return false;
+      return true;
+    });
+
+  const cleaned = lines
+    .join("\n")
+    .replace(/-\s*GitHub:\s*$/gim, "")
+    .replace(/-\s*LinkedIn:\s*$/gim, "")
+    .replace(/-\s*Email:\s*$/gim, "")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+
+  return cleaned || "Here you go:";
+};
+
+const ActionButtonIcon = ({
+  icon
+}: {
+  icon: "linkedin" | "github" | "portfolio" | "email";
+}) => {
+  if (icon === "linkedin") return <Linkedin className="w-3 h-3" />;
+  if (icon === "github") return <Github className="w-3 h-3" />;
+  if (icon === "portfolio") return <Globe className="w-3 h-3" />;
+  return <Mail className="w-3 h-3" />;
+};
+
+const CHAT_API_URL = import.meta.env.VITE_CHAT_API_URL || "https://andydoes-ai-portfolio-assistant-rf2oa0yqw-anandprinces-projects.vercel.app/api/chat";
+
 const Index = () => {
+  const projects: Project[] = [{
+    title: "Multi-Modal Deep Learning for VQA",
+    description: "Constructed a multimodal architecture for Visual Question Answering by synthesizing image features via ResNet and textual embeddings via BERT, attaining high precision in contextual responses.",
+    overview: "This project combines computer vision and language understanding so a user can ask a question about an image and receive a context-aware answer. The system works by extracting visual signals, translating the question into embeddings, and fusing both streams before prediction.",
+    stack: ["Python", "PyTorch", "ResNet", "BERT", "Deep Learning"],
+    highlights: ["Merged image and language features into a single reasoning pipeline.", "Improved contextual response quality for visual question-answering tasks.", "Created a foundation for explainable AI workflows that depend on both text and imagery."],
+    workflowTitle: "How the VQA pipeline works",
+    workflowSteps: [{
+      label: "Input Image",
+      detail: "A user submits an image along with a natural-language question about the scene."
+    }, {
+      label: "Dual Feature Extraction",
+      detail: "ResNet captures visual patterns while BERT encodes the question into semantic vectors."
+    }, {
+      label: "Feature Fusion",
+      detail: "The model combines image and text embeddings so both modalities influence the answer."
+    }, {
+      label: "Answer Prediction",
+      detail: "A classification head predicts the most likely response based on the joint representation."
+    }]
+  }, {
+    title: "VirtualEye - Drowning Detection",
+    description: "Deployed YOLOv5 on IBM Cloud to architect a real-time drowning detection system, triggering immediate alerts for drowning risks via Flask API endpoints.",
+    overview: "VirtualEye monitors live pool footage and flags dangerous movement patterns fast enough for intervention. The main value comes from turning continuous video into real-time safety alerts that lifeguards or administrators can act on immediately.",
+    stack: ["YOLOv5", "IBM Cloud", "Flask", "Computer Vision", "Python"],
+    highlights: ["Ran inference on streaming footage for real-time monitoring.", "Connected detections to alerting endpoints for faster response.", "Designed the system around safety-critical latency rather than offline analysis."],
+    workflowTitle: "How drowning detection works",
+    workflowSteps: [{
+      label: "Live Video Feed",
+      detail: "Camera footage streams continuously from the monitored pool environment."
+    }, {
+      label: "Object Detection",
+      detail: "YOLOv5 scans frames to identify swimmers and abnormal motion or posture patterns."
+    }, {
+      label: "Risk Evaluation",
+      detail: "The backend applies rules to determine when a detection should be treated as a drowning risk."
+    }, {
+      label: "Instant Alert",
+      detail: "Flask endpoints notify responders so they can intervene without waiting for manual review."
+    }]
+  }, {
+    title: "Signease - Sign Language Detection",
+    description: "Developed a browser-based sign language translator leveraging Mobilenet SSD and TensorFlow.js, enabling seamless gesture-to-text conversion in real time.",
+    overview: "Signease makes sign-language interpretation accessible in the browser by turning hand and gesture input into readable text with low friction. Because it runs client-side, the experience stays interactive and immediate for the user.",
+    stack: ["TensorFlow.js", "MobileNet SSD", "JavaScript", "Browser ML"],
+    highlights: ["Kept the experience browser-native for easy access.", "Enabled real-time gesture-to-text feedback without requiring a heavy install.", "Focused on accessibility and live interaction rather than batch prediction."],
+    workflowTitle: "How sign translation works",
+    workflowSteps: [{
+      label: "Browser Camera",
+      detail: "The user opens the app and shares a live webcam feed inside the browser."
+    }, {
+      label: "Gesture Detection",
+      detail: "TensorFlow.js and MobileNet SSD detect hand positions and classify sign inputs frame by frame."
+    }, {
+      label: "Interpretation Layer",
+      detail: "Detected gesture sequences are mapped into textual meaning using the translation logic."
+    }, {
+      label: "Live Text Output",
+      detail: "The translated result appears immediately on screen so communication feels conversational."
+    }]
+  }, {
+    title: "Skin Disease Classification CNN",
+    description: "Built and fine-tuned a convolutional neural network achieving 93% accuracy in classifying dermatological conditions across multiple categories.",
+    overview: "This classifier analyzes dermatological images and predicts likely condition categories to support faster screening. The project centered on cleaning the image pipeline, training a robust CNN, and improving confidence across visually similar classes.",
+    stack: ["Python", "CNN", "Deep Learning", "Image Classification"],
+    highlights: ["Reached 93% accuracy across multiple disease classes.", "Improved screening speed by automating first-pass categorization.", "Handled visually similar classes with a fine-tuned vision model."],
+    workflowTitle: "How the classifier works",
+    workflowSteps: [{
+      label: "Image Upload",
+      detail: "A skin image is collected from the user or a diagnostic source."
+    }, {
+      label: "Preprocessing",
+      detail: "Images are normalized, resized, and prepared so the model sees consistent input quality."
+    }, {
+      label: "CNN Inference",
+      detail: "The trained network analyzes visual patterns associated with different dermatological conditions."
+    }, {
+      label: "Class Prediction",
+      detail: "The model returns the most likely class, helping clinicians or users narrow next steps."
+    }]
+  }, {
+    title: "Smart Door Lock with Face Detection",
+    description: "Built a security system integrating Raspberry Pi, facial recognition, and fingerprint validation to automate intelligent door access.",
+    overview: "This system modernizes physical access control by combining multiple identity checks before unlocking a door. The project balances convenience and security by validating both who the user is and whether the biometric input is trusted.",
+    stack: ["Raspberry Pi", "Facial Recognition", "Fingerprint Validation", "Embedded Systems"],
+    highlights: ["Used multi-factor biometrics for stronger access control.", "Automated door entry without removing the security gate.", "Connected embedded hardware with recognition logic in a single flow."],
+    workflowTitle: "How the smart lock works",
+    workflowSteps: [{
+      label: "Visitor Approaches",
+      detail: "The Raspberry Pi camera and fingerprint reader wait for a user at the door."
+    }, {
+      label: "Identity Capture",
+      detail: "The system captures a face image and fingerprint sample for verification."
+    }, {
+      label: "Biometric Validation",
+      detail: "Recognition logic checks whether both signals match an authorized identity."
+    }, {
+      label: "Access Decision",
+      detail: "If validation succeeds, the lock actuates automatically; otherwise entry stays blocked."
+    }]
+  }, {
+    title: "Colabify",
+    description: "Built a real-time collaborative document editor with Next.js, TypeScript, Supabase, and WebRTC to support synchronized document state, responsive editing, and low-latency voice communication.",
+    overview: "Colabify is designed for teams editing the same document at once without losing context or stepping on each other. It combines shared state, live presence, and voice collaboration so the editing experience feels closer to working side by side.",
+    stack: ["Next.js", "TypeScript", "Supabase", "PostgreSQL", "WebRTC", "LiveKit", "PDF.js", "Gemini 1.5 Flash"],
+    highlights: ["Kept document state synchronized in real time across collaborators.", "Added low-latency voice communication with WebRTC for live teamwork.", "Integrated AI-assisted document understanding using page-aware references."],
+    workflowTitle: "How Colabify works",
+    workflowSteps: [{
+      label: "Shared Workspace",
+      detail: "Users open the same document room and load the current document state from Supabase."
+    }, {
+      label: "Realtime Sync",
+      detail: "Edits, cursors, and collaboration signals are synchronized across participants as they type."
+    }, {
+      label: "Voice + Context",
+      detail: "LiveKit handles voice communication while PDF.js and Gemini power document-aware assistance."
+    }, {
+      label: "Unified Collaboration",
+      detail: "Everyone sees the latest content, can talk through changes, and gets faster answers from the AI layer."
+    }]
+  }, {
+    title: "PeekersNest",
+    description: "Created an AI-powered shopping deals platform with Next.js and Gemini that aggregates product listings, ranks options by value signals, and highlights the best deals for users.",
+    overview: "PeekersNest reduces the time users spend bouncing between product listings by gathering deal data into one ranking experience. The product focuses on surfacing trustworthy, high-value options quickly instead of forcing manual comparison across many tabs.",
+    stack: ["Next.js", "TypeScript", "Gemini 1.5 Pro", "Ranking Logic", "Search Aggregation"],
+    highlights: ["Aggregated product listings into one discovery workflow.", "Applied ranking signals like price, ratings, and trustworthiness.", "Reduced manual deal comparison time for end users."],
+    workflowTitle: "How deal discovery works",
+    workflowSteps: [{
+      label: "Collect Listings",
+      detail: "The app gathers relevant product information from multiple sources into a single dataset."
+    }, {
+      label: "AI + Rule Ranking",
+      detail: "Gemini-assisted analysis and ranking logic evaluate value, price, and trustworthiness signals."
+    }, {
+      label: "Compare Options",
+      detail: "Users see normalized, easy-to-scan comparisons instead of fragmented marketplace pages."
+    }, {
+      label: "Best Deal Highlight",
+      detail: "The interface promotes the strongest-value deals so decisions are faster and more confident."
+    }]
+  }, {
+    title: "Dental AI Matching API",
+    description: "Developed a Python and Flask backend that connects clinics with labs using multi-criteria matching, improving recommendation efficiency and speeding up decision-making.",
+    overview: "This API helps clinics find the right lab faster by matching demand with lab capabilities, availability, and fit. It turns what is usually a manual coordination problem into a repeatable backend service that can scale with marketplace usage.",
+    stack: ["Python", "Flask", "Google Cloud Platform", "Firestore", "XGBoost", "Docker", "REST APIs"],
+    highlights: ["Matched clinics with thousands of labs more efficiently.", "Improved decision speed through multi-criteria scoring.", "Packaged the service as a backend API ready for platform integration."],
+    workflowTitle: "How clinic-to-lab matching works",
+    workflowSteps: [{
+      label: "Clinic Request",
+      detail: "A clinic submits requirements such as service type, turnaround, and operational constraints."
+    }, {
+      label: "Candidate Retrieval",
+      detail: "The API pulls matching labs and relevant metadata from backend storage."
+    }, {
+      label: "Scoring Engine",
+      detail: "Filtering and model-based ranking score candidates based on fit, efficiency, and practicality."
+    }, {
+      label: "Recommended Matches",
+      detail: "The service returns the strongest lab options so teams can act without manual searching."
+    }]
+  }, {
+    title: "LLM-based Text-to-SQL",
+    description: "Built a React, Python, and Flask application that turns natural language into SQL using OpenAI with schema-aware prompting to generate accurate database queries.",
+    overview: "This project makes databases easier to query for non-SQL users by translating questions into executable queries. The key challenge was keeping generated SQL accurate by grounding prompts in schema context rather than relying on generic language generation alone.",
+    stack: ["React", "Python", "Flask", "OpenAI", "Prompt Engineering", "SQL"],
+    highlights: ["Converted plain-English requests into database queries.", "Used schema-aware prompting to improve query precision.", "Lowered the barrier for teams that need data without writing SQL manually."],
+    workflowTitle: "How text-to-SQL works",
+    workflowSteps: [{
+      label: "Natural Language Prompt",
+      detail: "A user asks a database question in plain English instead of writing SQL."
+    }, {
+      label: "Schema Grounding",
+      detail: "The backend enriches the prompt with table and column context so generation stays accurate."
+    }, {
+      label: "LLM Query Generation",
+      detail: "OpenAI produces SQL tailored to the available schema and the user's intent."
+    }, {
+      label: "Actionable Result",
+      detail: "The app returns the generated query for execution, review, or refinement in the UI."
+    }]
+  }];
+  const experiences: Experience[] = [{
+    company: "Community Dreams Foundation",
+    role: "Software Engineer (Backend & AI Systems)",
+    period: "Sep 2025 - Present",
+    summary: "I build backend systems and AI-supported product infrastructure for marketplace-style workflows, with a focus on scalable data pipelines, recommendation quality, and dependable deployment paths.",
+    stack: ["Python", "GCP", "PostgreSQL", "Supabase", "Firebase", "XGBoost", "Next.js", "Cloud Build", "Cloud Run"],
+    highlights: ["Built scalable backend data pipelines on Python and GCP, combining structured data in PostgreSQL and Supabase with unstructured Firebase data for real-time marketplace activity, reducing data retrieval latency by 25%.", "Developed an XGBoost-based recommendation model using user activity and listing metadata, improving prediction accuracy to 90% and increasing the relevance of marketplace matches.", "Automated CI/CD with Google Cloud Build and Cloud Run, reducing deployment time by 40% and improving reliability across data and ML workflows.", "Optimized REST APIs to handle concurrent matching requests across 2,000+ lab records, enabling real-time filtering and workload-aware availability updates.", "Collaborated on a Next.js frontend with Firebase Authentication to support secure user access and smooth integration with backend APIs."]
+  }];
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const [isPluggedIn, setIsPluggedIn] = useState(false);
   const [isPhoneOpen, setIsPhoneOpen] = useState(false);
-  const getBotReply = (userMsg: string) => {
-    const msg = userMsg.toLowerCase();
-    if (msg.includes('hire') || msg.includes('job') || msg.includes('work') || msg.includes('opportunity'))
-      return "That sounds exciting! I'm always open to new opportunities. Let's connect and discuss further on LinkedIn 😊";
-    if (msg.includes('project') || msg.includes('collaborate') || msg.includes('collab'))
-      return "I'd love to chat about collaborating! Let's take this conversation to LinkedIn 😊";
-    if (msg.includes('hello') || msg.includes('hi') || msg.includes('hey') || msg.includes('sup'))
-      return "Hey there! Great to hear from you. If you'd like to chat more, feel free to connect on LinkedIn 😊";
-    if (msg.includes('skill') || msg.includes('tech') || msg.includes('stack') || msg.includes('experience'))
-      return "Great question! I'd be happy to share more about my skills and experience. Let's connect on LinkedIn 😊";
-    if (msg.includes('contact') || msg.includes('reach') || msg.includes('connect') || msg.includes('email'))
-      return "The best way to reach me is through LinkedIn — let's connect! 😊";
-    if (msg.includes('who') || msg.includes('about'))
-      return "I'm a Software Developer & AI Enthusiast based in New York! Let's connect on LinkedIn to learn more 😊";
-    return "Thanks for reaching out! I'd love to continue this conversation — feel free to connect with me on LinkedIn 😊";
-  };
-
-  const [chatMessages, setChatMessages] = useState<{
-    text: string;
-    isMe: boolean;
-    linkedinButton?: boolean;
-  }[]>([{
-    text: "Hey! Welcome to my portfolio 👋",
+  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([{
+    text: "Hey! Welcome to my portfolio. Ask me about my projects, experience, or resume.",
     isMe: false
   }]);
   const [newMessage, setNewMessage] = useState("");
+  const [isChatLoading, setIsChatLoading] = useState(false);
 
   useEffect(() => {
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
     }
   }, [chatMessages]);
+
+  const splitReplyIntoBubbles = (reply: string) => {
+    const normalized = reply.replace(/\r/g, "").trim();
+    if (!normalized) return [];
+
+    const paragraphChunks = normalized
+      .split(/\n{2,}/)
+      .map(chunk => chunk.trim())
+      .filter(Boolean);
+
+    const bubbles = paragraphChunks.flatMap(chunk => {
+      if (chunk.length <= 140) return [chunk];
+
+      const sentenceParts = chunk.match(/[^.!?]+[.!?]?/g)?.map(part => part.trim()).filter(Boolean) || [chunk];
+      const grouped: string[] = [];
+      let current = "";
+
+      for (const sentence of sentenceParts) {
+        const candidate = current ? `${current} ${sentence}` : sentence;
+        if (candidate.length <= 140) {
+          current = candidate;
+          continue;
+        }
+
+        if (current) {
+          grouped.push(current);
+          current = sentence;
+          continue;
+        }
+
+        grouped.push(sentence);
+      }
+
+      if (current) grouped.push(current);
+      return grouped;
+    });
+
+    return bubbles.slice(0, 4);
+  };
+
+  const sendChatMessage = async (userMsg: string) => {
+    const trimmedMessage = userMsg.trim();
+    if (!trimmedMessage || isChatLoading) return;
+
+    const history = chatMessages.map(message => ({
+      role: message.isMe ? "user" as const : "assistant" as const,
+      text: message.text
+    }));
+
+    setChatMessages(prev => [...prev, {
+      text: trimmedMessage,
+      isMe: true
+    }]);
+    setNewMessage("");
+    setIsChatLoading(true);
+
+    try {
+      const response = await fetch(CHAT_API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          message: trimmedMessage,
+          history
+        })
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || "I couldn't generate a response right now.");
+      }
+      const actionButtons = buildActionButtons(data.reply);
+      const bubbles = splitReplyIntoBubbles(data.reply);
+      setChatMessages(prev => [...prev, ...bubbles.map((text, index) => ({
+        text: index === bubbles.length - 1 ? cleanReplyText(text, Boolean(actionButtons?.length)) : cleanReplyText(text, false),
+        isMe: false,
+        actionButtons: index === bubbles.length - 1 ? actionButtons : undefined
+      }))]);
+    } catch (error) {
+      const fallback = error instanceof Error ? error.message : "I couldn't generate a response right now.";
+      setChatMessages(prev => [...prev, {
+        text: `${fallback} If you want, you can also reach out on LinkedIn.`,
+        isMe: false,
+        actionButtons: buildActionButtons("linkedin email github portfolio")
+      }]);
+    } finally {
+      setIsChatLoading(false);
+    }
+  };
 
   const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [isGeneratorOn, setIsGeneratorOn] = useState(false);
@@ -50,22 +449,6 @@ const Index = () => {
   }); // Hanging down longer by default
   const [activeFolder, setActiveFolder] = useState<'projects' | 'experience'>('projects');
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
-  const projects = [{
-    title: "Multi-Modal Deep Learning for VQA",
-    description: "Constructed a multimodal architecture for Visual Question Answering by synthesizing image features via ResNet and textual embeddings via BERT, attaining high precision in contextual responses."
-  }, {
-    title: "VirtualEye – Drowning Detection",
-    description: "Deployed YOLOv5 on IBM Cloud to architect a real-time drowning detection system, triggering immediate alerts for drowning risks via Flask API endpoints."
-  }, {
-    title: "Signease – Sign Language Detection",
-    description: "Developed a browser-based sign language translator leveraging Mobilenet SSD and TensorFlow.js, enabling seamless gesture-to-text conversion in real time."
-  }, {
-    title: "Skin Disease Classification CNN",
-    description: "Built and fine-tuned a convolutional neural network achieving 93% accuracy in classifying dermatological conditions across multiple categories."
-  }, {
-    title: "Smart Door Lock with Face Detection",
-    description: "Built a security system integrating Raspberry Pi, facial recognition, and fingerprint validation to automate intelligent door access."
-  }];
   const plugRef = useRef<HTMLDivElement>(null);
   const plugPositionRef = useRef(plugPosition);
   const [spiderDescending, setSpiderDescending] = useState(false);
@@ -837,61 +1220,37 @@ const Index = () => {
                 <div className="flex-1 overflow-y-auto py-3 space-y-2 scrollbar-hide" ref={chatContainerRef} style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                   {chatMessages.map((msg, i) => <div key={i} className={`flex ${msg.isMe ? 'justify-end' : 'justify-start'}`}>
                       <div className={`max-w-[80%] px-3 py-2 rounded-2xl text-sm ${msg.isMe ? 'bg-[hsl(210_100%_50%)] text-white rounded-br-md' : 'bg-[hsl(0_0%_18%)] text-white rounded-bl-md'}`}>
-                        {msg.text}
-                        {msg.linkedinButton && (
-                          <a
-                            href="https://www.linkedin.com/in/anandprince1/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="mt-2 flex items-center gap-1.5 bg-[hsl(210_80%_45%)] hover:bg-[hsl(210_80%_40%)] text-white text-xs font-medium px-3 py-1.5 rounded-full w-fit transition-colors"
-                            onClick={e => e.stopPropagation()}
-                          >
-                            <Linkedin className="w-3 h-3" />
-                            Connect on LinkedIn
-                          </a>
-                        )}
+                        {renderChatText(msg.text)}
+                        {msg.actionButtons && <div className="mt-2 flex flex-wrap gap-2">
+                            {msg.actionButtons.map(button => <a key={button.label} href={button.href} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 bg-[hsl(210_80%_45%)] hover:bg-[hsl(210_80%_40%)] text-white text-xs font-medium px-3 py-1.5 rounded-full w-fit transition-colors" onClick={e => e.stopPropagation()}>
+                                <ActionButtonIcon icon={button.icon} />
+                                {button.label}
+                              </a>)}
+                          </div>}
                       </div>
                     </div>)}
+                  {isChatLoading && <div className="flex justify-start">
+                      <div className="max-w-[80%] px-3 py-3 rounded-2xl rounded-bl-md text-sm bg-[hsl(0_0%_18%)] text-white">
+                        <div className="flex items-center gap-1.5">
+                          <span className="typing-dot" />
+                          <span className="typing-dot" />
+                          <span className="typing-dot" />
+                        </div>
+                      </div>
+                    </div>}
                 </div>
                 
                 {/* Input */}
                 <div className="flex gap-2 pt-2 border-t border-[hsl(0_0%_15%)]">
                   <input type="text" value={newMessage} onChange={e => setNewMessage(e.target.value)} onKeyDown={e => {
-                if (e.key === 'Enter' && newMessage.trim()) {
-                  const userMsg = newMessage;
-                  setChatMessages(prev => [...prev, {
-                    text: userMsg,
-                    isMe: true
-                  }]);
-                  setNewMessage('');
-                  // Auto reply after a short delay
-                   setTimeout(() => {
-                    setChatMessages(prev => [...prev, {
-                      text: getBotReply(userMsg),
-                      isMe: false,
-                      linkedinButton: true
-                    }]);
-                  }, 1000);
+                if (e.key === 'Enter') {
+                  void sendChatMessage(newMessage);
                 }
-              }} placeholder="Type a message..." className="flex-1 bg-[hsl(0_0%_15%)] text-white text-sm px-4 py-2 rounded-full outline-none placeholder:text-[hsl(0_0%_40%)]" onClick={e => e.stopPropagation()} />
+              }} placeholder="Ask about projects, experience, or resume..." className="flex-1 bg-[hsl(0_0%_15%)] text-white text-sm px-4 py-2 rounded-full outline-none placeholder:text-[hsl(0_0%_40%)] disabled:opacity-60" onClick={e => e.stopPropagation()} disabled={isChatLoading} />
                   <button onClick={e => {
                 e.stopPropagation();
-                if (newMessage.trim()) {
-                  setChatMessages(prev => [...prev, {
-                    text: newMessage,
-                    isMe: true
-                  }]);
-                  const userMsg = newMessage;
-                  setNewMessage('');
-                  setTimeout(() => {
-                    setChatMessages(prev => [...prev, {
-                      text: getBotReply(userMsg),
-                      isMe: false,
-                      linkedinButton: true
-                    }]);
-                  }, 1000);
-                }
-              }} className="w-9 h-9 bg-[hsl(210_100%_50%)] rounded-full flex items-center justify-center">
+                void sendChatMessage(newMessage);
+              }} className="w-9 h-9 bg-[hsl(210_100%_50%)] rounded-full flex items-center justify-center disabled:opacity-60" disabled={isChatLoading}>
                     <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
                     </svg>
@@ -1293,9 +1652,41 @@ const Index = () => {
                 fontFamily: 'Comic Sans MS, cursive'
               }}>
                       {selectedProject !== null ? (/* Single project detail view */
-                <div className="max-w-2xl mx-auto">
-                          <h2 className="text-xl md:text-3xl font-bold mb-4">{projects[selectedProject].title}</h2>
-                          <p className="text-sm md:text-base text-black/80 leading-relaxed">{projects[selectedProject].description}</p>
+                <div className="max-w-5xl mx-auto space-y-6">
+                          <div className="rounded-2xl border-2 border-black bg-[linear-gradient(180deg,#fffdfa_0%,#fff4d6_100%)] p-5 md:p-6 shadow-[6px_6px_0_rgba(0,0,0,0.12)]">
+                            <p className="text-[11px] md:text-xs font-bold uppercase tracking-[0.25em] text-black/50 mb-3">Project Breakdown</p>
+                            <h2 className="text-xl md:text-3xl font-bold mb-3">{projects[selectedProject].title}</h2>
+                            <p className="text-sm md:text-base text-black/80 leading-relaxed">{projects[selectedProject].description}</p>
+                          </div>
+
+                          <div className="grid gap-4 lg:grid-cols-[1.35fr_0.95fr]">
+                            <div className="rounded-2xl border-2 border-black bg-white p-5 shadow-[5px_5px_0_rgba(0,0,0,0.08)]">
+                              <h3 className="text-lg md:text-xl font-bold mb-3">What it does</h3>
+                              <p className="text-sm md:text-base leading-relaxed text-black/75">{projects[selectedProject].overview}</p>
+                            </div>
+                            <div className="rounded-2xl border-2 border-black bg-[#f8f5ec] p-5 shadow-[5px_5px_0_rgba(0,0,0,0.08)]">
+                              <h3 className="text-lg md:text-xl font-bold mb-3">Core stack</h3>
+                              <div className="flex flex-wrap gap-2">
+                                {projects[selectedProject].stack.map(item => <span key={item} className="rounded-full border-2 border-black bg-white px-3 py-1 text-xs md:text-sm font-bold">
+                                    {item}
+                                  </span>)}
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="rounded-2xl border-2 border-black bg-white p-5 md:p-6 shadow-[5px_5px_0_rgba(0,0,0,0.08)]">
+                            <h3 className="text-lg md:text-xl font-bold mb-4">{projects[selectedProject].workflowTitle}</h3>
+                            <WorkflowDiagram steps={projects[selectedProject].workflowSteps} />
+                          </div>
+
+                          <div className="rounded-2xl border-2 border-black bg-[#f7f1df] p-5 md:p-6 shadow-[5px_5px_0_rgba(0,0,0,0.08)]">
+                            <h3 className="text-lg md:text-xl font-bold mb-4">Why it matters</h3>
+                            <div className="grid gap-3 md:grid-cols-3">
+                              {projects[selectedProject].highlights.map(point => <div key={point} className="rounded-xl border-2 border-black bg-white p-4 text-sm md:text-base leading-relaxed text-black/75">
+                                  {point}
+                                </div>)}
+                            </div>
+                          </div>
                         </div>) : (/* All projects grid view */
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                           {projects.map((project, index) => <div key={index} onClick={() => setSelectedProject(index)} className="p-4 border-2 border-black rounded-lg hover:bg-black/5 transition-colors cursor-pointer">
@@ -1303,11 +1694,52 @@ const Index = () => {
                               <p className="text-xs md:text-sm text-black/70 line-clamp-3">{project.description}</p>
                             </div>)}
                         </div>)}
-                    </div> : <div className="text-black text-center" style={{
+                    </div> : <div className="text-black space-y-6" style={{
                 fontFamily: 'Comic Sans MS, cursive'
               }}>
-                      <p className="text-2xl md:text-4xl font-bold mb-4">My Experience</p>
-                      <p className="text-sm md:text-lg text-black/60">Experience coming soon...</p>
+                      <div className="rounded-2xl border-2 border-black bg-[linear-gradient(180deg,#fffdfa_0%,#fff4d6_100%)] p-5 md:p-6 shadow-[6px_6px_0_rgba(0,0,0,0.12)]">
+                        <p className="text-[11px] md:text-xs font-bold uppercase tracking-[0.25em] text-black/50 mb-3">Experience</p>
+                        <h2 className="text-2xl md:text-4xl font-bold mb-3">What I've been building</h2>
+                        <p className="text-sm md:text-base text-black/75 leading-relaxed">The experience section now reflects the work captured on the resume, focused on backend systems, AI-driven matching, and production-ready cloud workflows.</p>
+                      </div>
+
+                      <div className="space-y-5">
+                        {experiences.map(experience => <div key={`${experience.company}-${experience.role}`} className="rounded-2xl border-2 border-black bg-white p-5 md:p-6 shadow-[6px_6px_0_rgba(0,0,0,0.1)]">
+                            <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+                              <div>
+                                <h3 className="text-xl md:text-2xl font-bold">{experience.role}</h3>
+                                <p className="text-base md:text-lg text-black/75">{experience.company}</p>
+                              </div>
+                              <div className="self-start rounded-full border-2 border-black bg-[#f7e7a1] px-4 py-1.5 text-xs md:text-sm font-bold">
+                                {experience.period}
+                              </div>
+                            </div>
+
+                            <div className="mt-5 grid gap-4 lg:grid-cols-[1.2fr_0.9fr]">
+                              <div className="rounded-2xl border-2 border-black bg-[#fffdf7] p-4">
+                                <h4 className="text-base md:text-lg font-bold mb-2">Role overview</h4>
+                                <p className="text-sm md:text-base leading-relaxed text-black/75">{experience.summary}</p>
+                              </div>
+                              <div className="rounded-2xl border-2 border-black bg-[#f8f5ec] p-4">
+                                <h4 className="text-base md:text-lg font-bold mb-3">Tools and platforms</h4>
+                                <div className="flex flex-wrap gap-2">
+                                  {experience.stack.map(item => <span key={item} className="rounded-full border-2 border-black bg-white px-3 py-1 text-xs md:text-sm font-bold">
+                                      {item}
+                                    </span>)}
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="mt-5">
+                              <h4 className="text-base md:text-lg font-bold mb-3">Key impact</h4>
+                              <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+                                {experience.highlights.map(point => <div key={point} className="rounded-xl border-2 border-black bg-[#fdf8ea] p-4 text-sm md:text-base leading-relaxed text-black/75">
+                                    {point}
+                                  </div>)}
+                              </div>
+                            </div>
+                          </div>)}
+                      </div>
                     </div>}
                 </div>
               </div>
