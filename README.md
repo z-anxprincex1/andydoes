@@ -1,7 +1,5 @@
 # andydoes
 
-Personal portfolio site for Anand Prince Purty.
-
 ## Tech stack
 
 - Vite
