@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { MapPin, HelpCircle, X, Github, Linkedin, Mail, Globe } from "lucide-react";
 import Cat from "@/components/Cat";
 import profileImage from "@/assets/profile.png";
+import replyAiLeaderboard from "@/assets/reply-ai-leaderboard.png";
 
 type ProjectStep = {
   label: string;
@@ -22,6 +23,17 @@ type Experience = {
   company: string;
   role: string;
   period: string;
+  summary: string;
+  stack: string[];
+  highlights: string[];
+};
+
+type Achievement = {
+  title: string;
+  event: string;
+  period: string;
+  rank: string;
+  fieldSize: string;
   summary: string;
   stack: string[];
   highlights: string[];
@@ -52,6 +64,10 @@ const WorkflowDiagram = ({ steps }: { steps: ProjectStep[] }) => <div className=
             </div>}
         </div>)}
     </div>
+  </div>;
+
+const RankingSnapshot = () => <div className="rounded-2xl border-2 border-black bg-[#111111] p-3 shadow-[6px_6px_0_rgba(0,0,0,0.18)]">
+    <img src={replyAiLeaderboard} alt="Reply AI Agent Challenge 2026 leaderboard showing Anand Purty 4d01 Team ranked 55th out of 1971 teams." className="w-full rounded-xl border border-white/10 object-cover" />
   </div>;
 
 const renderChatText = (text: string) => text.split("\n").map((line, lineIndex) => <span key={`${line}-${lineIndex}`} className="block">
@@ -327,11 +343,28 @@ const Index = () => {
   }];
   const experiences: Experience[] = [{
     company: "Community Dreams Foundation",
-    role: "Software Engineer (Backend & AI Systems)",
+    role: "Full Stack Engineer (Backend & AI Systems)",
     period: "Sep 2025 - Present",
-    summary: "I build backend systems and AI-supported product infrastructure for marketplace-style workflows, with a focus on scalable data pipelines, recommendation quality, and dependable deployment paths.",
-    stack: ["Python", "GCP", "PostgreSQL", "Supabase", "Firebase", "XGBoost", "Next.js", "Cloud Build", "Cloud Run"],
-    highlights: ["Built scalable backend data pipelines on Python and GCP, combining structured data in PostgreSQL and Supabase with unstructured Firebase data for real-time marketplace activity, reducing data retrieval latency by 25%.", "Developed an XGBoost-based recommendation model using user activity and listing metadata, improving prediction accuracy to 90% and increasing the relevance of marketplace matches.", "Automated CI/CD with Google Cloud Build and Cloud Run, reducing deployment time by 40% and improving reliability across data and ML workflows.", "Optimized REST APIs to handle concurrent matching requests across 2,000+ lab records, enabling real-time filtering and workload-aware availability updates.", "Collaborated on a Next.js frontend with Firebase Authentication to support secure user access and smooth integration with backend APIs."]
+    summary: "I build backend pipelines, recommendation systems, and cloud deployment workflows for marketplace-style products, while also wiring those services into a Next.js frontend for secure, API-driven user experiences.",
+    stack: ["Python", "GCP", "PostgreSQL", "Supabase", "Firebase", "XGBoost", "Next.js", "OAuth", "Cloud Build", "Cloud Run"],
+    highlights: ["Built backend data pipelines with Python and GCP across PostgreSQL, Supabase, and Firebase, reducing data retrieval latency by about 25% and supporting real-time user interactions.", "Developed an XGBoost-based recommendation system using user activity and listing metadata, improving match relevance and reaching about 90% prediction accuracy.", "Automated CI/CD with Google Cloud Build and Cloud Run, cutting deployment time by about 40% and making releases more reliable.", "Designed and optimized REST APIs for concurrent matching across 2,000+ records, enabling real-time filtering and queue-based workload balancing.", "Integrated backend services with a Next.js frontend and OAuth-based authentication to support seamless, secure API-driven flows."]
+  }, {
+    company: "Wrexa Technologies",
+    role: "Full Stack Engineer",
+    period: "Mar 2021 - Feb 2024",
+    summary: "I worked across frontend and backend systems, modernizing the React application, improving performance and retention, and strengthening production reliability with better debugging, query optimization, and API design.",
+    stack: ["React", "JavaScript", "Node.js", "PostgreSQL", "Postman", "Jest", "Performance Optimization"],
+    highlights: ["Migrated the frontend to React.js with a more modular component structure and cleaner state handling, contributing to about a 15% increase in user retention.", "Improved page load speed by about 30% by refactoring components, reducing unnecessary re-renders, and tightening rendering logic.", "Built backend services with Node.js and PostgreSQL to handle user data and real-time updates while reducing API response times through indexing, pagination, and connection pooling.", "Resolved production issues across APIs, slow queries, and UI bugs using log-based debugging, query profiling, and API testing with Postman and Jest.", "Improved reliability across key user flows by focusing on navigation, state transitions, and production issue turnaround."]
+  }];
+  const achievements: Achievement[] = [{
+    title: "Reply AI Agent Challenge 2026",
+    event: "OpenRouter x Reply hackathon",
+    period: "Apr 2026",
+    rank: "55th",
+    fieldSize: "1971",
+    summary: "I built an agent-based fraud detection pipeline during the Reply AI Agent Challenge 2026, focusing on practical signal selection, iterative tuning, and observability under hackathon time pressure.",
+    stack: ["AI Agents", "Fraud Detection", "Langfuse", "Observability", "Scoring Systems", "OpenRouter"],
+    highlights: ["Finished 55th out of 1,971 teams in the global Reply AI Agent Challenge 2026.", "Developed a multi-agent fraud detection workflow that evaluated transaction patterns, user behavior, location anomalies, phishing-style communication, and audio-related events.", "Used Langfuse for tracing and observability, which made it easier to inspect agent behavior and improve the system through iteration.", "Spent most of the challenge tuning precision and recall, removing noisy signals, and tightening the scoring logic so the pipeline stayed practical under pressure.", "Turned the hackathon into a strong applied-AI exercise in experimentation, agent orchestration, and measurable system improvement."]
   }];
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const [isPluggedIn, setIsPluggedIn] = useState(false);
@@ -1700,7 +1733,7 @@ const Index = () => {
                       <div className="rounded-2xl border-2 border-black bg-[linear-gradient(180deg,#fffdfa_0%,#fff4d6_100%)] p-5 md:p-6 shadow-[6px_6px_0_rgba(0,0,0,0.12)]">
                         <p className="text-[11px] md:text-xs font-bold uppercase tracking-[0.25em] text-black/50 mb-3">Experience</p>
                         <h2 className="text-2xl md:text-4xl font-bold mb-3">What I've been building</h2>
-                        <p className="text-sm md:text-base text-black/75 leading-relaxed">The experience section now reflects the work captured on the resume, focused on backend systems, AI-driven matching, and production-ready cloud workflows.</p>
+                        <p className="text-sm md:text-base text-black/75 leading-relaxed">My recent experience spans full-stack product work across React and Next.js frontends, backend APIs, AI-assisted matching systems, and cloud deployment workflows.</p>
                       </div>
 
                       <div className="space-y-5">
@@ -1734,6 +1767,55 @@ const Index = () => {
                               <h4 className="text-base md:text-lg font-bold mb-3">Key impact</h4>
                               <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
                                 {experience.highlights.map(point => <div key={point} className="rounded-xl border-2 border-black bg-[#fdf8ea] p-4 text-sm md:text-base leading-relaxed text-black/75">
+                                    {point}
+                                  </div>)}
+                              </div>
+                            </div>
+                          </div>)}
+                      </div>
+
+                      <div className="rounded-2xl border-2 border-black bg-[linear-gradient(180deg,#fff8ee_0%,#ffe6a8_100%)] p-5 md:p-6 shadow-[6px_6px_0_rgba(0,0,0,0.12)]">
+                        <p className="text-[11px] md:text-xs font-bold uppercase tracking-[0.25em] text-black/50 mb-3">Hackathons & Achievements</p>
+                        <h2 className="text-2xl md:text-4xl font-bold mb-3">What I ship under pressure</h2>
+                        <p className="text-sm md:text-base text-black/75 leading-relaxed">I like competitive builds that force quick iteration, tighter feedback loops, and better judgment about which ideas actually improve the system.</p>
+                      </div>
+
+                      <div className="space-y-5">
+                        {achievements.map(achievement => <div key={`${achievement.title}-${achievement.period}`} className="rounded-2xl border-2 border-black bg-white p-5 md:p-6 shadow-[6px_6px_0_rgba(0,0,0,0.1)]">
+                            <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+                              <div>
+                                <h3 className="text-xl md:text-2xl font-bold">{achievement.title}</h3>
+                                <p className="text-base md:text-lg text-black/75">{achievement.event}</p>
+                              </div>
+                              <div className="self-start rounded-full border-2 border-black bg-[#f7e7a1] px-4 py-1.5 text-xs md:text-sm font-bold">
+                                {achievement.period}
+                              </div>
+                            </div>
+
+                            <div className="mt-5 grid gap-4 lg:grid-cols-[1.1fr_0.9fr]">
+                              <div className="space-y-4">
+                                <div className="rounded-2xl border-2 border-black bg-[#fffdf7] p-4">
+                                  <h4 className="text-base md:text-lg font-bold mb-2">Challenge overview</h4>
+                                  <p className="text-sm md:text-base leading-relaxed text-black/75">{achievement.summary}</p>
+                                </div>
+
+                                <div className="rounded-2xl border-2 border-black bg-[#f8f5ec] p-4">
+                                  <h4 className="text-base md:text-lg font-bold mb-3">Topics and tools</h4>
+                                  <div className="flex flex-wrap gap-2">
+                                    {achievement.stack.map(item => <span key={item} className="rounded-full border-2 border-black bg-white px-3 py-1 text-xs md:text-sm font-bold">
+                                        {item}
+                                      </span>)}
+                                  </div>
+                                </div>
+                              </div>
+
+                              <RankingSnapshot />
+                            </div>
+
+                            <div className="mt-5">
+                              <h4 className="text-base md:text-lg font-bold mb-3">What stands out</h4>
+                              <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+                                {achievement.highlights.map(point => <div key={point} className="rounded-xl border-2 border-black bg-[#fdf8ea] p-4 text-sm md:text-base leading-relaxed text-black/75">
                                     {point}
                                   </div>)}
                               </div>

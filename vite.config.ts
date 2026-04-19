@@ -19,16 +19,30 @@ Education:
 - Bachelor of Engineering in Computer Science, Rajalakshmi Engineering College, Aug 2020 - May 2024
 
 Experience:
-- Community Dreams Foundation, Software Engineer (Backend & AI Systems), Sep 2025 - Present
-- Built scalable backend data pipelines using Python and GCP.
-- Used PostgreSQL and Supabase for structured data and Firebase for real-time unstructured interactions.
-- Reduced data retrieval latency by 25%.
-- Built an XGBoost-based recommendation model using user activity and listing metadata.
-- Improved prediction accuracy to 90% and increased relevance of marketplace matches.
+- Community Dreams Foundation, Full Stack Engineer (Backend & AI Systems), Sep 2025 - Present
+- Built backend data pipelines using Python and GCP across PostgreSQL, Supabase, and Firebase.
+- Reduced data retrieval latency by about 25% and supported real-time user interactions.
+- Built an XGBoost-based recommendation system using user activity and listing metadata.
+- Improved match relevance and achieved about 90% prediction accuracy.
 - Automated CI/CD using Google Cloud Build and Cloud Run.
-- Reduced deployment time by 40%.
-- Optimized REST APIs for concurrent matching requests across 2,000+ lab records with real-time filtering and workload-aware availability updates.
-- Collaborated on a Next.js frontend with Firebase Authentication for secure user access and backend integration.
+- Reduced deployment time by about 40%.
+- Designed REST APIs for concurrent matching across 2,000+ records with real-time filtering and queue-based workload balancing.
+- Integrated backend services with a Next.js frontend and OAuth-based authentication.
+- Wrexa Technologies, Full Stack Engineer, Mar 2021 - Feb 2024
+- Migrated the frontend to React.js with modular components and cleaner state handling.
+- Contributed to about a 15% increase in user retention.
+- Improved page load speed by about 30% through component refactoring and reducing unnecessary re-renders.
+- Built backend services with Node.js and PostgreSQL for user data and real-time updates.
+- Reduced API response times with query indexing, pagination, and connection pooling.
+- Resolved production API failures, slow queries, and UI bugs using logs, query profiling, Postman, and Jest.
+
+Hackathons and achievements:
+- Reply AI Agent Challenge 2026, OpenRouter x Reply, Apr 2026.
+- Finished 55th out of 1,971 teams.
+- Built an agent-based fraud detection pipeline.
+- Used signals such as transaction patterns, user behavior, location anomalies, phishing-style communication, and audio-related events.
+- Used Langfuse for tracing and observability to inspect behavior and improve the system iteratively.
+- Focused heavily on tuning precision and recall, reducing noisy signals, and improving scoring logic under time pressure.
 
 Projects:
 - Multi-Modal Deep Learning for VQA: combines ResNet image features and BERT text embeddings to answer image questions.
