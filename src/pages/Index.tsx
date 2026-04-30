@@ -1,8 +1,9 @@
 import { useState, useRef, useEffect } from "react";
-import { MapPin, HelpCircle, X, Github, Linkedin, Mail, Globe } from "lucide-react";
+import { MapPin, HelpCircle, X, Github, Linkedin, Mail, Globe, ZoomIn } from "lucide-react";
 import Cat from "@/components/Cat";
 import profileImage from "@/assets/profile.png";
 import replyAiLeaderboard from "@/assets/reply-ai-leaderboard.png";
+import zerveFunnelAnalysisFlow from "@/assets/zerve-funnel-analysis-flow.png";
 
 type ProjectStep = {
   label: string;
@@ -37,6 +38,8 @@ type Achievement = {
   summary: string;
   stack: string[];
   highlights: string[];
+  imageSrc: string;
+  imageAlt: string;
 };
 
 type ChatMessage = {
@@ -66,9 +69,20 @@ const WorkflowDiagram = ({ steps }: { steps: ProjectStep[] }) => <div className=
     </div>
   </div>;
 
-const RankingSnapshot = () => <div className="rounded-2xl border-2 border-black bg-[#111111] p-3 shadow-[6px_6px_0_rgba(0,0,0,0.18)]">
-    <img src={replyAiLeaderboard} alt="Reply AI Agent Challenge 2026 leaderboard showing Anand Purty 4d01 Team ranked 55th out of 1971 teams." className="w-full rounded-xl border border-white/10 object-cover" />
-  </div>;
+const AchievementSnapshot = ({
+  src,
+  alt,
+  onZoom
+}: {
+  src: string;
+  alt: string;
+  onZoom: () => void;
+}) => <button type="button" onClick={onZoom} aria-label="Zoom achievement image" className="group relative rounded-2xl border-2 border-black bg-[#111111] p-3 text-left shadow-[6px_6px_0_rgba(0,0,0,0.18)] transition-transform hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-black/20">
+    <img src={src} alt={alt} className="w-full rounded-xl border border-white/10 object-cover" />
+    <span className="absolute right-5 top-5 flex h-9 w-9 items-center justify-center rounded-full border-2 border-white/80 bg-black/70 text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
+      <ZoomIn className="h-4 w-4" />
+    </span>
+  </button>;
 
 const renderChatText = (text: string) => text.split("\n").map((line, lineIndex) => <span key={`${line}-${lineIndex}`} className="block">
     {line.split(/(\*\*.*?\*\*)/g).filter(Boolean).map((part, partIndex) => {
@@ -364,11 +378,28 @@ const Index = () => {
     fieldSize: "1971",
     summary: "I built an agent-based fraud detection pipeline during the Reply AI Agent Challenge 2026, focusing on practical signal selection, iterative tuning, and observability under hackathon time pressure.",
     stack: ["AI Agents", "Fraud Detection", "Langfuse", "Observability", "Scoring Systems", "OpenRouter"],
-    highlights: ["Finished 55th out of 1,971 teams in the global Reply AI Agent Challenge 2026.", "Developed a multi-agent fraud detection workflow that evaluated transaction patterns, user behavior, location anomalies, phishing-style communication, and audio-related events.", "Used Langfuse for tracing and observability, which made it easier to inspect agent behavior and improve the system through iteration.", "Spent most of the challenge tuning precision and recall, removing noisy signals, and tightening the scoring logic so the pipeline stayed practical under pressure.", "Turned the hackathon into a strong applied-AI exercise in experimentation, agent orchestration, and measurable system improvement."]
+    highlights: ["Finished 55th out of 1,971 teams in the global Reply AI Agent Challenge 2026.", "Developed a multi-agent fraud detection workflow that evaluated transaction patterns, user behavior, location anomalies, phishing-style communication, and audio-related events.", "Used Langfuse for tracing and observability, which made it easier to inspect agent behavior and improve the system through iteration.", "Spent most of the challenge tuning precision and recall, removing noisy signals, and tightening the scoring logic so the pipeline stayed practical under pressure.", "Turned the hackathon into a strong applied-AI exercise in experimentation, agent orchestration, and measurable system improvement."],
+    imageSrc: replyAiLeaderboard,
+    imageAlt: "Reply AI Agent Challenge 2026 leaderboard showing Anand Purty 4d01 Team ranked 55th out of 1971 teams."
+  }, {
+    title: "Zerve ODSC Datathon",
+    event: "Upgrade prediction and funnel analysis",
+    period: "Apr 2026",
+    rank: "24-hour",
+    fieldSize: "3.5M events",
+    summary: "I analyzed 3.5 million Zerve product events during a 24-hour datathon to predict free-to-paid upgrades, build a deterministic user funnel, and turn product behavior into activation recommendations.",
+    stack: ["Python", "XGBoost", "SHAP", "Streamlit", "Funnel Analysis", "Product Analytics", "Feature Engineering"],
+    highlights: ["Engineered 43 leakage-safe behavioral features across activity, AI usage, deployments, credit pressure, and time windows.", "Trained an XGBoost upgrade model with stratified cross-validation and SHAP explanations against a 1.84% base upgrade rate.", "Built a deterministic, time-aware funnel that assigns every user to one ordered stage, with At Risk overriding silent engaged users.", "Found that AI generation, total activity, credit pressure, unique event types, and tenure were the strongest upgrade signals.", "Shipped Streamlit tools for a Funnel Sandbox and Command Center so the analysis could be explored through real user profiles, segments, and recommended actions."],
+    imageSrc: zerveFunnelAnalysisFlow,
+    imageAlt: "Zerve ODSC Datathon funnel analysis flow diagram showing data pipeline, feature families, deterministic funnel, and ML scoring."
   }];
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const [isPluggedIn, setIsPluggedIn] = useState(false);
   const [isPhoneOpen, setIsPhoneOpen] = useState(false);
+  const [zoomedAchievementImage, setZoomedAchievementImage] = useState<{
+    src: string;
+    alt: string;
+  } | null>(null);
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([{
     text: "Hey! Welcome to my portfolio. Ask me about my projects, experience, or resume.",
     isMe: false
@@ -381,6 +412,19 @@ const Index = () => {
       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
     }
   }, [chatMessages]);
+
+  useEffect(() => {
+    if (!zoomedAchievementImage) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setZoomedAchievementImage(null);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [zoomedAchievementImage]);
 
   const splitReplyIntoBubbles = (reply: string) => {
     const normalized = reply.replace(/\r/g, "").trim();
@@ -1809,7 +1853,10 @@ const Index = () => {
                                 </div>
                               </div>
 
-                              <RankingSnapshot />
+                              <AchievementSnapshot src={achievement.imageSrc} alt={achievement.imageAlt} onZoom={() => setZoomedAchievementImage({
+                                src: achievement.imageSrc,
+                                alt: achievement.imageAlt
+                              })} />
                             </div>
 
                             <div className="mt-5">
@@ -1828,6 +1875,15 @@ const Index = () => {
             </div>
             {/* Screen bottom weight bar */}
             <div className="w-[85vw] h-2 bg-gradient-to-b from-[hsl(0_0%_20%)] to-[hsl(0_0%_10%)] rounded-b" />
+          </div>
+        </div>}
+
+      {zoomedAchievementImage && <div className="fixed inset-0 z-[80] flex items-center justify-center bg-black/55 p-4 backdrop-blur-md md:p-8" onClick={() => setZoomedAchievementImage(null)}>
+          <div className="relative max-h-full w-full max-w-6xl" onClick={event => event.stopPropagation()}>
+            <button type="button" onClick={() => setZoomedAchievementImage(null)} aria-label="Close zoomed image" className="absolute -right-2 -top-12 flex h-10 w-10 items-center justify-center rounded-full border-2 border-white bg-black text-white shadow-[4px_4px_0_rgba(255,255,255,0.16)] transition-transform hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-white/30 md:-right-4 md:-top-4">
+              <X className="h-5 w-5" />
+            </button>
+            <img src={zoomedAchievementImage.src} alt={zoomedAchievementImage.alt} className="max-h-[82vh] w-full rounded-2xl border-2 border-white/80 bg-black object-contain shadow-[0_24px_80px_rgba(0,0,0,0.55)]" />
           </div>
         </div>}
 
