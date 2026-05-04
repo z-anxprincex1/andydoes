@@ -359,16 +359,16 @@ const Index = () => {
     company: "Community Dreams Foundation",
     role: "Full Stack Engineer (Backend & AI Systems)",
     period: "Sep 2025 - Present",
-    summary: "I build backend pipelines, recommendation systems, and cloud deployment workflows for marketplace-style products, while also wiring those services into a Next.js frontend for secure, API-driven user experiences.",
-    stack: ["Python", "GCP", "PostgreSQL", "Supabase", "Firebase", "XGBoost", "Next.js", "OAuth", "Cloud Build", "Cloud Run"],
-    highlights: ["Built backend data pipelines with Python and GCP across PostgreSQL, Supabase, and Firebase, reducing data retrieval latency by about 25% and supporting real-time user interactions.", "Developed an XGBoost-based recommendation system using user activity and listing metadata, improving match relevance and reaching about 90% prediction accuracy.", "Automated CI/CD with Google Cloud Build and Cloud Run, cutting deployment time by about 40% and making releases more reliable.", "Designed and optimized REST APIs for concurrent matching across 2,000+ records, enabling real-time filtering and queue-based workload balancing.", "Integrated backend services with a Next.js frontend and OAuth-based authentication to support seamless, secure API-driven flows."]
+    summary: "I build production AI and backend systems for marketplace-style products, spanning Vertex AI recommendation services, Python/GCP data pipelines, containerized inference workloads, and secure Next.js integrations.",
+    stack: ["Python", "GCP", "Vertex AI", "BigQuery", "GKE", "Firestore", "Supabase", "XGBoost", "Next.js", "OAuth", "Cloud Build", "Cloud Run"],
+    highlights: ["Deployed an XGBoost-based recommendation system on Vertex AI using user activity and listing metadata, reaching about 90% prediction accuracy and improving match relevance across 2,000+ records.", "Built Python and GCP data pipelines with BigQuery for feature aggregation and Firestore/Supabase for real-time storage, reducing data retrieval latency by about 25%.", "Orchestrated containerized ML services on GKE with queue-based load balancing to support scalable real-time inference and matching workloads.", "Automated CI/CD with Google Cloud Build and Cloud Run, cutting deployment time by about 40% and improving release reliability across ML and backend services.", "Integrated backend AI services with a Next.js frontend through OAuth-based authentication and API-driven interactions for seamless LLM-enhanced user experiences."]
   }, {
     company: "Wrexa Technologies",
     role: "Full Stack Engineer",
     period: "Mar 2021 - Feb 2024",
-    summary: "I worked across frontend and backend systems, modernizing the React application, improving performance and retention, and strengthening production reliability with better debugging, query optimization, and API design.",
-    stack: ["React", "JavaScript", "Node.js", "PostgreSQL", "Postman", "Jest", "Performance Optimization"],
-    highlights: ["Migrated the frontend to React.js with a more modular component structure and cleaner state handling, contributing to about a 15% increase in user retention.", "Improved page load speed by about 30% by refactoring components, reducing unnecessary re-renders, and tightening rendering logic.", "Built backend services with Node.js and PostgreSQL to handle user data and real-time updates while reducing API response times through indexing, pagination, and connection pooling.", "Resolved production issues across APIs, slow queries, and UI bugs using log-based debugging, query profiling, and API testing with Postman and Jest.", "Improved reliability across key user flows by focusing on navigation, state transitions, and production issue turnaround."]
+    summary: "I worked across React, Node.js, PostgreSQL, and AWS systems, improving frontend performance, backend response times, deployment consistency, and production reliability across core user flows.",
+    stack: ["React", "JavaScript", "Node.js", "PostgreSQL", "AWS S3", "AWS Lambda", "AWS EKS", "Postman", "Jest", "Performance Optimization"],
+    highlights: ["Built backend services with Node.js and PostgreSQL for user data and real-time updates, reducing API response times through query indexing, pagination, and connection pooling.", "Served static assets through AWS S3 and scaled compute with AWS Lambda to support more reliable production delivery.", "Containerized and deployed backend workloads on AWS EKS, improving deployment consistency across environments.", "Improved page performance by about 30% by refactoring the React frontend with memoization patterns including React.memo and useMemo, contributing to about a 15% increase in user retention.", "Resolved production issues across API failures, slow queries, and UI bugs using log-based debugging, query profiling, and API testing with Postman and Jest."]
   }];
   const achievements: Achievement[] = [{
     title: "Reply AI Agent Challenge 2026",
@@ -1777,7 +1777,7 @@ const Index = () => {
                       <div className="rounded-2xl border-2 border-black bg-[linear-gradient(180deg,#fffdfa_0%,#fff4d6_100%)] p-5 md:p-6 shadow-[6px_6px_0_rgba(0,0,0,0.12)]">
                         <p className="text-[11px] md:text-xs font-bold uppercase tracking-[0.25em] text-black/50 mb-3">Experience</p>
                         <h2 className="text-2xl md:text-4xl font-bold mb-3">What I've been building</h2>
-                        <p className="text-sm md:text-base text-black/75 leading-relaxed">My recent experience spans full-stack product work across React and Next.js frontends, backend APIs, AI-assisted matching systems, and cloud deployment workflows.</p>
+                        <p className="text-sm md:text-base text-black/75 leading-relaxed">My recent experience spans full-stack product work across React and Next.js frontends, backend APIs, production AI systems, real-time data pipelines, and cloud deployment workflows across GCP and AWS.</p>
                       </div>
 
                       <div className="space-y-5">
