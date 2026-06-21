@@ -45,6 +45,7 @@ Hackathons and achievements:
 - Focused heavily on tuning precision and recall, reducing noisy signals, and improving scoring logic under time pressure.
 
 Projects:
+- UPASS DETECT [OBB]: real-time underpass clearance and safety detection using a fine-tuned YOLOv8-OBB model, FastAPI backend, and Next.js frontend (GitHub: github.com/z-anxprincex1/cv2025-underpass-detection).
 - Multi-Modal Deep Learning for VQA: combines ResNet image features and BERT text embeddings to answer image questions.
 - VirtualEye - Drowning Detection: real-time drowning detection using YOLOv5, IBM Cloud, and Flask alerts.
 - Signease - Sign Language Detection: browser-based sign language translation using MobileNet SSD and TensorFlow.js.

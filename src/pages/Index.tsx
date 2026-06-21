@@ -176,6 +176,31 @@ const CHAT_API_URL = import.meta.env.VITE_CHAT_API_URL || "https://andydoes-ai-p
 
 const Index = () => {
   const projects: Project[] = [{
+    title: "UPASS DETECT [OBB]",
+    description: "Developed UPASS DETECT, a real-time underpass clearance and safety detection system utilizing a fine-tuned YOLOv8-OBB model to identify structures and evaluate collision risks.",
+    overview: "UPASS DETECT is a distributed system with a Python FastAPI backend running custom-trained YOLOv8-OBB (Oriented Bounding Box) models and a Next.js TypeScript frontend that delivers a high-contrast industrial dashboard. By using oriented bounding boxes, the system achieves highly precise spatial alignment with angled bridges, overhead signs, and tunnel entrances for accurate collision risk evaluation.",
+    stack: ["Next.js", "TypeScript", "FastAPI", "Python", "YOLOv8-OBB", "PyTorch", "Ultralytics", "Tailwind CSS"],
+    highlights: [
+      "Custom-trained YOLOv8-OBB model weight file (best.pt) to locate bridges, height signs, warning barriers, and tunnel entrances.",
+      "Replaced horizontal boxes with oriented bounding boxes (4 coordinates representing 4 corners) to align accurately with tilted/angled structures.",
+      "High-contrast, brutalist-inspired diagnostic dashboard built with Next.js and Tailwind CSS featuring dynamic adjustments for confidence and IoU thresholds."
+    ],
+    githubUrl: "https://github.com/z-anxprincex1/cv2025-underpass-detection",
+    workflowTitle: "How underpass detection works",
+    workflowSteps: [{
+      label: "Image Upload",
+      detail: "A camera stream or driver-perspective photo is uploaded to the dashboard."
+    }, {
+      label: "YOLOv8-OBB Inference",
+      detail: "The FastAPI backend runs the fine-tuned YOLOv8-OBB model to locate structures with rotated bounding boxes."
+    }, {
+      label: "Collision Risk Evaluation",
+      detail: "The system extracts height limits and proximity markers to evaluate immediate clearance hazards."
+    }, {
+      label: "Industrial Dashboard View",
+      detail: "Rotated boxes and detailed diagnostic metrics are displayed in real-time on a high-contrast frontend."
+    }]
+  }, {
     title: "Multi-Modal Deep Learning for VQA",
     description: "Constructed a multimodal architecture for Visual Question Answering by synthesizing image features via ResNet and textual embeddings via BERT, attaining high precision in contextual responses.",
     overview: "This project combines computer vision and language understanding so a user can ask a question about an image and receive a context-aware answer. The system works by extracting visual signals, translating the question into embeddings, and fusing both streams before prediction.",
