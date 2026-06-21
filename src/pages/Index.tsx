@@ -18,6 +18,7 @@ type Project = {
   highlights: string[];
   workflowTitle: string;
   workflowSteps: ProjectStep[];
+  githubUrl?: string;
 };
 
 type Experience = {
@@ -240,6 +241,7 @@ const Index = () => {
     overview: "This classifier analyzes dermatological images and predicts likely condition categories to support faster screening. The project centered on cleaning the image pipeline, training a robust CNN, and improving confidence across visually similar classes.",
     stack: ["Python", "CNN", "Deep Learning", "Image Classification"],
     highlights: ["Reached 93% accuracy across multiple disease classes.", "Improved screening speed by automating first-pass categorization.", "Handled visually similar classes with a fine-tuned vision model."],
+    githubUrl: "https://github.com/z-anxprincex1/derm-cnn",
     workflowTitle: "How the classifier works",
     workflowSteps: [{
       label: "Image Upload",
@@ -275,31 +277,12 @@ const Index = () => {
       detail: "If validation succeeds, the lock actuates automatically; otherwise entry stays blocked."
     }]
   }, {
-    title: "Colabify",
-    description: "Built a real-time collaborative document editor with Next.js, TypeScript, Supabase, and WebRTC to support synchronized document state, responsive editing, and low-latency voice communication.",
-    overview: "Colabify is designed for teams editing the same document at once without losing context or stepping on each other. It combines shared state, live presence, and voice collaboration so the editing experience feels closer to working side by side.",
-    stack: ["Next.js", "TypeScript", "Supabase", "PostgreSQL", "WebRTC", "LiveKit", "PDF.js", "Gemini 1.5 Flash"],
-    highlights: ["Kept document state synchronized in real time across collaborators.", "Added low-latency voice communication with WebRTC for live teamwork.", "Integrated AI-assisted document understanding using page-aware references."],
-    workflowTitle: "How Colabify works",
-    workflowSteps: [{
-      label: "Shared Workspace",
-      detail: "Users open the same document room and load the current document state from Supabase."
-    }, {
-      label: "Realtime Sync",
-      detail: "Edits, cursors, and collaboration signals are synchronized across participants as they type."
-    }, {
-      label: "Voice + Context",
-      detail: "LiveKit handles voice communication while PDF.js and Gemini power document-aware assistance."
-    }, {
-      label: "Unified Collaboration",
-      detail: "Everyone sees the latest content, can talk through changes, and gets faster answers from the AI layer."
-    }]
-  }, {
     title: "PeekersNest",
     description: "Created an AI-powered shopping deals platform with Next.js and Gemini that aggregates product listings, ranks options by value signals, and highlights the best deals for users.",
     overview: "PeekersNest reduces the time users spend bouncing between product listings by gathering deal data into one ranking experience. The product focuses on surfacing trustworthy, high-value options quickly instead of forcing manual comparison across many tabs.",
     stack: ["Next.js", "TypeScript", "Gemini 1.5 Pro", "Ranking Logic", "Search Aggregation"],
     highlights: ["Aggregated product listings into one discovery workflow.", "Applied ranking signals like price, ratings, and trustworthiness.", "Reduced manual deal comparison time for end users."],
+    githubUrl: "https://github.com/z-anxprincex1/peekers-nest",
     workflowTitle: "How deal discovery works",
     workflowSteps: [{
       label: "Collect Listings",
@@ -320,6 +303,7 @@ const Index = () => {
     overview: "This API helps clinics find the right lab faster by matching demand with lab capabilities, availability, and fit. It turns what is usually a manual coordination problem into a repeatable backend service that can scale with marketplace usage.",
     stack: ["Python", "Flask", "Google Cloud Platform", "Firestore", "XGBoost", "Docker", "REST APIs"],
     highlights: ["Matched clinics with thousands of labs more efficiently.", "Improved decision speed through multi-criteria scoring.", "Packaged the service as a backend API ready for platform integration."],
+    githubUrl: "https://github.com/z-anxprincex1/smart-dental-ai",
     workflowTitle: "How clinic-to-lab matching works",
     workflowSteps: [{
       label: "Clinic Request",
@@ -340,6 +324,7 @@ const Index = () => {
     overview: "This project makes databases easier to query for non-SQL users by translating questions into executable queries. The key challenge was keeping generated SQL accurate by grounding prompts in schema context rather than relying on generic language generation alone.",
     stack: ["React", "Python", "Flask", "OpenAI", "Prompt Engineering", "SQL"],
     highlights: ["Converted plain-English requests into database queries.", "Used schema-aware prompting to improve query precision.", "Lowered the barrier for teams that need data without writing SQL manually."],
+    githubUrl: "https://github.com/z-anxprincex1/text-to-sql",
     workflowTitle: "How text-to-SQL works",
     workflowSteps: [{
       label: "Natural Language Prompt",
@@ -354,6 +339,27 @@ const Index = () => {
       label: "Actionable Result",
       detail: "The app returns the generated query for execution, review, or refinement in the UI."
     }]
+  }, {
+    title: "Housing Value Predictor",
+    description: "Built an interactive Electron and Python desktop application leveraging Random Forest Regressor models to predict California median housing values with Leaflet map integration.",
+    overview: "This premium desktop application predicts housing values across California. By integrating a Python machine learning backend with an Electron frontend, it allows users to select locations on an interactive Leaflet map and receive real-time value predictions based on regional metrics like median income and housing age.",
+    stack: ["Electron", "Python", "Random Forest Regressor", "Leaflet", "Machine Learning"],
+    highlights: ["Constructed an interactive map interface using Leaflet for spatial location selection.", "Developed a Random Forest Regressor model to predict median housing values with high accuracy.", "Integrated Electron frontend with a Python backend to perform real-time model inference and suggest optimal neighborhoods."],
+    githubUrl: "https://github.com/z-anxprincex1/housing-value-pred",
+    workflowTitle: "How the prediction pipeline works",
+    workflowSteps: [{
+      label: "Location Selection",
+      detail: "The user clicks or searches for a neighborhood on the interactive Leaflet map inside the Electron app."
+    }, {
+      label: "Feature Extraction",
+      detail: "The application extracts geographic coordinates and fetches corresponding regional Census metrics (e.g. median income, housing age)."
+    }, {
+      label: "Model Execution",
+      detail: "The Python backend runs the input features through the trained Random Forest Regressor model."
+    }, {
+      label: "Value & Locality Display",
+      detail: "The model returns the predicted median housing value and highlights optimal neighborhood localities on the map."
+    }]
   }];
   const experiences: Experience[] = [{
     company: "Community Dreams Foundation",
@@ -365,7 +371,7 @@ const Index = () => {
   }, {
     company: "Wrexa Technologies",
     role: "Full Stack Engineer",
-    period: "Mar 2021 - Feb 2024",
+    period: "Mar 2022 - Feb 2024",
     summary: "I worked across React, Node.js, PostgreSQL, and AWS systems, improving frontend performance, backend response times, deployment consistency, and production reliability across core user flows.",
     stack: ["React", "JavaScript", "Node.js", "PostgreSQL", "AWS S3", "AWS Lambda", "AWS EKS", "Postman", "Jest", "Performance Optimization"],
     highlights: ["Built backend services with Node.js and PostgreSQL for user data and real-time updates, reducing API response times through query indexing, pagination, and connection pooling.", "Served static assets through AWS S3 and scaled compute with AWS Lambda to support more reliable production delivery.", "Containerized and deployed backend workloads on AWS EKS, improving deployment consistency across environments.", "Improved page performance by about 30% by refactoring the React frontend with memoization patterns including React.memo and useMemo, contributing to about a 15% increase in user retention.", "Resolved production issues across API failures, slow queries, and UI bugs using log-based debugging, query profiling, and API testing with Postman and Jest."]
@@ -1731,9 +1737,25 @@ const Index = () => {
                       {selectedProject !== null ? (/* Single project detail view */
                 <div className="max-w-5xl mx-auto space-y-6">
                           <div className="rounded-2xl border-2 border-black bg-[linear-gradient(180deg,#fffdfa_0%,#fff4d6_100%)] p-5 md:p-6 shadow-[6px_6px_0_rgba(0,0,0,0.12)]">
-                            <p className="text-[11px] md:text-xs font-bold uppercase tracking-[0.25em] text-black/50 mb-3">Project Breakdown</p>
-                            <h2 className="text-xl md:text-3xl font-bold mb-3">{projects[selectedProject].title}</h2>
-                            <p className="text-sm md:text-base text-black/80 leading-relaxed">{projects[selectedProject].description}</p>
+                            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+                              <div className="flex-1">
+                                <p className="text-[11px] md:text-xs font-bold uppercase tracking-[0.25em] text-black/50 mb-3">Project Breakdown</p>
+                                <h2 className="text-xl md:text-3xl font-bold mb-3">{projects[selectedProject].title}</h2>
+                                <p className="text-sm md:text-base text-black/80 leading-relaxed">{projects[selectedProject].description}</p>
+                              </div>
+                              {projects[selectedProject].githubUrl && (
+                                <a
+                                  href={projects[selectedProject].githubUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-bold rounded-xl border-2 border-black bg-white hover:bg-black hover:text-white transition-all shadow-[4px_4px_0_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px] self-start mt-2 sm:mt-6 whitespace-nowrap"
+                                  onClick={(e) => e.stopPropagation()}
+                                >
+                                  <Github className="w-4 h-4" />
+                                  <span>Repository</span>
+                                </a>
+                              )}
+                            </div>
                           </div>
 
                           <div className="grid gap-4 lg:grid-cols-[1.35fr_0.95fr]">

@@ -28,7 +28,7 @@ Experience:
 - Reduced deployment time by about 40%.
 - Designed REST APIs for concurrent matching across 2,000+ records with real-time filtering and queue-based workload balancing.
 - Integrated backend services with a Next.js frontend and OAuth-based authentication.
-- Wrexa Technologies, Full Stack Engineer, Mar 2021 - Feb 2024
+- Wrexa Technologies, Full Stack Engineer, Mar 2022 - Feb 2024
 - Migrated the frontend to React.js with modular components and cleaner state handling.
 - Contributed to about a 15% increase in user retention.
 - Improved page load speed by about 30% through component refactoring and reducing unnecessary re-renders.
