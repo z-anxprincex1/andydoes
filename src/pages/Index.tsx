@@ -1072,7 +1072,7 @@ const Index = () => {
           <div className={`absolute bottom-0 left-1/2 -translate-x-1/2 ${!spiderDescending && !spiderAtCoffee ? 'animate-spider-bob' : ''}`}>
             {/* Speech bubble when at coffee - ellipse */}
             <div className={`absolute -left-32 md:-left-36 -top-4 bg-white px-4 py-2 rounded-[50%] shadow-lg border-2 border-black w-[110px] md:w-[120px] h-[40px] md:h-[44px] flex items-center justify-center transform transition-all duration-500 ${spiderAtCoffee ? 'scale-100 opacity-100' : 'scale-0 opacity-0'}`}>
-              <p className="text-[10px] md:text-[12px] font-bold text-center text-black" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
+              <p className="text-[10px] md:text-[12px] font-bold text-center text-black" style={{ fontFamily: "'Comic Neue', 'Comic Sans MS', cursive" }}>
                 buy me coffee!
               </p>
             </div>
@@ -1125,7 +1125,7 @@ const Index = () => {
           </button>
           
           <div className="text-[hsl(0_0%_10%)] text-sm md:text-base" style={{
-          fontFamily: 'Comic Sans MS, cursive'
+          fontFamily: "'Comic Neue', 'Comic Sans MS', cursive"
         }}>
             <span className="font-bold block mb-2 text-base md:text-lg">About Me</span>
             <p>Hey! I&apos;m a Software developer and AI enthusiast who enjoys building practical tools and systems that solve real-world problems. I work across cloud platforms, machine learning pipelines, and data-driven applications.</p>
@@ -1136,7 +1136,7 @@ const Index = () => {
       {/* Whoosh text - appears when generator turns on */}
       {isGeneratorOn && <div className="fixed top-1/2 left-1/2 z-50 pointer-events-none animate-whoosh-text">
           <span className="text-[hsl(50_90%_60%)] text-4xl md:text-6xl font-extrabold whitespace-nowrap drop-shadow-[3px_3px_0_hsl(0_0%_10%)]" style={{
-        fontFamily: 'Comic Sans MS, cursive'
+        fontFamily: "'Comic Neue', 'Comic Sans MS', cursive"
       }}>
             whoosh!
           </span>
@@ -1145,7 +1145,7 @@ const Index = () => {
       {/* Phewnn text - appears when generator turns off */}
       {!isGeneratorOn && wasGeneratorOn && <div className="fixed top-1/2 left-1/2 z-50 pointer-events-none animate-phewnn-text">
           <span className="text-[hsl(180_70%_60%)] text-4xl md:text-6xl font-extrabold whitespace-nowrap drop-shadow-[3px_3px_0_hsl(0_0%_10%)]" style={{
-        fontFamily: 'Comic Sans MS, cursive'
+        fontFamily: "'Comic Neue', 'Comic Sans MS', cursive"
       }}>
             phewnn!
           </span>
@@ -1322,7 +1322,7 @@ const Index = () => {
       <div className={`fixed left-4 md:left-8 z-30 transition-all duration-500 pointer-events-none ${isPhoneOpen ? 'opacity-0 bottom-[520px] md:bottom-[580px]' : 'opacity-100 bottom-24 md:bottom-28'}`}>
         <div className="relative bg-[hsl(50_90%_60%)] px-3 py-2 rounded-lg border-2 border-[hsl(0_0%_10%)] shadow-[3px_3px_0_hsl(0_0%_10%)]">
           <span className="text-[hsl(0_0%_10%)] text-xs md:text-sm font-bold whitespace-nowrap" style={{
-          fontFamily: 'Comic Sans MS, cursive'
+          fontFamily: "'Comic Neue', 'Comic Sans MS', cursive"
         }}>
             got a question for me?
           </span>
@@ -1431,7 +1431,7 @@ const Index = () => {
       {/* Tip above generator */}
       <div className={`fixed bottom-[8.5rem] md:bottom-[10.5rem] left-[calc(50%-1rem)] md:left-[calc(50%-1.5rem)] -translate-x-1/2 z-20 pointer-events-none transition-opacity duration-500 ${isGeneratorOn ? 'opacity-0' : 'opacity-100'}`}>
         <span className="text-[hsl(0_0%_100%)] text-sm md:text-base font-extrabold whitespace-nowrap drop-shadow-[2px_2px_0_hsl(0_0%_10%)] inline-block -rotate-6 animate-bounce" style={{
-        fontFamily: 'Comic Sans MS, cursive'
+        fontFamily: "'Comic Neue', 'Comic Sans MS', cursive"
       }}>
           click here to view my work!
         </span>
@@ -1752,7 +1752,7 @@ const Index = () => {
               <div className="absolute top-4 left-[2.5%] flex items-center pointer-events-auto">
                 {/* Back button - always takes space, visibility controlled */}
                 <button onClick={() => setSelectedProject(null)} className={`mr-2 px-3 py-2 text-sm md:text-base font-bold rounded-lg border-2 border-black bg-black text-white hover:bg-black/80 transition-all flex items-center gap-1 ${selectedProject !== null && activeFolder === 'projects' ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} style={{
-              fontFamily: 'Comic Sans MS, cursive'
+              fontFamily: "'Comic Neue', 'Comic Sans MS', cursive"
             }}>
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -1764,7 +1764,7 @@ const Index = () => {
               setActiveFolder('projects');
               setSelectedProject(null);
             }} className={`relative px-6 py-2 text-sm md:text-base font-bold rounded-t-lg border-2 border-b-0 transition-all ${activeFolder === 'projects' ? 'bg-white border-black text-black z-10 -mb-[2px]' : 'bg-white/50 border-black/30 text-black/50 hover:bg-white/80'}`} style={{
-              fontFamily: 'Comic Sans MS, cursive'
+              fontFamily: "'Comic Neue', 'Comic Sans MS', cursive"
             }}>
                   projects
                 </button>
@@ -1773,7 +1773,7 @@ const Index = () => {
               setActiveFolder('experience');
               setSelectedProject(null);
             }} className={`relative px-6 py-2 text-sm md:text-base font-bold rounded-t-lg border-2 border-b-0 transition-all -ml-1 ${activeFolder === 'experience' ? 'bg-white border-black text-black z-10 -mb-[2px]' : 'bg-white/50 border-black/30 text-black/50 hover:bg-white/80'}`} style={{
-              fontFamily: 'Comic Sans MS, cursive'
+              fontFamily: "'Comic Neue', 'Comic Sans MS', cursive"
             }}>
                   experience
                 </button>
@@ -1784,7 +1784,7 @@ const Index = () => {
                 {/* Folder content */}
                 <div className="w-full h-full overflow-y-auto p-4 md:p-6">
                   {activeFolder === 'projects' ? <div className="text-black" style={{
-                fontFamily: 'Comic Sans MS, cursive'
+                fontFamily: "'Comic Neue', 'Comic Sans MS', cursive"
               }}>
                       {selectedProject !== null ? (/* Single project detail view */
                 <div className="max-w-5xl mx-auto space-y-6">
@@ -1862,7 +1862,7 @@ const Index = () => {
                             </div>)}
                         </div>)}
                     </div> : <div className="text-black space-y-6" style={{
-                fontFamily: 'Comic Sans MS, cursive'
+                fontFamily: "'Comic Neue', 'Comic Sans MS', cursive"
               }}>
                       <div className="rounded-2xl border-2 border-black bg-[linear-gradient(180deg,#fffdfa_0%,#fff4d6_100%)] p-5 md:p-6 shadow-[6px_6px_0_rgba(0,0,0,0.12)]">
                         <p className="text-[11px] md:text-xs font-bold uppercase tracking-[0.25em] text-black/50 mb-3">Experience</p>
@@ -2036,3 +2036,4 @@ const Index = () => {
     </main>;
 };
 export default Index;
+
