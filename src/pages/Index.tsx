@@ -18,6 +18,7 @@ type Project = {
   highlights: string[];
   workflowTitle: string;
   workflowSteps: ProjectStep[];
+  liveUrl?: string;
   githubUrl?: string;
 };
 
@@ -176,6 +177,32 @@ const CHAT_API_URL = import.meta.env.VITE_CHAT_API_URL || "https://andydoes-ai-p
 
 const Index = () => {
   const projects: Project[] = [{
+    title: "Quizzly",
+    description: "Built a real-time multiplayer AI quiz platform with WebSockets, document-to-quiz generation, themed game sessions, live scoreboards, timers, and chat.",
+    overview: "Quizzly is a full-stack multiplayer quiz platform where players can join live game rooms while an AI service turns uploaded documents and prompts into structured quizzes. The system pairs a Socket.IO game server with a FastAPI Gemini microservice, a Prisma/MySQL data layer, and a responsive Next.js frontend for fast, custom-themed quiz sessions.",
+    stack: ["Next.js", "TypeScript", "Node.js", "Socket.IO", "MySQL", "Prisma", "FastAPI", "Python", "Google GenAI", "GCP Cloud Run"],
+    highlights: [
+      "Built an Express and Socket.IO game server to sync timers, scoreboards, chat, and game state across multiplayer clients.",
+      "Developed a FastAPI microservice using Google GenAI and pypdf to parse documents and generate structured quizzes with custom visual themes.",
+      "Deployed Dockerized services through Google Cloud Build to Cloud Run, using Prisma transactions to handle concurrent score updates."
+    ],
+    liveUrl: "https://quizzly.andydoes.tech",
+    githubUrl: "https://github.com/z-anxprincex1/quizly",
+    workflowTitle: "How AI quiz sessions work",
+    workflowSteps: [{
+      label: "Create Room",
+      detail: "A host starts a quiz room, configures the session, and invites players into a real-time lobby."
+    }, {
+      label: "Generate Quiz",
+      detail: "The FastAPI service parses documents or prompts with Google GenAI to produce structured questions and themed styling."
+    }, {
+      label: "Live Gameplay",
+      detail: "Socket.IO keeps timers, chat, answers, and scoreboards synchronized across all connected clients."
+    }, {
+      label: "Score Persistence",
+      detail: "Prisma and MySQL transactions record concurrent score updates while Cloud Run handles the containerized services."
+    }]
+  }, {
     title: "UPASS DETECT [OBB]",
     description: "Developed UPASS DETECT, a real-time underpass clearance and safety detection system utilizing a fine-tuned YOLOv8-OBB model to identify structures and evaluate collision risks.",
     overview: "UPASS DETECT is a distributed system with a Python FastAPI backend running custom-trained YOLOv8-OBB (Oriented Bounding Box) models and a Next.js TypeScript frontend that delivers a high-contrast industrial dashboard. By using oriented bounding boxes, the system achieves highly precise spatial alignment with angled bridges, overhead signs, and tunnel entrances for accurate collision risk evaluation.",
@@ -1768,17 +1795,33 @@ const Index = () => {
                                 <h2 className="text-xl md:text-3xl font-bold mb-3">{projects[selectedProject].title}</h2>
                                 <p className="text-sm md:text-base text-black/80 leading-relaxed">{projects[selectedProject].description}</p>
                               </div>
-                              {projects[selectedProject].githubUrl && (
-                                <a
-                                  href={projects[selectedProject].githubUrl}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-bold rounded-xl border-2 border-black bg-white hover:bg-black hover:text-white transition-all shadow-[4px_4px_0_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px] self-start mt-2 sm:mt-6 whitespace-nowrap"
-                                  onClick={(e) => e.stopPropagation()}
-                                >
-                                  <Github className="w-4 h-4" />
-                                  <span>Repository</span>
-                                </a>
+                              {(projects[selectedProject].liveUrl || projects[selectedProject].githubUrl) && (
+                                <div className="flex flex-wrap gap-3 self-start mt-2 sm:mt-6">
+                                  {projects[selectedProject].liveUrl && (
+                                    <a
+                                      href={projects[selectedProject].liveUrl}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-bold rounded-xl border-2 border-black bg-black text-white hover:bg-white hover:text-black transition-all shadow-[4px_4px_0_rgba(0,0,0,0.35)] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px] whitespace-nowrap"
+                                      onClick={(e) => e.stopPropagation()}
+                                    >
+                                      <Globe className="w-4 h-4" />
+                                      <span>Live App</span>
+                                    </a>
+                                  )}
+                                  {projects[selectedProject].githubUrl && (
+                                    <a
+                                      href={projects[selectedProject].githubUrl}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-bold rounded-xl border-2 border-black bg-white hover:bg-black hover:text-white transition-all shadow-[4px_4px_0_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px] whitespace-nowrap"
+                                      onClick={(e) => e.stopPropagation()}
+                                    >
+                                      <Github className="w-4 h-4" />
+                                      <span>Repository</span>
+                                    </a>
+                                  )}
+                                </div>
                               )}
                             </div>
                           </div>
