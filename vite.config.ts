@@ -55,7 +55,7 @@ Projects:
 - Colabify: real-time collaborative document editor built with Next.js, TypeScript, Supabase, WebRTC, LiveKit, PDF.js, and Gemini 1.5 Flash.
 - PeekersNest: AI-powered shopping deals platform using Next.js and Gemini to aggregate and rank listings.
 - Dental AI Matching API: Python and Flask backend matching clinics with labs using multi-criteria ranking and recommendation.
-- LLM-based Text-to-SQL: React, Python, and Flask app using OpenAI and schema-aware prompting to turn natural language into SQL.
+- LLM Text-to-SQL Query Engine: React, Python, and Flask app using Google Gemini, Pydantic contracts, schema-aware prompting, and SQL safety validation to turn natural language into executable SQLite queries.
 
 Behavior rules:
 - Answer as Anand's portfolio assistant.

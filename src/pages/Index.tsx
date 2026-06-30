@@ -371,11 +371,11 @@ const Index = () => {
       detail: "The service returns the strongest lab options so teams can act without manual searching."
     }]
   }, {
-    title: "LLM-based Text-to-SQL",
-    description: "Built a React, Python, and Flask application that turns natural language into SQL using OpenAI with schema-aware prompting to generate accurate database queries.",
-    overview: "This project makes databases easier to query for non-SQL users by translating questions into executable queries. The key challenge was keeping generated SQL accurate by grounding prompts in schema context rather than relying on generic language generation alone.",
-    stack: ["React", "Python", "Flask", "OpenAI", "Prompt Engineering", "SQL"],
-    highlights: ["Converted plain-English requests into database queries.", "Used schema-aware prompting to improve query precision.", "Lowered the barrier for teams that need data without writing SQL manually."],
+    title: "LLM Text-to-SQL Query Engine",
+    description: "Built a React, Python, and Flask query engine that turns natural language into SQL using Google Gemini, schema-aware prompting, and typed Pydantic contracts.",
+    overview: "This project makes databases easier to query for non-SQL users by translating questions into executable SQLite SELECT queries. The key challenge was keeping generated SQL accurate and safe by grounding prompts in schema context, validating structured output, and blocking unsafe statements before execution.",
+    stack: ["React", "Python", "Flask", "Google Gemini", "Pydantic", "Prompt Engineering", "SQL"],
+    highlights: ["Converted plain-English requests into executable database queries.", "Used schema-aware prompting and structured JSON contracts to improve query precision.", "Added SELECT-only validation and table checks to reduce unsafe or invalid SQL outputs."],
     githubUrl: "https://github.com/z-anxprincex1/text-to-sql",
     workflowTitle: "How text-to-SQL works",
     workflowSteps: [{
